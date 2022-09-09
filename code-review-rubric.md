@@ -18,9 +18,10 @@ El programa necesita cumplir especificaciones y funcionar correctamente. Esto si
 
 ### Legibilidad
 
-El código necesia ser legible tanto para ti como para un tercero. Esto incluye:
-* Uso constante de indentación (usando tabs, o N espacios, pero mantener consistencia)
-* Adopta las convenciones de la guía de [estilo de swift](https://google.github.io/swift/)
+
+El código necesia ser legible tant opara ti como a un tercero. Esto incluye:
+* Uso constante de indentación (usando tabs, o n spacios, pero mantener consistencia)
+* Adopta la convenciones de la guía de stilo de swift(https://google.github.io/swift/)
 * Utiliza nombres descriptivos. Variables de una palabra o abreviaciones terminan siendo ambiguas y es dificil inferir su propósito. Ejemplos:
     - `let n: 3` -> `let numberOfRowsInSection: 3`
     - `let name: "José"` -> `let userFirstName`
@@ -34,6 +35,7 @@ El código necesia ser legible tanto para ti como para un tercero. Esto incluye:
         - `let closure: (String)** -> **Void`
         - `func method(param: Type)** -> **Void`
     * 1 linea entre methodos:
+
 ```   
     func one() { }\n
     \n
