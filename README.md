@@ -129,7 +129,7 @@ Si tienes problemas y necesitas ayuda no dudes en solicitar un mentor en el cana
 Construye una aplicacion con las siguientes características:
 
 * Clona este repositorio con tu cuenta de github.
-    - Crea y sube tus ramas `dev` y `main` a github. (Versionamiento de código con git)
+    - Crea y sube tus ramas `dev` y `main` a github.
     - Sigue la guía [Por dónde empezar](#por-donde-empezar)
 * Completa y usa la TheMovieDB API.
     - La clase `MovieAPI` debe tener al menos 2 propiedades
@@ -154,7 +154,7 @@ Usando lo construido en tu entregable anterior:
 
 * Muestra la información de las películas
     - Crea un `UIViewController` para mostrar el detalle de película
-    - Utiliza `NSLayoutContraint`s para posicionar los elementos gráficos
+    - Utiliza el `Interface Builder` para posicionar los elementos gráficos
 * Crea un buscador de películas
     - Implementa un `UICollectionView` para los resultados de búsqueda
     - Declara vistas con archivos xibs y Storyboard
