@@ -14,9 +14,9 @@ class TrendingViewController: UITableViewController {
         super.viewDidLoad()
 
         let movieApi = MovieAPI()
-        
-        movies = movieApi.getMovies(.Trendig)
+        movies = movieApi.getMovies(.TopRated)
         tableView.reloadData()
+        
     }
     /// La funcion getImage retorna la informacion de una imagen
     /// - Parameter urlImage: String con la url de la imagen a descargar
