@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import UIKit
 
 enum ApiURL{
     case Trendig
@@ -13,6 +14,11 @@ enum ApiURL{
     case Popular
     case TopRated
     case UpComing
+    case Keyword
+    case Search
+    case Reviews
+    case Similar
+    case Recommendations
     
     var url: String {
         switch self {
@@ -26,6 +32,16 @@ enum ApiURL{
             return "/movie/top_rated"
         case .UpComing:
             return "/movie/upcoming"
+        case .Keyword:
+            return "/search/keyword"
+        case .Search:
+            return "/search/movie"
+        case .Reviews:
+            return "/movie/{movieID}/reviews"
+        case .Similar:
+            return "/movie/{movieID}/similar"
+        case .Recommendations:
+            return "/movie/{movieID}/recommendations"
         }
     }
 }
