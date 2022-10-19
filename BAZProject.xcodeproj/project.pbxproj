@@ -114,9 +114,6 @@
 		DD80456828F8704B0056875F /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
-				DDDC4DAE28FEF2D800BCC425 /* APIClient.swift */,
-				C30893E028A425E1004B1860 /* MovieAPI.swift */,
-				DDDC4DB028FEF3EA00BCC425 /* MovieClient.swift */,
 				DDDC4DEF290046D700BCC425 /* ViewModelMovie.swift */,
 			);
 			path = ViewModel;
@@ -125,11 +122,22 @@
 		DDDC4DEE290043BA00BCC425 /* Home */ = {
 			isa = PBXGroup;
 			children = (
+				DDDC4DF129009E2000BCC425 /* API */,
 				DD80456828F8704B0056875F /* ViewModel */,
 				DD80456728F8702C0056875F /* View */,
 				DD80456628F8701F0056875F /* Model */,
 			);
 			path = Home;
+			sourceTree = "<group>";
+		};
+		DDDC4DF129009E2000BCC425 /* API */ = {
+			isa = PBXGroup;
+			children = (
+				C30893E028A425E1004B1860 /* MovieAPI.swift */,
+				DDDC4DB028FEF3EA00BCC425 /* MovieClient.swift */,
+				DDDC4DAE28FEF2D800BCC425 /* APIClient.swift */,
+			);
+			path = API;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
