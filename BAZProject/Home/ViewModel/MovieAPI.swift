@@ -7,12 +7,9 @@
 import Foundation
 
 class MovieAPI {
-    func showError(_ error: APIError) {
-        print("El error es: \(error)")
-    }
     /// Funcion getInformation obtiene la informacion de una api de peliculas dependiendo la URL que manden
     ///  - Parameter api: Seleccionas el tipo de api que solicitaras
-    func getInformation(_ api: MovieFeed,_ extra: String = "") -> [MovieResults] {
+    func getInformation(_ api: MovieFeed) -> [MovieResults] {
         let semaphore = DispatchSemaphore (value: 0)
         var request = api.request
         request.httpMethod = "GET"
@@ -55,6 +52,11 @@ class MovieAPI {
                 movies.append(Movie(id: id, title: title, poster_path: poster_path))}
         }
         return movies
+    }
+    /// Fucnon showError imprime un error
+    /// - Parameter error: El tipo de error a imprimir
+    func showError(_ error: APIError) {
+        print("El error es: \(error)")
     }
     
     func getMovies2(_ movieFeedType: MovieFeed) -> [Movie] {

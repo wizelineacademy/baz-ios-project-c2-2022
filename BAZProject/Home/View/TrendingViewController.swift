@@ -8,24 +8,23 @@ import UIKit
 
 class TrendingViewController: UITableViewController {
 
-    var movies: [Movie] = []
-
+    let viewModel = ViewModelMovie()
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        let movieApi = MovieAPI()
-        movies = movieApi.getMovies(.TopRated)
-        tableView.reloadData()
+        configurateView()
+        refreshData()
         
     }
-    /// La funcion getImage retorna la informacion de una imagen
-    /// - Parameter urlImage: String con la url de la imagen a descargar
-    /// - Returns: La infotmacion de la imagen descargada de tipo Data
-    func getImage(urlImage: String) -> Data {
-        let urlIm = "https://image.tmdb.org/t/p/w500\(urlImage)"
-        guard let urlData = URL(string: urlIm),
-              let data = try? Data(contentsOf: urlData) else { return Data() }
-        return data
+    private func configurateView() {
+        viewModel.getInfo(.Trendig)
+    }
+    
+    private func refreshData() {
+        viewModel.refreshData = { [weak self] () in
+            DispatchQueue.main.async {
+                self?.tableView.reloadData()
+            }
+        }
     }
 
 }
@@ -35,7 +34,7 @@ class TrendingViewController: UITableViewController {
 extension TrendingViewController {
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        movies.count
+        viewModel.dataArray.count
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -50,8 +49,8 @@ extension TrendingViewController {
 
     override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         var config = UIListContentConfiguration.cell()
-        config.text = movies[indexPath.row].title
-        config.image = UIImage(data: getImage(urlImage: movies[indexPath.row].poster_path))
+        config.text = viewModel.dataArray[indexPath.row].title
+        config.image = UIImage(data: viewModel.getImage(urlImage: viewModel.dataArray[indexPath.row].poster_path))
         cell.contentConfiguration = config
     }
 
