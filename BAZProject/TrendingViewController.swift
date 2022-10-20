@@ -9,12 +9,10 @@ import UIKit
 class TrendingViewController: UITableViewController {
 
     var movies: [Movie] = []
-
+    let movieApi = MovieAPI()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        let movieApi = MovieAPI()
-        
         movies = movieApi.getMovies()
         tableView.reloadData()
     }
@@ -42,7 +40,7 @@ extension TrendingViewController {
     override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         var config = UIListContentConfiguration.cell()
         config.text = movies[indexPath.row].title
-        config.image = UIImage(named: "poster")
+        config.image = movieApi.getImageMovie(nameImage: movies[indexPath.row].posterPath)
         cell.contentConfiguration = config
     }
 
