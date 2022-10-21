@@ -23,8 +23,8 @@ class MoviePresenter {
     }
     
     /// Makes a query to the service, places the value in an array and calls a function of the view
-    func getMovies() {
-        movieApiService.getMovies { movies in
+    func getMoviesByCategory(category: CategoryMovieType) {
+        movieApiService.getMovies(category: category) { movies in
             if let movies = movies {
                 self.movies = movies
                 self.movieViewDelegate?.showMovies()

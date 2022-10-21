@@ -12,9 +12,9 @@ class MovieAPI {
     private let baseUrl: String = "https://api.themoviedb.org/3"
     private let baseUrlImg: String = "https://image.tmdb.org/t/p/w500"
 
-    ///Make an API request for the trending category
-    func getMovies(completionHandler: @escaping ([Movie]?) -> Void){
-        if let url = URL(string: "\(baseUrl)/trending/movie/day?api_key=\(apiKey)") {
+    ///Make an API request by category
+    func getMovies(category: CategoryMovieType, completionHandler: @escaping ([Movie]?) -> Void){
+        if let url = URL(string: "\(baseUrl)\(category.endpoint)?api_key=\(apiKey)") {
             URLSession.shared.dataTask(with: url) { data, response, error in
                 if error != nil{
                     print("Ha ocurrido un error ",error?.localizedDescription ?? "error")
