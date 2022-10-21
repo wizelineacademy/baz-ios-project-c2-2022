@@ -10,6 +10,8 @@ struct Movie {
     let id: Int
     let title: String
     let poster_path: String
+    let original_title: String
+    let vote_average: Double
 }
 
 struct MovieApiModel: Codable {
