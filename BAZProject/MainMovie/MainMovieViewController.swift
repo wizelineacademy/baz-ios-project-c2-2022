@@ -10,12 +10,26 @@
 
 import UIKit
 
-class MainMovieViewController: UIViewController, MainMovieViewProtocol {
+class MainMovieViewController: UITabBarController, MainMovieViewProtocol {
 
 	var presenter: MainMoviePresenterProtocol?
 
-	override func viewDidLoad() {
+    private let endPoints: [EndPoint] = [TrendingEndPoint(), NowPlayingEndPoint(), PopularEndPoint(), TopRatedEndPoint(), UpcomingEndPoint()]
+    private let tabBarImages: [String] = ["chart.line.uptrend.xyaxis.circle.fill", "play.circle", "theatermasks", "star.fill", "arrowshape.turn.up.forward.circle"]
+    private let tabBarTitles: [String] = ["Trending", "Now Playing", "Popular", "Top Rated", "Upcoming"]
+
+    override func viewDidLoad() {
         super.viewDidLoad()
+        guard let viewControllers = self.viewControllers else {
+            return
+        }
+        for (index, controller) in viewControllers.enumerated() {
+            if let movieListViewController = controller as? MovieListViewController {
+                movieListViewController.endPoint = endPoints[index]
+                movieListViewController.tabBarItem.title = tabBarTitles[index]
+                movieListViewController.tabBarItem.image = UIImage(systemName: tabBarImages[index])
+            }
+        }
     }
 
 }

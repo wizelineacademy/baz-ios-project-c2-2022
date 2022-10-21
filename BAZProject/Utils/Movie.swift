@@ -7,20 +7,21 @@
 import Foundation
 
 struct Movie: Decodable {
-    let id: Int
-    let title: String
-    let posterPath: String
-    let adult: Bool
-    let backdropPath: String
-    let genreIds: [Int]
-    let originalLanguage: String
-    let originalTitle: String
-    let overview: String
-    let popularity: Float
-    let releaseDate: String
-    let video: Bool
-    let voteAverage: Double
-    let voteCount: Int
+    let name: String?
+    let id: Int?
+    let title: String?
+    let posterPath: String?
+    let adult: Bool?
+    let backdropPath: String?
+    let genreIds: [Int]?
+    let originalLanguage: String?
+    let originalTitle: String?
+    let overview: String?
+    let popularity: Float?
+    let releaseDate: String?
+    let video: Bool?
+    let voteAverage: Double?
+    let voteCount: Int?
     let mediaType: String?
 }
 

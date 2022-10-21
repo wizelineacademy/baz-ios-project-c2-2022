@@ -16,7 +16,7 @@ class MainMovieRouter: MainMovieWireframeProtocol {
 
     static func createModule() -> UIViewController {
         // Change to get view from storyboard if not using progammatic UI
-        let view = MainMovieViewController(nibName: nil, bundle: nil)
+        let view = MainMovieViewController(nibName: nil, bundle: Bundle(for: MainMovieRouter.self))
         let interactor = MainMovieInteractor()
         let router = MainMovieRouter()
         let presenter = MainMoviePresenter(interface: view, interactor: interactor, router: router)

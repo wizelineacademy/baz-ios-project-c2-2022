@@ -64,7 +64,15 @@ struct TopRatedEndPoint: EndPoint {
     }
 }
 
-struct SearchdEndPoint: EndPoint {
+struct UpcomingEndPoint: EndPoint {
+    var url: URL? { createURL() }
+
+    private func createURL() -> URL? {
+        return EndPointComponents.init(path: "/3/movie/upcoming").components.url
+    }
+}
+
+struct SearchEndPoint: EndPoint {
     var query: String
     var url: URL? { createURL(query: query) }
 
@@ -73,10 +81,49 @@ struct SearchdEndPoint: EndPoint {
         components.queryItems?.append(URLQueryItem(name: "query", value: query))
         return components.url
     }
-    
+
     init(query: String) {
         self.query = query
     }
 }
 
+struct KeywordEndPoint: EndPoint {
+    var query: String
+    var url: URL? { createURL(query: query) }
 
+    private func createURL(query: String) -> URL? {
+        var components = EndPointComponents.init(path: "/3/search/keyword").components
+        components.queryItems?.append(URLQueryItem(name: "query", value: query))
+        return components.url
+    }
+
+    init(query: String) {
+        self.query = query
+    }
+}
+
+struct SimilarMovieEndPoint: EndPoint {
+    var movieId: String
+    var url: URL? { createURL(movieId: movieId) }
+
+    private func createURL(movieId: String) -> URL? {
+        return EndPointComponents.init(path: "/3/movie/\(movieId)/similar").components.url
+    }
+
+    init(movieId: String) {
+        self.movieId = movieId
+    }
+}
+
+struct RecommendationsMovieEndPoint: EndPoint {
+    var movieId: String
+    var url: URL? { createURL(movieId: movieId) }
+
+    private func createURL(movieId: String) -> URL? {
+        return EndPointComponents.init(path: "/3/movie/\(movieId)/recommendations").components.url
+    }
+
+    init(movieId: String) {
+        self.movieId = movieId
+    }
+}

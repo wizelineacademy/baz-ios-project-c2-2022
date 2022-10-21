@@ -6,14 +6,19 @@
 
 import UIKit
 
-class TrendingViewController: UITableViewController {
+class MovieListViewController: UITableViewController {
 
-    var movies: [Movie] = []
+    private var movies: [Movie] = []
+    var endPoint: EndPoint?
 
     override func viewDidLoad() {
         super.viewDidLoad()
         let movieApi = MovieAPI()
-        movies = movieApi.getMovies(endPoint: TrendingEndPoint())
+
+        guard let endPoint = endPoint else {
+            return
+        }
+        movies = movieApi.getMovies(endPoint: endPoint)
         tableView.reloadData()
     }
 
@@ -21,26 +26,27 @@ class TrendingViewController: UITableViewController {
 
 // MARK: - TableView's DataSource
 
-extension TrendingViewController {
+extension MovieListViewController {
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         movies.count
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        tableView.dequeueReusableCell(withIdentifier: "TrendingTableViewCell")!
+        tableView.dequeueReusableCell(withIdentifier: "MovieListTableViewCell")!
     }
 
 }
 
 // MARK: - TableView's Delegate
 
-extension TrendingViewController {
+extension MovieListViewController {
 
     override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         var config = UIListContentConfiguration.cell()
-        config.text = movies[indexPath.row].title
-        if let url = URL(string: "https://image.tmdb.org/t/p/w500\(movies[indexPath.row].posterPath)") {
+        config.text = movies[indexPath.row].title ?? movies[indexPath.row].name
+        let posterPath = movies[indexPath.row].posterPath ?? ""
+        if let url = URL(string: "https://image.tmdb.org/t/p/w500\(posterPath)") {
             if let imageData = try? Data(contentsOf: url) {
                 config.image = UIImage(data: imageData)
             } else {

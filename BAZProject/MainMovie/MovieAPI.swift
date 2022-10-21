@@ -12,9 +12,6 @@ class MovieAPI {
         let decoder = JSONDecoder()
         decoder.keyDecodingStrategy = .convertFromSnakeCase
 
-        let url = endPoint.url
-        let data = try? Data(contentsOf: url!)
-        let movies = try? decoder.decode(GenericResponse.self, from: data!)
         guard let url = endPoint.url,
               let data = try? Data(contentsOf: url),
               let movies = try? decoder.decode(GenericResponse.self, from: data)
