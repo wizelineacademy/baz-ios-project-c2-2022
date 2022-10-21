@@ -59,4 +59,29 @@ extension MovieFeed: Endpoint {
             return "/3/movie/\(movieID)/recommendations"
         }
     }
+    
+    var name: String {
+        switch self {
+        case .Trendig:
+            return "Trending"
+        case .NowPlaying:
+            return "NowPlaying"
+        case .Popular:
+            return "Popular"
+        case .TopRated:
+            return "TopRated"
+        case .UpComing:
+            return "UpComing"
+        case .Keyword:
+            return "Keyword"
+        case .Search:
+            return "Search"
+        case .Reviews:
+            return "Reviews"
+        case .Similar:
+            return "Similar"
+        case .Recommendations:
+            return "Recommendations"
+        }
+    }
 }

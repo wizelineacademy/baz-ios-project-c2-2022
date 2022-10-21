@@ -91,8 +91,10 @@
                                             <segment title=""/>
                                             <segment title=""/>
                                             <segment title=""/>
-                                            <segment title=""/>
                                         </segments>
+                                        <connections>
+                                            <action selector="showInfo:" destination="gJ9-X3-A7i" eventType="valueChanged" id="PXu-ml-Yzt"/>
+                                        </connections>
                                     </segmentedControl>
                                     <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="b5H-5a-ZfM">
                                         <rect key="frame" x="0.0" y="31" width="414" height="738"/>

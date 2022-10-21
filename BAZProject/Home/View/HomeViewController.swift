@@ -25,10 +25,34 @@ class HomeViewController: UIViewController {
         super.viewDidLoad()
         configurateView()
         refreshData()
+        configSegment()
+    }
+    private func configSegment() {
+        segmentControl.setTitle("Trending", forSegmentAt: 0)
+        segmentControl.setTitle("Now Paying", forSegmentAt: 1)
+        segmentControl.setTitle("Popular", forSegmentAt: 2)
+        segmentControl.setTitle("Top Rated", forSegmentAt: 3)
+        segmentControl.setTitle("Up Coming", forSegmentAt: 4)
+    }
+    
+    @IBAction func showInfo(_ sender: Any) {
+        switch segmentControl.selectedSegmentIndex {
+        case 0:
+            viewModel.changeDataToShow(.Trendig)
+        case 1:
+            viewModel.changeDataToShow(.NowPlaying)
+        case 2:
+            viewModel.changeDataToShow(.Popular)
+        case 3:
+            viewModel.changeDataToShow(.TopRated)
+        default:
+            viewModel.changeDataToShow(.UpComing)
+            
+        }
     }
     
     private func configurateView() {
-        viewModel.getInfo(.Trendig)
+        viewModel.getAllMovies()
     }
 
     private func refreshData() {
