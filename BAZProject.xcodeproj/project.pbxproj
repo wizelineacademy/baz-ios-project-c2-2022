@@ -24,6 +24,7 @@
 		DDDC4DF32901921200BCC425 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDDC4DF22901921200BCC425 /* HomeViewController.swift */; };
 		DDDC4DF52901B41C00BCC425 /* MovieCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = DDDC4DF42901B41C00BCC425 /* MovieCell.xib */; };
 		DDDC4DF72901B8CF00BCC425 /* MovieTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDDC4DF62901B8CF00BCC425 /* MovieTableViewCell.swift */; };
+		DDDC4DFA29033A5B00BCC425 /* SkeletonView in Frameworks */ = {isa = PBXBuildFile; productRef = DDDC4DF929033A5B00BCC425 /* SkeletonView */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -53,6 +54,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DDDC4DFA29033A5B00BCC425 /* SkeletonView in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -107,8 +109,6 @@
 				C30893C328A2F845004B1860 /* TrendingViewController.swift */,
 				C30893B328A2F42B004B1860 /* Main.storyboard */,
 				DDDC4DF22901921200BCC425 /* HomeViewController.swift */,
-				DDDC4DF42901B41C00BCC425 /* MovieCell.xib */,
-				DDDC4DF62901B8CF00BCC425 /* MovieTableViewCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -124,6 +124,7 @@
 		DDDC4DEE290043BA00BCC425 /* Home */ = {
 			isa = PBXGroup;
 			children = (
+				DDDC4DFB2903475E00BCC425 /* Cells */,
 				DDDC4DF129009E2000BCC425 /* API */,
 				DD80456828F8704B0056875F /* ViewModel */,
 				DD80456728F8702C0056875F /* View */,
@@ -138,6 +139,15 @@
 				C30893E028A425E1004B1860 /* MovieAPI.swift */,
 			);
 			path = API;
+			sourceTree = "<group>";
+		};
+		DDDC4DFB2903475E00BCC425 /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				DDDC4DF42901B41C00BCC425 /* MovieCell.xib */,
+				DDDC4DF62901B8CF00BCC425 /* MovieTableViewCell.swift */,
+			);
+			path = Cells;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -156,6 +166,9 @@
 			dependencies = (
 			);
 			name = BAZProject;
+			packageProductDependencies = (
+				DDDC4DF929033A5B00BCC425 /* SkeletonView */,
+			);
 			productName = BAZProject;
 			productReference = C30893AA28A2F42B004B1860 /* BAZProject.app */;
 			productType = "com.apple.product-type.application";
@@ -184,6 +197,9 @@
 				Base,
 			);
 			mainGroup = C30893A128A2F42B004B1860;
+			packageReferences = (
+				DDDC4DF829033A5B00BCC425 /* XCRemoteSwiftPackageReference "SkeletonView" */,
+			);
 			productRefGroup = C30893AB28A2F42B004B1860 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -442,6 +458,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		DDDC4DF829033A5B00BCC425 /* XCRemoteSwiftPackageReference "SkeletonView" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Juanpe/SkeletonView";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		DDDC4DF929033A5B00BCC425 /* SkeletonView */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = DDDC4DF829033A5B00BCC425 /* XCRemoteSwiftPackageReference "SkeletonView" */;
+			productName = SkeletonView;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = C30893A228A2F42B004B1860 /* Project object */;
 }
