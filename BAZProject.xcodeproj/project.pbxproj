@@ -66,17 +66,49 @@
 		C30893AC28A2F42B004B1860 /* BAZProject */ = {
 			isa = PBXGroup;
 			children = (
+				C91B023E2903437900A02F46 /* Service Data */,
+				C91B023D2903431F00A02F46 /* Model */,
+				C91B023C2903431C00A02F46 /* View */,
+				C91B023B2903431800A02F46 /* Controller */,
 				C30893AD28A2F42B004B1860 /* AppDelegate.swift */,
 				C30893AF28A2F42B004B1860 /* SceneDelegate.swift */,
-				C30893C328A2F845004B1860 /* TrendingViewController.swift */,
-				C30893E128A425E1004B1860 /* Movie.swift */,
-				C30893E028A425E1004B1860 /* MovieAPI.swift */,
-				C30893B328A2F42B004B1860 /* Main.storyboard */,
-				C30893B828A2F42D004B1860 /* LaunchScreen.storyboard */,
 				C30893B628A2F42D004B1860 /* Assets.xcassets */,
 				C30893BB28A2F42D004B1860 /* Info.plist */,
 			);
 			path = BAZProject;
+			sourceTree = "<group>";
+		};
+		C91B023B2903431800A02F46 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				C30893C328A2F845004B1860 /* TrendingViewController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		C91B023C2903431C00A02F46 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				C30893B828A2F42D004B1860 /* LaunchScreen.storyboard */,
+				C30893B328A2F42B004B1860 /* Main.storyboard */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		C91B023D2903431F00A02F46 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				C30893E128A425E1004B1860 /* Movie.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		C91B023E2903437900A02F46 /* Service Data */ = {
+			isa = PBXGroup;
+			children = (
+				C30893E028A425E1004B1860 /* MovieAPI.swift */,
+			);
+			path = "Service Data";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
