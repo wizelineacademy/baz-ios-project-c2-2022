@@ -6,10 +6,10 @@
 
 import UIKit
 
-class TrendingViewController: UITableViewController {
+final class TrendingViewController: UITableViewController {
 
-    var movies: [Movie] = []
-    let movieApi = MovieAPI()
+    private var movies: [Movie] = []
+    private let movieApi = MovieAPI()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -40,7 +40,7 @@ extension TrendingViewController {
     override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         var config = UIListContentConfiguration.cell()
         config.text = movies[indexPath.row].title
-        config.image = movieApi.getImageMovie(nameImage: movies[indexPath.row].posterPath)
+        config.image = movieApi.getImage(with: movies[indexPath.row].posterPath)
         cell.contentConfiguration = config
     }
 
