@@ -13,7 +13,8 @@ final class MovieAPI {
     private let urlBase: String = "https://api.themoviedb.org/3"
     
     /// Function get movies of API
-    /// - Return: Movies Array
+    /// - Returns: Movies Array
+    /// - throws: if any basic condition dont success, this return empty array
     func getMovies() -> [Movie] {
         guard let url = URL(string: urlBase + "/trending/movie/day?api_key=\(apiKey)"),
               let data = try? Data(contentsOf: url),
@@ -36,10 +37,10 @@ final class MovieAPI {
         }
     }
     
-    /// Function decode data info into model Movie
+    /// Decode info type data to a Movie model
     /// - Parameters:
-    ///    - data: Info to decode in Data formater.
-    ///    - decoder:
+    ///    - data: Info received in type Data.
+    ///    - decoder:Custom JsonDecoder
     func decodeInfo(with data: Data, decoder: JSONDecoder) -> [Movie] {
         do {
             let decoded = try decoder.decode([Movie].self, from: data)
@@ -50,9 +51,9 @@ final class MovieAPI {
         }
     }
     
-    /// Function return a image
-    /// - Parameter name: specific image name
-    /// - Return: Image
+    /// Download image
+    /// - Parameter name: name of image to download
+    /// - Returns: Image of type UIIMage
     func getImage(with name: String) -> UIImage {
         let image = UIImage(named: "poster") ?? UIImage()
         guard let url = URL(string: "https://image.tmdb.org/t/p/w500\(name)"),

@@ -41,6 +41,7 @@ extension TrendingViewController {
         var config = UIListContentConfiguration.cell()
         config.text = movies[indexPath.row].title
         config.image = movieApi.getImage(with: movies[indexPath.row].posterPath)
+        print("ID movie: \(movies[indexPath.row].id)")
         cell.contentConfiguration = config
     }
 
