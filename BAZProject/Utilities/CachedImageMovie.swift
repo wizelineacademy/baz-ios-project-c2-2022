@@ -17,9 +17,7 @@ extension UIImageView {
      */
     func loadImage(urlStr: String) {
         image = UIImage()
-//        self.addSkeletonAnimation()
         if let img = imageCache.object(forKey: NSString(string: urlStr)) {
-//            self.removeSkeletonAnimation()
             image = img
             return
         }
@@ -33,8 +31,6 @@ extension UIImageView {
                 DispatchQueue.main.async {
                     guard let data = data,
                           let tempImg = UIImage(data: data) else { return }
-                    
-//                    self.removeSkeletonAnimation()
                     self.alpha = 0.3;
                     self.image = tempImg
                     
