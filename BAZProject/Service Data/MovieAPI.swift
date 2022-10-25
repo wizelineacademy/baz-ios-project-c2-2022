@@ -6,30 +6,45 @@
 
 import Foundation
 
-class MovieAPI {
 
-    private let apiKey: String = "f6cd5c1a9e6c6b965fdcab0fa6ddd38a"
+enum Path: String {
+    case pathStrMovies = "/trending/movie/day?api_key="
+}
 
-    func getMovies() -> [Movie] {
-        guard let url = URL(string: "https://api.themoviedb.org/3/trending/movie/day?api_key=\(apiKey)"),
-              let data = try? Data(contentsOf: url),
-              let json = try? JSONSerialization.jsonObject(with: data) as? NSDictionary,
-              let results = json.object(forKey: "results") as? [NSDictionary]
-        else {
-            return []
-        }
-
-        var movies: [Movie] = []
-
-        for result in results {
-            if let id = result.object(forKey: "id") as? Int,
-               let title = result.object(forKey: "title") as? String,
-               let poster_path = result.object(forKey: "poster_path") as? String {
-                movies.append(Movie(id: id, title: title, poster_path: poster_path))
+final class MovieAPI {
+    
+    private let apiKey: String = Bundle.main.infoDictionary?["MovieApiKey"] as? String ?? ""
+    private let baseEndpoint: String = "https://api.themoviedb.org/3"
+    
+    /// API request creation to get movies
+    
+    func getMovies(completion: @escaping (Result<[InfoMovies], Error>) -> ()){
+        if let urlString = URL(string: "\(baseEndpoint)\(Path.pathStrMovies.rawValue)\(apiKey)"){
+            let session = URLSession(configuration: .default)
+            let task = session.dataTask(with: urlString) { data, response, error in
+                if let error = error {
+                    completion(.failure(error))
+                }
+                if let jsonData = self.parsingJson(jsonData: data!) {
+                    completion(.success(jsonData.results))
+                }
             }
+            task.resume()
         }
-
-        return movies
     }
-
+    
+    /// Parsing json to get movie data.
+   
+    private func parsingJson(jsonData: Data) -> ArrayMovies? {
+        let jsonDecoder = JSONDecoder()
+        do {
+            let decodedData = try jsonDecoder.decode(ArrayMovies.self, from: jsonData)
+            return decodedData
+        }catch {
+            print("Error al decodificar los datos")
+            return nil
+        }
+        
+    }
+    
 }
