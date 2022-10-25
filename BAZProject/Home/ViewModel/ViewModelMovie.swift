@@ -33,6 +33,12 @@ class ViewModelMovie {
     func getInfo(_ api: MovieFeed) {
         self.dataArray = self.movieApi.getMovies(api)
     }
+    /// La funcion getInfoIndex devuelve la informacion de las peliculas del index que mandan
+    /// - Parameter index: Index de la informacion que se busca.
+    /// - Returns: Una estructura de tipo Movie
+    func getInfoIndex(_ index: Int) -> Movie{
+        return dataArray[index]
+    }
     /// La funcion changeDataToShow actualiza la informacion del diccionario de dataArray
     /// - Parameter kindOfData: El tipo de peliculas que se busca actualizar
     func changeDataToShow(_ kindOfData: MovieFeed) {

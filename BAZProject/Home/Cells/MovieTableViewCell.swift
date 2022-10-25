@@ -16,7 +16,13 @@ class MovieTableViewCell: UITableViewCell {
     @IBOutlet weak var originalTitleMovie: UILabel!
     @IBOutlet weak var calificacionMovie: UILabel!
     
-    func configure(titulo: String, originalTitle: String, calificacion: Double, image: UIImage) {
+    public var movieModel: Movie? {
+        didSet { configure() }
+    }
+    
+    private var movieViewModel = ViewModelMovie()
+    
+    func configureData(titulo: String, originalTitle: String, calificacion: Double, image: UIImage) {
         tituloMovie.text = titulo
         originalTitleMovie.text = originalTitle
         calificacionMovie.text = "Calificacion: \(calificacion)"
@@ -31,6 +37,12 @@ class MovieTableViewCell: UITableViewCell {
         tituloMovie.isSkeletonable = true
         originalTitleMovie.isSkeletonable = true
         calificacionMovie.isSkeletonable = true
+    }
+    
+    private func configure() {
+        guard let movieModel = movieModel else { return }
+        let imageMovie = UIImage(data: self.movieViewModel.getImage(urlImage: movieModel.poster_path)) ?? UIImage(named: "poster")
+        self.configureData(titulo: movieModel.title, originalTitle: movieModel.original_title, calificacion: movieModel.vote_average, image: imageMovie ?? UIImage())
     }
     
 }

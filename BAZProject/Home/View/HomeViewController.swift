@@ -9,7 +9,15 @@ import UIKit
 
 class HomeViewController: UIViewController {
     
-    @IBOutlet weak var segmentControl: UISegmentedControl!
+    @IBOutlet weak var segmentControl: UISegmentedControl! {
+        didSet {
+            segmentControl.setTitle("Trending", forSegmentAt: 0)
+            segmentControl.setTitle("Now Paying", forSegmentAt: 1)
+            segmentControl.setTitle("Popular", forSegmentAt: 2)
+            segmentControl.setTitle("Top Rated", forSegmentAt: 3)
+            segmentControl.setTitle("Up Coming", forSegmentAt: 4)
+        }
+    }
     @IBOutlet weak var tableViewMovies: UITableView! {
         didSet {
             let nib = UINib(nibName: "MovieCell", bundle: nil)
@@ -25,14 +33,6 @@ class HomeViewController: UIViewController {
         super.viewDidLoad()
         configurateView()
         refreshData()
-        configSegment()
-    }
-    private func configSegment() {
-        segmentControl.setTitle("Trending", forSegmentAt: 0)
-        segmentControl.setTitle("Now Paying", forSegmentAt: 1)
-        segmentControl.setTitle("Popular", forSegmentAt: 2)
-        segmentControl.setTitle("Top Rated", forSegmentAt: 3)
-        segmentControl.setTitle("Up Coming", forSegmentAt: 4)
     }
     
     @IBAction func showInfo(_ sender: Any) {
@@ -69,8 +69,7 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
             cell.tituloMovie.hideSkeleton()
             cell.calificacionMovie.hideSkeleton()
             cell.imageViewMovie.hideSkeleton()
-            let imageMovie = UIImage(data: self.viewModel.getImage(urlImage: viewModel.dataArray[indexPath.row].poster_path)) ?? UIImage(named: "poster")
-            cell.configure(titulo: viewModel.dataArray[indexPath.row].title, originalTitle: viewModel.dataArray[indexPath.row].original_title, calificacion: viewModel.dataArray[indexPath.row].vote_average, image: imageMovie ?? UIImage())
+            cell.movieModel = viewModel.getInfoIndex(indexPath.row)
         }
         return cell
     }
