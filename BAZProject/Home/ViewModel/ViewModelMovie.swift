@@ -18,7 +18,7 @@ class ViewModelMovie {
             refreshData()
         }
     }
-    
+    /// La funcion getAllMovies obtiene la informacion de todas las peliculas dividadas y las guarda en un diccionario
     func getAllMovies() {
         dicAllMovies["Trending"] = self.movieApi.getMovies(.Trendig)
         dicAllMovies["TopRated"] = self.movieApi.getMovies(.TopRated)
@@ -30,15 +30,14 @@ class ViewModelMovie {
     let movieApi = MovieAPI()
     /// La funcion getInfo hace la peticion de la informacion con la instancia de la clase de MovieAPI y la guarda en el dataArray del ViewModel
     /// - Parameter api: El tipo de api que se busca la informacion
-    
     func getInfo(_ api: MovieFeed) {
         self.dataArray = self.movieApi.getMovies(api)
     }
-    
+    /// La funcion changeDataToShow actualiza la informacion del diccionario de dataArray
+    /// - Parameter kindOfData: El tipo de peliculas que se busca actualizar
     func changeDataToShow(_ kindOfData: MovieFeed) {
         self.dataArray = dicAllMovies[kindOfData.name] ?? []
     }
-    
     /// La funcion getImage retorna la informacion de una imagen
     /// - Parameter urlImage: String con la url de la imagen a descargar
     /// - Returns: La infotmacion de la imagen descargada de tipo Data
@@ -47,5 +46,21 @@ class ViewModelMovie {
         guard let urlData = URL(string: urlIm),
               let data = try? Data(contentsOf: urlData) else { return Data() }
         return data
+    }
+    
+    func changeInfoByIndex(_ index: Int) {
+        switch index {
+        case 0:
+            self.changeDataToShow(.Trendig)
+        case 1:
+            self.changeDataToShow(.NowPlaying)
+        case 2:
+            self.changeDataToShow(.Popular)
+        case 3:
+            self.changeDataToShow(.TopRated)
+        default:
+            self.changeDataToShow(.UpComing)
+            
+        }
     }
 }

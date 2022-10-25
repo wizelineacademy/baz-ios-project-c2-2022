@@ -36,19 +36,7 @@ class HomeViewController: UIViewController {
     }
     
     @IBAction func showInfo(_ sender: Any) {
-        switch segmentControl.selectedSegmentIndex {
-        case 0:
-            viewModel.changeDataToShow(.Trendig)
-        case 1:
-            viewModel.changeDataToShow(.NowPlaying)
-        case 2:
-            viewModel.changeDataToShow(.Popular)
-        case 3:
-            viewModel.changeDataToShow(.TopRated)
-        default:
-            viewModel.changeDataToShow(.UpComing)
-            
-        }
+        self.viewModel.changeInfoByIndex(segmentControl.selectedSegmentIndex)
     }
     
     private func configurateView() {
