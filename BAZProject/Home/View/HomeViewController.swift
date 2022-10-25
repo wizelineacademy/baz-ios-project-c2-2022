@@ -76,7 +76,7 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
         cell.calificacionMovie.showAnimatedGradientSkeleton()
         cell.imageViewMovie.showAnimatedGradientSkeleton()
         cell.originalTitleMovie.showAnimatedGradientSkeleton()
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1) { [self] in
+        DispatchQueue.main.asyncAfter(deadline: .now()) { [self] in
             cell.originalTitleMovie.hideSkeleton()
             cell.tituloMovie.hideSkeleton()
             cell.calificacionMovie.hideSkeleton()
@@ -87,6 +87,13 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
         return cell
     }
     
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "DetailViewController") as! DetailViewController
+        vc.viewModel.dataArray = viewModel.dataArray[indexPath.row]
+        vc.modalPresentationStyle = .fullScreen
+        present(vc, animated: true, completion: nil)
+        
+    }
     func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
         return UITableView.automaticDimension
     }

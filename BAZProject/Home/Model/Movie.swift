@@ -12,6 +12,8 @@ struct Movie {
     let poster_path: String
     let original_title: String
     let vote_average: Double
+    let overview: String
+    let release_date: String
 }
 
 struct MovieApiModel: Codable {
