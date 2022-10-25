@@ -41,8 +41,14 @@ extension TrendingViewController {
         var config = UIListContentConfiguration.cell()
         config.text = movies[indexPath.row].title
         config.image = movieApi.getImage(with: movies[indexPath.row].posterPath)
-        print("ID movie: \(movies[indexPath.row].id)")
         cell.contentConfiguration = config
+    }
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let movieDetails = detailsMovie(backgroundImage: movieApi.getImage(with: movies[indexPath.row].backdropPath), title: movies[indexPath.row].title, description: movies[indexPath.row].overview)
+        let vc = DetailsMovieRouter.createModuleDetailsMovie(details: movieDetails)
+        vc.modalPresentationStyle = .fullScreen
+        self.present(vc, animated: true)
     }
 
 }
