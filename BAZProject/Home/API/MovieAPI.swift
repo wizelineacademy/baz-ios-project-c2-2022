@@ -52,8 +52,9 @@ class MovieAPI {
                let original_title = result.original_title,
                let vote_avarage = result.vote_average,
                let overview = result.overview,
-               let release_date = result.release_date{
-                movies.append(Movie(id: id, title: title, poster_path: poster_path, original_title: original_title, vote_average: vote_avarage, overview: overview, release_date: release_date))}
+               let release_date = result.release_date,
+               let backdrop_path = result.backdrop_path{
+                movies.append(Movie(id: id, title: title, poster_path: poster_path, original_title: original_title, vote_average: vote_avarage, overview: overview, release_date: release_date, backdrop_path: backdrop_path))}
         }
         return movies
     }
@@ -72,8 +73,9 @@ class MovieAPI {
                let original_title = result.original_title,
                let vote_avarage = result.vote_average,
                let overview = result.overview,
-               let release_date = result.release_date{
-                movies.append(Movie(id: id, title: title, poster_path: poster_path, original_title: original_title, vote_average: vote_avarage, overview: overview, release_date: release_date))}
+               let release_date = result.release_date,
+               let backdrop_path = result.backdrop_path{
+                movies.append(Movie(id: id, title: title, poster_path: poster_path, original_title: original_title, vote_average: vote_avarage, overview: overview, release_date: release_date, backdrop_path: backdrop_path))}
         }
         return movies
     }

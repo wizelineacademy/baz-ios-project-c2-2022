@@ -7,7 +7,6 @@
 
 import UIKit
 import SkeletonView
-
 class MovieTableViewCell: UITableViewCell {
     
     @IBOutlet weak var infoStackView: UIStackView!
