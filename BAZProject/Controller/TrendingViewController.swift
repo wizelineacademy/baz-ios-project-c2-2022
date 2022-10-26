@@ -62,16 +62,6 @@ extension TrendingViewController {
         }
         let infoMovies = movies[indexPath.row]
         cell.showDetailsMovies(movie: infoMovies)
-        let urlString = "https://image.tmdb.org/t/p/w500\(infoMovies.poster_path ?? "")"
-            if let imageURL = URL(string: urlString) {
-                DispatchQueue.global().async {
-                    guard let imagenData = try? Data(contentsOf: imageURL)else {return}
-                    let image = UIImage(data: imagenData)
-                     DispatchQueue.main.async {
-                        cell.imgMovies.image = image
-                    }
-                }
-            }
         return cell
 }
 }
