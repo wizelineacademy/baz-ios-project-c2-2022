@@ -27,7 +27,7 @@ class HomeViewController: UIViewController {
             tableViewMovies.reloadData()
         }
     }
-    let viewModel = ViewModelMovie()
+    let homeViewModel = ViewModelMovie()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -36,15 +36,15 @@ class HomeViewController: UIViewController {
     }
     
     @IBAction func showInfo(_ sender: Any) {
-        self.viewModel.changeInfoByIndex(segmentControl.selectedSegmentIndex)
+        self.homeViewModel.changeInfoByIndex(segmentControl.selectedSegmentIndex)
     }
     
     private func configurateView() {
-        viewModel.getAllMovies()
+        homeViewModel.getAllMovies()
     }
     
     private func refreshData() {
-        viewModel.refreshData = { [weak self] () in
+        homeViewModel.refreshData = { [weak self] () in
             DispatchQueue.main.async {
                 self?.tableViewMovies.reloadData()
             }
@@ -54,29 +54,29 @@ class HomeViewController: UIViewController {
 
 extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        self.viewModel.dataArray.count
+        self.homeViewModel.dataArray.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = self.tableViewMovies.dequeueReusableCell(withIdentifier: "MovieCell") as! MovieTableViewCell
         cell.setUpSkeleton()
-        cell.tituloMovie.showAnimatedGradientSkeleton()
-        cell.calificacionMovie.showAnimatedGradientSkeleton()
+        cell.titleMovie.showAnimatedGradientSkeleton()
+        cell.qualificationMovie.showAnimatedGradientSkeleton()
         cell.imageViewMovie.showAnimatedGradientSkeleton()
         cell.originalTitleMovie.showAnimatedGradientSkeleton()
         DispatchQueue.main.asyncAfter(deadline: .now()) { [self] in
             cell.originalTitleMovie.hideSkeleton()
-            cell.tituloMovie.hideSkeleton()
-            cell.calificacionMovie.hideSkeleton()
+            cell.titleMovie.hideSkeleton()
+            cell.qualificationMovie.hideSkeleton()
             cell.imageViewMovie.hideSkeleton()
-            cell.movieModel = viewModel.getInfoIndex(indexPath.row)
+            cell.movieModel = homeViewModel.getInfoIndex(indexPath.row)
         }
         return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "DetailViewController") as! DetailViewController
-        vc.viewModel.dataArray = viewModel.dataArray[indexPath.row]
+        vc.detailViewModel.dataArray = homeViewModel.dataArray[indexPath.row]
         vc.modalPresentationStyle = .fullScreen
         present(vc, animated: true, completion: nil)
     }

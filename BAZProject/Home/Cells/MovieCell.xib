@@ -57,11 +57,11 @@
                 </constraints>
             </tableViewCellContentView>
             <connections>
-                <outlet property="calificacionMovie" destination="iYs-lw-5YK" id="3By-45-Bem"/>
                 <outlet property="imageViewMovie" destination="udW-hC-Tmk" id="PXa-AB-Vcg"/>
                 <outlet property="infoStackView" destination="Rep-ZI-GWB" id="WMa-EL-QiK"/>
                 <outlet property="originalTitleMovie" destination="W63-zj-h9a" id="WBf-Lq-3e3"/>
-                <outlet property="tituloMovie" destination="mHL-KX-YHC" id="Z8l-Hp-zXw"/>
+                <outlet property="qualificationMovie" destination="iYs-lw-5YK" id="owR-oC-NmW"/>
+                <outlet property="titleMovie" destination="mHL-KX-YHC" id="Wew-Sn-sSJ"/>
             </connections>
             <point key="canvasLocation" x="128.98550724637681" y="-168.75"/>
         </tableViewCell>

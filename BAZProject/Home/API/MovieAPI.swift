@@ -7,12 +7,13 @@
 import Foundation
 
 class MovieAPI {
+    let httpMeth = "GET"
     /// Funcion getInformation obtiene la informacion de una api de peliculas dependiendo la URL que manden
     ///  - Parameter api: Seleccionas el tipo de api que solicitaras
     func getInformation(_ api: MovieFeed) -> [MovieResults] {
         let semaphore = DispatchSemaphore (value: 0)
         var request = api.request
-        request.httpMethod = "GET"
+        request.httpMethod = httpMeth
         var infoJson: [MovieResults] = []
         let task = URLSession.shared.dataTask(with: request) { data, response, error in
             guard let httpResponse = response as? HTTPURLResponse else {
@@ -48,13 +49,13 @@ class MovieAPI {
         for result in jsonInfo {
             if let id = result.id,
                let title = result.title,
-               let poster_path = result.poster_path,
-               let original_title = result.original_title,
-               let vote_avarage = result.vote_average,
+               let posterPath = result.poster_path,
+               let originalTitle = result.original_title,
+               let voteAverage = result.vote_average,
                let overview = result.overview,
-               let release_date = result.release_date,
-               let backdrop_path = result.backdrop_path{
-                movies.append(Movie(id: id, title: title, poster_path: poster_path, original_title: original_title, vote_average: vote_avarage, overview: overview, release_date: release_date, backdrop_path: backdrop_path))}
+               let releaseDate = result.release_date,
+               let backdropPath = result.backdrop_path{
+                movies.append(Movie(id: id, title: title, posterPath: posterPath, originalTitle: originalTitle, voteAverage: voteAverage, overview: overview, releaseDate: releaseDate, backdropPath: backdropPath))}
         }
         return movies
     }
@@ -69,13 +70,13 @@ class MovieAPI {
         for result in jsonInfo {
             if let id = result.id,
                let title = result.title,
-               let poster_path = result.poster_path,
-               let original_title = result.original_title,
-               let vote_avarage = result.vote_average,
+               let posterPath = result.poster_path,
+               let originalTitle = result.original_title,
+               let voteAverage = result.vote_average,
                let overview = result.overview,
-               let release_date = result.release_date,
-               let backdrop_path = result.backdrop_path{
-                movies.append(Movie(id: id, title: title, poster_path: poster_path, original_title: original_title, vote_average: vote_avarage, overview: overview, release_date: release_date, backdrop_path: backdrop_path))}
+               let releaseDate = result.release_date,
+               let backdropPath = result.backdrop_path{
+                movies.append(Movie(id: id, title: title, posterPath: posterPath, originalTitle: originalTitle, voteAverage: voteAverage, overview: overview, releaseDate: releaseDate, backdropPath: backdropPath))}
         }
         return movies
     }

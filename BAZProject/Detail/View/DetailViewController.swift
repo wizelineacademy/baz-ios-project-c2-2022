@@ -17,7 +17,7 @@ class DetailViewController: UIViewController {
     @IBOutlet weak var fechaEstrenoDetail: UILabel!
     @IBOutlet weak var descDetailView: UILabel!
     
-    let viewModel = DetailModelView()
+    let detailViewModel = DetailModelView()
     override func viewDidLoad() {
         super.viewDidLoad()
         configurateView()
@@ -28,11 +28,11 @@ class DetailViewController: UIViewController {
         self.dismiss(animated: true, completion: nil)
     }
     private func configurateView() {
-        tituloDetailView.text = self.viewModel.dataArray?.title
-        tituloOriginalDetail.text = self.viewModel.dataArray?.original_title
-        clificacionDetailView.text = "Calificaion \(self.viewModel.dataArray?.vote_average ?? 0.0)"
-        fechaEstrenoDetail.text = self.viewModel.dataArray?.release_date
-        descDetailView.text = self.viewModel.dataArray?.overview
-        imageMovie.image = UIImage(data: self.viewModel.getImage(urlImage: viewModel.dataArray?.poster_path ?? "")) ?? UIImage(named: "poster")
+        tituloDetailView.text = self.detailViewModel.dataArray?.title
+        tituloOriginalDetail.text = self.detailViewModel.dataArray?.originalTitle
+        clificacionDetailView.text = "Calificaion \(self.detailViewModel.dataArray?.voteAverage ?? 0.0)"
+        fechaEstrenoDetail.text = self.detailViewModel.dataArray?.releaseDate
+        descDetailView.text = self.detailViewModel.dataArray?.overview
+        imageMovie.image = UIImage(data: self.detailViewModel.getImage(urlImage: detailViewModel.dataArray?.posterPath ?? "")) ?? UIImage(named: "poster")
     }
 }

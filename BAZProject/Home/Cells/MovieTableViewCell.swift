@@ -11,9 +11,9 @@ class MovieTableViewCell: UITableViewCell {
     
     @IBOutlet weak var infoStackView: UIStackView!
     @IBOutlet weak var imageViewMovie: UIImageView!
-    @IBOutlet weak var tituloMovie: UILabel!
+    @IBOutlet weak var titleMovie: UILabel!
     @IBOutlet weak var originalTitleMovie: UILabel!
-    @IBOutlet weak var calificacionMovie: UILabel!
+    @IBOutlet weak var qualificationMovie: UILabel!
     
     public var movieModel: Movie? {
         didSet { configure() }
@@ -22,26 +22,26 @@ class MovieTableViewCell: UITableViewCell {
     private var movieViewModel = ViewModelMovie()
     
     func configureData(titulo: String, originalTitle: String, calificacion: Double, image: UIImage) {
-        tituloMovie.text = titulo
+        titleMovie.text = titulo
         originalTitleMovie.text = originalTitle
-        calificacionMovie.text = "Calificacion: \(calificacion)"
+        qualificationMovie.text = "Calificacion: \(calificacion)"
         imageViewMovie.image = image
     }
     
     func setUpSkeleton() {
         imageViewMovie.isSkeletonable = true
-        tituloMovie.linesCornerRadius = 8
+        titleMovie.linesCornerRadius = 8
         originalTitleMovie.linesCornerRadius = 8
-        calificacionMovie.linesCornerRadius = 8
-        tituloMovie.isSkeletonable = true
+        qualificationMovie.linesCornerRadius = 8
+        titleMovie.isSkeletonable = true
         originalTitleMovie.isSkeletonable = true
-        calificacionMovie.isSkeletonable = true
+        qualificationMovie.isSkeletonable = true
     }
     
     private func configure() {
         guard let movieModel = movieModel else { return }
-        let imageMovie = UIImage(data: self.movieViewModel.getImage(urlImage: movieModel.poster_path)) ?? UIImage(named: "poster")
-        self.configureData(titulo: movieModel.title, originalTitle: movieModel.original_title, calificacion: movieModel.vote_average, image: imageMovie ?? UIImage())
+        let imageMovie = UIImage(data: self.movieViewModel.getImage(urlImage: movieModel.posterPath)) ?? UIImage(named: "poster")
+        self.configureData(titulo: movieModel.title, originalTitle: movieModel.originalTitle, calificacion: movieModel.voteAverage, image: imageMovie ?? UIImage())
     }
     
 }
