@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="19455" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_0" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19454"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="MovieCollectionViewCell" id="gTV-IL-0wX" customClass="MovieCollectionViewCell" customModule="BAZProject" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="100" height="150"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                <rect key="frame" x="0.0" y="0.0" width="100" height="150"/>
+                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vC3-3K-QOV">
+                        <rect key="frame" x="0.0" y="5" width="100" height="141"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="poster" translatesAutoresizingMaskIntoConstraints="NO" id="Fef-ny-f3R">
+                                <rect key="frame" x="5" y="5" width="90" height="96"/>
+                                <color key="backgroundColor" systemColor="systemGray4Color"/>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7IO-M9-YZM">
+                                <rect key="frame" x="5" y="105" width="90" height="18"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="18" id="aq8-AW-2MN"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="Kailasa" family="Kailasa" pointSize="16"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Subtitle" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dP9-yp-Vm5">
+                                <rect key="frame" x="8" y="123" width="84" height="18"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="18" id="xsF-vW-2jA"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="italicSystem" pointSize="14"/>
+                                <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="Fef-ny-f3R" secondAttribute="trailing" constant="5" id="2IB-Au-mzQ"/>
+                            <constraint firstItem="Fef-ny-f3R" firstAttribute="leading" secondItem="vC3-3K-QOV" secondAttribute="leading" constant="5" id="Cvg-EK-l7s"/>
+                            <constraint firstItem="7IO-M9-YZM" firstAttribute="leading" secondItem="vC3-3K-QOV" secondAttribute="leading" constant="5" id="GoY-5L-7o5"/>
+                            <constraint firstItem="7IO-M9-YZM" firstAttribute="top" secondItem="Fef-ny-f3R" secondAttribute="bottom" constant="4" id="HCs-7Y-jR0"/>
+                            <constraint firstItem="dP9-yp-Vm5" firstAttribute="top" secondItem="7IO-M9-YZM" secondAttribute="bottom" id="Z8J-lG-2Kl"/>
+                            <constraint firstAttribute="trailing" secondItem="7IO-M9-YZM" secondAttribute="trailing" constant="5" id="ccD-os-c2l"/>
+                            <constraint firstAttribute="bottom" secondItem="dP9-yp-Vm5" secondAttribute="bottom" id="iPi-J0-vNy"/>
+                            <constraint firstItem="dP9-yp-Vm5" firstAttribute="leading" secondItem="vC3-3K-QOV" secondAttribute="leading" constant="8" id="oN6-lC-K4L"/>
+                            <constraint firstAttribute="trailing" secondItem="dP9-yp-Vm5" secondAttribute="trailing" constant="8" id="qoF-dJ-KLM"/>
+                            <constraint firstItem="Fef-ny-f3R" firstAttribute="top" secondItem="vC3-3K-QOV" secondAttribute="top" constant="5" id="ySS-hm-q6t"/>
+                        </constraints>
+                    </view>
+                </subviews>
+            </view>
+            <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
+            <constraints>
+                <constraint firstAttribute="bottom" secondItem="vC3-3K-QOV" secondAttribute="bottom" constant="4" id="LpD-57-w9G"/>
+                <constraint firstAttribute="trailing" secondItem="vC3-3K-QOV" secondAttribute="trailing" id="Nlo-ch-0lO"/>
+                <constraint firstItem="vC3-3K-QOV" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="QzQ-bc-4k1"/>
+                <constraint firstItem="vC3-3K-QOV" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" constant="5" id="Rh0-WY-If9"/>
+            </constraints>
+            <size key="customSize" width="111" height="157"/>
+            <connections>
+                <outlet property="mainCoverImg" destination="Fef-ny-f3R" id="ACZ-i4-nm4"/>
+                <outlet property="subtitle" destination="dP9-yp-Vm5" id="3eP-MI-yhU"/>
+                <outlet property="titleLbl" destination="7IO-M9-YZM" id="5r7-jD-c2Z"/>
+            </connections>
+            <point key="canvasLocation" x="173.4375" y="133.62676056338029"/>
+        </collectionViewCell>
+    </objects>
+    <resources>
+        <image name="poster" width="500" height="743"/>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="systemGray4Color">
+            <color red="0.81960784313725488" green="0.81960784313725488" blue="0.83921568627450982" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+    </resources>
+</document>
