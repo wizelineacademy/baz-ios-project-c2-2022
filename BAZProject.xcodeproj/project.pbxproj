@@ -26,6 +26,7 @@
 		DDDC4DFA29033A5B00BCC425 /* SkeletonView in Frameworks */ = {isa = PBXBuildFile; productRef = DDDC4DF929033A5B00BCC425 /* SkeletonView */; };
 		DDDC4E0B290354B700BCC425 /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDDC4E0A290354B700BCC425 /* DetailViewController.swift */; };
 		DDDC4E0F29082D7400BCC425 /* DetailModelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDDC4E0E29082D7400BCC425 /* DetailModelView.swift */; };
+		DDDC4E11290AEF7300BCC425 /* ImageViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDDC4E10290AEF7300BCC425 /* ImageViewExtension.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -49,6 +50,7 @@
 		DDDC4DF62901B8CF00BCC425 /* MovieTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieTableViewCell.swift; sourceTree = "<group>"; };
 		DDDC4E0A290354B700BCC425 /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
 		DDDC4E0E29082D7400BCC425 /* DetailModelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailModelView.swift; sourceTree = "<group>"; };
+		DDDC4E10290AEF7300BCC425 /* ImageViewExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageViewExtension.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -87,6 +89,7 @@
 				DDDC4DFC29034FD200BCC425 /* Detail */,
 				DDDC4DEE290043BA00BCC425 /* Home */,
 				C30893AD28A2F42B004B1860 /* AppDelegate.swift */,
+				DDDC4E10290AEF7300BCC425 /* ImageViewExtension.swift */,
 				C30893AF28A2F42B004B1860 /* SceneDelegate.swift */,
 				C30893B828A2F42D004B1860 /* LaunchScreen.storyboard */,
 				C30893B628A2F42D004B1860 /* Assets.xcassets */,
@@ -271,6 +274,7 @@
 				DDDC4DA928FEF20900BCC425 /* Endpoint.swift in Sources */,
 				DDDC4DAD28FEF29C00BCC425 /* APIError.swift in Sources */,
 				C30893B028A2F42B004B1860 /* SceneDelegate.swift in Sources */,
+				DDDC4E11290AEF7300BCC425 /* ImageViewExtension.swift in Sources */,
 				C30893E228A425E1004B1860 /* MovieAPI.swift in Sources */,
 				DDDC4DAB28FEF25F00BCC425 /* MovieFeed.swift in Sources */,
 				C30893E328A425E1004B1860 /* Movie.swift in Sources */,

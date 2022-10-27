@@ -9,6 +9,8 @@ import UIKit
 
 class DetailViewController: UIViewController {
 
+    @IBOutlet weak var stackView: UIStackView!
+    @IBOutlet weak var BackDetailTopView: UIView!
     @IBOutlet weak var backArrowButtom: UIBarButtonItem!
     @IBOutlet weak var imageMovie: UIImageView!
     @IBOutlet weak var tituloDetailView: UILabel!
@@ -28,11 +30,14 @@ class DetailViewController: UIViewController {
         self.dismiss(animated: true, completion: nil)
     }
     private func configurateView() {
-        tituloDetailView.text = self.detailViewModel.dataArray?.title
-        tituloOriginalDetail.text = self.detailViewModel.dataArray?.originalTitle
-        clificacionDetailView.text = "Calificaion \(self.detailViewModel.dataArray?.voteAverage ?? 0.0)"
-        fechaEstrenoDetail.text = self.detailViewModel.dataArray?.releaseDate
-        descDetailView.text = self.detailViewModel.dataArray?.overview
+        stackView.layer.cornerRadius = 15
+        BackDetailTopView.addBlurToView()
+        BackDetailTopView.backgroundColor = UIColor(patternImage: UIImage(data: self.detailViewModel.getImage(urlImage: detailViewModel.dataArray?.backdropPath ?? "")) ?? UIImage())
+        tituloDetailView.text = "  \(self.detailViewModel.dataArray?.title ?? "")"
+        tituloOriginalDetail.text = "  \(self.detailViewModel.dataArray?.originalTitle ?? "")"
+        clificacionDetailView.text = "  Calificaion \(self.detailViewModel.dataArray?.voteAverage ?? 0.0)"
+        fechaEstrenoDetail.text = "  \(self.detailViewModel.dataArray?.releaseDate ?? "")"
+        descDetailView.text = "\(self.detailViewModel.dataArray?.overview ?? "")"
         imageMovie.image = UIImage(data: self.detailViewModel.getImage(urlImage: detailViewModel.dataArray?.posterPath ?? "")) ?? UIImage(named: "poster")
     }
 }
