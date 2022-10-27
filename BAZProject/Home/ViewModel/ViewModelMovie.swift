@@ -53,7 +53,8 @@ class ViewModelMovie {
               let data = try? Data(contentsOf: urlData) else { return Data() }
         return data
     }
-    
+    /// La funcion cambia la informacion a mostrar en el HomeView
+    /// - Parameter index: Index de la informacion a mostrar en la tabla
     func changeInfoByIndex(_ index: Int) {
         switch index {
         case 0:

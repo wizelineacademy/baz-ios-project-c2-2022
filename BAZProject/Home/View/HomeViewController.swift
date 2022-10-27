@@ -79,8 +79,8 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
         vc.viewModel.dataArray = viewModel.dataArray[indexPath.row]
         vc.modalPresentationStyle = .fullScreen
         present(vc, animated: true, completion: nil)
-        
     }
+    
     func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
         return UITableView.automaticDimension
     }
