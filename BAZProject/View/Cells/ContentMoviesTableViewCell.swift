@@ -13,9 +13,12 @@ class ContentMoviesTableViewCell: UITableViewCell {
     @IBOutlet weak var lblTitleMovies: UILabel!
     @IBOutlet weak var lblSubtitleMovies: UILabel!
     
+    /// Setting of the detail of the movies for the cells
     func showDetailsMovies(movie: InfoMovies){
         lblTitleMovies.text = movie.title
         lblSubtitleMovies.text  = movie.overview
-        imgMovies.image = UIImage().getMovieImage(nameImage: movie.poster_path ?? "")
+        if let posterPath = movie.posterPath {
+            imgMovies.setMovieImage(nameImage: posterPath )
+        }
     }
 }

@@ -16,9 +16,13 @@ final class MovieAPI {
     private let apiKey: String = Bundle.main.infoDictionary?["MovieApiKey"] as? String ?? ""
     private let baseEndpoint: String = "https://api.themoviedb.org/3"
     
-    /// API request creation to get movies
-    
-    func getMovies(completion: @escaping (Result<[InfoMovies], Error>) -> ()){
+    /**
+     API request creation to get movies
+     - completion: Result
+        - [InfoMovies]: An array that represents the information of the movies
+        - Error: An error representing that the API failed.
+     */
+    public func getMovies(completion: @escaping (Result<[InfoMovies], Error>) -> ()){
         if let urlString = URL(string: "\(baseEndpoint)\(Path.pathStrMovies.rawValue)\(apiKey)"){
             let session = URLSession(configuration: .default)
             let task = session.dataTask(with: urlString) { data, response, error in

@@ -21,18 +21,19 @@ class TrendingViewController: UITableViewController {
         }
     }
     
-    
+    //MARK: Override methods
     override func viewDidLoad() {
         super.viewDidLoad()
         instanceFromNib()
         getMovies()
     }
     
-    func instanceFromNib() {
+    //MARK: private methods
+    private func instanceFromNib() {
         tblMovies.register(UINib(nibName: "ContentMoviesTableViewCell", bundle: nil), forCellReuseIdentifier: "ContentMoviesTableViewCell")
     }
     
-    func getMovies() {
+    private func getMovies() {
             self.movieAPI.getMovies { result in
                 switch result {
                 case .success(let movies):
@@ -60,8 +61,7 @@ extension TrendingViewController {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "ContentMoviesTableViewCell", for: indexPath) as? ContentMoviesTableViewCell else {
             return UITableViewCell()
         }
-        let infoMovies = movies[indexPath.row]
-        cell.showDetailsMovies(movie: infoMovies)
+        cell.showDetailsMovies(movie: movies[indexPath.row])
         return cell
 }
 }

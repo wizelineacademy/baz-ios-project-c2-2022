@@ -7,25 +7,45 @@
 import Foundation
 
 // MARK: - Object: Movie Information
-struct InfoMovies : Codable {
+struct InfoMovies: Codable{
     var adult: Bool?
-    var backdrop_path: String?
+    var backdropPath: String?
     let id: Int?
     let title: String?
-    let original_language: String?
-    let original_title: String?
+    let originalLanguage: String?
+    let originalTitle: String?
     let overview: String?
-    let poster_path: String?
-    let media_type: String?
-    let genre_ids: [Int]?
+    let posterPath: String?
+    let mediaType: String?
+    let genreIds: [Int]?
     let popularity: Double?
-    let release_date: String?
+    let releaseDate: String?
     let video: Bool?
-    let vote_average: Double?
-    let vote_count: Int?
+    let voteAverage: Double?
+    let voteCount: Int?
+    
+    /// Associated values ​​CodingKeys is set simply by adopting it.
+    enum CodingKeys: String, CodingKey{
+        case adult
+        case backdropPath = "backdrop_path"
+        case id
+        case title
+        case originalLanguage = "original_language"
+        case originalTitle = "original_title"
+        case overview
+        case posterPath = "poster_path"
+        case mediaType = "media_type"
+        case genreIds = "genre_ids"
+        case popularity
+        case releaseDate = "release_date"
+        case video
+        case voteAverage = "vote_average"
+        case voteCount = "vote_count"
+        
+    }
 }
 
 // MARK: - Object: Array Movies
-struct ArrayMovies: Codable {
+struct ArrayMovies: Codable{
     let results: [InfoMovies]
 }
