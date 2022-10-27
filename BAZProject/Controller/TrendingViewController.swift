@@ -62,7 +62,8 @@ extension TrendingViewController {
             return UITableViewCell()
         }
         cell.showDetailsMovies(movie: movies[indexPath.row])
+        tblMovies.separatorColor = .none
         return cell
-}
+    }
 }
 
