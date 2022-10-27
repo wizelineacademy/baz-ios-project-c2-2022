@@ -7,43 +7,33 @@
 import UIKit
 
 class TrendingViewController: UITableViewController {
-
-    var movies: [Movie] = []
-
+    @IBOutlet var tblMovie: UITableView!
+    
+    let movieApi = MovieAPI()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        let movieApi = MovieAPI()
-        
-        movies = movieApi.getMovies()
-        tableView.reloadData()
+        movieApi.getMovies()
+        movieApi.refreshData = { [weak self]() in
+            DispatchQueue.main.async {
+                self?.tblMovie.reloadData()
+            }
+        }
     }
-
 }
 
 // MARK: - TableView's DataSource
 
 extension TrendingViewController {
-
+    
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        movies.count
+        return movieApi.dataMovie?.results.count ?? 0
     }
-
+    
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        tableView.dequeueReusableCell(withIdentifier: "TrendingTableViewCell")!
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "TrendingTableViewCell", for: indexPath) as? TrendingTableViewCell else{ return UITableViewCell() }
+        let info = movieApi.dataMovie?.results[indexPath.row]
+        cell.lblTitle.text = info?.title
+        return cell
     }
-
-}
-
-// MARK: - TableView's Delegate
-
-extension TrendingViewController {
-
-    override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        var config = UIListContentConfiguration.cell()
-        config.text = movies[indexPath.row].title
-        config.image = UIImage(named: "poster")
-        cell.contentConfiguration = config
-    }
-
 }

@@ -7,32 +7,30 @@
 import Foundation
 
 class MovieAPI {
-
+    
     private let apiKey: String = "f6cd5c1a9e6c6b965fdcab0fa6ddd38a"
-
-    func getMovies() -> [Movie] {
-        guard let url = URL(string: "https://api.themoviedb.org/3/trending/movie/day?api_key=\(apiKey)"),
-              let data = try? Data(contentsOf: url),
-              let json = try? JSONSerialization.jsonObject(with: data) as? NSDictionary,
-              let results = json.object(forKey: "results") as? [NSDictionary]
-        else {
-            return []
+    private let baseURL: String = "https://api.themoviedb.org/3"
+    
+    ///enlaza TrendingViewController con este modelo de la vista
+    var refreshData = {()->() in }
+    
+    ///Fuente de datos Array
+    var dataMovie : ResultsMovie? {
+        didSet{
+            refreshData()
         }
-
-        var movies: [Movie] = []
-
-        for result in results {
-            if let id = result.object(forKey: "id") as? Int,
-               let title = result.object(forKey: "title") as? String,
-               let poster_path = result.object(forKey: "poster_path") as? String,
-               let popularity = result.object(forKey: "popularity") as? Double,
-               let release_date = result.object(forKey: "release_date") as? String,
-               let vote_average = result.object(forKey: "vote_average") as? Double {
-                movies.append(Movie(id: id, title: title, poster_path: poster_path, popularity: popularity, release_date: release_date, vote_average: vote_average ))
-            }
-        }
-
-        return movies
     }
-
+    
+    func getMovies(){
+        guard let url = URL(string: "\(baseURL)/trending/movie/day?api_key=\(apiKey)") else {return}
+        URLSession.shared.dataTask(with: url) { [self] (data, response, error) in
+            guard let json = data else{return}
+            do{
+                let decoder = JSONDecoder()
+                self.dataMovie = try decoder.decode(ResultsMovie.self, from: json)
+            }catch let error{
+                print("Ha ocurrido un error: \(error.localizedDescription)")
+            }
+        }.resume()
+    }
 }
