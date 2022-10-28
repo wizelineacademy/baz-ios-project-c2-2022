@@ -10,6 +10,7 @@ class TrendingViewController: UITableViewController {
     @IBOutlet var tblMovie: UITableView!
     
     let movieApi = MovieAPI()
+    let identifier = "TrendingTableViewCell"
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -31,7 +32,7 @@ extension TrendingViewController {
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: "TrendingTableViewCell", for: indexPath) as? TrendingTableViewCell else{ return UITableViewCell() }
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: identifier, for: indexPath) as? TrendingTableViewCell else{ return UITableViewCell() }
         let info = movieApi.dataMovie?.results[indexPath.row]
         cell.lblTitle.text = info?.title
         return cell

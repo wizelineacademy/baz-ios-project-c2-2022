@@ -21,7 +21,7 @@ class MovieAPI {
         }
     }
     
-    func getMovies(){
+    func getMovies() {
         guard let url = URL(string: "\(baseURL)/trending/movie/day?api_key=\(apiKey)") else {return}
         URLSession.shared.dataTask(with: url) { [self] (data, response, error) in
             guard let json = data else{return}
@@ -34,7 +34,7 @@ class MovieAPI {
         }.resume()
     }
     ///return imageURL
-    func getImage() -> String{
+    func getImage() -> String {
         return  imageURL
     }
 }
