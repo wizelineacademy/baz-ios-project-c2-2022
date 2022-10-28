@@ -7,7 +7,7 @@
 
 import Foundation
 
-class MoviePresenter {
+final class MoviePresenter {
     weak private var movieViewDelegate: MovieViewDelegate?
     private let movieApiService: MovieAPI
     private var movies: [Movie] =  []

@@ -8,7 +8,7 @@
 import Foundation
 import UIKit
 
-class MovieFilterViewController: UIViewController {
+final class MovieFilterViewController: UIViewController {
     @IBOutlet weak var categoriesTableView: UITableView!
     weak var filterDelegate: MovieFilterDelegate?
     // MARK: - Override viewDidLoad

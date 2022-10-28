@@ -5,7 +5,6 @@
 //  Created by 1017143 on 24/10/22.
 //
 
-import Foundation
 import UIKit
 
 extension DetailMovieViewController: UICollectionViewDataSource {

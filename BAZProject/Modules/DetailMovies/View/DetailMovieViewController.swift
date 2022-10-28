@@ -5,14 +5,13 @@
 //  Created by 1017143 on 21/10/22.
 //
 
-import Foundation
 import UIKit
 // swiftlint:disable class_delegate_protocol
 protocol MovieDetailDelegate: NSObject {
     func showMovieBySection(section: MovieSections, movies: [Movie])
 }
 
-class DetailMovieViewController: UIViewController {
+final class DetailMovieViewController: UIViewController {
     @IBOutlet weak var mainImage: UIImageView!
     @IBOutlet weak var nameMovieLbl: UILabel!
     @IBOutlet weak var similarLbl: UILabel!

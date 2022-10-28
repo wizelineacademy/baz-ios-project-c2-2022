@@ -15,21 +15,21 @@ protocol MovieFilterDelegate: NSObject {
     func getMoviesByCategory(category: CategoryMovieType)
 }
 
-class DasboardViewController: UIViewController {
+final class DasboardViewController: UIViewController {
 
     @IBOutlet weak var moviewTableView: UITableView!
     @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet weak var resultSearch: UICollectionView!
     private var filterController: MovieFilterViewController?
     private var searchResults: [Movie]?
-    let moviePresenter = MoviePresenter(movieApiService: MovieAPI())
+    private(set) var moviePresenter = MoviePresenter(movieApiService: MovieAPI())
     // MARK: - Properties of collection configuration
-    let numberOfSections = 1
-    let insets: CGFloat = 8
-    let heightAditionalConstant: CGFloat = 40
-    let minimumLineSpacing: CGFloat = 10
-    let minimumInteritemSpacing: CGFloat = 10
-    let cellsPerRow: Int = 2
+    private(set) var numberOfSections = 1
+    private(set) var insets: CGFloat = 8
+    private(set) var heightAditionalConstant: CGFloat = 40
+    private(set) var minimumLineSpacing: CGFloat = 10
+    private(set) var minimumInteritemSpacing: CGFloat = 10
+    private(set) var cellsPerRow: Int = 2
     // MARK: - Start
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -37,6 +37,10 @@ class DasboardViewController: UIViewController {
         self.registerCell()
         self.moviePresenter.setMovieDelegate(movieViewDelegate: self)
         self.moviePresenter.getMoviesByCategory(category: .trending)
+        self.setConfigSearchBar()
+    }
+    /// Config some properties of searchBar
+    private func setConfigSearchBar() {
         self.searchBar.delegate = self
         self.searchBar.placeholder = "Encuentra tu película"
         self.resultSearch.isHidden = true
