@@ -18,25 +18,17 @@ class MovieAPI {
         setUrl(endPoint: endPoint)
         
         guard let url = URL(string: endPointUrl + apiKey),
-              let data = try? Data(contentsOf: url),
-              let json = try? JSONSerialization.jsonObject(with: data) as? NSDictionary,
-              let results = json.object(forKey: "results") as? [NSDictionary]
+              let data = try? Data(contentsOf: url)
         else {
             return []
         }
         
-        for result in results {
-            if let id = result.object(forKey: "id") as? Int,
-               let title = result.object(forKey: "title") as? String,
-               let poster_path = result.object(forKey: "poster_path") as? String,
-               let popularity = result.object(forKey: "popularity") as? Double,
-               let release_date = result.object(forKey: "release_date") as? String,
-               let vote_average = result.object(forKey: "vote_average") as? Double {
-                movies.append(Movie(id: id, title: title, poster_path: poster_path, popularity: popularity, release_date: release_date, vote_average: vote_average))
-            }
+        if let api = try? JSONDecoder().decode(API.self, from: data) {
+            movies = api.results
+            return movies
+        } else {
+            return []
         }
-        
-        return movies
     }
     
     func setUrl(endPoint: MovieEndpoint) {
