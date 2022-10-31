@@ -17,6 +17,7 @@
 		C30893E228A425E1004B1860 /* MovieAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = C30893E028A425E1004B1860 /* MovieAPI.swift */; };
 		C30893E328A425E1004B1860 /* Movie.swift in Sources */ = {isa = PBXBuildFile; fileRef = C30893E128A425E1004B1860 /* Movie.swift */; };
 		C383356E28CA917400FCE0D5 /* code-review-rubric.md in Resources */ = {isa = PBXBuildFile; fileRef = C383356D28CA917400FCE0D5 /* code-review-rubric.md */; };
+		FDDDCA52290F18C9001ECD73 /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDDDCA51290F18C9001ECD73 /* API.swift */; };
 		FDF38960290AF5F400A174D1 /* MovieEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDF3895F290AF5F400A174D1 /* MovieEndpoint.swift */; };
 /* End PBXBuildFile section */
 
@@ -33,6 +34,7 @@
 		C30893E028A425E1004B1860 /* MovieAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MovieAPI.swift; sourceTree = "<group>"; };
 		C30893E128A425E1004B1860 /* Movie.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Movie.swift; sourceTree = "<group>"; };
 		C383356D28CA917400FCE0D5 /* code-review-rubric.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = "code-review-rubric.md"; sourceTree = "<group>"; };
+		FDDDCA51290F18C9001ECD73 /* API.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = API.swift; sourceTree = "<group>"; };
 		FDF3895F290AF5F400A174D1 /* MovieEndpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieEndpoint.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -83,6 +85,7 @@
 		FDF38961290B07E200A174D1 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				FDDDCA51290F18C9001ECD73 /* API.swift */,
 				C30893E128A425E1004B1860 /* Movie.swift */,
 				C30893E028A425E1004B1860 /* MovieAPI.swift */,
 				FDF3895F290AF5F400A174D1 /* MovieEndpoint.swift */,
@@ -185,6 +188,7 @@
 				C30893E228A425E1004B1860 /* MovieAPI.swift in Sources */,
 				C30893E328A425E1004B1860 /* Movie.swift in Sources */,
 				FDF38960290AF5F400A174D1 /* MovieEndpoint.swift in Sources */,
+				FDDDCA52290F18C9001ECD73 /* API.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
