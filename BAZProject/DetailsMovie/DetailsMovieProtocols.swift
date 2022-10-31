@@ -21,7 +21,7 @@ protocol DetailsMoviePresenterProtocols: AnyObject {
 }
 
 protocol DetailsMovieRouterProtocols: AnyObject {
-    static func createModuleDetailsMovie(details: detailsMovie) -> UIViewController
+    static func createModuleDetailsMovie(movie: Movie) -> UIViewController
 }
 
 protocol DetailsMovieInteractorInputAndOutputProtocols: AnyObject {

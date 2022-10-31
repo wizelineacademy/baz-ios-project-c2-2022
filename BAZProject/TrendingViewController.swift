@@ -45,8 +45,7 @@ extension TrendingViewController {
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let movieDetails = detailsMovie(backgroundImage: movieApi.getImage(with: movies[indexPath.row].backdropPath), title: movies[indexPath.row].title, description: movies[indexPath.row].overview)
-        let vc = DetailsMovieRouter.createModuleDetailsMovie(details: movieDetails)
+        let vc = DetailsMovieRouter.createModuleDetailsMovie(movie: movies[indexPath.row])
         vc.modalPresentationStyle = .fullScreen
         self.present(vc, animated: true)
     }

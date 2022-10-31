@@ -9,6 +9,4 @@ import Foundation
 
 class DetailsMovieInteractor: DetailsMovieInteractorInputAndOutputProtocols {
     var presenter: DetailsMoviePresenterProtocols?
-    
-    
 }

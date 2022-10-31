@@ -28,12 +28,10 @@ final class MovieAPI {
             guard let movies = dataInfo else {
                 return []
             }
-            let formatter = DateFormatter()
-            formatter.dateFormat = "yyyy-MM-dd"
-            let decoder = JSONDecoder()
-            decoder.keyDecodingStrategy = .convertFromSnakeCase
-            decoder.dateDecodingStrategy = .formatted(formatter)
-            return decodeInfo(with: movies, decoder: decoder)
+            guard let moviesArray: [Movie] = decodeInfo(with: movies) else {
+                return []
+            }
+            return moviesArray
         }
     }
     
@@ -41,13 +39,12 @@ final class MovieAPI {
     /// - Parameters:
     ///    - data: Info received in type Data.
     ///    - decoder:Custom JsonDecoder
-    func decodeInfo(with data: Data, decoder: JSONDecoder) -> [Movie] {
+    func decodeInfo<T:Decodable>(with data: Data, decoder: JSONDecoder = JSONDecoder()) -> T? {
         do {
-            let decoded = try decoder.decode([Movie].self, from: data)
+            let decoded = try decoder.decode(T.self, from: data)
             return decoded
         } catch {
-            print("Failed to decode JSON")
-            return []
+            return nil
         }
     }
     
