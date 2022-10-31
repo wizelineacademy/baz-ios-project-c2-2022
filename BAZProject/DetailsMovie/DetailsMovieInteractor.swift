@@ -7,6 +7,6 @@
 
 import Foundation
 
-class DetailsMovieInteractor: DetailsMovieInteractorInputAndOutputProtocols {
+final class DetailsMovieInteractor: DetailsMovieInteractorInputAndOutputProtocols {
     var presenter: DetailsMoviePresenterProtocols?
 }

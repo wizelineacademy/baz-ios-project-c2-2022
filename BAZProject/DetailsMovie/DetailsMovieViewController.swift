@@ -9,7 +9,6 @@ import UIKit
 
 final class DetailsMovieViewController: UIViewController {
     
-    
     @IBOutlet weak var backgroundImage: UIImageView!
     @IBOutlet weak var titleLbl: UILabel!
     @IBOutlet weak var descriptionLbl: UILabel!
@@ -31,7 +30,6 @@ final class DetailsMovieViewController: UIViewController {
         super.viewDidLoad()
         self.navigationController?.isNavigationBarHidden = false
     }
-
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
