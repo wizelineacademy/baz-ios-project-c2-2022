@@ -8,7 +8,6 @@
 import UIKit
 
 class CategoryTableViewCell: UITableViewCell {
-    
     @IBOutlet weak var categoryNameLbl: UILabel!
     @IBOutlet weak var showCategoryBtn: UIButton!
 }
