@@ -18,6 +18,7 @@
 		C30893E328A425E1004B1860 /* Movie.swift in Sources */ = {isa = PBXBuildFile; fileRef = C30893E128A425E1004B1860 /* Movie.swift */; };
 		C383356E28CA917400FCE0D5 /* code-review-rubric.md in Resources */ = {isa = PBXBuildFile; fileRef = C383356D28CA917400FCE0D5 /* code-review-rubric.md */; };
 		EEEB2E18290A31B700E9C822 /* TrendingTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEEB2E17290A31B700E9C822 /* TrendingTableViewCell.swift */; };
+		EEEB2E1A290ADD5D00E9C822 /* TrendingTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = EEEB2E19290ADD5D00E9C822 /* TrendingTableViewCell.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
