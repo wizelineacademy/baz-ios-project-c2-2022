@@ -16,6 +16,10 @@
 		C30893E228A425E1004B1860 /* MovieAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = C30893E028A425E1004B1860 /* MovieAPI.swift */; };
 		C30893E328A425E1004B1860 /* Movie.swift in Sources */ = {isa = PBXBuildFile; fileRef = C30893E128A425E1004B1860 /* Movie.swift */; };
 		C383356E28CA917400FCE0D5 /* code-review-rubric.md in Resources */ = {isa = PBXBuildFile; fileRef = C383356D28CA917400FCE0D5 /* code-review-rubric.md */; };
+		DD657E5129117B1E00DE7E63 /* SearchCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD657E4F29117B1E00DE7E63 /* SearchCollectionViewCell.swift */; };
+		DD657E5229117B1E00DE7E63 /* SearchCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = DD657E5029117B1E00DE7E63 /* SearchCollectionViewCell.xib */; };
+		DD657E5429117CA700DE7E63 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD657E5329117CA700DE7E63 /* SearchViewController.swift */; };
+		DD657E5629117D1800DE7E63 /* SearchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD657E5529117D1800DE7E63 /* SearchViewModel.swift */; };
 		DDDC4DA928FEF20900BCC425 /* Endpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDDC4DA828FEF20900BCC425 /* Endpoint.swift */; };
 		DDDC4DAB28FEF25F00BCC425 /* MovieFeed.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDDC4DAA28FEF25F00BCC425 /* MovieFeed.swift */; };
 		DDDC4DAD28FEF29C00BCC425 /* APIError.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDDC4DAC28FEF29C00BCC425 /* APIError.swift */; };
@@ -41,6 +45,10 @@
 		C30893E028A425E1004B1860 /* MovieAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MovieAPI.swift; sourceTree = "<group>"; };
 		C30893E128A425E1004B1860 /* Movie.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Movie.swift; sourceTree = "<group>"; };
 		C383356D28CA917400FCE0D5 /* code-review-rubric.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = "code-review-rubric.md"; sourceTree = "<group>"; };
+		DD657E4F29117B1E00DE7E63 /* SearchCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchCollectionViewCell.swift; sourceTree = "<group>"; };
+		DD657E5029117B1E00DE7E63 /* SearchCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SearchCollectionViewCell.xib; sourceTree = "<group>"; };
+		DD657E5329117CA700DE7E63 /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
+		DD657E5529117D1800DE7E63 /* SearchViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewModel.swift; sourceTree = "<group>"; };
 		DDDC4DA828FEF20900BCC425 /* Endpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Endpoint.swift; sourceTree = "<group>"; };
 		DDDC4DAA28FEF25F00BCC425 /* MovieFeed.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieFeed.swift; sourceTree = "<group>"; };
 		DDDC4DAC28FEF29C00BCC425 /* APIError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIError.swift; sourceTree = "<group>"; };
@@ -86,6 +94,7 @@
 		C30893AC28A2F42B004B1860 /* BAZProject */ = {
 			isa = PBXGroup;
 			children = (
+				DD657E4829117A9200DE7E63 /* Search */,
 				DDDC4DFC29034FD200BCC425 /* Detail */,
 				DDDC4DEE290043BA00BCC425 /* Home */,
 				C30893AD28A2F42B004B1860 /* AppDelegate.swift */,
@@ -96,6 +105,49 @@
 				C30893BB28A2F42D004B1860 /* Info.plist */,
 			);
 			path = BAZProject;
+			sourceTree = "<group>";
+		};
+		DD657E4829117A9200DE7E63 /* Search */ = {
+			isa = PBXGroup;
+			children = (
+				DD657E4C29117AC400DE7E63 /* Cell */,
+				DD657E4B29117AB200DE7E63 /* ViewModel */,
+				DD657E4A29117AA600DE7E63 /* Model */,
+				DD657E4929117A9B00DE7E63 /* View */,
+			);
+			path = Search;
+			sourceTree = "<group>";
+		};
+		DD657E4929117A9B00DE7E63 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				DD657E5329117CA700DE7E63 /* SearchViewController.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		DD657E4A29117AA600DE7E63 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		DD657E4B29117AB200DE7E63 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				DD657E5529117D1800DE7E63 /* SearchViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		DD657E4C29117AC400DE7E63 /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				DD657E4F29117B1E00DE7E63 /* SearchCollectionViewCell.swift */,
+				DD657E5029117B1E00DE7E63 /* SearchCollectionViewCell.xib */,
+			);
+			path = Cell;
 			sourceTree = "<group>";
 		};
 		DD80456628F8701F0056875F /* Model */ = {
@@ -252,6 +304,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DD657E5229117B1E00DE7E63 /* SearchCollectionViewCell.xib in Resources */,
 				DDDC4DF52901B41C00BCC425 /* MovieCell.xib in Resources */,
 				C30893BA28A2F42D004B1860 /* LaunchScreen.storyboard in Resources */,
 				C30893DB28A42481004B1860 /* README.md in Resources */,
@@ -268,7 +321,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DD657E5429117CA700DE7E63 /* SearchViewController.swift in Sources */,
 				DDDC4E0B290354B700BCC425 /* DetailViewController.swift in Sources */,
+				DD657E5629117D1800DE7E63 /* SearchViewModel.swift in Sources */,
 				C30893AE28A2F42B004B1860 /* AppDelegate.swift in Sources */,
 				DDDC4DF72901B8CF00BCC425 /* MovieTableViewCell.swift in Sources */,
 				DDDC4DA928FEF20900BCC425 /* Endpoint.swift in Sources */,
@@ -280,6 +335,7 @@
 				C30893E328A425E1004B1860 /* Movie.swift in Sources */,
 				DDDC4DF32901921200BCC425 /* HomeViewController.swift in Sources */,
 				DDDC4DF0290046D700BCC425 /* ViewModelMovie.swift in Sources */,
+				DD657E5129117B1E00DE7E63 /* SearchCollectionViewCell.swift in Sources */,
 				DDDC4E0F29082D7400BCC425 /* DetailModelView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
