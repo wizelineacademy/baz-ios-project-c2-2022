@@ -9,11 +9,7 @@ import UIKit
 
 class SearchViewController: UIViewController {
     
-    @IBOutlet weak var SearchBarItem: UISearchBar! {
-        didSet {
-            SearchBarItem.delegate = self
-        }
-    }
+    @IBOutlet weak var searchText: UITextField!
     @IBOutlet weak var CollectionSearchView: UICollectionView! {
         didSet{
             CollectionSearchView.dataSource = self
@@ -31,7 +27,7 @@ class SearchViewController: UIViewController {
     }
     
     private func configurateView() {
-        searchViewModel.getInfo(.Search(query: "Matrix"))
+        searchViewModel.getInfo(.Search(query: ""))
     }
     
     private func refreshData() {
@@ -43,9 +39,24 @@ class SearchViewController: UIViewController {
         }
     }
     
+    @IBAction func searchMovies(_ sender: Any) {
+        if searchText.text == "" {
+            let alert = UIAlertController(title: "Ingresa la busqueda", message: "Favor de ingresar la busqueda a realizar", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+            self.present(alert, animated: true, completion: nil)
+        } else {
+            self.searchViewModel.getInfo(.Search(query: searchText.text ?? ""))
+            if self.searchViewModel.dataArray.isEmpty {
+                let alert = UIAlertController(title: "Lo siento", message: "No se encontro nada relacionado con tu busqueda", preferredStyle: .alert)
+                alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+                self.present(alert, animated: true, completion: nil)
+            }
+            self.CollectionSearchView.reloadData()
+        }
+    }
 }
 
-extension SearchViewController: UICollectionViewDelegate, UICollectionViewDataSource, UISearchBarDelegate {
+extension SearchViewController: UICollectionViewDelegate, UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         self.searchViewModel.dataArray.count
@@ -69,24 +80,6 @@ extension SearchViewController: UICollectionViewDelegate, UICollectionViewDataSo
         vc.detailViewModel.dataArray = searchViewModel.dataArray[indexPath.row]
         vc.modalPresentationStyle = .fullScreen
         present(vc, animated: true, completion: nil)
-    }
-    
-    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
-        SearchBarItem.text = nil
-        SearchBarItem.resignFirstResponder()
-        CollectionSearchView.resignFirstResponder()
-        self.SearchBarItem.showsCancelButton = false
-        CollectionSearchView.reloadData()
-    }
-    
-    func searchBarShouldEndEditing(_ searchBar: UISearchBar) -> Bool {
-        return true
-    }
-    
-    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        self.SearchBarItem.showsCancelButton = true
-        self.searchViewModel.getInfo(.Search(query: searchText))
-        self.CollectionSearchView.reloadData()
     }
     
 }
