@@ -64,6 +64,13 @@ extension SearchViewController: UICollectionViewDelegate, UICollectionViewDataSo
         return cell
     }
     
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "DetailViewController") as! DetailViewController
+        vc.detailViewModel.dataArray = searchViewModel.dataArray[indexPath.row]
+        vc.modalPresentationStyle = .fullScreen
+        present(vc, animated: true, completion: nil)
+    }
+    
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
         SearchBarItem.text = nil
         SearchBarItem.resignFirstResponder()
