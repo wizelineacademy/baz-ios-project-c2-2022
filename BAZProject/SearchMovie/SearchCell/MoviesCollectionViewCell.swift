@@ -14,8 +14,6 @@ final class MoviesCollectionViewCell: UICollectionViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
-        self.imageMovie.image = UIImage(named: "poster")
     }
 
 }

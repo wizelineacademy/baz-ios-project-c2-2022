@@ -7,36 +7,38 @@
 
 import UIKit
 
-final class SearchMovieViewController: UIViewController {
-
-    @IBOutlet weak var moviesCollection: UICollectionView!
+final class SearchMovieViewController: UICollectionViewController {
     
     let reuseIdentifier = "movieCollection"
-    let itemsPerRow: CGFloat = 3
+    let itemsPerRow: CGFloat = 2.0
     let sectionInsets = UIEdgeInsets(top: 50.0, left: 20.0, bottom: 50.0, right: 20.0)
+    private var movies: [Movie] = []
+    private let movieApi = MovieAPI()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
-        self.moviesCollection.dataSource = self
-        self.moviesCollection.delegate = self
     }
 }
 
-extension SearchMovieViewController: UICollectionViewDataSource {
+extension SearchMovieViewController {
     
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 4
+    override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return movies.count
     }
 
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+    override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as? MoviesCollectionViewCell else {
             return UICollectionViewCell()
         }
-        //cell.imageMovie.image = UIImage(named: "poster")
-        //cell.titleMovie.text = "Pelicula \(indexPath.row)"
+        let posterPath = movies[indexPath.row].posterPath ?? "poster"
+        cell.titleMovie.text = movies[indexPath.row].title
+        cell.imageMovie.image = movieApi.getImage(with: posterPath)
         return cell
+    }
+    
+    override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let vc = DetailsMovieRouter.createModuleDetailsMovie(movie: movies[indexPath.row])
+        self.present(vc, animated: true)
     }
     
     
@@ -46,9 +48,8 @@ extension SearchMovieViewController: UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let paddingSpace = sectionInsets.left * (itemsPerRow + 1)
-        let availiableWidth = view.frame.width - paddingSpace
-        let widthPerItem = availiableWidth / itemsPerRow
-    
+        let availableWidth = view.frame.width - paddingSpace
+        let widthPerItem = availableWidth / itemsPerRow
         return CGSize(width: widthPerItem, height: widthPerItem)
     }
     
@@ -57,7 +58,28 @@ extension SearchMovieViewController: UICollectionViewDelegateFlowLayout {
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-        return 10.0
+        return sectionInsets.left
+    }
+}
+
+extension SearchMovieViewController: UITextFieldDelegate {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        guard let text = textField.text else {
+            return true
+        }
+        let activityIndicator = UIActivityIndicatorView(style: .medium)
+        textField.addSubview(activityIndicator)
+        activityIndicator.frame = textField.bounds
+        activityIndicator.startAnimating()
+        
+        movies = movieApi.searchMovieByName(text)
+        DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(3)){
+            activityIndicator.stopAnimating()
+            self.collectionView.reloadData()
+            textField.text = nil
+            textField.resignFirstResponder()
+        }
+        return true
     }
 }
 

@@ -43,8 +43,31 @@ final class MovieAPI {
         do {
             let decoded = try decoder.decode(T.self, from: data)
             return decoded
-        } catch {
+        } catch let error as NSError{
+            debugPrint("Error parsing: \(error.debugDescription)")
             return nil
+        }
+    }
+    ///Search Movies By Name
+    /// - Parameter text: key text to search
+    /// - Returns: Movies Array
+    /// - throws: if any basic condition dont success, this return empty array
+    func searchMovieByName(_ text: String) -> [Movie] {
+        guard let url = URL(string: urlBase + "/search/movie?api_key=" + apiKey + "&language=en-US&&query=\(text)&page=1&include_adult=false"),
+        let data = try? Data(contentsOf: url),
+              let json = try? JSONSerialization.jsonObject(with: data) as? NSDictionary,
+              let result = json.object(forKey: "results") as? [NSDictionary] else {
+            return []
+        }
+        do{
+            let dataInfo = try? JSONSerialization.data(withJSONObject: result, options: .prettyPrinted)
+            guard let movies = dataInfo else {
+                return []
+            }
+            guard let moviesArray: [Movie] = decodeInfo(with: movies) else {
+                return []
+            }
+            return moviesArray
         }
     }
     

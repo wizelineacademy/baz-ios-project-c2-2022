@@ -37,7 +37,8 @@ final class DetailsMovieViewController: UIViewController {
             self.dismiss(animated: true)
             return
         }
-        self.backgroundImage.image = movieApi.getImage(with: info.posterPath)
+        let posterPath = info.backdropPath ?? "poster"
+        self.backgroundImage.image = movieApi.getImage(with: posterPath)
         self.titleLbl.text = info.title
         self.descriptionLbl.text = info.overview
     }

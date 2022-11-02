@@ -9,14 +9,14 @@ import Foundation
 struct Movie: Codable {
     var id: Int
     var adult: Bool
-    var backdropPath: String
+    var backdropPath: String?
     var originalTitle: String
-    var mediaType: String
+    var mediaType: String?
     var genreIds: [Int]
     var voteAverage: Double
     var popularity: Double
     var title: String
-    var posterPath: String
+    var posterPath: String?
     var overview: String
     var originalLanguage: String
     var voteCount: Int
