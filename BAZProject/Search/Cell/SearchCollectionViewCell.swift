@@ -7,7 +7,7 @@
 
 import UIKit
 import SkeletonView
-class SearchCollectionViewCell: UICollectionViewCell {
+class SearchCollectionViewCell: UICollectionViewCell, GenericCellMovie {
 
     @IBOutlet weak var image: UIImageView!
     @IBOutlet weak var title: UILabel!
@@ -15,7 +15,7 @@ class SearchCollectionViewCell: UICollectionViewCell {
         super.awakeFromNib()
         // Initialization code
     }
-    
+     
     public var movieModel: Movie? {
         didSet { configure() }
     }
@@ -33,7 +33,7 @@ class SearchCollectionViewCell: UICollectionViewCell {
         self.title.linesCornerRadius = 8
     }
     
-    private func configure() {
+    func configure() {
         guard let movieModel = movieModel else { return }
         let imageMovie = UIImage(data: self.movieViewModel.getImage(urlImage: movieModel.posterPath)) ?? UIImage(named: "poster")
         self.configureData(titulo: movieModel.title, image: imageMovie ?? UIImage())

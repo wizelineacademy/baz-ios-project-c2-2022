@@ -5,9 +5,9 @@
 //  Created by Alan Emiliano Ramirez Ayala on 21/10/22.
 //
 
-import UIKit
+import UIKit 
 
-class DetailViewController: UIViewController {
+class DetailViewController: UIViewController, GenericView {
 
     @IBOutlet weak var stackView: UIStackView!
     @IBOutlet weak var BackDetailTopView: UIView!
@@ -23,13 +23,12 @@ class DetailViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         configurateView()
-        // Do any additional setup after loading the view.
     }
     
     @IBAction func returnListMovie(_ sender: Any) {
         self.dismiss(animated: true, completion: nil)
     }
-    private func configurateView() {
+    func configurateView() {
         stackView.layer.cornerRadius = 15
         BackDetailTopView.addBlurToView()
         BackDetailTopView.backgroundColor = UIColor(patternImage: UIImage(data: self.detailViewModel.getImage(urlImage: detailViewModel.dataArray?.backdropPath ?? "")) ?? UIImage())

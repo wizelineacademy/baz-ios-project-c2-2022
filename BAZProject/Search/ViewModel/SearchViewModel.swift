@@ -7,8 +7,8 @@
 
 import Foundation
 
-class SearchViewModel {
-    
+class SearchViewModel: PrincipalViewModel {
+     
     var refreshData = { () -> () in }
     
     var dataArray: [Movie] = [] {
@@ -17,7 +17,7 @@ class SearchViewModel {
         }
     }
     
-    let movieApi = MovieAPI()
+    var movieApi: MovieAPI = MovieAPI()
     
     /// La funcion getInfo hace la peticion de la informacion con la instancia de la clase de MovieAPI y la guarda en el dataArray del ViewModel
     /// - Parameter api: El tipo de api que se busca la informacion

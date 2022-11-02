@@ -31,6 +31,7 @@
 		DDDC4E0B290354B700BCC425 /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDDC4E0A290354B700BCC425 /* DetailViewController.swift */; };
 		DDDC4E0F29082D7400BCC425 /* DetailModelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDDC4E0E29082D7400BCC425 /* DetailModelView.swift */; };
 		DDDC4E11290AEF7300BCC425 /* ImageViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDDC4E10290AEF7300BCC425 /* ImageViewExtension.swift */; };
+		DDFE33F62912D03100B17EBD /* MovieProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDFE33F52912D03100B17EBD /* MovieProtocols.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -59,6 +60,7 @@
 		DDDC4E0A290354B700BCC425 /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
 		DDDC4E0E29082D7400BCC425 /* DetailModelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailModelView.swift; sourceTree = "<group>"; };
 		DDDC4E10290AEF7300BCC425 /* ImageViewExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageViewExtension.swift; sourceTree = "<group>"; };
+		DDFE33F52912D03100B17EBD /* MovieProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieProtocols.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -94,6 +96,7 @@
 		C30893AC28A2F42B004B1860 /* BAZProject */ = {
 			isa = PBXGroup;
 			children = (
+				DDFE33F42912D01800B17EBD /* Protocols */,
 				DD657E4829117A9200DE7E63 /* Search */,
 				DDDC4DFC29034FD200BCC425 /* Detail */,
 				DDDC4DEE290043BA00BCC425 /* Home */,
@@ -240,6 +243,14 @@
 			path = Model;
 			sourceTree = "<group>";
 		};
+		DDFE33F42912D01800B17EBD /* Protocols */ = {
+			isa = PBXGroup;
+			children = (
+				DDFE33F52912D03100B17EBD /* MovieProtocols.swift */,
+			);
+			path = Protocols;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -336,6 +347,7 @@
 				DDDC4DF32901921200BCC425 /* HomeViewController.swift in Sources */,
 				DDDC4DF0290046D700BCC425 /* ViewModelMovie.swift in Sources */,
 				DD657E5129117B1E00DE7E63 /* SearchCollectionViewCell.swift in Sources */,
+				DDFE33F62912D03100B17EBD /* MovieProtocols.swift in Sources */,
 				DDDC4E0F29082D7400BCC425 /* DetailModelView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

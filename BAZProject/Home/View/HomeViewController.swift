@@ -7,8 +7,8 @@
 
 import UIKit
 
-class HomeViewController: UIViewController {
-    
+class HomeViewController: UIViewController, PrincipalView {
+     
     @IBOutlet weak var segmentControl: UISegmentedControl! {
         didSet {
             segmentControl.setTitle("Trending", forSegmentAt: 0)
@@ -39,11 +39,11 @@ class HomeViewController: UIViewController {
         self.homeViewModel.changeInfoByIndex(segmentControl.selectedSegmentIndex)
     }
     
-    private func configurateView() {
+    func configurateView() {
         homeViewModel.getAllMovies()
     }
     
-    private func refreshData() {
+    func refreshData() {
         homeViewModel.refreshData = { [weak self] () in
             DispatchQueue.main.async {
                 self?.tableViewMovies.reloadData()

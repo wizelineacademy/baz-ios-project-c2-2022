@@ -6,8 +6,8 @@
 //
 
 import Foundation
-
-class ViewModelMovie {
+ 
+class ViewModelMovie: PrincipalViewModel {
     
     var refreshData = { () -> () in }
     
@@ -18,6 +18,7 @@ class ViewModelMovie {
             refreshData()
         }
     }
+    var movieApi = MovieAPI()
     /// La funcion getAllMovies obtiene la informacion de todas las peliculas dividadas y las guarda en un diccionario
     func getAllMovies() {
         dicAllMovies["Trending"] = self.movieApi.getMovies(.Trendig)
@@ -27,7 +28,6 @@ class ViewModelMovie {
         dicAllMovies["NowPlaying"] = self.movieApi.getMovies(.NowPlaying)
         self.dataArray = dicAllMovies["Trending"] ?? []
     }
-    let movieApi = MovieAPI()
     /// La funcion getInfo hace la peticion de la informacion con la instancia de la clase de MovieAPI y la guarda en el dataArray del ViewModel
     /// - Parameter api: El tipo de api que se busca la informacion
     func getInfo(_ api: MovieFeed) {
