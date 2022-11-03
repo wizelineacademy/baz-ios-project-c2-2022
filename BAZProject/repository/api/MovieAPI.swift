@@ -6,14 +6,14 @@
 //
 
 import Foundation
-class MovieAPI: MovieAPIProtocol {
+final class MovieAPI: MovieAPIProtocol,MovieAPIConstantsProtocol {
     var interactor: MovieHomeDataExternalToInteractorProtocol?
     func getMovies() {
-        guard let url = URL(string: APIMOVIELISTURL)
+        guard let url = URL(string: self.APIMOVIELISTURL)
         else {
             return
         }
-
+        
         URLSession.shared.dataTask(with: url){
             data,response,error in
             guard let datos = data, error == nil, let result = response as? HTTPURLResponse
@@ -21,13 +21,9 @@ class MovieAPI: MovieAPIProtocol {
                 return
             }
             if result.statusCode == 200{
-                do{
-                    let getDeserialization = try JSONDecoder().decode(Result.self, from: datos)
-                    DispatchQueue.main.async {
-                        self.interactor?.responseListMovies(moviesList: getDeserialization.results)
-                    }
-                } catch let error{
-                    print("Ho Ocurrido un error: \(error.localizedDescription)")
+                guard let getDeserialization: Result = self.decode(data: datos) else { return }
+                DispatchQueue.main.async {
+                    self.interactor?.responseListMovies(moviesList: getDeserialization.results)
                 }
             }
             else{
@@ -35,5 +31,8 @@ class MovieAPI: MovieAPIProtocol {
             }
         }.resume()
     }
-
+    func decode<T:Decodable>(data: Data, jsonDecoder: JSONDecoder = JSONDecoder()) -> T?{
+        return try? jsonDecoder.decode(T.self, from: data)
+    }
+    
 }

@@ -6,17 +6,15 @@
 //
 
 import UIKit
-class TrendingViewController: UITableViewController {
+final class TrendingViewController: UITableViewController {
     var presenter: MoviewHomeViewToPresenterProtocol?
-
+    
     var movies: [Movie] = []
     override func viewDidLoad() {
         super.viewDidLoad()
-        presenter?.getMoviesHomeData()
-        //let movieApi = MovieAPI()
+        MovieHomeRouter.createModule(view: self)
         
-        //movies = movieApi.getMovies()
-        //tableView.reloadData()
+        presenter?.getMoviesHomeData()
     }
 }
 
@@ -27,24 +25,20 @@ extension TrendingViewController: MovieHomePresenterToViewProtocol{
     }
 }
 extension TrendingViewController{
-
+    
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return movies.count
     }
-
+    
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-            tableView.dequeueReusableCell(withIdentifier: "TrendingTableViewCell")!
-        }
-
-}
-// MARK: - TableView's DataSource
-extension TrendingViewController {
-
+        tableView.dequeueReusableCell(withIdentifier: "TrendingTableViewCell")!
+    }
+    
     override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         var config = UIListContentConfiguration.cell()
         config.text = movies[indexPath.row].title
-        config.image = UIImage(named: "poster")
+        config.image = presenter?.setUrlToImage(url: movies[indexPath.row].backdrop)
         cell.contentConfiguration = config
     }
-
+    
 }

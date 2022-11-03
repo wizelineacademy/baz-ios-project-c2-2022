@@ -7,7 +7,7 @@
 
 import Foundation
 import UIKit
-class MovieHomePresenter: MoviewHomeViewToPresenterProtocol, MovieHomeInteractorToPresenterProtocol{
+final class MovieHomePresenter: MoviewHomeViewToPresenterProtocol, MovieHomeInteractorToPresenterProtocol{
     var interactor: MovieHomePresenterToInteractorProtocol?
     
     var router: MovieHomePresenterToRouterProtocol?
@@ -21,5 +21,7 @@ class MovieHomePresenter: MoviewHomeViewToPresenterProtocol, MovieHomeInteractor
     func resultMoviesList(movies: [Movie]) {
         self.view?.getListMovies(listMovies: movies)
     }
-    
+    func setUrlToImage(url: String) -> UIImage!{
+        return interactor?.setUrlToImage(url: url)
+    }
 }

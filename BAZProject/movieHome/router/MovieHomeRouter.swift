@@ -6,10 +6,9 @@
 //
 import Foundation
 import UIKit
-class MovieHomeRouter: MovieHomePresenterToRouterProtocol{
-    static func createModule() -> TrendingViewController{
-        let view = mainstoryboard.instantiateViewController(withIdentifier: "TrendingViewController") as! TrendingViewController
-                
+final class MovieHomeRouter: MovieHomePresenterToRouterProtocol{
+    
+    static func createModule(view: TrendingViewController){
         var presenter: MoviewHomeViewToPresenterProtocol & MovieHomeInteractorToPresenterProtocol = MovieHomePresenter()
         var interactor: MovieHomePresenterToInteractorProtocol & MovieHomeDataExternalToInteractorProtocol = MovieHomeInteractor()
         let router: MovieHomePresenterToRouterProtocol = MovieHomeRouter()
@@ -22,16 +21,5 @@ class MovieHomeRouter: MovieHomePresenterToRouterProtocol{
         interactor.presenter = presenter
         interactor.movieAPI = movieAPI
         movieAPI.interactor = interactor
-        return view
     }
-    static var mainstoryboard: UIStoryboard{
-            return UIStoryboard(name:"Main",bundle: Bundle.main)
-        }
-        
-        func pushToMovieScreen(navigationConroller navigationController:UINavigationController) {
-            
-            let movieModue = MovieHomeRouter.createModule()
-            navigationController.pushViewController(movieModue,animated: true)
-            
-        }
 }
