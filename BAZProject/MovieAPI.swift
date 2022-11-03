@@ -31,5 +31,4 @@ class MovieAPI {
 
         return movies
     }
-
 }
