@@ -18,6 +18,7 @@ class DetailViewController: UIViewController {
         if let movie = movie {
             textField.text = movie.overview
             getImage(pathUrl: movie.poster_path)
+            self.navigationItem.title = movie.title
         }
     }
     

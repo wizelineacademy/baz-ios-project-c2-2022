@@ -96,9 +96,9 @@
 			isa = PBXGroup;
 			children = (
 				FDDDCA51290F18C9001ECD73 /* API.swift */,
-				C30893E128A425E1004B1860 /* Movie.swift */,
 				C30893E028A425E1004B1860 /* MovieAPI.swift */,
 				FDF3895F290AF5F400A174D1 /* MovieEndpoint.swift */,
+				C30893E128A425E1004B1860 /* Movie.swift */,
 				FD115B752914438F006A5468 /* MovieSection.swift */,
 			);
 			path = Model;

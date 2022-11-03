@@ -21,7 +21,7 @@
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="cell" rowHeight="90" id="9XR-Lf-659" customClass="MainTableViewCell" customModule="BAZProject" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" rowHeight="90" id="9XR-Lf-659" customClass="MainTableViewCell" customModule="BAZProject" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="44.5" width="414" height="90"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="9XR-Lf-659" id="1bP-al-9wV">
@@ -41,10 +41,6 @@
                                                 </label>
                                             </subviews>
                                         </tableViewCellContentView>
-                                        <connections>
-                                            <outlet property="imageField" destination="GA0-g9-muy" id="O0t-pr-B5W"/>
-                                            <outlet property="titleLabel" destination="Yb6-dl-yMF" id="xSS-m1-qEk"/>
-                                        </connections>
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
@@ -53,9 +49,13 @@
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="ICU-ie-UXP" firstAttribute="leading" secondItem="mnz-fK-mx3" secondAttribute="leading" id="4fC-Zf-AsC"/>
+                            <constraint firstItem="ICU-ie-UXP" firstAttribute="leading" secondItem="mnz-fK-mx3" secondAttribute="leading" id="FaC-gO-UBe"/>
+                            <constraint firstAttribute="bottom" secondItem="ICU-ie-UXP" secondAttribute="bottom" id="JJ5-mY-uph"/>
+                            <constraint firstItem="ICU-ie-UXP" firstAttribute="trailing" secondItem="mnz-fK-mx3" secondAttribute="trailing" id="LQL-DW-xYC"/>
                             <constraint firstAttribute="bottom" secondItem="ICU-ie-UXP" secondAttribute="bottom" id="R86-Kl-IZw"/>
                             <constraint firstItem="ICU-ie-UXP" firstAttribute="trailing" secondItem="mnz-fK-mx3" secondAttribute="trailing" id="TnV-wO-d3X"/>
                             <constraint firstItem="ICU-ie-UXP" firstAttribute="top" secondItem="P9c-qV-ic1" secondAttribute="top" id="biZ-BL-I3e"/>
+                            <constraint firstItem="ICU-ie-UXP" firstAttribute="top" secondItem="P9c-qV-ic1" secondAttribute="top" id="nH3-2Y-pBn"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="1sU-Cz-Wtr"/>
@@ -65,7 +65,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="zIr-Hz-kKz" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1771.0144927536232" y="-123.21428571428571"/>
+            <point key="canvasLocation" x="1704" y="-123"/>
         </scene>
         <!--Detail View Controller-->
         <scene sceneID="Alc-uT-dIq">
@@ -75,13 +75,11 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="yOo-gy-5Ff">
-                                <rect key="frame" x="20" y="107" width="374" height="280"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="yOo-gy-5Ff">
+                                <rect key="frame" x="20" y="108" width="374" height="280"/>
                             </imageView>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" textAlignment="justified" translatesAutoresizingMaskIntoConstraints="NO" id="KY3-09-NYP">
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="justified" translatesAutoresizingMaskIntoConstraints="NO" id="KY3-09-NYP">
                                 <rect key="frame" x="20" y="418" width="374" height="411"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
                                 <color key="textColor" systemColor="labelColor"/>
@@ -91,6 +89,16 @@
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="uSC-JG-BGL"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="yOo-gy-5Ff" firstAttribute="height" secondItem="heF-Ee-9Gb" secondAttribute="height" multiplier="0.3125" id="8Jp-aV-3ja"/>
+                            <constraint firstItem="KY3-09-NYP" firstAttribute="leading" secondItem="uSC-JG-BGL" secondAttribute="leading" constant="20" id="Pxs-e2-62h"/>
+                            <constraint firstItem="yOo-gy-5Ff" firstAttribute="centerX" secondItem="heF-Ee-9Gb" secondAttribute="centerX" id="XDt-dT-FP5"/>
+                            <constraint firstItem="uSC-JG-BGL" firstAttribute="bottom" secondItem="KY3-09-NYP" secondAttribute="bottom" constant="33" id="amC-0Y-GOE"/>
+                            <constraint firstItem="KY3-09-NYP" firstAttribute="top" secondItem="yOo-gy-5Ff" secondAttribute="bottom" constant="30" id="bLn-zl-niH"/>
+                            <constraint firstItem="yOo-gy-5Ff" firstAttribute="top" secondItem="uSC-JG-BGL" secondAttribute="top" constant="64" id="bcc-gw-z1F"/>
+                            <constraint firstItem="yOo-gy-5Ff" firstAttribute="width" secondItem="heF-Ee-9Gb" secondAttribute="width" multiplier="0.903382" id="rc6-wf-x4c"/>
+                            <constraint firstItem="uSC-JG-BGL" firstAttribute="trailing" secondItem="KY3-09-NYP" secondAttribute="trailing" constant="20" id="xhw-bD-jzN"/>
+                        </constraints>
                     </view>
                     <connections>
                         <outlet property="imageField" destination="yOo-gy-5Ff" id="2UI-7e-52c"/>
@@ -99,7 +107,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="YCI-yF-tv8" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2537.68115942029" y="-123.21428571428571"/>
+            <point key="canvasLocation" x="2522" y="-123"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="pFA-5l-uiK">
