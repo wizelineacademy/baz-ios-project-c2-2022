@@ -9,7 +9,12 @@ import Foundation
 struct Movie {
     let id: Int
     let title: String
-    let poster_path: String
+    let posterPath: String
+    let originalTitle: String
+    let voteAverage: Double
+    let overview: String
+    let releaseDate: String
+    let backdropPath: String
 }
 
 struct MovieApiModel: Codable {

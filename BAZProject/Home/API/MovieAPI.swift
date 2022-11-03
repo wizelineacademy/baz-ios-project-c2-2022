@@ -7,12 +7,13 @@
 import Foundation
 
 class MovieAPI {
+    let httpMeth = "GET"
     /// Funcion getInformation obtiene la informacion de una api de peliculas dependiendo la URL que manden
     ///  - Parameter api: Seleccionas el tipo de api que solicitaras
     func getInformation(_ api: MovieFeed) -> [MovieResults] {
         let semaphore = DispatchSemaphore (value: 0)
         var request = api.request
-        request.httpMethod = "GET"
+        request.httpMethod = httpMeth
         var infoJson: [MovieResults] = []
         let task = URLSession.shared.dataTask(with: request) { data, response, error in
             guard let httpResponse = response as? HTTPURLResponse else {
@@ -48,8 +49,13 @@ class MovieAPI {
         for result in jsonInfo {
             if let id = result.id,
                let title = result.title,
-               let poster_path = result.poster_path {
-                movies.append(Movie(id: id, title: title, poster_path: poster_path))}
+               let posterPath = result.poster_path,
+               let originalTitle = result.original_title,
+               let voteAverage = result.vote_average,
+               let overview = result.overview,
+               let releaseDate = result.release_date,
+               let backdropPath = result.backdrop_path{
+                movies.append(Movie(id: id, title: title, posterPath: posterPath, originalTitle: originalTitle, voteAverage: voteAverage, overview: overview, releaseDate: releaseDate, backdropPath: backdropPath))}
         }
         return movies
     }
@@ -59,27 +65,18 @@ class MovieAPI {
         print("El error es: \(error)")
     }
     
-    func getMovies2(_ movieFeedType: MovieFeed) -> [Movie] {
-        let client = MovieClient()
-        client.getFeed(from: movieFeedType) { result in
-                    switch result {
-                    case .success(let movieFeedResult):
-                        guard let movieResults = movieFeedResult?.results else { return }
-                        print(movieResults)
-                    case .failure(let error):
-                        print("the error \(error)")
-                    }
-        }
-        return []
-    }
-    
     func getInfoBaseMovies(_ jsonInfo: [MovieResults]) -> [Movie] {
         var movies: [Movie] = []
         for result in jsonInfo {
             if let id = result.id,
                let title = result.title,
-               let poster_path = result.poster_path {
-                movies.append(Movie(id: id, title: title, poster_path: poster_path))}
+               let posterPath = result.poster_path,
+               let originalTitle = result.original_title,
+               let voteAverage = result.vote_average,
+               let overview = result.overview,
+               let releaseDate = result.release_date,
+               let backdropPath = result.backdrop_path{
+                movies.append(Movie(id: id, title: title, posterPath: posterPath, originalTitle: originalTitle, voteAverage: voteAverage, overview: overview, releaseDate: releaseDate, backdropPath: backdropPath))}
         }
         return movies
     }

@@ -24,9 +24,9 @@ extension MovieFeed: Endpoint {
     var apiKey: String {
         switch self {
         case .Trendig, .NowPlaying, .Popular, .TopRated, .UpComing, .Reviews, .Similar, .Recommendations:
-            return "api_key=f6cd5c1a9e6c6b965fdcab0fa6ddd38a"
+            return "api_key=f6cd5c1a9e6c6b965fdcab0fa6ddd38a&language=es&region=MX&"
         case .Keyword(let query), .Search(let query):
-            return "api_key=f6cd5c1a9e6c6b965fdcab0fa6ddd38a&query=\(query)"
+            return "api_key=f6cd5c1a9e6c6b965fdcab0fa6ddd38a&language=es&region=MX&query=\(query)"
         }
     }
     
@@ -57,6 +57,31 @@ extension MovieFeed: Endpoint {
             return "/3/movie/\(movieID)/similar"
         case .Recommendations(let movieID):
             return "/3/movie/\(movieID)/recommendations"
+        }
+    }
+    
+    var name: String {
+        switch self {
+        case .Trendig:
+            return "Trending"
+        case .NowPlaying:
+            return "NowPlaying"
+        case .Popular:
+            return "Popular"
+        case .TopRated:
+            return "TopRated"
+        case .UpComing:
+            return "UpComing"
+        case .Keyword:
+            return "Keyword"
+        case .Search:
+            return "Search"
+        case .Reviews:
+            return "Reviews"
+        case .Similar:
+            return "Similar"
+        case .Recommendations:
+            return "Recommendations"
         }
     }
 }
