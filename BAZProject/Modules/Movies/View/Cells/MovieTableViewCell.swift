@@ -31,7 +31,7 @@ class MovieTableViewCell: UITableViewCell {
     /// Assign the values of the movie object to each of the cells
     func showMovie() {
         self.titleLbl.text = self.movie?.title
-        self.subTitleLbl.text = self.movie?.original_title
+        self.subTitleLbl.text = self.movie?.originalTitle
         self.movieImageView.loadImage(urlStr: baseUrl ?? "")
     }
     /// Shadow the selected cell
