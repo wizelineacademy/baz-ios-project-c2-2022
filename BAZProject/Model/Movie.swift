@@ -49,3 +49,8 @@ struct InfoMovies: Codable{
 struct ArrayMovies: Codable{
     let results: [InfoMovies]
 }
+
+public enum MoreMovies: String {
+    case similar
+    case recommended = "recommendations"
+}
