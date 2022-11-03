@@ -24,6 +24,7 @@
 		C9DF51FC29118F9300AAC618 /* DetailMovieViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9DF51FB29118F9300AAC618 /* DetailMovieViewController.swift */; };
 		C9DF524029123A4700AAC618 /* MoreMoviesCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9DF523E29123A4700AAC618 /* MoreMoviesCollectionViewCell.swift */; };
 		C9DF524129123A4700AAC618 /* MoreMoviesCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C9DF523F29123A4700AAC618 /* MoreMoviesCollectionViewCell.xib */; };
+		C9DF52472914619200AAC618 /* SearchMoviesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9DF52462914619200AAC618 /* SearchMoviesViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -46,6 +47,7 @@
 		C9DF51FB29118F9300AAC618 /* DetailMovieViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailMovieViewController.swift; sourceTree = "<group>"; };
 		C9DF523E29123A4700AAC618 /* MoreMoviesCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoreMoviesCollectionViewCell.swift; sourceTree = "<group>"; };
 		C9DF523F29123A4700AAC618 /* MoreMoviesCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MoreMoviesCollectionViewCell.xib; sourceTree = "<group>"; };
+		C9DF52462914619200AAC618 /* SearchMoviesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchMoviesViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -107,6 +109,7 @@
 			children = (
 				C30893C328A2F845004B1860 /* TrendingViewController.swift */,
 				C9DF51FB29118F9300AAC618 /* DetailMovieViewController.swift */,
+				C9DF52462914619200AAC618 /* SearchMoviesViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -248,6 +251,7 @@
 				C30893B028A2F42B004B1860 /* SceneDelegate.swift in Sources */,
 				C30893E228A425E1004B1860 /* MovieAPI.swift in Sources */,
 				C30893E328A425E1004B1860 /* Movie.swift in Sources */,
+				C9DF52472914619200AAC618 /* SearchMoviesViewController.swift in Sources */,
 				C90003AE290777B800F9DAAF /* ExtensionUIViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

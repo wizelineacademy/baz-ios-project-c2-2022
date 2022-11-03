@@ -54,6 +54,20 @@ final class MovieAPI {
                 task.resume()
             }
         }
+    
+    func getMoviesSearched(wordToSearch: String, completion: @escaping (Result<[InfoMovies], Error>) -> ()){
+            if let urlString = URL(string: "\(baseEndpoint)/search/movie?api_key=\(apiKey)&language=es&page=2&query=\(wordToSearch)") {
+                     let task = session.dataTask(with: urlString) { data, response, error in
+                         if let error = error {
+                             completion(.failure(error))
+                         }
+                         if let jsonData = self.parsingJson(jsonData: data!) {
+                             completion(.success(jsonData.results))
+                         }
+                     }
+                     task.resume()
+                 }
+             }
     /// Parsing json to get movie data.
    
     private func parsingJson(jsonData: Data) -> ArrayMovies? {
