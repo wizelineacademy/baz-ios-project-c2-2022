@@ -11,3 +11,4 @@ struct Movie {
     let title: String
     let poster_path: String
 }
+
