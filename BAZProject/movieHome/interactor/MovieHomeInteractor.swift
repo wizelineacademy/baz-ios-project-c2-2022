@@ -11,12 +11,19 @@ final class MovieHomeInteractor: MovieHomePresenterToInteractorProtocol,  MovieH
     
     var movieAPI: MovieAPIProtocol?
     var presenter: MovieHomeInteractorToPresenterProtocol?
+    ///This function does not receive parameters, call the service of movies
     func getMoviesInt(){
         self.movieAPI?.getMovies()
     }
+    /// This  function receive how parameter a list of object movie
+    /// - parameters
+    ///     - movieList get the list of movies
     func responseListMovies(moviesList: [Movie]) {
         presenter?.resultMoviesList(movies: moviesList)
     }
+    /// This function receive the url of image and retorn object UIImage
+    /// - parameters
+    ///     - url the url of image
     func setUrlToImage(url: String) -> UIImage!{
         if url.isEmpty{
             return UIImage(named: "poster")

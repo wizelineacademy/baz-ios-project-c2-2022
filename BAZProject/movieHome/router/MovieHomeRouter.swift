@@ -7,7 +7,9 @@
 import Foundation
 import UIKit
 final class MovieHomeRouter: MovieHomePresenterToRouterProtocol{
-    
+    /// This function receive parameter viewController
+    /// - parameters
+    ///      - view: receive the view of viewController called
     static func createModule(view: TrendingViewController){
         var presenter: MoviewHomeViewToPresenterProtocol & MovieHomeInteractorToPresenterProtocol = MovieHomePresenter()
         var interactor: MovieHomePresenterToInteractorProtocol & MovieHomeDataExternalToInteractorProtocol = MovieHomeInteractor()
