@@ -12,34 +12,38 @@ class MovieAPI {
     private var endPointUrl: String = ""
     
     var movies: [Movie] = []
+    var allMovies: [MovieSection] = []
     
-    func getMovies(endPoint: MovieEndpoint) -> [Movie] {
+    func getMovies() -> [Movie] {
         
-        setUrl(endPoint: endPoint)
-        
-        guard let url = URL(string: endPointUrl + apiKey),
-              let data = try? Data(contentsOf: url)
-        else {
-            return []
+        for endPoint in MovieEndpoint.allCases {
+            setUrl(endPoint: endPoint)
+            guard let url = URL(string: endPointUrl + apiKey),
+                  let data = try? Data(contentsOf: url)
+            else {
+                return []
+            }
+            
+            if let api = try? JSONDecoder().decode(API.self, from: data) {
+                movies = api.results
+            }
+            
+            let movieSection = MovieSection(genre: endPoint.rawValue, movies: movies)
+            allMovies.append(movieSection)
         }
         
-        if let api = try? JSONDecoder().decode(API.self, from: data) {
-            movies = api.results
-            return movies
-        } else {
-            return []
-        }
+        return movies
     }
     
     func setUrl(endPoint: MovieEndpoint) {
         switch endPoint {
-        case .trending:
+        case .Trending:
             endPointUrl = "https://api.themoviedb.org/3/trending/movie/day?api_key="
-        case .nowPlaying:
+        case .NowPlaying:
             endPointUrl = "https://api.themoviedb.org/3/movie/now_playing?api_key="
-        case .popular:
+        case .Popular:
             endPointUrl = "https://api.themoviedb.org/3/movie/popular?api_key="
-        case .topRated:
+        case .TopRated:
             endPointUrl = "https://api.themoviedb.org/3/movie/top_rated?api_key="
         case .Upcoming:
             endPointUrl = "https://api.themoviedb.org/3/movie/upcoming?api_key="

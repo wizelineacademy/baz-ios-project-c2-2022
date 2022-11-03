@@ -18,7 +18,7 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
         tableView.delegate = self
         tableView.dataSource = self
         let api = MovieAPI()
-        movies = api.getMovies(endPoint: .trending)
+        movies = api.getMovies()
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
