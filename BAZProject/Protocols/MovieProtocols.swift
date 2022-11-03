@@ -21,11 +21,15 @@ protocol GenericViewModel {
 }
 
 protocol PrincipalViewModel: GenericViewModel {
-    var movieApi: MovieAPI {get set}
+    var movieApiDelegate: MovieApiDelegate? {get set}
     func getInfo(_ api: MovieFeed)
 }
 
 protocol GenericCellMovie {
     func setUpSkeleton()
     func configure()
+}
+
+protocol MovieApiDelegate {
+    func getMovies(_ api: MovieFeed) -> [Movie] 
 }

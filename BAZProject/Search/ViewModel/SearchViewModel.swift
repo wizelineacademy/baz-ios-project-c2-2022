@@ -17,12 +17,12 @@ class SearchViewModel: PrincipalViewModel {
         }
     }
     
-    var movieApi: MovieAPI = MovieAPI()
+    var movieApiDelegate: MovieApiDelegate?
     
     /// La funcion getInfo hace la peticion de la informacion con la instancia de la clase de MovieAPI y la guarda en el dataArray del ViewModel
     /// - Parameter api: El tipo de api que se busca la informacion
     func getInfo(_ api: MovieFeed) {
-        self.dataArray = self.movieApi.getMovies(api)
+        self.dataArray = self.movieApiDelegate?.getMovies(api) ?? []
     }
     /// La funcion getImage retorna la informacion de una imagen
     /// - Parameter urlImage: String con la url de la imagen a descargar

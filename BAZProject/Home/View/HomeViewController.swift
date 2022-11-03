@@ -40,6 +40,7 @@ class HomeViewController: UIViewController, PrincipalView {
     }
     
     func configurateView() {
+        homeViewModel.movieApiDelegate = MovieAPI()
         homeViewModel.getAllMovies()
     }
     

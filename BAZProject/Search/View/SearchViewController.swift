@@ -27,6 +27,7 @@ class SearchViewController: UIViewController, PrincipalView {
     }
     
     func configurateView() {
+        searchViewModel.movieApiDelegate = MovieAPI()
         searchViewModel.getInfo(.Search(query: ""))
     }
     

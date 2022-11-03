@@ -18,20 +18,20 @@ class ViewModelMovie: PrincipalViewModel {
             refreshData()
         }
     }
-    var movieApi = MovieAPI()
+    var movieApiDelegate: MovieApiDelegate?
     /// La funcion getAllMovies obtiene la informacion de todas las peliculas dividadas y las guarda en un diccionario
     func getAllMovies() {
-        dicAllMovies["Trending"] = self.movieApi.getMovies(.Trendig)
-        dicAllMovies["TopRated"] = self.movieApi.getMovies(.TopRated)
-        dicAllMovies["UpComing"] = self.movieApi.getMovies(.UpComing)
-        dicAllMovies["Popular"] = self.movieApi.getMovies(.Popular)
-        dicAllMovies["NowPlaying"] = self.movieApi.getMovies(.NowPlaying)
+        dicAllMovies["Trending"] = self.movieApiDelegate?.getMovies(.Trendig)
+        dicAllMovies["TopRated"] = self.movieApiDelegate?.getMovies(.TopRated)
+        dicAllMovies["UpComing"] = self.movieApiDelegate?.getMovies(.UpComing)
+        dicAllMovies["Popular"] = self.movieApiDelegate?.getMovies(.Popular)
+        dicAllMovies["NowPlaying"] = self.movieApiDelegate?.getMovies(.NowPlaying)
         self.dataArray = dicAllMovies["Trending"] ?? []
     }
     /// La funcion getInfo hace la peticion de la informacion con la instancia de la clase de MovieAPI y la guarda en el dataArray del ViewModel
     /// - Parameter api: El tipo de api que se busca la informacion
     func getInfo(_ api: MovieFeed) {
-        self.dataArray = self.movieApi.getMovies(api)
+        self.dataArray = self.movieApiDelegate?.getMovies(api) ?? []
     }
     /// La funcion getInfoIndex devuelve la informacion de las peliculas del index que mandan
     /// - Parameter index: Index de la informacion que se busca.
