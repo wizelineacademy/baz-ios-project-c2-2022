@@ -14,7 +14,7 @@ class MovieAPI {
     var movies: [Movie] = []
     var allMovies: [MovieSection] = []
     
-    func getMovies() -> [Movie] {
+    func getMovies() -> [MovieSection] {
         
         for endPoint in MovieEndpoint.allCases {
             setUrl(endPoint: endPoint)
@@ -32,7 +32,7 @@ class MovieAPI {
             allMovies.append(movieSection)
         }
         
-        return movies
+        return allMovies
     }
     
     func setUrl(endPoint: MovieEndpoint) {

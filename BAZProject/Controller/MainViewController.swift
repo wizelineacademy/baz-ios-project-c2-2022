@@ -11,7 +11,7 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
     
     @IBOutlet weak var tableView: UITableView!
     
-    var movies: [Movie] = []
+    var movies: [MovieSection] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -22,12 +22,31 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return movies[section].movies.count
+    }
+    
+    func numberOfSections(in tableView: UITableView) -> Int {
         return movies.count
+    }
+    
+    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        return movies[section].genre
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as? MainTableViewCell else { return UITableViewCell() }
-        cell.printData(movie: movies[indexPath.row])
+        cell.printData(movie: movies[indexPath.section].movies[indexPath.row])
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        //performSegue(withIdentifier: "information", sender: self)
+        //tableView.deselectRow(at: indexPath, animated: true)
+        //self.navigationController?.pushViewController(DetailViewController(), animated: true)
+        
+        let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
+        let resultViewController = storyBoard.instantiateViewController(withIdentifier: "DetailViewController") as! DetailViewController
+        resultViewController.movie = movies[indexPath.section].movies[indexPath.row]
+        self.navigationController?.pushViewController(resultViewController, animated: true)
     }
 }
