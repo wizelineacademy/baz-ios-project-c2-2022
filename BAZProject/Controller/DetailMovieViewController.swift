@@ -14,6 +14,8 @@ class DetailMovieViewController: UIViewController {
     @IBOutlet weak var lblDetailTitle: UILabel!
     @IBOutlet weak var collectionSimilar: UICollectionView!
     @IBOutlet weak var collectionRecommended: UICollectionView!
+    
+    //MARK: Properties
     let movieAPI = MovieAPI()
     var arraySimilar: [InfoMovies] = [] {
         didSet {
@@ -34,6 +36,7 @@ class DetailMovieViewController: UIViewController {
         return self.movie.id!
     }
     
+    //MARK: Override methods
     override func viewDidLoad() {
         super.viewDidLoad()
         instanceFromNib()
@@ -42,6 +45,7 @@ class DetailMovieViewController: UIViewController {
         getMoviesRecommended()
     }
   
+    //MARK: private methods
     private func instanceFromNib() {
         collectionSimilar.register(UINib(nibName: "MoreMoviesCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "MoreMoviesCollectionViewCell")
         collectionRecommended.register(UINib(nibName: "MoreMoviesCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "MoreMoviesCollectionViewCell")
@@ -81,7 +85,9 @@ class DetailMovieViewController: UIViewController {
     }
 }
 
-extension DetailMovieViewController: UICollectionViewDelegate, UICollectionViewDataSource {
+// MARK: - collectionView's DataSource
+
+extension DetailMovieViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         switch collectionView {
         case collectionSimilar:

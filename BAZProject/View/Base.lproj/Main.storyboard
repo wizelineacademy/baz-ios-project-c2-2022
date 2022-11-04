@@ -47,21 +47,21 @@
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JZR-MH-4ln">
                                 <rect key="frame" x="152" y="60" width="160" height="20.5"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Similares" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4wh-sF-pzV">
                                 <rect key="frame" x="0.0" y="262" width="320" height="20.5"/>
-                                <color key="backgroundColor" systemColor="systemGrayColor"/>
+                                <color key="backgroundColor" red="1" green="0.57637232540000005" blue="0.0" alpha="0.79382376119393072" colorSpace="custom" customColorSpace="sRGB"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="mage" translatesAutoresizingMaskIntoConstraints="NO" id="mqT-Kq-2Vf">
-                                <rect key="frame" x="16" y="60" width="128" height="93"/>
+                                <rect key="frame" x="16" y="60" width="128" height="69"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="93" id="3su-34-RnE"/>
+                                    <constraint firstAttribute="height" constant="69" id="3su-34-RnE"/>
                                     <constraint firstAttribute="width" constant="128" id="90m-ye-p4R"/>
                                 </constraints>
                             </imageView>
@@ -85,7 +85,7 @@
                             </collectionView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Recomendas" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tkI-J6-BSt">
                                 <rect key="frame" x="0.0" y="414.5" width="320" height="21"/>
-                                <color key="backgroundColor" systemColor="systemGrayColor"/>
+                                <color key="backgroundColor" red="0.016804177310000001" green="0.19835099580000001" blue="1" alpha="0.72316653712266155" colorSpace="custom" customColorSpace="sRGB"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
@@ -108,15 +108,14 @@
                                     <outlet property="delegate" destination="nHg-7a-xSY" id="nbL-zg-nyn"/>
                                 </connections>
                             </collectionView>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="AOW-bz-CZq">
-                                <rect key="frame" x="8" y="154" width="304" height="100"/>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="AOW-bz-CZq">
+                                <rect key="frame" x="8" y="137" width="304" height="117"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="100" id="bOk-T8-UMv"/>
+                                    <constraint firstAttribute="height" constant="117" id="bOk-T8-UMv"/>
                                 </constraints>
-                                <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
                                 <color key="textColor" systemColor="labelColor"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="10"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
                         </subviews>
@@ -130,7 +129,7 @@
                             <constraint firstItem="YFF-JL-DVt" firstAttribute="trailing" secondItem="JZR-MH-4ln" secondAttribute="trailing" constant="8" id="EYc-oQ-fgU"/>
                             <constraint firstItem="YFF-JL-DVt" firstAttribute="trailing" secondItem="AOW-bz-CZq" secondAttribute="trailing" constant="8" id="LHz-Hd-mA9"/>
                             <constraint firstItem="LGk-jh-wzn" firstAttribute="leading" secondItem="YFF-JL-DVt" secondAttribute="leading" id="LzD-Bh-Z4n"/>
-                            <constraint firstItem="AOW-bz-CZq" firstAttribute="top" secondItem="mqT-Kq-2Vf" secondAttribute="bottom" constant="1" id="QRX-fz-bcc"/>
+                            <constraint firstItem="AOW-bz-CZq" firstAttribute="top" secondItem="mqT-Kq-2Vf" secondAttribute="bottom" constant="8" id="QRX-fz-bcc"/>
                             <constraint firstItem="JZR-MH-4ln" firstAttribute="top" secondItem="YFF-JL-DVt" secondAttribute="top" constant="16" id="RqL-22-3JA"/>
                             <constraint firstItem="fgf-rb-tZh" firstAttribute="top" secondItem="tkI-J6-BSt" secondAttribute="bottom" id="VvH-el-Y1u"/>
                             <constraint firstItem="YFF-JL-DVt" firstAttribute="trailing" secondItem="4wh-sF-pzV" secondAttribute="trailing" id="WTz-qH-U8X"/>
@@ -276,9 +275,6 @@
         </systemColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-        </systemColor>
-        <systemColor name="systemGrayColor">
-            <color red="0.55686274509803924" green="0.55686274509803924" blue="0.57647058823529407" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>
