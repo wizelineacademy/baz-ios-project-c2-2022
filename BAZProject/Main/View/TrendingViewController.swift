@@ -8,7 +8,7 @@ import UIKit
 
 class TrendingViewController: UIViewController {
     
-    @IBOutlet var tblMovie: UITableView!{
+    @IBOutlet weak var tblMovie: UITableView!{
         didSet{
             tblMovie.delegate = self
             tblMovie.dataSource = self
@@ -44,8 +44,10 @@ extension TrendingViewController : UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: identifier, for: indexPath) as? TrendingTableViewCell else{ return UITableViewCell() }
-        let info = movieApi.dataMovie?.results[indexPath.row]
-        cell.lblTitle.text = info?.title
+        if let dataMovie = movieApi.dataMovie{
+        let info = dataMovie.results[indexPath.row]
+        cell.getInfoCell(movie: info )
+        }
         return cell
     }
 }

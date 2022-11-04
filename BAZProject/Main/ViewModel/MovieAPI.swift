@@ -5,6 +5,7 @@
 //
 
 import Foundation
+import UIKit
 
 class MovieAPI {
     
@@ -33,8 +34,12 @@ class MovieAPI {
             }
         }.resume()
     }
+    
     ///return imageURL
-    func getImage() -> String {
-        return  imageURL
+    func getImage(urlImage: String) -> Data {
+        let urlIm = "\(imageURL)\(urlImage)"
+        guard let urlData = URL(string: urlIm),
+              let data = try? Data(contentsOf: urlData) else { return Data() }
+        return data
     }
 }
