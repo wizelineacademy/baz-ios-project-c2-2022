@@ -13,7 +13,7 @@ final class TrendingViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        movies = movieApi.getMovies()
+        movies = movieApi.getMoviesByCategory(.topRated)
         tableView.reloadData()
     }
 
@@ -46,7 +46,8 @@ extension TrendingViewController {
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let vc = DetailsMovieRouter.createModuleDetailsMovie(movie: movies[indexPath.row])
+        //let vc = DetailsMovieRouter.createModuleDetailsMovie(movie: movies[indexPath.row])
+        let vc = MoviesCategoriesViewController()
         self.present(vc, animated: true)
     }
 
