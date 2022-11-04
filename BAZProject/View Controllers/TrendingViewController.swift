@@ -8,18 +8,21 @@ import UIKit
 
 class TrendingViewController: UITableViewController {
     
-    var viewModel = MovieAPI()
-
+    var viewModel = ViewModelMovies()
+    
+    @IBOutlet var moviesTable: UITableView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
         configureView()
         bind()
     }
     
     private func configureView() {
-        viewModel.getMovies()
+        moviesTable.register(MoviesCategoriesTableViewCell.nib(), forCellReuseIdentifier: MoviesCategoriesTableViewCell.identifier)
+        moviesTable.delegate = self
+        moviesTable.dataSource = self
+        viewModel.retriveMoviesList()
     }
     
     private func bind(){
@@ -37,25 +40,15 @@ class TrendingViewController: UITableViewController {
 extension TrendingViewController {
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return viewModel.api?.results.count ?? 00
+        return 1
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        tableView.dequeueReusableCell(withIdentifier: "TrendingTableViewCell")!
+        let cell = moviesTable.dequeueReusableCell(withIdentifier: MoviesCategoriesTableViewCell.identifier, for: indexPath) as! MoviesCategoriesTableViewCell
+        cell.lblNameCategory.text = "Trending"
+        cell.configure(with: viewModel.movies)
+        return cell
     }
 
 }
 
-// MARK: - TableView's Delegate
-
-extension TrendingViewController {
-
-    override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        var config = UIListContentConfiguration.cell()
-        let movie = viewModel.api?.results[indexPath.row]
-        config.text = movie?.title
-        config.image = UIImage(named: "poster")
-        cell.contentConfiguration = config
-    }
-
-}
