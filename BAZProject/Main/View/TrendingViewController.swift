@@ -31,7 +31,7 @@ class TrendingViewController: UIViewController {
     
     private func registerNibs() {
         tblMovie.register(UINib(nibName: "TrendingTableViewCell", bundle: nil), forCellReuseIdentifier: "TrendingTableViewCell")
-       }
+    }
 }
 
 // MARK: - TableView's DataSource
@@ -45,9 +45,19 @@ extension TrendingViewController : UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: identifier, for: indexPath) as? TrendingTableViewCell else{ return UITableViewCell() }
         if let dataMovie = movieApi.dataMovie{
-        let info = dataMovie.results[indexPath.row]
-        cell.getInfoCell(movie: info )
+            let info = dataMovie.results[indexPath.row]
+            cell.getInfoCell(movie: info )
         }
         return cell
     }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let vc = DetailViewController(nibName: "DetailViewController",
+                                      bundle: Bundle(for: DetailViewController.self))
+        if let dataMovie = movieApi.dataMovie{
+            vc.dataMovie = dataMovie.results[indexPath.row]
+            self.navigationController?.pushViewController(vc, animated: true)
+        }
+    }
 }
+

@@ -9,11 +9,10 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Detail View Controller-->
+        <!--View Controller-->
         <scene sceneID="s0d-6b-0kx">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-                <viewController storyboardIdentifier="DetailViewController" id="Y6W-OH-hqX" customClass="DetailViewController" customModule="BAZProject" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="Y6W-OH-hqX" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="5EZ-qb-Rvc">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -135,17 +134,11 @@
                             <constraint firstItem="3H2-pe-nia" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="16" id="zSw-A4-VlJ"/>
                         </constraints>
                     </view>
-                    <connections>
-                        <outlet property="imvPoster" destination="eyy-19-I0o" id="Tlp-qM-aOe"/>
-                        <outlet property="lblActor" destination="M1K-Bg-Sbg" id="mbg-NH-T20"/>
-                        <outlet property="lblRecomendaciones" destination="ali-Fw-141" id="syb-DM-yPJ"/>
-                        <outlet property="lblReseña" destination="TCo-Sx-h4t" id="leH-Dn-PZb"/>
-                        <outlet property="lblSimilares" destination="3H2-pe-nia" id="wwK-fv-G3q"/>
-                        <outlet property="lblTitle" destination="9Uf-sV-W3h" id="8Ob-SU-lqe"/>
-                    </connections>
+                    <navigationItem key="navigationItem" id="4Yy-Qb-T2U"/>
                 </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-3.75" y="79.225352112676063"/>
+            <point key="canvasLocation" x="993.75" y="79.225352112676063"/>
         </scene>
     </scenes>
     <resources>

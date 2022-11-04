@@ -35,10 +35,12 @@ class MovieAPI {
         }.resume()
     }
     
-    ///return imageURL
+    /// - Parameter urlImage: String with the url of the image to download
+    /// - Return:  information of the downloaded image of type Data
+    
     func getImage(urlImage: String) -> Data {
-        let urlIm = "\(imageURL)\(urlImage)"
-        guard let urlData = URL(string: urlIm),
+        let urlImage = "\(imageURL)\(urlImage)"
+        guard let urlData = URL(string: urlImage),
               let data = try? Data(contentsOf: urlData) else { return Data() }
         return data
     }

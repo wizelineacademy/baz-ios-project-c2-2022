@@ -10,15 +10,23 @@ import UIKit
 
 class DetailViewController: UIViewController {
     @IBOutlet weak var lblTitle: UILabel!
-    @IBOutlet weak var lblReseña: UILabel!
-    @IBOutlet weak var lblActor: UILabel!
-    @IBOutlet weak var lblSimilares: UILabel!
-    @IBOutlet weak var lblRecomendaciones: UILabel!
+    @IBOutlet weak var txtReseña: UITextView!
     @IBOutlet weak var imvPoster: UIImageView!
     
-    
+    var dataMovie: Movie?
+    private var movieAPI = MovieAPI()
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        configurateDetailView()
+    }
+    
+    private func configurateDetailView() {
+        lblTitle.text = dataMovie?.title
+        txtReseña.text = dataMovie?.overview
+        if let dataMovie = dataMovie {
+            let imageMovie = UIImage(data: movieAPI.getImage(urlImage: dataMovie.poster_path)) ?? UIImage(named: "poster")
+            imvPoster.image = imageMovie
+        }
     }
 }
