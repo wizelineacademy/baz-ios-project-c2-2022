@@ -11,7 +11,7 @@ class TrendingTableViewCell: UITableViewCell {
   
     private var movieAPI = MovieAPI()
     
-    func getInfoCell(movie: Movie){
+    func getInfoCell(movie: Movie) {
         lblTitle.text = movie.title
         let imageMovie = UIImage(data: movieAPI.getImage(urlImage: movie.poster_path)) ?? UIImage(named: "poster")
         imvPoster.image = imageMovie
