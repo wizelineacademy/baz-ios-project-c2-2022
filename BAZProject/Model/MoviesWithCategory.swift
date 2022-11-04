@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct MovieSection {
+struct MoviesWithCategory {
     let genre: String
     let movies: [Movie]
     

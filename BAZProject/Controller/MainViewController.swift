@@ -11,7 +11,7 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
     
     @IBOutlet weak var tableView: UITableView!
     
-    var movies: [MovieSection] = []
+    var movies: [MoviesWithCategory] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()

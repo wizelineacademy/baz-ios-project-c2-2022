@@ -20,7 +20,7 @@
 		FD115B7029143F79006A5468 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD115B6F29143F79006A5468 /* MainViewController.swift */; };
 		FD115B7329144107006A5468 /* MainTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD115B7129144107006A5468 /* MainTableViewCell.swift */; };
 		FD115B7429144107006A5468 /* MainTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FD115B7229144107006A5468 /* MainTableViewCell.xib */; };
-		FD115B762914438F006A5468 /* MovieSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD115B752914438F006A5468 /* MovieSection.swift */; };
+		FD115B762914438F006A5468 /* MoviesWithCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD115B752914438F006A5468 /* MoviesWithCategory.swift */; };
 		FD115B7829144D9D006A5468 /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD115B7729144D9D006A5468 /* DetailViewController.swift */; };
 		FDDDCA52290F18C9001ECD73 /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDDDCA51290F18C9001ECD73 /* API.swift */; };
 		FDF38960290AF5F400A174D1 /* MovieEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDF3895F290AF5F400A174D1 /* MovieEndpoint.swift */; };
@@ -42,7 +42,7 @@
 		FD115B6F29143F79006A5468 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		FD115B7129144107006A5468 /* MainTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTableViewCell.swift; sourceTree = "<group>"; };
 		FD115B7229144107006A5468 /* MainTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MainTableViewCell.xib; sourceTree = "<group>"; };
-		FD115B752914438F006A5468 /* MovieSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieSection.swift; sourceTree = "<group>"; };
+		FD115B752914438F006A5468 /* MoviesWithCategory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoviesWithCategory.swift; sourceTree = "<group>"; };
 		FD115B7729144D9D006A5468 /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
 		FDDDCA51290F18C9001ECD73 /* API.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = API.swift; sourceTree = "<group>"; };
 		FDF3895F290AF5F400A174D1 /* MovieEndpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieEndpoint.swift; sourceTree = "<group>"; };
@@ -99,7 +99,7 @@
 				C30893E028A425E1004B1860 /* MovieAPI.swift */,
 				FDF3895F290AF5F400A174D1 /* MovieEndpoint.swift */,
 				C30893E128A425E1004B1860 /* Movie.swift */,
-				FD115B752914438F006A5468 /* MovieSection.swift */,
+				FD115B752914438F006A5468 /* MoviesWithCategory.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -203,7 +203,7 @@
 				FD115B7329144107006A5468 /* MainTableViewCell.swift in Sources */,
 				C30893AE28A2F42B004B1860 /* AppDelegate.swift in Sources */,
 				C30893B028A2F42B004B1860 /* SceneDelegate.swift in Sources */,
-				FD115B762914438F006A5468 /* MovieSection.swift in Sources */,
+				FD115B762914438F006A5468 /* MoviesWithCategory.swift in Sources */,
 				C30893E228A425E1004B1860 /* MovieAPI.swift in Sources */,
 				C30893E328A425E1004B1860 /* Movie.swift in Sources */,
 				FDF38960290AF5F400A174D1 /* MovieEndpoint.swift in Sources */,

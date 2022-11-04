@@ -12,9 +12,9 @@ class MovieAPI {
     private var endPointUrl: String = ""
     
     var movies: [Movie] = []
-    var allMovies: [MovieSection] = []
+    var allMovies: [MoviesWithCategory] = []
     
-    func getMovies() -> [MovieSection] {
+    func getMovies() -> [MoviesWithCategory] {
         
         for endPoint in MovieEndpoint.allCases {
             setUrl(endPoint: endPoint)
@@ -28,7 +28,7 @@ class MovieAPI {
                 movies = api.results
             }
             
-            let movieSection = MovieSection(genre: endPoint.rawValue, movies: movies)
+            let movieSection = MoviesWithCategory(genre: endPoint.rawValue, movies: movies)
             allMovies.append(movieSection)
         }
         
