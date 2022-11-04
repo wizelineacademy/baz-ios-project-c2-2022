@@ -35,7 +35,32 @@ class MovieAPI {
         }.resume()
     }
     
-    /// - Parameter urlImage: String with the url of the image to download
+    /// Request to search movies by word.
+    /// - Parameters:
+    ///   - wordToSearch: word to search in request
+    ///   - completionHandler: closure to retrive the response
+    
+    func getMoviesSearch(wordToSearch: String, completionHandler: @escaping ([Movie]?) -> Void) {
+        if let url = URL(string: "\(baseURL)/search/multi?api_key=\(apiKey)&language=es&query=\(wordToSearch)&page=1") {
+            URLSession.shared.dataTask(with: url) { data, response, error in
+                if error != nil {
+                    print("Ha ocurrido un error Search: ", error?.localizedDescription ?? "error")
+                }
+                do {
+                    guard let json = data else { return }
+                    let movies = try JSONDecoder().decode(ResultsMovie.self, from: json)
+                    print("Data: ", movies)
+                    completionHandler(movies.results)
+                } catch {
+                    print("Ha ocurrido un error Search: \(error.localizedDescription)")
+                }
+            }.resume()
+        }
+        completionHandler(nil)
+    }
+    
+    /// - Parameters:
+    ///  - urlImage: String with the url of the image to download
     /// - Return:  information of the downloaded image of type Data
     
     func getImage(urlImage: String) -> Data {

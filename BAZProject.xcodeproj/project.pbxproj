@@ -19,6 +19,9 @@
 		C383356E28CA917400FCE0D5 /* code-review-rubric.md in Resources */ = {isa = PBXBuildFile; fileRef = C383356D28CA917400FCE0D5 /* code-review-rubric.md */; };
 		EE512FC12914463B007EB24A /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE512FC02914463B007EB24A /* DetailViewController.swift */; };
 		EE512FDB2914EE47007EB24A /* DetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = EE512FDA2914EE47007EB24A /* DetailViewController.xib */; };
+		EE512FDE29155862007EB24A /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE512FDD29155862007EB24A /* SearchViewController.swift */; };
+		EE51301C29157D1E007EB24A /* SearchCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = EE51301B29157D1D007EB24A /* SearchCell.xib */; };
+		EE51301E29157FCF007EB24A /* SearchCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE51301D29157FCF007EB24A /* SearchCell.swift */; };
 		EEEB2E18290A31B700E9C822 /* TrendingTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEEB2E17290A31B700E9C822 /* TrendingTableViewCell.swift */; };
 		EEEB2E1A290ADD5D00E9C822 /* TrendingTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = EEEB2E19290ADD5D00E9C822 /* TrendingTableViewCell.xib */; };
 /* End PBXBuildFile section */
@@ -38,6 +41,9 @@
 		C383356D28CA917400FCE0D5 /* code-review-rubric.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = "code-review-rubric.md"; sourceTree = "<group>"; };
 		EE512FC02914463B007EB24A /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
 		EE512FDA2914EE47007EB24A /* DetailViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DetailViewController.xib; sourceTree = "<group>"; };
+		EE512FDD29155862007EB24A /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
+		EE51301B29157D1D007EB24A /* SearchCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SearchCell.xib; sourceTree = "<group>"; };
+		EE51301D29157FCF007EB24A /* SearchCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchCell.swift; sourceTree = "<group>"; };
 		EEEB2E17290A31B700E9C822 /* TrendingTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrendingTableViewCell.swift; sourceTree = "<group>"; };
 		EEEB2E19290ADD5D00E9C822 /* TrendingTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TrendingTableViewCell.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -76,6 +82,7 @@
 			children = (
 				EE512FBA29143DE8007EB24A /* Detail */,
 				EE512FB629143D3B007EB24A /* Main */,
+				EE512FDC2915583F007EB24A /* Search */,
 				C30893AD28A2F42B004B1860 /* AppDelegate.swift */,
 				C30893AF28A2F42B004B1860 /* SceneDelegate.swift */,
 				C30893B828A2F42D004B1860 /* LaunchScreen.storyboard */,
@@ -155,6 +162,16 @@
 			path = ViewModel;
 			sourceTree = "<group>";
 		};
+		EE512FDC2915583F007EB24A /* Search */ = {
+			isa = PBXGroup;
+			children = (
+				EE512FDD29155862007EB24A /* SearchViewController.swift */,
+				EE51301B29157D1D007EB24A /* SearchCell.xib */,
+				EE51301D29157FCF007EB24A /* SearchCell.swift */,
+			);
+			path = Search;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -218,6 +235,7 @@
 				C30893B728A2F42D004B1860 /* Assets.xcassets in Resources */,
 				EE512FDB2914EE47007EB24A /* DetailViewController.xib in Resources */,
 				C383356E28CA917400FCE0D5 /* code-review-rubric.md in Resources */,
+				EE51301C29157D1E007EB24A /* SearchCell.xib in Resources */,
 				EEEB2E1A290ADD5D00E9C822 /* TrendingTableViewCell.xib in Resources */,
 				C30893B528A2F42B004B1860 /* Main.storyboard in Resources */,
 			);
@@ -232,7 +250,9 @@
 			files = (
 				C30893C428A2F845004B1860 /* TrendingViewController.swift in Sources */,
 				C30893AE28A2F42B004B1860 /* AppDelegate.swift in Sources */,
+				EE512FDE29155862007EB24A /* SearchViewController.swift in Sources */,
 				EEEB2E18290A31B700E9C822 /* TrendingTableViewCell.swift in Sources */,
+				EE51301E29157FCF007EB24A /* SearchCell.swift in Sources */,
 				C30893B028A2F42B004B1860 /* SceneDelegate.swift in Sources */,
 				C30893E228A425E1004B1860 /* MovieAPI.swift in Sources */,
 				C30893E328A425E1004B1860 /* Movie.swift in Sources */,
