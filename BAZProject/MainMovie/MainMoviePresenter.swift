@@ -10,7 +10,7 @@
 
 import UIKit
 
-class MainMoviePresenter: MainMoviePresenterProtocol {
+final class MainMoviePresenter: MainMoviePresenterProtocol {
 
     weak private var view: MainMovieViewProtocol?
     var interactor: MainMovieInteractorProtocol?
@@ -20,6 +20,10 @@ class MainMoviePresenter: MainMoviePresenterProtocol {
         self.view = interface
         self.interactor = interactor
         self.router = router
+    }
+
+    func getMovies(endPoint: EndPoint) -> MovieResponseResult {
+        return interactor?.getMovies(endPoint: endPoint) ?? MovieResponseResult(totalPages: 0, totalResults: 0, movies: [])
     }
 
 }

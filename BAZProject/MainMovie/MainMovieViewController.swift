@@ -14,22 +14,40 @@ class MainMovieViewController: UITabBarController, MainMovieViewProtocol {
 
 	var presenter: MainMoviePresenterProtocol?
 
-    private let endPoints: [EndPoint] = [TrendingEndPoint(), NowPlayingEndPoint(), PopularEndPoint(), TopRatedEndPoint(), UpcomingEndPoint()]
-    private let tabBarImages: [String] = ["chart.line.uptrend.xyaxis.circle.fill", "play.circle", "theatermasks", "star.fill", "arrowshape.turn.up.forward.circle"]
-    private let tabBarTitles: [String] = ["Trending", "Now Playing", "Popular", "Top Rated", "Upcoming"]
+    private var mainMovieTabs: [MainMovieTab] = []
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        setTabs()
+        configureSearchButton()
+    }
+
+    private func setTabs() {
+        self.viewControllers = mainMovieTabs.map { $0.uiViewController }
         guard let viewControllers = self.viewControllers else {
             return
         }
         for (index, controller) in viewControllers.enumerated() {
-            if let movieListViewController = controller as? MovieListViewController {
-                movieListViewController.endPoint = endPoints[index]
-                movieListViewController.tabBarItem.title = tabBarTitles[index]
-                movieListViewController.tabBarItem.image = UIImage(systemName: tabBarImages[index])
+            if index < mainMovieTabs.count {
+                controller.tabBarItem.title = mainMovieTabs[index].tabBarTitle
+                controller.tabBarItem.image = UIImage(systemName: mainMovieTabs[index].tabBarImages)
             }
         }
+    }
+
+    func configure(tabs: [MainMovieTab]) {
+        mainMovieTabs = tabs
+    }
+
+    func configureSearchButton() {
+        let image = UIImage(systemName: "magnifyingglass")
+        let searchButton = UIBarButtonItem(image: image, style: .plain, target: self, action: #selector(openSearchView))
+        self.navigationItem.rightBarButtonItem = searchButton
+    }
+
+    @objc func openSearchView() {
+        let searchView = SearchMovieRouter.createModule()
+        self.navigationController?.pushViewController(searchView, animated: true)
     }
 
 }

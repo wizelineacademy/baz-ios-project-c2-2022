@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19455" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19454"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Search Movie View Controller-->
+        <scene sceneID="s0d-6b-0kx">
+            <objects>
+                <viewController storyboardIdentifier="SearchMovie" id="Y6W-OH-hqX" customClass="SearchMovieViewController" customModule="BAZProject" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="5EZ-qb-Rvc">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Qfp-Ub-wfu">
+                                <rect key="frame" x="0.0" y="61" width="375" height="606"/>
+                                <subviews>
+                                    <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="qLL-69-2WG">
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="606"/>
+                                        <color key="backgroundColor" red="0.059405393899999999" green="0.085522271689999999" blue="0.13333889839999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                        <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="TVd-IH-nIe">
+                                            <size key="itemSize" width="128" height="128"/>
+                                            <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                            <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                            <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                        </collectionViewFlowLayout>
+                                        <cells/>
+                                    </collectionView>
+                                </subviews>
+                                <color key="backgroundColor" red="0.059405393899999999" green="0.085522271689999999" blue="0.13333889839999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                <constraints>
+                                    <constraint firstItem="qLL-69-2WG" firstAttribute="top" secondItem="Qfp-Ub-wfu" secondAttribute="top" id="8Ny-Pb-Dsb"/>
+                                    <constraint firstAttribute="bottom" secondItem="qLL-69-2WG" secondAttribute="bottom" id="98k-nv-AVw"/>
+                                    <constraint firstAttribute="trailing" secondItem="qLL-69-2WG" secondAttribute="trailing" id="CmO-ZZ-k7X"/>
+                                    <constraint firstItem="qLL-69-2WG" firstAttribute="leading" secondItem="Qfp-Ub-wfu" secondAttribute="leading" id="N1N-JZ-FOb"/>
+                                </constraints>
+                            </view>
+                            <searchBar contentMode="redraw" barStyle="black" placeholder="Busca una película" translatesAutoresizingMaskIntoConstraints="NO" id="aG6-rO-Wz3">
+                                <rect key="frame" x="0.0" y="5" width="375" height="51"/>
+                                <color key="barTintColor" red="0.059405393899999999" green="0.085522271689999999" blue="0.13333889839999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </searchBar>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
+                        <color key="backgroundColor" red="0.13374167679999999" green="0.15629059079999999" blue="0.19608345629999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                        <constraints>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="Qfp-Ub-wfu" secondAttribute="trailing" id="Tsb-88-V2p"/>
+                            <constraint firstItem="Qfp-Ub-wfu" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="Umr-em-VYa"/>
+                            <constraint firstItem="aG6-rO-Wz3" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" constant="5" id="fU5-6z-bgl"/>
+                            <constraint firstItem="aG6-rO-Wz3" firstAttribute="trailing" secondItem="vDu-zF-Fre" secondAttribute="trailing" id="nMO-do-OAv"/>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="bottom" secondItem="Qfp-Ub-wfu" secondAttribute="bottom" id="sRv-6B-gNn"/>
+                            <constraint firstItem="aG6-rO-Wz3" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="tUX-r1-LfR"/>
+                            <constraint firstItem="Qfp-Ub-wfu" firstAttribute="top" secondItem="aG6-rO-Wz3" secondAttribute="bottom" constant="5" id="wAe-s3-Q2Z"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="movieCollectionView" destination="qLL-69-2WG" id="F3G-P7-iRS"/>
+                        <outlet property="txtSearch" destination="aG6-rO-Wz3" id="Zrh-Il-q5m"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="97" y="104"/>
+        </scene>
+    </scenes>
+</document>

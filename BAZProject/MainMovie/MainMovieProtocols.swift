@@ -11,22 +11,20 @@
 import Foundation
 
 // MARK: Wireframe -
-protocol MainMovieWireframeProtocol: AnyObject {
+protocol MainMovieWireframeProtocol: AnyObject {}
 
-}
 // MARK: Presenter -
 protocol MainMoviePresenterProtocol: AnyObject {
-
+    func getMovies(endPoint: EndPoint) -> MovieResponseResult
 }
 
 // MARK: Interactor -
 protocol MainMovieInteractorProtocol: AnyObject {
-
-  var presenter: MainMoviePresenterProtocol? { get set }
+    var presenter: MainMoviePresenterProtocol? { get set }
+    func getMovies(endPoint: EndPoint) -> MovieResponseResult
 }
 
 // MARK: View -
 protocol MainMovieViewProtocol: AnyObject {
-
-  var presenter: MainMoviePresenterProtocol? { get set }
+    var presenter: MainMoviePresenterProtocol? { get set }
 }

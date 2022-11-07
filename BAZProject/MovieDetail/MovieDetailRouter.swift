@@ -14,7 +14,7 @@ class MovieDetailRouter: MovieDetailWireframeProtocol {
 
     weak var viewController: UIViewController?
 
-    static func createModule() -> UIViewController {
+    static func createModule(movie: MovieModel) -> UIViewController {
         // Change to get view from storyboard if not using progammatic UI
         let view = MovieDetailViewController(nibName: nil, bundle: Bundle(for: MovieDetailRouter.self))
         let interactor = MovieDetailInteractor()
@@ -22,6 +22,7 @@ class MovieDetailRouter: MovieDetailWireframeProtocol {
         let presenter = MovieDetailPresenter(interface: view, interactor: interactor, router: router)
 
         view.presenter = presenter
+        view.movie = movie
         interactor.presenter = presenter
         router.viewController = view
 

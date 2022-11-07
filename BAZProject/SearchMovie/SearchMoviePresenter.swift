@@ -22,4 +22,7 @@ class SearchMoviePresenter: SearchMoviePresenterProtocol {
         self.router = router
     }
 
+    func getMovies(endPoint: EndPoint) -> MovieResponseResult {
+        return interactor?.getMovies(endPoint: endPoint) ?? MovieResponseResult(totalPages: 0, totalResults: 0, movies: [])
+    }
 }

@@ -6,22 +6,53 @@
 
 import UIKit
 
-class MovieListViewController: UITableViewController {
+class MovieListViewController: UITableViewController, MainMovieViewProtocol {
 
-    private var movies: [Movie] = []
+    var presenter: MainMoviePresenterProtocol?
+    private var movies: [MovieModel] = []
     var endPoint: EndPoint?
+    var totalResults: Int = 0
+    var totalPages: Int = 0
+    private lazy var loaderMoreView: UIView = {
+        let loaderView = UIActivityIndicatorView(style: UIActivityIndicatorView.Style.large)
+        loaderView.color = UIColor.gray
+        loaderView.startAnimating()
+        return loaderView
+    }()
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        let movieApi = MovieAPI()
-
+        tableView.register(MovieListTableViewCell.nib(), forCellReuseIdentifier: "MovieListTableViewCell")
         guard let endPoint = endPoint else {
             return
         }
-        movies = movieApi.getMovies(endPoint: endPoint)
+        if let result = presenter?.getMovies(endPoint: endPoint) {
+            movies = result.movies
+            totalPages = result.totalPages
+            totalResults = result.totalResults
+        }
         tableView.reloadData()
     }
 
+    func addData() {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 10) {
+            guard let endPoint = self.endPoint, let url = endPoint.url else {
+                return
+            }
+            let components = URLComponents(url: url, resolvingAgainstBaseURL: false)
+            self.movies += self.presenter?.getMovies(endPoint: endPoint).movies ?? []
+            self.tableView.reloadData()
+        }
+    }
+
+    func setUpLoaderView(toShow: Bool) {
+        if toShow {
+            self.tableView.tableFooterView?.isHidden = false
+            self.tableView.tableFooterView = self.loaderMoreView
+        } else {
+            self.tableView.tableFooterView = UIView()
+        }
+    }
 }
 
 // MARK: - TableView's DataSource
@@ -33,7 +64,11 @@ extension MovieListViewController {
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        tableView.dequeueReusableCell(withIdentifier: "MovieListTableViewCell")!
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "MovieListTableViewCell", for: indexPath) as? MovieListTableViewCell else {
+            return UITableViewCell()
+        }
+        cell.configureCell(movie: movies[indexPath.row])
+        return cell
     }
 
 }
@@ -42,25 +77,19 @@ extension MovieListViewController {
 
 extension MovieListViewController {
 
-    override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        var config = UIListContentConfiguration.cell()
-        config.text = movies[indexPath.row].title ?? movies[indexPath.row].name
-        let posterPath = movies[indexPath.row].posterPath ?? ""
-        if let url = URL(string: "https://image.tmdb.org/t/p/w500\(posterPath)") {
-            if let imageData = try? Data(contentsOf: url) {
-                config.image = UIImage(data: imageData)
-            } else {
-                config.image = UIImage(named: "poster")
-            }
-        } else {
-            config.image = UIImage(named: "poster")
-        }
-        cell.contentConfiguration = config
-    }
+//    override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+//        let currentCount = self.movies.count
+//        if currentCount < totalResults && indexPath.row == (currentCount-1) {
+//            self.addData()
+//            self.setUpLoaderView(toShow: true)
+//        } else {
+//            self.setUpLoaderView(toShow: false)
+//        }
+//    }
 
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let detailView = MovieDetailRouter.createModule()
-        self.present(detailView, animated: true, completion: nil)
+        let detailView = MovieDetailRouter.createModule(movie: movies[indexPath.row])
+        self.navigationController?.pushViewController(detailView, animated: true)
     }
 
 }
