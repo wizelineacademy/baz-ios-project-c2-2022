@@ -41,6 +41,7 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
         searchMovies = api.getSearchMovies()
         
         tableView.register(UINib(nibName: "MainTableViewCell", bundle: nil), forCellReuseIdentifier: "cell")
+        searchCollection.register(UINib(nibName: "SearchCell", bundle: nil), forCellWithReuseIdentifier: "searchCell")
     }
     
     // MARK: - TableView Methods
