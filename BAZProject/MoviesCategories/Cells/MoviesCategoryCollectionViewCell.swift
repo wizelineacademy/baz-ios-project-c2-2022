@@ -13,7 +13,8 @@ final class MoviesCategoryCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var titleMovie: UILabel!
     
     
-    let identifier = "cellCollectionMovie"
+    static let identifier = "cellCollectionMovie"
+    static let nameCell = "MoviesCategoryCollectionViewCell"
     let apiMovie = MovieAPI()
     
     override func awakeFromNib() {

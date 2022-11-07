@@ -9,7 +9,6 @@ import UIKit
 
 final class MoviesCategoriesViewController: UIViewController {
     
-    private let cellIdentifier = "cellCollectionMovie"
     private let itemsPerRow: CGFloat = 2.0
     private var movies: [Movie] = []
     private let movieApi = MovieAPI()
@@ -21,7 +20,7 @@ final class MoviesCategoriesViewController: UIViewController {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
-        movies = movieApi.getMoviesByCategory(.nowPlaying)
+        movies = movieApi.getMovies(.nowPlaying)
         collectionMovies.reloadData()
     }
     
@@ -30,29 +29,30 @@ final class MoviesCategoriesViewController: UIViewController {
         setupElements()
     }
     
-    func setupElements() {
+    private func setupElements() {
         self.pickerSelector.dataSource = self
         self.pickerSelector.delegate = self
         self.collectionMovies.delegate = self
         self.collectionMovies.dataSource = self
-        self.collectionMovies.register(UINib(nibName: "MoviesCategoryCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: cellIdentifier)
+        self.collectionMovies.register(UINib(nibName: MoviesCategoryCollectionViewCell.nameCell, bundle: nil), forCellWithReuseIdentifier: MoviesCategoryCollectionViewCell.identifier)
     }
     
-    func changePickerSelected(_ value: Int) {
+    private func changePickerSelected(_ value: Int) {
         let activityIndicator = UIActivityIndicatorView(style: .medium)
         view.addSubview(activityIndicator)
         activityIndicator.frame = view.bounds
         activityIndicator.startAnimating()
         movies.removeAll()
-        movies = movieApi.getMoviesByCategory(CategoryFilterMovie(rawValue: value) ?? .nowPlaying)
+        movies = movieApi.getMovies(CategoryFilterMovie(rawValue: value) ?? .nowPlaying)
         DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(2)){
             activityIndicator.stopAnimating()
             self.collectionMovies.reloadData()
         }
     }
     
-    @IBAction func tapSearch() {
-        let vc = SearchMovieViewController()
+    @IBAction private func tapSearch() {
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let vc = storyboard.instantiateViewController(withIdentifier: "SearchCollection")
         vc.modalPresentationStyle = .fullScreen
         self.present(vc, animated: true)
     }
@@ -65,7 +65,9 @@ extension MoviesCategoriesViewController: UICollectionViewDataSource {
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionMovies.dequeueReusableCell(withReuseIdentifier: cellIdentifier, for: indexPath) as! MoviesCategoryCollectionViewCell
+        guard let cell = collectionMovies.dequeueReusableCell(withReuseIdentifier: MoviesCategoryCollectionViewCell.identifier, for: indexPath) as? MoviesCategoryCollectionViewCell else {
+            return UICollectionViewCell()
+        }
         cell.setUpCell(movies[indexPath.row])
         return cell
     }

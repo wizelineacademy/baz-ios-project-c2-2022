@@ -39,7 +39,7 @@ final class MovieAPI {
     /// - Parameter category: category by enum
     /// - Returns: Movies Array
     /// - throws: if any basic condition dont success, this return empty array
-    func getMoviesByCategory(_ category: CategoryFilterMovie) -> [Movie] {
+    func getMovies(_ category: CategoryFilterMovie) -> [Movie] {
         let urlStr = urlBase + "/movie/\(category.codeUrl)?api_key=\(apiKey)&language=es&region=MX&page=1"
         guard let url = URL(string: urlStr),
         let data = try? Data(contentsOf: url),

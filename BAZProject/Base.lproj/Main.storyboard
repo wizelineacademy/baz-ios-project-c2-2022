@@ -168,7 +168,7 @@
         <!--Search-->
         <scene sceneID="A8w-hu-mzG">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="45j-op-bca" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="SearchCollection" automaticallyAdjustsScrollViewInsets="NO" id="45j-op-bca" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Search" image="magnifyingglass" catalog="system" id="nPf-3a-Ie7"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="xya-GL-QJb">
