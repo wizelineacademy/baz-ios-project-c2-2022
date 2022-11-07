@@ -34,6 +34,7 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
         searchCollection.dataSource = self
         
         navigationItem.searchController = searchController
+        navigationItem.title = "FILMS"
         searchController.searchResultsUpdater = self
         
         let api = MovieAPI()
