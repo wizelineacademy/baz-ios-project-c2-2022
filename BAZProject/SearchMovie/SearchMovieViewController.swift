@@ -9,14 +9,18 @@ import UIKit
 
 final class SearchMovieViewController: UICollectionViewController {
     
-    let reuseIdentifier = "movieCollection"
-    let itemsPerRow: CGFloat = 2.0
-    let sectionInsets = UIEdgeInsets(top: 50.0, left: 20.0, bottom: 50.0, right: 20.0)
+    private let itemsPerRow: CGFloat = 2.0
+    private let sectionInsets = UIEdgeInsets(top: 50.0, left: 20.0, bottom: 50.0, right: 20.0)
     private var movies: [Movie] = []
     private let movieApi = MovieAPI()
     
     override func viewDidLoad() {
         super.viewDidLoad()
+    }
+    
+    private func showMovieDetails(_ Element: Movie) {
+        let vc = DetailsMovieRouter.createModuleDetailsMovie(movie: Element)
+        self.present(vc, animated: true)
     }
 }
 
@@ -27,18 +31,15 @@ extension SearchMovieViewController {
     }
 
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as? MoviesCollectionViewCell else {
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MoviesCollectionViewCell.identifier, for: indexPath) as? MoviesCollectionViewCell else {
             return UICollectionViewCell()
         }
-        let posterPath = movies[indexPath.row].posterPath ?? "poster"
-        cell.titleMovie.text = movies[indexPath.row].title
-        cell.imageMovie.image = movieApi.getImage(with: posterPath)
+        cell.setUpCell(movies[indexPath.row])
         return cell
     }
     
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let vc = DetailsMovieRouter.createModuleDetailsMovie(movie: movies[indexPath.row])
-        self.present(vc, animated: true)
+        showMovieDetails(movies[indexPath.row])
     }
     
     
