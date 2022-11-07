@@ -15,24 +15,29 @@ class MovieAPI {
     var allMovies: [MoviesWithCategory] = []
     
     func getMovies() -> [MoviesWithCategory] {
-        
         for endPoint in MovieEndpoint.allCases {
             setUrl(endPoint: endPoint)
             guard let url = URL(string: endPointUrl + apiKey),
                   let data = try? Data(contentsOf: url)
-            else {
-                return []
-            }
-            
+            else { return [] }
             if let api = try? JSONDecoder().decode(API.self, from: data) {
                 movies = api.results
             }
-            
             let movieSection = MoviesWithCategory(genre: endPoint.rawValue, movies: movies)
             allMovies.append(movieSection)
         }
-        
         return allMovies
+    }
+    
+    func getSearchMovies() -> [Movie] {
+        guard let url = URL(string: "https://api.themoviedb.org/3/movie/upcoming?api_key=" + apiKey),
+              let data = try? Data(contentsOf: url)
+        else { return [] }
+        var searchMovies: [Movie] = []
+        if let api = try? JSONDecoder().decode(API.self, from: data) {
+            searchMovies = api.results
+        }
+        return searchMovies
     }
     
     func setUrl(endPoint: MovieEndpoint) {
