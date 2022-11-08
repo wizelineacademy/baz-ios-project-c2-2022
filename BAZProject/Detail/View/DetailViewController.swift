@@ -21,7 +21,7 @@ class DetailViewController: UIViewController, GenericView {
     let detailViewModel = DetailModelView()
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.navigationController?.title = "Detail"
+        self.title = "Detail"
         configurateView()
     }
     
