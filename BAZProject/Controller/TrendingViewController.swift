@@ -13,6 +13,7 @@ class TrendingViewController: UITableViewController {
     
     //MARK: Properties
     let movieAPI = MovieAPI()
+    var movieSelected: InfoMovies?
     var movies: [InfoMovies] = [] {
         didSet {
             DispatchQueue.main.async {
@@ -34,17 +35,22 @@ class TrendingViewController: UITableViewController {
     }
     
     private func getMovies() {
-            self.movieAPI.getMovies { result in
-                switch result {
-                case .success(let movies):
-                    self.movies = movies
-                case .failure(let error):
-                    debugPrint("Error\(error)")
-                    self.basicAlert(title: "Hubo algún problema", message: "\(error)")
-                }
-        
+        self.movieAPI.getMovies { result in
+            switch result {
+            case .success(let movies):
+                self.movies = movies
+            case .failure(let error):
+                debugPrint("Error\(error)")
+                self.basicAlert(title: "Hubo algún problema", message: "\(error)")
             }
-       
+        }
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "detailsMovies" {
+            let detailMovies = segue.destination as! DetailMovieViewController
+            detailMovies.movie = movieSelected!
+        }
     }
 }
 
@@ -64,6 +70,12 @@ extension TrendingViewController {
         cell.showDetailsMovies(movie: movies[indexPath.row])
         tblMovies.separatorColor = .none
         return cell
+    }
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        movieSelected = movies[indexPath.row]
+        guard movieSelected != nil else { return }
+        performSegue(withIdentifier: "detailsMovies", sender: nil)
     }
 }
 
