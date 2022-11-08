@@ -26,6 +26,11 @@ class SearchViewController: UIViewController, PrincipalView {
         refreshData()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.tabBarController?.tabBar.isHidden = false
+    }
+    
     func configurateView() {
         searchViewModel.movieApiDelegate = MovieAPI()
         searchViewModel.getInfo(.Search(query: ""))

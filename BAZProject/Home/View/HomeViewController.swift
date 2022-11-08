@@ -35,6 +35,11 @@ class HomeViewController: UIViewController, PrincipalView {
         refreshData()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.tabBarController?.tabBar.isHidden = false
+    }
+    
     @IBAction func showInfo(_ sender: Any) {
         self.homeViewModel.changeInfoByIndex(segmentControl.selectedSegmentIndex)
     }

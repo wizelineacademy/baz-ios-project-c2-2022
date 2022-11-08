@@ -22,6 +22,7 @@ class DetailViewController: UIViewController, GenericView {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.title = "Detail"
+        self.tabBarController?.tabBar.isHidden = true
         configurateView()
     }
     
