@@ -64,21 +64,5 @@ class MovieAPI: MovieApiDelegate {
     func showError(_ error: APIError) {
         print("El error es: \(error)")
     }
-    
-    func getInfoBaseMovies(_ jsonInfo: [MovieResults]) -> [Movie] {
-        var movies: [Movie] = []
-        for result in jsonInfo {
-            if let id = result.id,
-               let title = result.title,
-               let posterPath = result.poster_path,
-               let originalTitle = result.original_title,
-               let voteAverage = result.vote_average,
-               let overview = result.overview,
-               let releaseDate = result.release_date,
-               let backdropPath = result.backdrop_path{
-                movies.append(Movie(id: id, title: title, posterPath: posterPath, originalTitle: originalTitle, voteAverage: voteAverage, overview: overview, releaseDate: releaseDate, backdropPath: backdropPath))}
-        }
-        return movies
-    }
 
 }
