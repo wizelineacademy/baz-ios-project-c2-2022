@@ -21,7 +21,6 @@ class MoviesCollectionViewCell: UICollectionViewCell {
     }
     
     public func configureCollection(with movie:Movie){
-        print(movie)
         if let posterPath = movie.posterPath{
             imgPosterPath.setMovieImage(nameImage: posterPath)
         }

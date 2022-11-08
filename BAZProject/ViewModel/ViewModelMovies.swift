@@ -28,5 +28,16 @@ class ViewModelMovies  {
         }
     }
     
+    func searchMovies(query: String){
+        MoviesService.searchMovies(query: query){ result in
+                                   switch result{
+                                   case let .success(movies):
+                                       self.movies = movies
+                                   case let .failure(error):
+                                       self.movies = []
+                                   }
+        }
+    }
+    
     
 }

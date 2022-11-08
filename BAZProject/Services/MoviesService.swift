@@ -59,7 +59,7 @@ import Foundation
             case .keyword:
                 return "\(baseUrl)\(path)"
             case .search:
-                return "\(baseUrl)\(path)"
+                return "\(baseUrl)\(path)&query="
             case .reviews:
                 return "\(baseUrl)\(path)"
             case .similar:
@@ -75,13 +75,11 @@ import Foundation
                 completion(.failure(CustomError.noConnection))
                 return
             }
-
             var request = URLRequest(url: url)
             request.httpMethod = "GET"
-
             URLSession.shared.dataTask(with: request) { data, _, error in
                 if let error = error {
-                    print(#function, "🧨 Request: \(request)\nError: \(error)")
+                    debugPrint(#function, "🧨 Request: \(request)\nError: \(error)")
                     completion(.failure(error))
                     return
                 }
@@ -95,9 +93,38 @@ import Foundation
                     let movies = try JSONDecoder().decode(MoviesResponse.self, from: data)
                     completion(.success(movies.results))
                 } catch let error {
-                    print(#function, "🧨 Request: \(request)\nError: \(error)")
+                    debugPrint(#function, "🧨 Request: \(request)\nError: \(error)")
                     completion(.failure(error))
                 }
             }.resume()
         }
+     
+     static func searchMovies(query: String, completion: @escaping (Result<[Movie], Error>) -> Void){
+         guard Reachability.isConnectedToNetwork(), let url = URL(string: "\(Endpoint.search.url)\(query)") else {
+             completion(.failure(CustomError.noConnection))
+             return
+         }
+         var request = URLRequest(url: url)
+         request.httpMethod = "GET"
+         URLSession.shared.dataTask(with: request) { data, _, error in
+             if let error = error {
+                 debugPrint(#function, "🧨 Request: \(request)\nError: \(error)")
+                 completion(.failure(error))
+                 return
+             }
+
+             guard let data = data else {
+                 completion(.failure(CustomError.noData))
+                 return
+             }
+
+             do {
+                 let movies = try JSONDecoder().decode(MoviesResponse.self, from: data)
+                 completion(.success(movies.results))
+             } catch let error {
+                 debugPrint(#function, "🧨 Request: \(request)\nError: \(error)")
+                 completion(.failure(error))
+             }
+         }.resume()
+     }
 }
