@@ -61,7 +61,7 @@ class DetailMovieViewController: UIViewController {
     }
     
     private func getMoviesSimilar() {
-        self.movieAPI.getMoreMovies(section: MoreMovies.similar.rawValue, idMovie: idMovie, completion: { result in
+        self.movieAPI.getMoreMovies(sectionMovie: MoreMovies.similar.rawValue, idMovie: idMovie, completion: { result in
             switch result {
             case .success(let moviesSimilar):
                 self.arraySimilar = moviesSimilar
@@ -73,7 +73,7 @@ class DetailMovieViewController: UIViewController {
     }
     
     private func getMoviesRecommended() {
-        self.movieAPI.getMoreMovies(section: MoreMovies.recommended.rawValue, idMovie: idMovie, completion: { result in
+        self.movieAPI.getMoreMovies(sectionMovie: MoreMovies.recommended.rawValue, idMovie: idMovie, completion: { result in
             switch result {
             case .success(let moviesRecommended):
                 self.arrayRecommended = moviesRecommended
