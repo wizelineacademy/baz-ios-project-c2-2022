@@ -34,6 +34,8 @@ extension DasboardViewController: UICollectionViewDelegate {
            let url = moviePresenter.getUrlImgeMovie(indexPath: indexPath.row, size: .middle) {
             detailController.movie = movie
             detailController.urlImg = url
+            NotificationCenter.default.post(name: NSNotification.Name("Movies.save"),
+                                            object: nil, userInfo: ["movie": movie])
         }
         self.navigationController?.pushViewController(detailController, animated: true)
     }

@@ -10,10 +10,12 @@ import UIKit
 
 final class MovieFilterViewController: UIViewController {
     @IBOutlet weak var categoriesTableView: UITableView!
+    @IBOutlet weak var mainContainerView: UIView!
     weak var filterDelegate: MovieFilterDelegate?
     // MARK: - Override viewDidLoad
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.mainContainerView.layer.cornerRadius = 20
     }
     /// Close view controller presented
     ///

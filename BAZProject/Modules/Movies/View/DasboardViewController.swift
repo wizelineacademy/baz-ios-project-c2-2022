@@ -33,16 +33,21 @@ final class DasboardViewController: UIViewController {
     // MARK: - Start
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.title = NSLocalizedString("titleHome", comment: "title controller")
+        self.title = "titleHome".localized
         self.registerCell()
         self.moviePresenter.setMovieDelegate(movieViewDelegate: self)
         self.moviePresenter.getMoviesByCategory(category: .trending)
+        self.moviePresenter.startNotification()
         self.setConfigSearchBar()
+    }
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.moviePresenter.checkFavorites()
     }
     /// Config some properties of searchBar
     private func setConfigSearchBar() {
         self.searchBar.delegate = self
-        self.searchBar.placeholder = "Encuentra tu película"
+        self.searchBar.placeholder = "placeHolder".localized
         self.resultSearch.isHidden = true
     }
     /// Register the custom cell that is used in the table
@@ -68,6 +73,12 @@ final class DasboardViewController: UIViewController {
                                            animated: true,
                                            completion: nil)
     }
+    /// Add action to Trash button showed in cell when the category is Favorites
+    ///
+    /// - Parameter sender: Contains a Button object
+    @objc func removeMovie(sender: UIButton) {
+        moviePresenter.removeMovie(index: sender.tag)
+    }
 }
 
 // MARK: - TableView's DataSource
@@ -83,8 +94,11 @@ extension DasboardViewController: UITableViewDataSource {
                                                              for: indexPath) as? MovieTableViewCell else {
             return UITableViewCell()
         }
+        cell.trashBtn.tag = indexPath.row
+        cell.trashBtn.addTarget(self, action: #selector(removeMovie(sender:)), for: .touchUpInside)
         cell.setUpMovie(movie: moviePresenter.getMovie(indexPath: indexPath.row, type: .table),
-                        baseUrl: moviePresenter.getUrlImgeMovie(indexPath: indexPath.row, size: .small))
+                        baseUrl: moviePresenter.getUrlImgeMovie(indexPath: indexPath.row, size: .small),
+                        showBin: moviePresenter.binIsHidden())
         cell.showMovie()
         return cell
     }
@@ -99,6 +113,8 @@ extension DasboardViewController: UITableViewDelegate {
            let url = moviePresenter.getUrlImgeMovie(indexPath: indexPath.row, size: .big) {
             detailController.movie = movie
             detailController.urlImg = url
+            NotificationCenter.default.post(name: NSNotification.Name("Movies.save"),
+                                            object: nil, userInfo: ["movie": movie])
         }
         self.navigationController?.pushViewController(detailController, animated: true)
     }
@@ -125,20 +141,16 @@ extension DasboardViewController: UISearchBarDelegate {
 extension DasboardViewController: MovieViewDelegate {
     /// Show movies over table moviewTableView
     func showMovies() {
-        if moviePresenter.getTotalMovies() > 0 {
             DispatchQueue.main.async {
                 self.moviewTableView.reloadData()
                 self.moviewTableView.isHidden = false
             }
-        }
     }
     /// Show movies over collection resultSearch
     func showResults() {
-        if moviePresenter.getSearchedMovies() > 0 {
-            DispatchQueue.main.async {
-                self.resultSearch.reloadData()
-                self.resultSearch.isHidden = false
-            }
+        DispatchQueue.main.async {
+            self.resultSearch.reloadData()
+            self.resultSearch.isHidden = false
         }
     }
 }

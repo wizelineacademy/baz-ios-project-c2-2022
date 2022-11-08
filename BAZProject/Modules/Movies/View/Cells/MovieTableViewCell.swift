@@ -12,6 +12,7 @@ class MovieTableViewCell: UITableViewCell {
     @IBOutlet weak var movieImageView: UIImageView!
     @IBOutlet weak var titleLbl: UILabel!
     @IBOutlet weak var subTitleLbl: UILabel!
+    @IBOutlet weak var trashBtn: UIButton!
     private var movie: Movie?
     private var baseUrl: String?
      /// Assigns value to the visual elements of the CollectionViewCell from an object of type Movie.
@@ -19,11 +20,12 @@ class MovieTableViewCell: UITableViewCell {
      /// - Parameters:
      /// - movie: Object of type Movie contains the values to show in the view.
      /// - baseUrl:  String with url of image
-    func setUpMovie(movie: Movie?, baseUrl: String?) {
+    func setUpMovie(movie: Movie?, baseUrl: String?, showBin: Bool = false) {
         if let movie = movie,
            let baseUrl = baseUrl {
             self.movie = movie
             self.baseUrl = baseUrl
+            self.trashBtn.isHidden = !showBin
         } else {
             print("Parameters Incomplete")
         }
