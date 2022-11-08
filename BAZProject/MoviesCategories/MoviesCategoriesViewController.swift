@@ -12,36 +12,37 @@ final class MoviesCategoriesViewController: UIViewController {
     private let itemsPerRow: CGFloat = 2.0
     private var movies: [Movie] = []
     private let movieApi = MovieAPI()
-    private var activityIndicator: UIActivityIndicatorView!
-
+    
     @IBOutlet weak var btnSearch: UIButton!
     @IBOutlet weak var pickerSelector: UIPickerView!
     @IBOutlet weak var collectionMovies: UICollectionView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        activityIndicator = self.createActivityIndicator()
-        activityIndicator.startAnimating()
+        let indicatorAnimating = indicator
+        indicatorAnimating.startAnimating()
         movieApi.getMovies(by: .trending, completion: { result in
             switch result{
             case .success(let movies):
                 self.movies = movies.movies
                 DispatchQueue.main.async {
-                    self.activityIndicator.stopAnimating()
                     if self.movies.count > 0 {
                         self.collectionMovies.reloadData()
+                        indicatorAnimating.stopAnimating()
                     } else {
                         self.showError(with: .arrayEmpty)
+                        indicatorAnimating.stopAnimating()
                     }
                 }
             case .failure(let error):
                 DispatchQueue.main.async {
-                    self.activityIndicator.stopAnimating()
+                    indicatorAnimating.stopAnimating()
                     guard let error = error as? APIError else {return}
                     self.showError(with: error)
                 }
             }
         })
+        NotificationCenter.default.addObserver(self, selector: #selector(moviesCount(with:)), name: NSNotification.Name(rawValue: "contadorToVCCategory"), object: nil)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -61,24 +62,30 @@ final class MoviesCategoriesViewController: UIViewController {
     }
     
     private func changePickerSelected(_ value: Int) {
-        activityIndicator.startAnimating()
+        let indicatorAnimating = indicator
+        indicatorAnimating.startAnimating()
         movies.removeAll()
         movieApi.getMovies(by: CategoryFilterMovie(rawValue: value) ?? .nowPlaying) { resultado in
             switch resultado {
             case .success(let result):
                 DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(2)){
-                    self.activityIndicator.stopAnimating()
                     self.movies = result.movies
                     self.collectionMovies.reloadData()
+                    indicatorAnimating.stopAnimating()
                 }
             case .failure(let error):
                 DispatchQueue.main.async {
-                    self.activityIndicator.stopAnimating()
                     guard let error = error as? APIError else {return}
                     self.showError(with: error)
+                    indicatorAnimating.stopAnimating()
                 }
             }
         }
+    }
+    
+    @objc private func moviesCount(with notification: Notification) {
+        guard let userInfo = notification.object as? [String:Any ] else { return }
+        print(userInfo)
     }
     
     @IBAction private func tapSearch() {
@@ -102,7 +109,7 @@ extension MoviesCategoriesViewController: UICollectionViewDataSource {
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let vc = DetailsMovieRouter.createModuleDetailsMovie(movie: movies[indexPath.row])
+        let vc = DetailsMovieRouter.createModuleDetailsMovie(with: movies[indexPath.row], from: .moviesCategory)
         self.present(vc, animated: true)
     }
     

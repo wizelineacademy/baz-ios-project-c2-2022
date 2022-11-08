@@ -13,16 +13,20 @@ final class SearchMovieViewController: UICollectionViewController, Storyboarded 
     private let sectionInsets = UIEdgeInsets(top: 50.0, left: 20.0, bottom: 50.0, right: 20.0)
     private var movies: [Movie] = []
     private let movieApi = MovieAPI()
-    private var activityIndicator: UIActivityIndicatorView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        activityIndicator = self.createActivityIndicator()
+        NotificationCenter.default.addObserver(self, selector: #selector(moviesCount(with:)), name: NSNotification.Name(rawValue: "contadorToVCSearch"), object: nil)
     }
     
     private func showMovieDetails(_ Element: Movie) {
-        let vc = DetailsMovieRouter.createModuleDetailsMovie(movie: Element)
+        let vc = DetailsMovieRouter.createModuleDetailsMovie(with: Element, from: .searchMovie)
         self.present(vc, animated: true)
+    }
+    
+    @objc private func moviesCount(with notification: Notification) {
+        guard let userInfo = notification.object as? [String:Any ]else { return }
+        print(userInfo)
     }
 }
 
@@ -61,13 +65,12 @@ extension SearchMovieViewController: UITextFieldDelegate {
         guard let text = textField.text else {
             return true
         }
-        activityIndicator = self.createActivityIndicator()
-        activityIndicator.startAnimating()
+        let indicatorAnimating = indicator
+        indicatorAnimating.startAnimating()
         movieApi.searchMovie(with: text) { resultado in
             switch resultado {
             case .success(let result):
                 DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(3)){
-                    self.activityIndicator.stopAnimating()
                     self.movies = result.movies
                     if self.movies.isEmpty {
                         self.showError(with: .arrayEmpty)
@@ -75,10 +78,11 @@ extension SearchMovieViewController: UITextFieldDelegate {
                     self.collectionView.reloadData()
                     textField.text = nil
                     textField.resignFirstResponder()
+                    indicatorAnimating.stopAnimating()
                 }
             case .failure(let error):
-                self.activityIndicator.stopAnimating()
                 DispatchQueue.main.async {
+                    indicatorAnimating.stopAnimating()
                     guard let error = error as? APIError else {return}
                     self.showError(with: error)
                 }

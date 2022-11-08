@@ -8,6 +8,10 @@
 import Foundation
 import UIKit
 
+protocol IndicatorActivity {
+    var indicator: UIActivityIndicatorView { get }
+}
+
 extension UIPickerView {
     
     func customPicker() {
@@ -36,9 +40,13 @@ extension UIButton {
     }
 }
 
-extension UIViewController {
-    
-    static let activity = UIActivityIndicatorView()
+extension UIViewController: IndicatorActivity {
+    var indicator: UIActivityIndicatorView {
+        let activityIndicator = UIActivityIndicatorView(style: .large)
+        view.addSubview(activityIndicator)
+        activityIndicator.frame = view.bounds
+        return activityIndicator
+    }
     
     func showError(with error: APIError) {
         let dialogMessage = UIAlertController(title: error.titleError, message: error.descriptionError, preferredStyle: .alert)
@@ -48,12 +56,11 @@ extension UIViewController {
         dialogMessage.addAction(ok)
         self.present(dialogMessage, animated: true)
     }
-    
-    func createActivityIndicator() -> UIActivityIndicatorView {
-        let activityIndicator = UIActivityIndicatorView(style: .large)
-        view.addSubview(activityIndicator)
-        activityIndicator.frame = view.bounds
-        return activityIndicator
+}
+
+extension Notification.Name {
+    static var notificationName: Notification.Name {
+        return .init(rawValue: "contador")
     }
 }
 

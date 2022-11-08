@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1B0DEE44291B0B6800A2E52A /* MovieResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B0DEE43291B0B6800A2E52A /* MovieResponse.swift */; };
 		1B18E2DC290834740097673D /* DetailsMovieViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B18E2DA290834740097673D /* DetailsMovieViewController.swift */; };
 		1B18E2DD290834740097673D /* DetailsMovieViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1B18E2DB290834740097673D /* DetailsMovieViewController.xib */; };
 		1B18E2DF290837500097673D /* DetailsMovieProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B18E2DE290837500097673D /* DetailsMovieProtocols.swift */; };
@@ -35,6 +36,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		1B0DEE43291B0B6800A2E52A /* MovieResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieResponse.swift; sourceTree = "<group>"; };
 		1B18E2DA290834740097673D /* DetailsMovieViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsMovieViewController.swift; sourceTree = "<group>"; };
 		1B18E2DB290834740097673D /* DetailsMovieViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DetailsMovieViewController.xib; sourceTree = "<group>"; };
 		1B18E2DE290837500097673D /* DetailsMovieProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsMovieProtocols.swift; sourceTree = "<group>"; };
@@ -168,6 +170,7 @@
 				C30893B828A2F42D004B1860 /* LaunchScreen.storyboard */,
 				C30893B628A2F42D004B1860 /* Assets.xcassets */,
 				C30893BB28A2F42D004B1860 /* Info.plist */,
+				1B0DEE43291B0B6800A2E52A /* MovieResponse.swift */,
 			);
 			path = BAZProject;
 			sourceTree = "<group>";
@@ -263,6 +266,7 @@
 				1B18E2DC290834740097673D /* DetailsMovieViewController.swift in Sources */,
 				C30893E328A425E1004B1860 /* Movie.swift in Sources */,
 				1B8322B72919E0CA00097EA7 /* Extensions.swift in Sources */,
+				1B0DEE44291B0B6800A2E52A /* MovieResponse.swift in Sources */,
 				1B18E2E32908377B0097673D /* DetailsMoviePresenter.swift in Sources */,
 				1B8322B52919D5FE00097EA7 /* Storyboarded.swift in Sources */,
 			);

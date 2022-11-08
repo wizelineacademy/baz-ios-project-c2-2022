@@ -41,11 +41,3 @@ struct Movie: Codable {
         case video = "video"
     }
 }
-
-struct ResponseMovie: Codable {
-    let movies: [Movie]
-    
-    enum CodingKeys: String, CodingKey {
-        case movies = "results"
-    }
-}

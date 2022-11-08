@@ -70,3 +70,8 @@ enum APIError: Error {
         }
     }
 }
+
+enum fromViewController {
+    case moviesCategory
+    case searchMovie
+}

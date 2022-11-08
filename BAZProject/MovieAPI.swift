@@ -16,7 +16,7 @@ final class MovieAPI {
     /// - Parameter category: category by enum
     /// - Returns: Movies Array
     /// - throws: if any basic condition dont success, this return empty array
-    func getMovies(by category: CategoryFilterMovie, completion: @escaping (Result<ResponseMovie, Error>) -> Void) {
+    func getMovies(by category: CategoryFilterMovie, completion: @escaping (Result<MovieResponse, Error>) -> Void) {
         let urlStr = category == .trending ? urlBase + "/trending/movie/day?api_key=\(apiKey)" : urlBase + "/movie/\(category.codeUrl)?api_key=\(apiKey)&language=es&region=MX&page=1"
         guard let url = URL(string: urlStr) else { completion(Result.failure(APIError.urlError)); return }
         getFetch(with: URLRequest(url: url), completion: completion)
@@ -39,7 +39,7 @@ final class MovieAPI {
     /// - Parameter title: title´s movie to search`
     /// - Returns: Movies Array
     /// - throws: if any basic condition dont success, this return empty array
-    func searchMovie(with title: String, completion: @escaping (Result<ResponseMovie, Error>) -> Void) {
+    func searchMovie(with title: String, completion: @escaping (Result<MovieResponse, Error>) -> Void) {
         let urlStr = urlBase + "/search/movie?api_key=" + apiKey + "&language=en-US&&query=\(title)&page=1&include_adult=false"
         guard let url = URL(string: urlStr) else {
             completion(Result.failure(APIError.urlError))
