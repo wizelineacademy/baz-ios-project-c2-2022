@@ -1,6 +1,6 @@
-# BAZ Proyecto Final iOS C1 2022
+# BAZ Proyecto Final iOS C2 2022
 
-Gracias por participar en este curso de Wizeline Academy!
+Gracias por participar en este curso de Wizeline DSA!
 
 Este archivo README contiene instrucciones de cómo completar tu proyecto final.
 
