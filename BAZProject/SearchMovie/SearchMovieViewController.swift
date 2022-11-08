@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class SearchMovieViewController: UICollectionViewController {
+final class SearchMovieViewController: UICollectionViewController, Storyboarded {
     
     private let itemsPerRow: CGFloat = 2.0
     private let sectionInsets = UIEdgeInsets(top: 50.0, left: 20.0, bottom: 50.0, right: 20.0)
@@ -41,8 +41,6 @@ extension SearchMovieViewController {
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         showMovieDetails(movies[indexPath.row])
     }
-    
-    
 }
 
 extension SearchMovieViewController: UICollectionViewDelegateFlowLayout {
@@ -56,21 +54,28 @@ extension SearchMovieViewController: UICollectionViewDelegateFlowLayout {
 }
 
 extension SearchMovieViewController: UITextFieldDelegate {
+    
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         guard let text = textField.text else {
             return true
         }
-        let activityIndicator = UIActivityIndicatorView(style: .medium)
-        textField.addSubview(activityIndicator)
-        activityIndicator.frame = textField.bounds
+        let activityIndicator = UIActivityIndicatorView(style: .large)
+        view.addSubview(activityIndicator)
+        activityIndicator.frame = view.bounds
         activityIndicator.startAnimating()
-        
-        movies = movieApi.searchMovieByName(text)
-        DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(3)){
-            activityIndicator.stopAnimating()
-            self.collectionView.reloadData()
-            textField.text = nil
-            textField.resignFirstResponder()
+        movieApi.searchMovie(with: text) { resultado in
+            switch resultado {
+            case .success(let result):
+                DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(3)){
+                    activityIndicator.stopAnimating()
+                    self.movies = result.movies
+                    self.collectionView.reloadData()
+                    textField.text = nil
+                    textField.resignFirstResponder()
+                }
+            case .failure(let error):
+                print("Error: \(error)")
+            }
         }
         return true
     }

@@ -30,7 +30,7 @@
         <!--Search Movie View Controller-->
         <scene sceneID="Q3o-3W-Rkd">
             <objects>
-                <collectionViewController id="oLv-Vf-fgE" customClass="SearchMovieViewController" customModule="BAZProject" customModuleProvider="target" sceneMemberID="viewController">
+                <collectionViewController storyboardIdentifier="SearchMovieViewController" id="oLv-Vf-fgE" customClass="SearchMovieViewController" customModule="BAZProject" customModuleProvider="target" sceneMemberID="viewController">
                     <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="qjU-Zb-UbE">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -106,7 +106,7 @@
                     <navigationItem key="navigationItem" id="HUX-fd-IiE">
                         <nil key="title"/>
                         <textField key="titleView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Search" textAlignment="natural" minimumFontSize="17" id="awh-Qg-gwZ">
-                            <rect key="frame" x="170.5" y="5" width="73" height="34"/>
+                            <rect key="frame" x="0.0" y="5" width="414" height="34"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                             <textInputTraits key="textInputTraits" returnKeyType="search"/>

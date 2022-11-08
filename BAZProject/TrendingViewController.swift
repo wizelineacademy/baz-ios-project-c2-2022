@@ -13,8 +13,17 @@ final class TrendingViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        movies = movieApi.getMovies(.topRated)
-        tableView.reloadData()
+        movieApi.getMovies(by: .nowPlaying, completion: { resultado in
+            switch resultado{
+            case .success(let mov):
+                self.movies = mov.movies
+                DispatchQueue.main.async {
+                    self.tableView.reloadData()
+                }
+            case .failure(let error ):
+                print("Error: \(error.localizedDescription)")
+            }
+        })
     }
 
 }

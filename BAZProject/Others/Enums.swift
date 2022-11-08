@@ -37,3 +37,31 @@ enum CategoryFilterMovie: Int {
         }
     }
 }
+
+enum APIError: Error {
+    case urlError
+    case decodeError
+    case arrayEmpty
+    
+    var titleError: String {
+        switch self {
+        case .urlError:
+            return "Algo salio mal"
+        case .decodeError:
+            return "¡Ups!"
+        case .arrayEmpty:
+            return "Sin datos"
+        }
+    }
+    
+    var descriptionError: String {
+        switch self {
+        case .urlError:
+            return "Error en la URL, favor de verificar"
+        case .decodeError:
+            return "Error al guardar la información"
+        case .arrayEmpty:
+            return "No hay peliculas para mostrar"
+        }
+    }
+}

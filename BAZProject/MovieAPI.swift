@@ -12,51 +12,14 @@ final class MovieAPI {
     private let apiKey: String = "f6cd5c1a9e6c6b965fdcab0fa6ddd38a"
     private let urlBase: String = "https://api.themoviedb.org/3"
     
-    /// Function get movies of API
-    /// - Returns: Movies Array
-    /// - throws: if any basic condition dont success, this return empty array
-    func getMovies() -> [Movie] {
-        guard let url = URL(string: urlBase + "/trending/movie/day?api_key=\(apiKey)"),
-              let data = try? Data(contentsOf: url),
-              let json = try? JSONSerialization.jsonObject(with: data) as? NSDictionary,
-              let results = json.object(forKey: "results") as? [NSDictionary]
-        else {
-            return []
-        }
-        do {
-            let dataInfo = try? JSONSerialization.data(withJSONObject: results, options: .prettyPrinted)
-            guard let movies = dataInfo else {
-                return []
-            }
-            guard let moviesArray: [Movie] = decodeInfo(with: movies) else {
-                return []
-            }
-            return moviesArray
-        }
-    }
-    
     ///Get Movies By Category
     /// - Parameter category: category by enum
     /// - Returns: Movies Array
     /// - throws: if any basic condition dont success, this return empty array
-    func getMovies(_ category: CategoryFilterMovie) -> [Movie] {
+    func getMovies(by category: CategoryFilterMovie, completion: @escaping (Result<ResponseMovie, Error>) -> Void) {
         let urlStr = urlBase + "/movie/\(category.codeUrl)?api_key=\(apiKey)&language=es&region=MX&page=1"
-        guard let url = URL(string: urlStr),
-        let data = try? Data(contentsOf: url),
-              let json = try? JSONSerialization.jsonObject(with: data) as? NSDictionary,
-              let result = json.object(forKey: "results") as? [NSDictionary] else {
-            return []
-        }
-        do {
-            let dataInfo = try? JSONSerialization.data(withJSONObject: result, options: .prettyPrinted)
-            guard let movies = dataInfo else {
-                return []
-            }
-            guard let moviesArray: [Movie] = decodeInfo(with: movies) else {
-                return []
-            }
-            return moviesArray
-        }
+        guard let url = URL(string: urlStr) else { completion(Result.failure(APIError.urlError)); return }
+        getFetch(with: URLRequest(url: url), completion: completion)
     }
     
     /// Decode info type data to a Movie model
@@ -73,26 +36,16 @@ final class MovieAPI {
         }
     }
     ///Search Movies By Name
-    /// - Parameter text: key text to search
+    /// - Parameter title: title´s movie to search`
     /// - Returns: Movies Array
     /// - throws: if any basic condition dont success, this return empty array
-    func searchMovieByName(_ text: String) -> [Movie] {
-        guard let url = URL(string: urlBase + "/search/movie?api_key=" + apiKey + "&language=en-US&&query=\(text)&page=1&include_adult=false"),
-        let data = try? Data(contentsOf: url),
-              let json = try? JSONSerialization.jsonObject(with: data) as? NSDictionary,
-              let result = json.object(forKey: "results") as? [NSDictionary] else {
-            return []
+    func searchMovie(with title: String, completion: @escaping (Result<ResponseMovie, Error>) -> Void) {
+        let urlStr = urlBase + "/search/movie?api_key=" + apiKey + "&language=en-US&&query=\(title)&page=1&include_adult=false"
+        guard let url = URL(string: urlStr) else {
+            completion(Result.failure(APIError.urlError))
+            return
         }
-        do{
-            let dataInfo = try? JSONSerialization.data(withJSONObject: result, options: .prettyPrinted)
-            guard let movies = dataInfo else {
-                return []
-            }
-            guard let moviesArray: [Movie] = decodeInfo(with: movies) else {
-                return []
-            }
-            return moviesArray
-        }
+        getFetch(with: URLRequest(url: url), completion: completion)
     }
     
     /// Download image
@@ -106,13 +59,17 @@ final class MovieAPI {
         }
         return UIImage(data: data) ?? image
     }
-
+    
+    /// URLSession request
+    ///  - Parameter request: request to API
+    ///  - Returns: Result custorm type and Error if this appear
+    func getFetch<T: Decodable>(with request: URLRequest, completion: @escaping (Result<T, Error>) -> Void) {
+        URLSession.shared.dataTask(with: request) { data, response, error in
+            guard let data = data, let result: T = self.decodeInfo(with: data) else {
+                completion(Result.failure(APIError.decodeError))
+                return
+            }
+            completion(Result.success(result))
+        }.resume()
+    }
 }
-
-///URLs
-///https://api.themoviedb.org/3/trending/movie/day?api_key=f6cd5c1a9e6c6b965fdcab0fa6ddd38a&language=es&region=MX&page=1
-///https://api.themoviedb.org/3/movie/now_playing?api_key=f6cd5c1a9e6c6b965fdcab0fa6ddd38a&language=es&region=MX&page=1
-///https://api.themoviedb.org/3/movie/popular?api_key=f6cd5c1a9e6c6b965fdcab0fa6ddd38a&language=es&region=MX&page=1
-///https://api.themoviedb.org/3/movie/top_rated?api_key=f6cd5c1a9e6c6b965fdcab0fa6ddd38a&language=es&page=1&region=MX
-///https://api.themoviedb.org/3/movie/upcoming?api_key=f6cd5c1a9e6c6b965fdcab0fa6ddd38a&language=es&region=MX&page=1
-///

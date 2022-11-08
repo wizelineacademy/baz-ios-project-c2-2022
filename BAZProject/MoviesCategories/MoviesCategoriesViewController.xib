@@ -11,6 +11,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="MoviesCategoriesViewController" customModule="BAZProject" customModuleProvider="target">
             <connections>
+                <outlet property="btnSearch" destination="JM3-9p-Zy0" id="Rto-Qw-aZe"/>
                 <outlet property="collectionMovies" destination="v4N-cA-rZb" id="sMq-J2-Hsr"/>
                 <outlet property="pickerSelector" destination="OtE-mb-PyB" id="b9J-01-MTg"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
@@ -23,6 +24,8 @@
             <subviews>
                 <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="OtE-mb-PyB">
                     <rect key="frame" x="25" y="44" width="299" height="80"/>
+                    <color key="backgroundColor" systemColor="systemGray3Color"/>
+                    <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="80" id="0YQ-sN-L9a"/>
                     </constraints>
@@ -39,13 +42,16 @@
                 </collectionView>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JM3-9p-Zy0">
                     <rect key="frame" x="332" y="54" width="60" height="60"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="60" id="LWA-92-8d9"/>
                         <constraint firstAttribute="width" constant="60" id="e6B-ml-cbs"/>
                     </constraints>
                     <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                     <state key="normal" image="magnifyingglass" catalog="system"/>
-                    <buttonConfiguration key="configuration" style="plain" image="magnifyingglass" catalog="system"/>
+                    <buttonConfiguration key="configuration" style="plain" image="magnifyingglass" catalog="system">
+                        <color key="baseForegroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    </buttonConfiguration>
                     <connections>
                         <action selector="tapSearch" destination="-1" eventType="touchUpInside" id="nFT-lO-QtJ"/>
                     </connections>
@@ -71,6 +77,9 @@
         <image name="magnifyingglass" catalog="system" width="128" height="115"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="systemGray3Color">
+            <color red="0.7803921568627451" green="0.7803921568627451" blue="0.80000000000000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>

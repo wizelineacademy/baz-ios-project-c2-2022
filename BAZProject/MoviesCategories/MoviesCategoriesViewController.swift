@@ -13,20 +13,34 @@ final class MoviesCategoriesViewController: UIViewController {
     private var movies: [Movie] = []
     private let movieApi = MovieAPI()
 
+    @IBOutlet weak var btnSearch: UIButton!
     @IBOutlet weak var pickerSelector: UIPickerView!
     @IBOutlet weak var collectionMovies: UICollectionView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
-        movies = movieApi.getMovies(.nowPlaying)
-        collectionMovies.reloadData()
+        movieApi.getMovies(by: .nowPlaying, completion: { result in
+            switch result{
+            case .success(let movies):
+                self.movies = movies.movies
+                DispatchQueue.main.async {
+                    self.collectionMovies.reloadData()
+                }
+            case .failure(let error):
+                DispatchQueue.main.async {
+                    guard let error = error as? APIError else {return}
+                    self.showAlertError(with: error)
+                }
+            }
+        })
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        self.title = "Movies"
         setupElements()
+        pickerSelector.customPicker()
+        btnSearch.shakeButton()
     }
     
     private func setupElements() {
@@ -38,23 +52,41 @@ final class MoviesCategoriesViewController: UIViewController {
     }
     
     private func changePickerSelected(_ value: Int) {
-        let activityIndicator = UIActivityIndicatorView(style: .medium)
+        let activityIndicator = UIActivityIndicatorView(style: .large)
         view.addSubview(activityIndicator)
         activityIndicator.frame = view.bounds
         activityIndicator.startAnimating()
         movies.removeAll()
-        movies = movieApi.getMovies(CategoryFilterMovie(rawValue: value) ?? .nowPlaying)
-        DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(2)){
-            activityIndicator.stopAnimating()
-            self.collectionMovies.reloadData()
+        movieApi.getMovies(by: CategoryFilterMovie(rawValue: value) ?? .nowPlaying) { resultado in
+            switch resultado {
+            case .success(let result):
+                DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(2)){
+                    activityIndicator.stopAnimating()
+                    self.movies = result.movies
+                    self.collectionMovies.reloadData()
+                }
+            case .failure(let error):
+                DispatchQueue.main.async {
+                    activityIndicator.stopAnimating()
+                    guard let error = error as? APIError else {return}
+                    self.showAlertError(with: error)
+                }
+            }
         }
     }
     
+    private func showAlertError(with error: APIError) {
+        let dialogMessage = UIAlertController(title: error.titleError, message: error.descriptionError, preferredStyle: .alert)
+        let ok = UIAlertAction(title: "Ok", style: .default, handler: { (action) -> Void in
+            debugPrint("Cerro la alerta")
+        })
+        dialogMessage.addAction(ok)
+        self.present(dialogMessage, animated: true)
+    }
+    
     @IBAction private func tapSearch() {
-        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        let vc = storyboard.instantiateViewController(withIdentifier: "SearchCollection")
-        vc.modalPresentationStyle = .fullScreen
-        self.present(vc, animated: true)
+        guard let vc = SearchMovieViewController.instantiate() else { return }
+        navigationController?.pushViewController(vc, animated: true)
     }
 }
 
