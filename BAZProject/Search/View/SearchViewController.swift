@@ -84,7 +84,8 @@ extension SearchViewController: UICollectionViewDelegate, UICollectionViewDataSo
         let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "DetailViewController") as! DetailViewController
         vc.detailViewModel.dataArray = searchViewModel.dataArray[indexPath.row]
         vc.modalPresentationStyle = .fullScreen
-        present(vc, animated: true, completion: nil)
+        self.navigationController?.pushViewController(vc, animated: true)
+//        present(vc, animated: true, completion: nil)
     }
     
 }

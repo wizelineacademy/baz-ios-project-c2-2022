@@ -79,7 +79,8 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
         let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "DetailViewController") as! DetailViewController
         vc.detailViewModel.dataArray = homeViewModel.dataArray[indexPath.row]
         vc.modalPresentationStyle = .fullScreen
-        present(vc, animated: true, completion: nil)
+        self.navigationController?.pushViewController(vc, animated: true)
+//        present(vc, animated: true, completion: nil)
     }
     
     func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {

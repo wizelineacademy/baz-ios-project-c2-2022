@@ -11,7 +11,6 @@ class DetailViewController: UIViewController, GenericView {
 
     @IBOutlet weak var stackView: UIStackView!
     @IBOutlet weak var BackDetailTopView: UIView!
-    @IBOutlet weak var backArrowButtom: UIBarButtonItem!
     @IBOutlet weak var imageMovie: UIImageView!
     @IBOutlet weak var tituloDetailView: UILabel!
     @IBOutlet weak var tituloOriginalDetail: UILabel!
@@ -22,12 +21,10 @@ class DetailViewController: UIViewController, GenericView {
     let detailViewModel = DetailModelView()
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.navigationController?.title = "Detail"
         configurateView()
     }
     
-    @IBAction func returnListMovie(_ sender: Any) {
-        self.dismiss(animated: true, completion: nil)
-    }
     func configurateView() {
         stackView.layer.cornerRadius = 15
         BackDetailTopView.addBlurToView()
