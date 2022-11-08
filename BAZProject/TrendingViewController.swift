@@ -21,7 +21,10 @@ final class TrendingViewController: UITableViewController {
                     self.tableView.reloadData()
                 }
             case .failure(let error ):
-                print("Error: \(error.localizedDescription)")
+                DispatchQueue.main.async {
+                    guard let error = error as? APIError else {return}
+                    self.showError(with: error)
+                }
             }
         })
     }

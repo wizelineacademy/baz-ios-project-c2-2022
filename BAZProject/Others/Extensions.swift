@@ -36,6 +36,27 @@ extension UIButton {
     }
 }
 
+extension UIViewController {
+    
+    static let activity = UIActivityIndicatorView()
+    
+    func showError(with error: APIError) {
+        let dialogMessage = UIAlertController(title: error.titleError, message: error.descriptionError, preferredStyle: .alert)
+        let ok = UIAlertAction(title: "Ok", style: .default, handler: { (action) -> Void in
+            debugPrint("Cerro la alerta")
+        })
+        dialogMessage.addAction(ok)
+        self.present(dialogMessage, animated: true)
+    }
+    
+    func createActivityIndicator() -> UIActivityIndicatorView {
+        let activityIndicator = UIActivityIndicatorView(style: .large)
+        view.addSubview(activityIndicator)
+        activityIndicator.frame = view.bounds
+        return activityIndicator
+    }
+}
+
 func ranmdomInterval(with interval: TimeInterval, and variancia: Double) -> TimeInterval {
     return interval + variancia * Double((Double(arc4random_uniform(1000)) - 500.0) / 500.0)
 }

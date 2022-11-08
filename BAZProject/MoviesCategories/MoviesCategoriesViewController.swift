@@ -12,6 +12,7 @@ final class MoviesCategoriesViewController: UIViewController {
     private let itemsPerRow: CGFloat = 2.0
     private var movies: [Movie] = []
     private let movieApi = MovieAPI()
+    private var activityIndicator: UIActivityIndicatorView!
 
     @IBOutlet weak var btnSearch: UIButton!
     @IBOutlet weak var pickerSelector: UIPickerView!
@@ -19,17 +20,25 @@ final class MoviesCategoriesViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        movieApi.getMovies(by: .nowPlaying, completion: { result in
+        activityIndicator = self.createActivityIndicator()
+        activityIndicator.startAnimating()
+        movieApi.getMovies(by: .trending, completion: { result in
             switch result{
             case .success(let movies):
                 self.movies = movies.movies
                 DispatchQueue.main.async {
-                    self.collectionMovies.reloadData()
+                    self.activityIndicator.stopAnimating()
+                    if self.movies.count > 0 {
+                        self.collectionMovies.reloadData()
+                    } else {
+                        self.showError(with: .arrayEmpty)
+                    }
                 }
             case .failure(let error):
                 DispatchQueue.main.async {
+                    self.activityIndicator.stopAnimating()
                     guard let error = error as? APIError else {return}
-                    self.showAlertError(with: error)
+                    self.showError(with: error)
                 }
             }
         })
@@ -52,36 +61,24 @@ final class MoviesCategoriesViewController: UIViewController {
     }
     
     private func changePickerSelected(_ value: Int) {
-        let activityIndicator = UIActivityIndicatorView(style: .large)
-        view.addSubview(activityIndicator)
-        activityIndicator.frame = view.bounds
         activityIndicator.startAnimating()
         movies.removeAll()
         movieApi.getMovies(by: CategoryFilterMovie(rawValue: value) ?? .nowPlaying) { resultado in
             switch resultado {
             case .success(let result):
                 DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(2)){
-                    activityIndicator.stopAnimating()
+                    self.activityIndicator.stopAnimating()
                     self.movies = result.movies
                     self.collectionMovies.reloadData()
                 }
             case .failure(let error):
                 DispatchQueue.main.async {
-                    activityIndicator.stopAnimating()
+                    self.activityIndicator.stopAnimating()
                     guard let error = error as? APIError else {return}
-                    self.showAlertError(with: error)
+                    self.showError(with: error)
                 }
             }
         }
-    }
-    
-    private func showAlertError(with error: APIError) {
-        let dialogMessage = UIAlertController(title: error.titleError, message: error.descriptionError, preferredStyle: .alert)
-        let ok = UIAlertAction(title: "Ok", style: .default, handler: { (action) -> Void in
-            debugPrint("Cerro la alerta")
-        })
-        dialogMessage.addAction(ok)
-        self.present(dialogMessage, animated: true)
     }
     
     @IBAction private func tapSearch() {

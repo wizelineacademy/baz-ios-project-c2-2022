@@ -6,13 +6,16 @@
 //
 
 enum CategoryFilterMovie: Int {
-    case nowPlaying = 0
-    case polular = 1
-    case topRated = 2
-    case upcoming = 3
+    case trending = 0
+    case nowPlaying = 1
+    case polular = 2
+    case topRated = 3
+    case upcoming = 4
     
     var title: String {
         switch self {
+        case .trending:
+            return "Trending"
         case .nowPlaying:
             return "Now Playing"
         case .polular:
@@ -26,6 +29,8 @@ enum CategoryFilterMovie: Int {
     
     var codeUrl: String {
         switch self {
+        case .trending:
+            return ""
         case .nowPlaying:
             return "now_playing"
         case .polular:

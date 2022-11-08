@@ -13,9 +13,11 @@ final class SearchMovieViewController: UICollectionViewController, Storyboarded 
     private let sectionInsets = UIEdgeInsets(top: 50.0, left: 20.0, bottom: 50.0, right: 20.0)
     private var movies: [Movie] = []
     private let movieApi = MovieAPI()
+    private var activityIndicator: UIActivityIndicatorView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        activityIndicator = self.createActivityIndicator()
     }
     
     private func showMovieDetails(_ Element: Movie) {
@@ -59,22 +61,27 @@ extension SearchMovieViewController: UITextFieldDelegate {
         guard let text = textField.text else {
             return true
         }
-        let activityIndicator = UIActivityIndicatorView(style: .large)
-        view.addSubview(activityIndicator)
-        activityIndicator.frame = view.bounds
+        activityIndicator = self.createActivityIndicator()
         activityIndicator.startAnimating()
         movieApi.searchMovie(with: text) { resultado in
             switch resultado {
             case .success(let result):
                 DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(3)){
-                    activityIndicator.stopAnimating()
+                    self.activityIndicator.stopAnimating()
                     self.movies = result.movies
+                    if self.movies.isEmpty {
+                        self.showError(with: .arrayEmpty)
+                    }
                     self.collectionView.reloadData()
                     textField.text = nil
                     textField.resignFirstResponder()
                 }
             case .failure(let error):
-                print("Error: \(error)")
+                self.activityIndicator.stopAnimating()
+                DispatchQueue.main.async {
+                    guard let error = error as? APIError else {return}
+                    self.showError(with: error)
+                }
             }
         }
         return true
