@@ -17,33 +17,23 @@
                 <rect key="frame" x="0.0" y="0.0" width="200" height="200"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OpV-D5-Np8">
-                        <rect key="frame" x="16" y="159" width="168" height="21"/>
-                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                        <nil key="textColor"/>
-                        <nil key="highlightedColor"/>
-                    </label>
                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="MfK-qD-8qO">
-                        <rect key="frame" x="28.5" y="12" width="143" height="127"/>
+                        <rect key="frame" x="28.5" y="12" width="143" height="170"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="143" id="oQ1-zG-gpD"/>
-                            <constraint firstAttribute="height" constant="127" id="x6q-SZ-WST"/>
+                            <constraint firstAttribute="height" constant="170" id="x6q-SZ-WST"/>
                         </constraints>
                     </imageView>
                 </subviews>
+                <color key="backgroundColor" red="0.85490196080000003" green="0.84313725490000002" blue="0.80392156859999997" alpha="1" colorSpace="calibratedRGB"/>
                 <constraints>
                     <constraint firstItem="MfK-qD-8qO" firstAttribute="top" secondItem="lRd-Aw-V6j" secondAttribute="top" constant="12" id="3wD-Kl-s7x"/>
-                    <constraint firstItem="OpV-D5-Np8" firstAttribute="width" secondItem="MfK-qD-8qO" secondAttribute="width" multiplier="1.17483" id="Jc0-Ug-6Ck"/>
                     <constraint firstItem="MfK-qD-8qO" firstAttribute="centerX" secondItem="lRd-Aw-V6j" secondAttribute="centerX" id="Uog-Fg-khS"/>
-                    <constraint firstItem="OpV-D5-Np8" firstAttribute="top" secondItem="MfK-qD-8qO" secondAttribute="bottom" constant="20" id="b9F-Dl-rUJ"/>
-                    <constraint firstItem="OpV-D5-Np8" firstAttribute="height" secondItem="MfK-qD-8qO" secondAttribute="height" multiplier="0.165354" id="h11-9q-sID"/>
-                    <constraint firstItem="OpV-D5-Np8" firstAttribute="centerX" secondItem="lRd-Aw-V6j" secondAttribute="centerX" id="r74-Ra-0na"/>
                 </constraints>
             </collectionViewCellContentView>
             <size key="customSize" width="374" height="320"/>
             <connections>
                 <outlet property="imageField" destination="MfK-qD-8qO" id="IIo-Gf-F5G"/>
-                <outlet property="titleField" destination="OpV-D5-Np8" id="HfV-Nj-BMs"/>
             </connections>
             <point key="canvasLocation" x="-82.608695652173921" y="15.401785714285714"/>
         </collectionViewCell>

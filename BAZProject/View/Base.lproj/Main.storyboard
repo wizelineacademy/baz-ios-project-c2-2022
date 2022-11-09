@@ -84,15 +84,13 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="yOo-gy-5Ff">
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="yOo-gy-5Ff">
                                 <rect key="frame" x="0.0" y="86" width="414" height="513"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" textAlignment="justified" translatesAutoresizingMaskIntoConstraints="NO" id="KY3-09-NYP">
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="justified" translatesAutoresizingMaskIntoConstraints="NO" id="KY3-09-NYP">
                                 <rect key="frame" x="0.0" y="607" width="414" height="255"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <mutableString key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</mutableString>
+                                <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
                                 <color key="textColor" systemColor="labelColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
@@ -100,6 +98,16 @@
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="uSC-JG-BGL"/>
                         <color key="backgroundColor" red="0.85490196080000003" green="0.84313725490000002" blue="0.80392156859999997" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstItem="yOo-gy-5Ff" firstAttribute="height" secondItem="heF-Ee-9Gb" secondAttribute="height" multiplier="0.572545" id="12H-WW-cav"/>
+                            <constraint firstItem="KY3-09-NYP" firstAttribute="centerX" secondItem="heF-Ee-9Gb" secondAttribute="centerX" id="74Z-il-zBl"/>
+                            <constraint firstItem="yOo-gy-5Ff" firstAttribute="top" secondItem="uSC-JG-BGL" secondAttribute="top" constant="42" id="7J5-L3-83q"/>
+                            <constraint firstItem="yOo-gy-5Ff" firstAttribute="width" secondItem="heF-Ee-9Gb" secondAttribute="width" id="ME3-Kc-xyB"/>
+                            <constraint firstItem="KY3-09-NYP" firstAttribute="top" secondItem="yOo-gy-5Ff" secondAttribute="bottom" constant="8" symbolic="YES" id="R4Y-7s-Z9X"/>
+                            <constraint firstItem="KY3-09-NYP" firstAttribute="width" secondItem="yOo-gy-5Ff" secondAttribute="width" id="gVS-Yc-KT7"/>
+                            <constraint firstItem="KY3-09-NYP" firstAttribute="height" secondItem="yOo-gy-5Ff" secondAttribute="height" multiplier="0.497076" id="h00-XY-tCz"/>
+                            <constraint firstItem="yOo-gy-5Ff" firstAttribute="centerX" secondItem="heF-Ee-9Gb" secondAttribute="centerX" id="osx-ya-8BH"/>
+                        </constraints>
                     </view>
                     <connections>
                         <outlet property="imageField" destination="yOo-gy-5Ff" id="2UI-7e-52c"/>
