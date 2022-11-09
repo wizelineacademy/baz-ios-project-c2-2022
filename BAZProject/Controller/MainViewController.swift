@@ -47,7 +47,7 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
         searchCollection.register(UINib(nibName: "SearchCell", bundle: nil), forCellWithReuseIdentifier: "searchCell")
     }
     
-    func getMovies(movies: [MoviesWithCategory]) {
+    func getAllMovies(movies: [MoviesWithCategory]) {
         self.movies = movies
     }
     

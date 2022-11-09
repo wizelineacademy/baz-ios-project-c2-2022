@@ -7,7 +7,7 @@
 import Foundation
 
 protocol MovieApiProtocol {
-    func getMovies(movies: [MoviesWithCategory])
+    func getAllMovies(movies: [MoviesWithCategory])
 }
 
 class MovieAPI {
@@ -31,7 +31,7 @@ class MovieAPI {
             let movieSection = MoviesWithCategory(genre: endPoint.rawValue, movies: movies)
             allMovies.append(movieSection)
         }
-        movieApiDelegate?.getMovies(movies: allMovies)
+        movieApiDelegate?.getAllMovies(movies: allMovies)
     }
     
     func getSearchMovies() -> [Movie] {
