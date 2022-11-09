@@ -6,27 +6,32 @@
 
 import Foundation
 
+protocol MovieApiProtocol {
+    func getMovies(movies: [MoviesWithCategory])
+}
+
 class MovieAPI {
 
     private let apiKey: String = "f6cd5c1a9e6c6b965fdcab0fa6ddd38a"
     private var endPointUrl: String = ""
+    var movieApiDelegate: MovieApiProtocol?
     
     var movies: [Movie] = []
     var allMovies: [MoviesWithCategory] = []
     
-    func getMovies() -> [MoviesWithCategory] {
+    func getMovies(){
         for endPoint in MovieEndpoint.allCases {
             setUrl(endPoint: endPoint)
             guard let url = URL(string: endPointUrl + apiKey),
                   let data = try? Data(contentsOf: url)
-            else { return [] }
+            else { return }
             if let api = try? JSONDecoder().decode(API.self, from: data) {
                 movies = api.results
             }
             let movieSection = MoviesWithCategory(genre: endPoint.rawValue, movies: movies)
             allMovies.append(movieSection)
         }
-        return allMovies
+        movieApiDelegate?.getMovies(movies: allMovies)
     }
     
     func getSearchMovies() -> [Movie] {

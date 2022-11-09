@@ -7,7 +7,7 @@
 
 import UIKit
 
-class MainViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UISearchResultsUpdating, UICollectionViewDelegate, UICollectionViewDataSource {
+class MainViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UISearchResultsUpdating, UICollectionViewDelegate, UICollectionViewDataSource, MovieApiProtocol {
     
     // MARK: - IBOutlets
     
@@ -39,11 +39,16 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
         searchController.searchResultsUpdater = self
         
         let api = MovieAPI()
-        movies = api.getMovies()
+        api.movieApiDelegate = self
+        api.getMovies()
         searchMovies = api.getSearchMovies()
         
         tableView.register(UINib(nibName: "MainTableViewCell", bundle: nil), forCellReuseIdentifier: "cell")
         searchCollection.register(UINib(nibName: "SearchCell", bundle: nil), forCellWithReuseIdentifier: "searchCell")
+    }
+    
+    func getMovies(movies: [MoviesWithCategory]) {
+        self.movies = movies
     }
     
     // MARK: - TableView Methods
