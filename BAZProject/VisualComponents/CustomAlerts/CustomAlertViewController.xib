@@ -46,31 +46,41 @@
                             <nil key="textColor"/>
                             <nil key="highlightedColor"/>
                         </label>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tqf-Zt-2Xe">
-                            <rect key="frame" x="0.0" y="417" width="331" height="31"/>
-                            <state key="normal" title="Button"/>
-                            <buttonConfiguration key="configuration" style="plain" title="Aceptar"/>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tqf-Zt-2Xe" customClass="CustomButton" customModule="BAZProject" customModuleProvider="target">
+                            <rect key="frame" x="10" y="408" width="311" height="30"/>
+                            <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                            <state key="normal" title="Aceptar"/>
+                            <userDefinedRuntimeAttributes>
+                                <userDefinedRuntimeAttribute type="number" keyPath="buttonStyle">
+                                    <integer key="value" value="1"/>
+                                </userDefinedRuntimeAttribute>
+                            </userDefinedRuntimeAttributes>
                         </button>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qIf-y9-Psw">
-                            <rect key="frame" x="0.0" y="386" width="331" height="31"/>
-                            <state key="normal" title="Button"/>
-                            <buttonConfiguration key="configuration" style="plain" title="Cancelar"/>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qIf-y9-Psw" customClass="CustomButton" customModule="BAZProject" customModuleProvider="target">
+                            <rect key="frame" x="10" y="368" width="311" height="30"/>
+                            <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                            <state key="normal" title="Cancelar"/>
+                            <userDefinedRuntimeAttributes>
+                                <userDefinedRuntimeAttribute type="number" keyPath="buttonStyle">
+                                    <integer key="value" value="2"/>
+                                </userDefinedRuntimeAttribute>
+                            </userDefinedRuntimeAttributes>
                         </button>
                     </subviews>
                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     <constraints>
                         <constraint firstItem="4w3-QJ-u3p" firstAttribute="centerX" secondItem="gnJ-o8-HwY" secondAttribute="centerX" id="5mK-1e-eEU"/>
-                        <constraint firstAttribute="trailing" secondItem="tqf-Zt-2Xe" secondAttribute="trailing" id="Eng-Mh-9wd"/>
-                        <constraint firstItem="tqf-Zt-2Xe" firstAttribute="leading" secondItem="gnJ-o8-HwY" secondAttribute="leading" id="HeR-fG-mbh"/>
+                        <constraint firstAttribute="trailing" secondItem="tqf-Zt-2Xe" secondAttribute="trailing" constant="10" id="Eng-Mh-9wd"/>
+                        <constraint firstItem="tqf-Zt-2Xe" firstAttribute="leading" secondItem="gnJ-o8-HwY" secondAttribute="leading" constant="10" id="HeR-fG-mbh"/>
                         <constraint firstItem="4w3-QJ-u3p" firstAttribute="top" secondItem="gnJ-o8-HwY" secondAttribute="top" constant="20" id="ILp-qd-PGf"/>
-                        <constraint firstItem="qIf-y9-Psw" firstAttribute="leading" secondItem="gnJ-o8-HwY" secondAttribute="leading" id="KBb-Sy-G5w"/>
+                        <constraint firstItem="qIf-y9-Psw" firstAttribute="leading" secondItem="gnJ-o8-HwY" secondAttribute="leading" constant="10" id="KBb-Sy-G5w"/>
                         <constraint firstItem="qO3-sW-kAL" firstAttribute="centerX" secondItem="gnJ-o8-HwY" secondAttribute="centerX" id="M7T-6P-6np"/>
                         <constraint firstItem="DB4-TR-ssQ" firstAttribute="top" secondItem="qO3-sW-kAL" secondAttribute="bottom" constant="10" id="OZf-Jf-m7b"/>
-                        <constraint firstItem="tqf-Zt-2Xe" firstAttribute="top" secondItem="qIf-y9-Psw" secondAttribute="bottom" id="Pky-2G-8l5"/>
+                        <constraint firstItem="tqf-Zt-2Xe" firstAttribute="top" secondItem="qIf-y9-Psw" secondAttribute="bottom" constant="10" id="Pky-2G-8l5"/>
                         <constraint firstAttribute="trailing" secondItem="DB4-TR-ssQ" secondAttribute="trailing" constant="5" id="Pqm-dq-D5o"/>
-                        <constraint firstAttribute="trailing" secondItem="qIf-y9-Psw" secondAttribute="trailing" id="Q4f-iQ-Hlz"/>
+                        <constraint firstAttribute="trailing" secondItem="qIf-y9-Psw" secondAttribute="trailing" constant="10" id="Q4f-iQ-Hlz"/>
                         <constraint firstItem="qO3-sW-kAL" firstAttribute="width" secondItem="gnJ-o8-HwY" secondAttribute="width" multiplier="0.6" id="XVe-ft-0Se"/>
-                        <constraint firstAttribute="bottom" secondItem="tqf-Zt-2Xe" secondAttribute="bottom" id="ZNd-gu-jk4"/>
+                        <constraint firstAttribute="bottom" secondItem="tqf-Zt-2Xe" secondAttribute="bottom" constant="10" id="ZNd-gu-jk4"/>
                         <constraint firstItem="DB4-TR-ssQ" firstAttribute="leading" secondItem="gnJ-o8-HwY" secondAttribute="leading" constant="5" id="gth-Hk-XNw"/>
                         <constraint firstItem="qO3-sW-kAL" firstAttribute="top" secondItem="4w3-QJ-u3p" secondAttribute="bottom" constant="10" id="qgQ-D4-Gyr"/>
                     </constraints>

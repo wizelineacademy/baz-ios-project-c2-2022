@@ -23,6 +23,8 @@
 		1D7BBA80291B815600F56442 /* CustomProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D7BBA7F291B815600F56442 /* CustomProtocol.swift */; };
 		1D7BBA87291BA18300F56442 /* CustomAlertViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D7BBA85291BA18300F56442 /* CustomAlertViewController.swift */; };
 		1D7BBA88291BA18300F56442 /* CustomAlertViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1D7BBA86291BA18300F56442 /* CustomAlertViewController.xib */; };
+		1D7BBA8B291BAF2A00F56442 /* CustomButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D7BBA8A291BAF2A00F56442 /* CustomButton.swift */; };
+		1D7BBA8D291BAF4B00F56442 /* CustomButtonStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D7BBA8C291BAF4B00F56442 /* CustomButtonStyle.swift */; };
 		C30893AE28A2F42B004B1860 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C30893AD28A2F42B004B1860 /* AppDelegate.swift */; };
 		C30893B028A2F42B004B1860 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C30893AF28A2F42B004B1860 /* SceneDelegate.swift */; };
 		C30893B528A2F42B004B1860 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C30893B328A2F42B004B1860 /* Main.storyboard */; };
@@ -56,6 +58,8 @@
 		1D7BBA7F291B815600F56442 /* CustomProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomProtocol.swift; sourceTree = "<group>"; };
 		1D7BBA85291BA18300F56442 /* CustomAlertViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomAlertViewController.swift; sourceTree = "<group>"; };
 		1D7BBA86291BA18300F56442 /* CustomAlertViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CustomAlertViewController.xib; sourceTree = "<group>"; };
+		1D7BBA8A291BAF2A00F56442 /* CustomButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomButton.swift; sourceTree = "<group>"; };
+		1D7BBA8C291BAF4B00F56442 /* CustomButtonStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomButtonStyle.swift; sourceTree = "<group>"; };
 		9B2ABFABABD3FA2D18AF8928 /* Pods-BAZProject.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BAZProject.release.xcconfig"; path = "Target Support Files/Pods-BAZProject/Pods-BAZProject.release.xcconfig"; sourceTree = "<group>"; };
 		C30893AA28A2F42B004B1860 /* BAZProject.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BAZProject.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C30893AD28A2F42B004B1860 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -114,6 +118,7 @@
 		1D7BB9FA2919EFE100F56442 /* VisualComponents */ = {
 			isa = PBXGroup;
 			children = (
+				1D7BBA89291BAF0F00F56442 /* CustomButton */,
 				1D7BBA7C291B7F0A00F56442 /* CustomAlerts */,
 				1D7BBA13291A0B9C00F56442 /* cells */,
 				1D7BBA25291A37EC00F56442 /* LoadingView.swift */,
@@ -214,6 +219,15 @@
 				1D7BBA86291BA18300F56442 /* CustomAlertViewController.xib */,
 			);
 			path = CustomAlerts;
+			sourceTree = "<group>";
+		};
+		1D7BBA89291BAF0F00F56442 /* CustomButton */ = {
+			isa = PBXGroup;
+			children = (
+				1D7BBA8A291BAF2A00F56442 /* CustomButton.swift */,
+				1D7BBA8C291BAF4B00F56442 /* CustomButtonStyle.swift */,
+			);
+			path = CustomButton;
 			sourceTree = "<group>";
 		};
 		93C9613A5C369670C266DF8D /* Pods */ = {
@@ -390,6 +404,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				1D7BBA80291B815600F56442 /* CustomProtocol.swift in Sources */,
+				1D7BBA8B291BAF2A00F56442 /* CustomButton.swift in Sources */,
+				1D7BBA8D291BAF4B00F56442 /* CustomButtonStyle.swift in Sources */,
 				1D7BBA87291BA18300F56442 /* CustomAlertViewController.swift in Sources */,
 				C30893C428A2F845004B1860 /* TrendingViewController.swift in Sources */,
 				1D7BBA0C2919F92B00F56442 /* HomeViewModel.swift in Sources */,
