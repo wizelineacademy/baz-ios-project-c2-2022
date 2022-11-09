@@ -20,7 +20,7 @@ struct Movie: Codable {
     var overview: String
     var originalLanguage: String
     var voteCount: Int
-    var releaseDate: String
+    var releaseDate: String?
     var video: Bool?
     
     enum CodingKeys: String, CodingKey {

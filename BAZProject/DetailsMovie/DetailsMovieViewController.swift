@@ -15,11 +15,13 @@ final class DetailsMovieViewController: UIViewController {
     
     var presenter: DetailsMoviePresenterProtocols?
     var movie: Movie?
+    var fromVC: fromViewController?
     private let movieApi = MovieAPI()
     
-    init(movie: Movie) {
+    init(movie: Movie, vc: fromViewController) {
         super.init(nibName: nil, bundle: nil)
         self.movie = movie
+        self.fromVC = vc
     }
     
     required init?(coder: NSCoder) {
@@ -29,6 +31,13 @@ final class DetailsMovieViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationController?.isNavigationBarHidden = false
+        let contadorNotification = ["cont": movie?.id]
+        if self.fromVC == .moviesCategory {
+            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "contadorToVCCategory"), object: contadorNotification)
+        } else {
+            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "contadorToVCSearch"), object: contadorNotification)
+        }
+        
     }
 
     override func viewWillAppear(_ animated: Bool) {

@@ -13,8 +13,20 @@ final class TrendingViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        movies = movieApi.getMovies()
-        tableView.reloadData()
+        movieApi.getMovies(by: .nowPlaying, completion: { resultado in
+            switch resultado{
+            case .success(let mov):
+                self.movies = mov.movies
+                DispatchQueue.main.async {
+                    self.tableView.reloadData()
+                }
+            case .failure(let error ):
+                DispatchQueue.main.async {
+                    guard let error = error as? APIError else {return}
+                    self.showError(with: error)
+                }
+            }
+        })
     }
 
 }
@@ -46,7 +58,7 @@ extension TrendingViewController {
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let vc = DetailsMovieRouter.createModuleDetailsMovie(movie: movies[indexPath.row])
+        let vc = MoviesCategoriesViewController()
         self.present(vc, animated: true)
     }
 
