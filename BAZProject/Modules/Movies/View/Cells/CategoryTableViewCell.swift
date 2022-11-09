@@ -7,6 +7,6 @@
 
 import UIKit
 
-class CategoryTableViewCell: UITableViewCell {
+final class CategoryTableViewCell: UITableViewCell {
     @IBOutlet weak var showCategoryBtn: UIButton!
 }

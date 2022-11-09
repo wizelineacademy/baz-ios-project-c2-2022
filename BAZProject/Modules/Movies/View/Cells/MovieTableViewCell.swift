@@ -7,7 +7,7 @@
 
 import UIKit
 
-class MovieTableViewCell: UITableViewCell {
+final class MovieTableViewCell: UITableViewCell {
 
     @IBOutlet weak var movieImageView: UIImageView!
     @IBOutlet weak var titleLbl: UILabel!
@@ -27,7 +27,7 @@ class MovieTableViewCell: UITableViewCell {
             self.baseUrl = baseUrl
             self.trashBtn.isHidden = !showBin
         } else {
-            print("Parameters Incomplete")
+            debugPrint("Parameters Incomplete")
         }
     }
     /// Assign the values of the movie object to each of the cells

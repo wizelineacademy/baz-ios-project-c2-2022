@@ -13,7 +13,7 @@ extension DasboardViewController: UICollectionViewDataSource {
     }
     // swiftlint:disable:next line_length
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "MovieCollectionViewCell",
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "idCollection".localized,
                                                             for: indexPath as IndexPath) as? MovieCollectionViewCell
         else {
             return UICollectionViewCell()

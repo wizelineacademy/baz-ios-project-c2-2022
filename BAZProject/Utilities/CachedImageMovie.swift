@@ -24,7 +24,7 @@ extension UIImageView {
         }
         URLSession.shared.dataTask(with: url) { data, _, error in
             if let err = error {
-                print(err)
+                debugPrint(err)
             } else {
                 DispatchQueue.main.async {
                     guard let data = data,

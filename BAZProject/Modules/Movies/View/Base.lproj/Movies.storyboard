@@ -22,14 +22,14 @@
                                 <rect key="frame" x="0.0" y="44" width="320" height="524"/>
                                 <subviews>
                                     <searchBar contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="8a9-hR-jUg">
-                                        <rect key="frame" x="0.0" y="0.0" width="320" height="50"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="320" height="51"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="50" id="Yg0-2s-gSR"/>
+                                            <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="50" id="Yg0-2s-gSR"/>
                                         </constraints>
                                         <textInputTraits key="textInputTraits"/>
                                     </searchBar>
                                     <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="OAQ-tz-zxt">
-                                        <rect key="frame" x="0.0" y="50" width="320" height="474"/>
+                                        <rect key="frame" x="0.0" y="51" width="320" height="473"/>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                         <sections/>
                                         <connections>
@@ -63,6 +63,10 @@
                                         </connections>
                                     </collectionView>
                                 </subviews>
+                                <constraints>
+                                    <constraint firstItem="8a9-hR-jUg" firstAttribute="leading" secondItem="3rQ-5N-ESJ" secondAttribute="leading" id="MC9-H2-RUC"/>
+                                    <constraint firstAttribute="trailing" secondItem="8a9-hR-jUg" secondAttribute="trailing" id="Pgh-ga-fQZ"/>
+                                </constraints>
                             </stackView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="0CP-VW-oDd"/>

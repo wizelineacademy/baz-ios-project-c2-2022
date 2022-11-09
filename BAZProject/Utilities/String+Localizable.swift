@@ -1,5 +1,5 @@
 //
-//  Localizable+String.swift
+//  String+Localizable.swift
 //  BAZProject
 //
 //  Created by 1017143 on 07/11/22.

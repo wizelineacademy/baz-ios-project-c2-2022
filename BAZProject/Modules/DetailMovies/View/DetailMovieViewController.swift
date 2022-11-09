@@ -28,10 +28,10 @@ final class DetailMovieViewController: UIViewController {
     // MARK: - Properties of collectionMovieMenu configuration
     let numberOfSections = 1
     let insets: CGFloat = 8
-    let heightAditionalConstant: CGFloat = 30
+    let heightAditionalConstant: CGFloat = 20
     let minimumLineSpacing: CGFloat = 10
     let minimumInteritemSpacing: CGFloat = 10
-    let cellsPerRow: Int = 2
+    let cellsPerRow: Float = 2.3
     // MARK: - Start
     override func viewDidLoad() {
         super.viewDidLoad()

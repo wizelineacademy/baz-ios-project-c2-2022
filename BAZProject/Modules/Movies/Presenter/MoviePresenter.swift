@@ -157,4 +157,10 @@ final class MoviePresenter {
                                                name: NSNotification.Name("Movies.save"),
                                                object: nil)
     }
+    /// Stop notification to save movie en User Defaults when user see deatil of it
+    func stopNotification() {
+        NotificationCenter.default.removeObserver(self,
+                                                  name: NSNotification.Name("Movies.save"),
+                                                  object: nil)
+    }
 }

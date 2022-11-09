@@ -26,7 +26,7 @@ final class DasboardViewController: UIViewController {
     // MARK: - Properties of collection configuration
     private(set) var numberOfSections = 1
     private(set) var insets: CGFloat = 8
-    private(set) var heightAditionalConstant: CGFloat = 40
+    private(set) var heightAditionalConstant: CGFloat = 20
     private(set) var minimumLineSpacing: CGFloat = 10
     private(set) var minimumInteritemSpacing: CGFloat = 10
     private(set) var cellsPerRow: Int = 2
@@ -44,6 +44,9 @@ final class DasboardViewController: UIViewController {
         super.viewWillAppear(animated)
         self.moviePresenter.checkFavorites()
     }
+    deinit {
+        self.moviePresenter.stopNotification()
+    }
     /// Config some properties of searchBar
     private func setConfigSearchBar() {
         self.searchBar.delegate = self
@@ -52,12 +55,12 @@ final class DasboardViewController: UIViewController {
     }
     /// Register the custom cell that is used in the table
     private func registerCell() {
-        self.moviewTableView.register(UINib(nibName: "MovieTableViewCell",
+        self.moviewTableView.register(UINib(nibName: "idTable".localized,
                                             bundle: Bundle(for: DasboardViewController.self)),
-                                      forCellReuseIdentifier: "MovieTableViewCell" )
-        self.resultSearch.register(UINib(nibName: "MovieCollectionViewCell",
+                                      forCellReuseIdentifier: "idTable".localized )
+        self.resultSearch.register(UINib(nibName: "idCollection".localized,
                                          bundle: Bundle(for: MovieCollectionViewCell.self)),
-                                   forCellWithReuseIdentifier: "MovieCollectionViewCell")
+                                   forCellWithReuseIdentifier: "idCollection".localized)
     }
     /// Show view controller in Modal Style to choose some category to show
     ///
@@ -90,7 +93,7 @@ extension DasboardViewController: UITableViewDataSource {
         return 80
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = moviewTableView.dequeueReusableCell(withIdentifier: "MovieTableViewCell",
+        guard let cell = moviewTableView.dequeueReusableCell(withIdentifier: "idTable".localized,
                                                              for: indexPath) as? MovieTableViewCell else {
             return UITableViewCell()
         }
