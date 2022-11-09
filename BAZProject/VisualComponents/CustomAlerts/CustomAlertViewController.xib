@@ -52,7 +52,7 @@
                             <state key="normal" title="Aceptar"/>
                             <userDefinedRuntimeAttributes>
                                 <userDefinedRuntimeAttribute type="number" keyPath="buttonStyle">
-                                    <integer key="value" value="1"/>
+                                    <integer key="value" value="3"/>
                                 </userDefinedRuntimeAttribute>
                             </userDefinedRuntimeAttributes>
                         </button>

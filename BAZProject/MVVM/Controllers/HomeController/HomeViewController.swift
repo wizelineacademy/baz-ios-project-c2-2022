@@ -96,7 +96,6 @@ class HomeViewController: UIViewController {
 }
 
 extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
-    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return self.viewModel?.response.value?.count ?? 0
     }
@@ -105,7 +104,7 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
         guard let cell = self.viewModel?.response.value else { return UITableViewCell () }
         if let movieCell = tableView.dequeueReusableCell(withIdentifier: MoviesCell.idReusable, for: indexPath) as? MoviesCell {
             let item = cell[indexPath.row]
-            movieCell.configure(item)
+            movieCell.configure(item, moviesCellDelegate: self)
             return movieCell
         } else {
             return UITableViewCell()
@@ -114,7 +113,6 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
 }
 
 extension HomeViewController: UISearchBarDelegate {
-    
     func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
         searchBar.returnKeyType = .search
     }
@@ -127,7 +125,6 @@ extension HomeViewController: UISearchBarDelegate {
 }
 
 extension HomeViewController: UIPickerViewDelegate, UIPickerViewDataSource {
-    
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
         return 1
     }
@@ -150,5 +147,11 @@ extension HomeViewController: CustomProtocol {
     func doneClick() {
         self.alert.dismiss(animated: true)
         self.searchBar.text = ""
+    }
+}
+
+extension HomeViewController: MoviesCellProtocol {
+    func selectMovie(id: Int) {
+        print(id)
     }
 }

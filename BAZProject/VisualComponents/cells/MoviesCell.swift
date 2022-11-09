@@ -19,11 +19,11 @@ class MoviesCell: UITableViewCell {
     static let idReusable: String = "MoviesCell"
     var moviesCellDelegate: MoviesCellProtocol?
     
-    func configure(_ data: MovieEntity) {
+    func configure(_ data: MovieEntity, moviesCellDelegate: MoviesCellProtocol) {
         self.imgMovies.loadImage(id: data.posterPath)
         self.lblTitle.text = data.title
         self.moviesCellId = data.id
-        self.layer.cornerRadius = 10
+        self.moviesCellDelegate = moviesCellDelegate
     }
     
     @IBAction func selectMovie(_ sender: Any) {
