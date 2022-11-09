@@ -1,5 +1,5 @@
 //
-//  HomeViewController.swift
+//  HomeView.swift
 //  BAZProject
 //
 //  Created by victor manzanero on 07/11/22.

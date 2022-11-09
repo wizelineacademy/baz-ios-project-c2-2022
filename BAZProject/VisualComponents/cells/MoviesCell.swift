@@ -13,8 +13,8 @@ protocol MoviesCellProtocol {
 
 class MoviesCell: UITableViewCell {
     
-    @IBOutlet weak var imgMovies: UIImageView!
-    @IBOutlet weak var lblTitle: UILabel!
+    @IBOutlet weak private var imgMovies: UIImageView!
+    @IBOutlet weak private var lblTitle: UILabel!
     var  moviesCellId: Int?
     static let idReusable: String = "MoviesCell"
     var moviesCellDelegate: MoviesCellProtocol?
