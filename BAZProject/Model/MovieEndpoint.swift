@@ -7,6 +7,10 @@
 
 import Foundation
 
-enum MovieEndpoint {
-    case trending, nowPlaying, popular, topRated, Upcoming
+enum MovieEndpoint: String, CaseIterable {
+    case Trending = "Trending Movies"
+    case NowPlaying = "Now Playing Movies"
+    case Popular = "Popular Movies"
+    case TopRated = "Top Rated Movies"
+    case Upcoming = "Upcoming Movies"
 }
