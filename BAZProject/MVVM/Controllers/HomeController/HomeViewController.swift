@@ -10,16 +10,18 @@ import Bond
 
 class HomeViewController: UIViewController {
 
-   
-    var viewModel: HomeViewModel?
     @IBOutlet weak var movieTable: UITableView!
     @IBOutlet weak var loadingView: UIActivityIndicatorView!
     @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet weak var myPicker: UIPickerView!
-    let data: [String] = ["Trending","Now Playing","Popular","Top Rated","Upcoming"]
     @IBOutlet weak var myToolbar: UIToolbar!
     @IBOutlet weak var btnDone: UIBarButtonItem!
     @IBOutlet weak var btnCancel: UIBarButtonItem!
+    
+    var viewModel: HomeViewModel?
+    lazy var alert: CustomAlertViewController = {
+        return CustomAlertViewController()
+    }()
     
     override func viewDidLoad() {
         self.config()
@@ -58,7 +60,10 @@ class HomeViewController: UIViewController {
         
         self.viewModel?.error.observeNext{ [weak self] response in
             if let error = response {
-                self?.setAlert(title: error.codeMessage ?? "", info: error.message ?? "")
+                self?.alert.alertStyle = .error
+                self?.alert.bodyText = error.message
+                self?.alert.customAlertDelegate = self
+                self?.present(self?.alert ?? UIViewController(), animated: true)
             }
         }.dispose(in: bag)
         
@@ -108,16 +113,6 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
     }
 }
 
-extension HomeViewController {
-    
-    func setAlert(title: String, info: String) {
-        let vc = UIAlertController(title: title, message: info, preferredStyle: .alert)
-        let btnAccept = UIAlertAction(title: "Ok", style: .cancel)
-        vc.addAction(btnAccept)
-        self.present(vc, animated: true)
-    }
-}
-
 extension HomeViewController: UISearchBarDelegate {
     
     func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
@@ -138,7 +133,7 @@ extension HomeViewController: UIPickerViewDelegate, UIPickerViewDataSource {
     }
     
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        return data.count
+        return 5
     }
     
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
@@ -149,4 +144,11 @@ extension HomeViewController: UIPickerViewDelegate, UIPickerViewDataSource {
        self.viewModel?.getType(index: row)
     }
     
+}
+
+extension HomeViewController: CustomProtocol {
+    func doneClick() {
+        self.alert.dismiss(animated: true)
+        self.searchBar.text = ""
+    }
 }

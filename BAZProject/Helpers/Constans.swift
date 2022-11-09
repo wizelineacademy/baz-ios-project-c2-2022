@@ -12,6 +12,9 @@ class Constans {
 }
 
 enum staticLabel {
-    static let genericError = "se ha encontrado un error al consultar la información"
+    static let genericError = "Se ha encontrado un error al consultar la información"
     static let noMovies = "No encontramos coincidencia"
+    static let titleError = "Error"
+    static let titleAlert = "Alerta"
+    static let titleConfirm = "¿Desea continuar?"
 }

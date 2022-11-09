@@ -19,6 +19,10 @@
 		1D7BBA1F291A234000F56442 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D7BBA11291A075100F56442 /* HomeViewController.swift */; };
 		1D7BBA24291A341000F56442 /* ExtensionUIImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D7BBA23291A341000F56442 /* ExtensionUIImageView.swift */; };
 		1D7BBA26291A37EC00F56442 /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D7BBA25291A37EC00F56442 /* LoadingView.swift */; };
+		1D7BBA7E291B7F5600F56442 /* CustomStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D7BBA7D291B7F5600F56442 /* CustomStyle.swift */; };
+		1D7BBA80291B815600F56442 /* CustomProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D7BBA7F291B815600F56442 /* CustomProtocol.swift */; };
+		1D7BBA87291BA18300F56442 /* CustomAlertViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D7BBA85291BA18300F56442 /* CustomAlertViewController.swift */; };
+		1D7BBA88291BA18300F56442 /* CustomAlertViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1D7BBA86291BA18300F56442 /* CustomAlertViewController.xib */; };
 		C30893AE28A2F42B004B1860 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C30893AD28A2F42B004B1860 /* AppDelegate.swift */; };
 		C30893B028A2F42B004B1860 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C30893AF28A2F42B004B1860 /* SceneDelegate.swift */; };
 		C30893B528A2F42B004B1860 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C30893B328A2F42B004B1860 /* Main.storyboard */; };
@@ -48,6 +52,10 @@
 		1D7BBA1D291A212C00F56442 /* Views.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Views.storyboard; sourceTree = "<group>"; };
 		1D7BBA23291A341000F56442 /* ExtensionUIImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionUIImageView.swift; sourceTree = "<group>"; };
 		1D7BBA25291A37EC00F56442 /* LoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingView.swift; sourceTree = "<group>"; };
+		1D7BBA7D291B7F5600F56442 /* CustomStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomStyle.swift; sourceTree = "<group>"; };
+		1D7BBA7F291B815600F56442 /* CustomProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomProtocol.swift; sourceTree = "<group>"; };
+		1D7BBA85291BA18300F56442 /* CustomAlertViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomAlertViewController.swift; sourceTree = "<group>"; };
+		1D7BBA86291BA18300F56442 /* CustomAlertViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CustomAlertViewController.xib; sourceTree = "<group>"; };
 		9B2ABFABABD3FA2D18AF8928 /* Pods-BAZProject.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BAZProject.release.xcconfig"; path = "Target Support Files/Pods-BAZProject/Pods-BAZProject.release.xcconfig"; sourceTree = "<group>"; };
 		C30893AA28A2F42B004B1860 /* BAZProject.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BAZProject.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C30893AD28A2F42B004B1860 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -106,6 +114,7 @@
 		1D7BB9FA2919EFE100F56442 /* VisualComponents */ = {
 			isa = PBXGroup;
 			children = (
+				1D7BBA7C291B7F0A00F56442 /* CustomAlerts */,
 				1D7BBA13291A0B9C00F56442 /* cells */,
 				1D7BBA25291A37EC00F56442 /* LoadingView.swift */,
 			);
@@ -194,6 +203,17 @@
 				1D7BBA23291A341000F56442 /* ExtensionUIImageView.swift */,
 			);
 			path = Helpers;
+			sourceTree = "<group>";
+		};
+		1D7BBA7C291B7F0A00F56442 /* CustomAlerts */ = {
+			isa = PBXGroup;
+			children = (
+				1D7BBA7D291B7F5600F56442 /* CustomStyle.swift */,
+				1D7BBA7F291B815600F56442 /* CustomProtocol.swift */,
+				1D7BBA85291BA18300F56442 /* CustomAlertViewController.swift */,
+				1D7BBA86291BA18300F56442 /* CustomAlertViewController.xib */,
+			);
+			path = CustomAlerts;
 			sourceTree = "<group>";
 		};
 		93C9613A5C369670C266DF8D /* Pods */ = {
@@ -312,6 +332,7 @@
 				C30893BA28A2F42D004B1860 /* LaunchScreen.storyboard in Resources */,
 				C30893DB28A42481004B1860 /* README.md in Resources */,
 				C30893B728A2F42D004B1860 /* Assets.xcassets in Resources */,
+				1D7BBA88291BA18300F56442 /* CustomAlertViewController.xib in Resources */,
 				C383356E28CA917400FCE0D5 /* code-review-rubric.md in Resources */,
 				C30893B528A2F42B004B1860 /* Main.storyboard in Resources */,
 				1D7BBA16291A0C0700F56442 /* MoviesCell.xib in Resources */,
@@ -368,6 +389,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1D7BBA80291B815600F56442 /* CustomProtocol.swift in Sources */,
+				1D7BBA87291BA18300F56442 /* CustomAlertViewController.swift in Sources */,
 				C30893C428A2F845004B1860 /* TrendingViewController.swift in Sources */,
 				1D7BBA0C2919F92B00F56442 /* HomeViewModel.swift in Sources */,
 				1D7BBA24291A341000F56442 /* ExtensionUIImageView.swift in Sources */,
@@ -376,6 +399,7 @@
 				C30893AE28A2F42B004B1860 /* AppDelegate.swift in Sources */,
 				1D7BBA18291A0C4B00F56442 /* MoviesCell.swift in Sources */,
 				C30893B028A2F42B004B1860 /* SceneDelegate.swift in Sources */,
+				1D7BBA7E291B7F5600F56442 /* CustomStyle.swift in Sources */,
 				1D7BBA26291A37EC00F56442 /* LoadingView.swift in Sources */,
 				1D7BBA10291A01D800F56442 /* ErrorResponseEntity.swift in Sources */,
 				C30893E228A425E1004B1860 /* MovieAPI.swift in Sources */,
