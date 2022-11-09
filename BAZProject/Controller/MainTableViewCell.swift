@@ -11,9 +11,11 @@ class MainTableViewCell: UITableViewCell {
 
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var imageField: UIImageView!
+    @IBOutlet weak var textField: UITextView!
     
     func printData(movie: Movie) {
         titleLabel.text = movie.title
+        textField.text = movie.overview
         getImage(movie: movie)
     }
     
