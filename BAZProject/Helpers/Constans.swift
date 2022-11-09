@@ -17,4 +17,7 @@ enum staticLabel {
     static let titleError = "Error"
     static let titleAlert = "Alerta"
     static let titleConfirm = "¿Desea continuar?"
+    static let lblMinutes = "Duracion: "
+    static let lblPoint = "Valoracion: "
+    static let lblvoteCount = "Votos: "
 }

@@ -16,6 +16,7 @@ class Endpoints {
     let popular = "movie/popular?api_key="
     let topRated = "movie/top_rated?api_key="
     let upcoming = "movie/upcoming?api_key="
+    let similar = "similar?api_key="
     
     private init(){}
     
@@ -34,6 +35,14 @@ class Endpoints {
     
     func getCategory(language: String, category: String)-> String {
         return "\(self.moviApi)\(category)\(Constans.apiKey)&language=\(language)&page=1"
+    }
+    
+    func getSimilar(language: String, id: Int)-> String {
+        return "\(self.moviApi)movie/\(id)/\(similar)\(Constans.apiKey)&language=\(language)&page=1"
+    }
+    
+    func getDetail(language: String, id: Int) -> String {
+        return "\(self.moviApi)movie/\(id)?api_key=\(Constans.apiKey)&language=\(language)&page=1"
     }
     
     private func clearQuery(query: String) -> String {

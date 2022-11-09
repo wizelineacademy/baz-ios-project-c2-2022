@@ -14,8 +14,8 @@ struct MovieEntity {
 }
 
 enum LanguageType: String {
-    case en = "English"
-    case es = "Espanol"
+    case en = "en"
+    case es = "es"
 }
 
 enum MovieType: String {

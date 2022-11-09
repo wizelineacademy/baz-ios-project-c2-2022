@@ -29,6 +29,7 @@
 		1D7BBA91291C32A700F56442 /* DetailMovieViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D7BBA90291C32A700F56442 /* DetailMovieViewModel.swift */; };
 		1D7BBA94291C360200F56442 /* suggestionsMovieCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1D7BBA93291C360200F56442 /* suggestionsMovieCell.xib */; };
 		1D7BBA96291C362400F56442 /* suggestionsMovieCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D7BBA95291C362400F56442 /* suggestionsMovieCell.swift */; };
+		1D7BBA98291C4A8B00F56442 /* DetailMovieEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D7BBA97291C4A8B00F56442 /* DetailMovieEntity.swift */; };
 		C30893AE28A2F42B004B1860 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C30893AD28A2F42B004B1860 /* AppDelegate.swift */; };
 		C30893B028A2F42B004B1860 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C30893AF28A2F42B004B1860 /* SceneDelegate.swift */; };
 		C30893B528A2F42B004B1860 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C30893B328A2F42B004B1860 /* Main.storyboard */; };
@@ -68,6 +69,7 @@
 		1D7BBA90291C32A700F56442 /* DetailMovieViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailMovieViewModel.swift; sourceTree = "<group>"; };
 		1D7BBA93291C360200F56442 /* suggestionsMovieCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = suggestionsMovieCell.xib; sourceTree = "<group>"; };
 		1D7BBA95291C362400F56442 /* suggestionsMovieCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = suggestionsMovieCell.swift; sourceTree = "<group>"; };
+		1D7BBA97291C4A8B00F56442 /* DetailMovieEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailMovieEntity.swift; sourceTree = "<group>"; };
 		9B2ABFABABD3FA2D18AF8928 /* Pods-BAZProject.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BAZProject.release.xcconfig"; path = "Target Support Files/Pods-BAZProject/Pods-BAZProject.release.xcconfig"; sourceTree = "<group>"; };
 		C30893AA28A2F42B004B1860 /* BAZProject.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BAZProject.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C30893AD28A2F42B004B1860 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -155,6 +157,7 @@
 			children = (
 				1D7BBA092919F85700F56442 /* MovieEntity.swift */,
 				1D7BBA0F291A01D800F56442 /* ErrorResponseEntity.swift */,
+				1D7BBA97291C4A8B00F56442 /* DetailMovieEntity.swift */,
 			);
 			path = Entitys;
 			sourceTree = "<group>";
@@ -426,6 +429,7 @@
 			files = (
 				1D7BBA80291B815600F56442 /* CustomProtocol.swift in Sources */,
 				1D7BBA8B291BAF2A00F56442 /* CustomButton.swift in Sources */,
+				1D7BBA98291C4A8B00F56442 /* DetailMovieEntity.swift in Sources */,
 				1D7BBA91291C32A700F56442 /* DetailMovieViewModel.swift in Sources */,
 				1D7BBA96291C362400F56442 /* suggestionsMovieCell.swift in Sources */,
 				1D7BBA8D291BAF4B00F56442 /* CustomButtonStyle.swift in Sources */,

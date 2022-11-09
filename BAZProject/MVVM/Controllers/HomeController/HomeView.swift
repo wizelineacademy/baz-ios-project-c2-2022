@@ -152,6 +152,9 @@ extension HomeViewController: CustomProtocol {
 
 extension HomeViewController: MoviesCellProtocol {
     func selectMovie(id: Int) {
-        print(id)
+        guard let vc = UIStoryboard(name: "Views", bundle: .main).instantiateViewController(withIdentifier: "detail") as? DetailMovieView else { return
+        }
+        vc.idMovie = id
+        self.navigationController?.pushViewController( vc, animated: true)
     }
 }
