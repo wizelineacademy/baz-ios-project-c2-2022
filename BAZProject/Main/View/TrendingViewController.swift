@@ -8,8 +8,6 @@ import UIKit
 
 class TrendingViewController: UIViewController {
     
-    @IBOutlet weak var searchBarMovie: UISearchBar!
-    
     @IBOutlet weak var tblMovie: UITableView!{
         didSet{
             tblMovie.delegate = self

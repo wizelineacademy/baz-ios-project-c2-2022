@@ -10,7 +10,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="SearchCell" id="DT6-7F-7pO" customClass="SearchCell" customModule="BAZProject" customModuleProvider="target">
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" restorationIdentifier="SearchCell" reuseIdentifier="SearchCell" id="DT6-7F-7pO" customClass="SearchCell" customModule="BAZProject" customModuleProvider="target">
             <rect key="frame" x="0.0" y="0.0" width="233" height="211"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="Ofn-mn-G81">
@@ -27,11 +27,11 @@
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gsl-Vl-icg">
                         <rect key="frame" x="16" y="13" width="201" height="21"/>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                        <nil key="textColor"/>
+                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <nil key="highlightedColor"/>
                     </label>
                 </subviews>
-                <color key="backgroundColor" red="0.6885259037" green="0.6885259037" blue="0.6885259037" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                <color key="backgroundColor" white="0.66666666666666663" alpha="0.28285389072847683" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                 <constraints>
                     <constraint firstItem="gsl-Vl-icg" firstAttribute="leading" secondItem="Ofn-mn-G81" secondAttribute="leading" constant="16" id="3zc-A2-Gc5"/>
                     <constraint firstAttribute="trailing" secondItem="zqj-in-shl" secondAttribute="trailing" constant="57" id="Ov5-Tq-fj3"/>

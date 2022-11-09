@@ -41,7 +41,7 @@ class MovieAPI {
     ///   - completionHandler: closure to retrive the response
     
     func getMoviesSearch(wordToSearch: String, completionHandler: @escaping ([Movie]?) -> Void) {
-        if let url = URL(string: "\(baseURL)/search/multi?api_key=\(apiKey)&language=es&query=\(wordToSearch)&page=1") {
+        if let url = URL(string: "\(baseURL)/search/movie?api_key=\(apiKey)&language=es&query=\(wordToSearch)&page=1") {
             URLSession.shared.dataTask(with: url) { data, response, error in
                 if error != nil {
                     print("Ha ocurrido un error Search: ", error?.localizedDescription ?? "error")

@@ -7,15 +7,20 @@
 
 import UIKit
 
+struct SearchResultCellViewData {
+    let title: String
+    let posterPath: String
+}
+
 class SearchCell: UICollectionViewCell {
     @IBOutlet weak var imvPoster: UIImageView!
     @IBOutlet weak var lblTitle: UILabel!
     
     private var movieAPI = MovieAPI()
     
-    func getInfoCollection(movie: Movie) {
+    func getInfoCollection(movie: SearchResultCellViewData) {
         lblTitle.text = movie.title
-        let imageMovie = UIImage(data: movieAPI.getImage(urlImage: movie.poster_path)) ?? UIImage(named: "poster")
+        let imageMovie = UIImage(data: movieAPI.getImage(urlImage: movie.posterPath)) ?? UIImage(named: "poster")
         imvPoster.image = imageMovie
     }
 }

@@ -7,9 +7,6 @@
 import Foundation
 
 struct ResultsMovie: Decodable {
-    let page: Int
-    let total_pages: Int
-    let total_results: Int
     let results: [Movie]
 }
 
@@ -31,4 +28,16 @@ struct Movie: Decodable {
     let release_date: String
     let vote_average: Double
     let vote_count : Int
+}
+
+
+// MARK: - MovieSearch
+struct MovieSearch: Codable {
+    let results: [FoundMovies]
+}
+
+// MARK: - FoundMovies
+struct FoundMovies: Codable {
+    let name: String?
+    let id: Int?
 }
