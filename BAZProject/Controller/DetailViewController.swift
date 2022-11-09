@@ -13,6 +13,7 @@ class DetailViewController: UIViewController {
     @IBOutlet weak var textField: UITextView!
     
     var movie: Movie?
+    private let imageUrl: String = "https://image.tmdb.org/t/p/w500"
     
     override func viewDidLoad() {
         if let movie = movie {
@@ -23,7 +24,7 @@ class DetailViewController: UIViewController {
     }
     
     func getImage(pathUrl: String) {
-        guard let imageURL = URL(string: "https://image.tmdb.org/t/p/w500" + pathUrl) else { fatalError("Sorry, error") }
+        guard let imageURL = URL(string: imageUrl + pathUrl) else { fatalError("Sorry, error") }
         DispatchQueue.global().async {
             guard let imageData = try? Data(contentsOf: imageURL) else { return }
             let image = UIImage(data: imageData)

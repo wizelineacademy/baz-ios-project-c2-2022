@@ -19,6 +19,7 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
     private var movies: [MoviesWithCategory] = []
     private var searchMovies: [Movie] = []
     private var filteredSearchMovies: [Movie] = []
+    private let detailIdentifier: String = "DetailViewController"
     
     let searchController = UISearchController()
     
@@ -43,8 +44,8 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
         api.getMovies()
         api.getSearchMovies()
         
-        tableView.register(UINib(nibName: "MainTableViewCell", bundle: nil), forCellReuseIdentifier: "cell")
-        searchCollection.register(UINib(nibName: "SearchCell", bundle: nil), forCellWithReuseIdentifier: "searchCell")
+        tableView.register(UINib(nibName: "MainTableViewCell", bundle: nil), forCellReuseIdentifier: MainTableViewCell.cellIdentifier)
+        searchCollection.register(UINib(nibName: "SearchCell", bundle: nil), forCellWithReuseIdentifier: SearchCollectionViewCell.cellIdentifier)
     }
     
     func getAllMovies(movies: [MoviesWithCategory]) {
@@ -132,7 +133,7 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
-        let resultViewController = storyBoard.instantiateViewController(withIdentifier: "DetailViewController") as! DetailViewController
+        let resultViewController = storyBoard.instantiateViewController(withIdentifier: detailIdentifier) as! DetailViewController
         resultViewController.movie = filteredSearchMovies[indexPath.row]
         self.navigationController?.pushViewController(resultViewController, animated: true)
         tableView.deselectRow(at: indexPath, animated: true)
