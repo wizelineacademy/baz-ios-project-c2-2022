@@ -59,6 +59,24 @@ class MovieAPI {
         completionHandler(nil)
     }
     
+    public func getMovieSection(section: String, idMovie: Int, completion: @escaping ([Movie]?) -> ()){
+        if let urlString = URL(string: "\(baseURL)/movie/\(idMovie)/\(section)?api_key=\(apiKey)&language=es") {
+            URLSession.shared.dataTask(with: urlString) { data, response, error in
+                if let error = error {
+                    print("Ha ocurrido un error Search: ", error.localizedDescription )
+                }
+                do {
+                    guard let json = data else { return }
+                    let movies = try JSONDecoder().decode(ResultsMovie.self, from: json)
+                    print("Data: ", movies)
+                    completion(movies.results)
+                } catch {
+                    print("Ha ocurrido un error Search: \(error.localizedDescription)")
+                }
+            }.resume()
+        }
+    }
+    
     /// - Parameters:
     ///  - urlImage: String with the url of the image to download
     /// - Return:  information of the downloaded image of type Data

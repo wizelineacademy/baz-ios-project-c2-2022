@@ -41,3 +41,15 @@ struct Movie: Codable {
         case voteCount = "vote_count"
     }
 }
+
+// MARK: - SearchResultCellViewData
+struct SearchResultCellViewData {
+    let title: String
+    let posterPath: String
+}
+
+public enum MoreMovies: String {
+    case similar
+    case recommended = "recommendations"
+}
+

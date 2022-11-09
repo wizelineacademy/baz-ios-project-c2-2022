@@ -11,6 +11,8 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="DetailViewController" customModule="BAZProject" customModuleProvider="target">
             <connections>
+                <outlet property="collectionRecommended" destination="RIG-hk-GeR" id="PzM-HR-4Ke"/>
+                <outlet property="collectionSimilar" destination="DFL-FL-fEQ" id="Dsf-u7-gED"/>
                 <outlet property="imvPoster" destination="mgC-MD-L4V" id="uWc-n6-2LK"/>
                 <outlet property="lblTitle" destination="XL1-Jb-W80" id="cys-YS-INv"/>
                 <outlet property="txtReseña" destination="6uU-wX-6ir" id="RKu-A1-i4F"/>
