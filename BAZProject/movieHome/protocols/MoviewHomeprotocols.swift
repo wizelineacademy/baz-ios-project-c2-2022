@@ -11,20 +11,18 @@ protocol MoviewHomeViewToPresenterProtocol{
     var view: MovieHomePresenterToViewProtocol? {get set}
     var interactor: MovieHomePresenterToInteractorProtocol? {get set}
     var router: MovieHomePresenterToRouterProtocol? {get set}
-    func getMoviesHomeData()
-    func setUrlToImage(url: String) -> UIImage!
+    func callApiMoviesHomeData()
     
 }
 protocol MovieHomePresenterToViewProtocol{
-    func getListMovies(listMovies: [Movie])
+    func callApiListMovies(listMovies: [Movie])
 }
 protocol MovieHomePresenterToRouterProtocol{
     static func createModule(view: TrendingViewController)
 }
 protocol MovieHomePresenterToInteractorProtocol{
     var presenter:MovieHomeInteractorToPresenterProtocol? {get set}
-    func getMoviesInt()
-    func setUrlToImage(url: String) -> UIImage!
+    func callMoviesApi()
 }
 protocol MovieHomeInteractorToPresenterProtocol{
     func resultMoviesList(movies: [Movie])
@@ -35,7 +33,7 @@ protocol MovieHomeDataExternalToInteractorProtocol{
 }
 protocol MovieAPIProtocol{
     var interactor: MovieHomeDataExternalToInteractorProtocol? {get set}
-    func getMovies()
+    func setMovies()
 }
 protocol MovieAPIConstantsProtocol{
     var APIKEY: String { get }
@@ -44,6 +42,13 @@ protocol MovieAPIConstantsProtocol{
     var URLIMAGE: String { get }
 }
 
+protocol MovieCollectionViewCellProtocol{
+    var movieItem: String { get set }
+}
+
+protocol MovieDetailDataViewControllerProtoco{
+    func setDataMovie(movieData: Movie)
+}
 extension MovieAPIConstantsProtocol{
     var APIKEY: String { return "f6cd5c1a9e6c6b965fdcab0fa6ddd38a"}
     
@@ -53,4 +58,6 @@ extension MovieAPIConstantsProtocol{
     
     var URLIMAGE: String { return "https://image.tmdb.org/t/p/w500/"}
 }
+
+
 

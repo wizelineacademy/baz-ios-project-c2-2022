@@ -9,7 +9,7 @@ import Foundation
 final class MovieAPI: MovieAPIProtocol,MovieAPIConstantsProtocol {
     var interactor: MovieHomeDataExternalToInteractorProtocol?
     /// This function does not receive parameters, call the service of movies
-    func getMovies() {
+    func setMovies() {
         guard let url = URL(string: self.APIMOVIELISTURL)
         else {
             return

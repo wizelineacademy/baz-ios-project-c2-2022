@@ -6,39 +6,37 @@
 //
 
 import UIKit
-final class TrendingViewController: UITableViewController {
+class TrendingViewController: UIViewController {
     var presenter: MoviewHomeViewToPresenterProtocol?
-    
+    //var collectionViewProtocol: MovieCollectionViewCellProtocol?
+    let collectionViewFlowLayout: UICollectionView = {
+        let layout = UICollectionViewFlowLayout()
+        layout.itemSize = .init(width: 300, height: 180)
+        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
+        collectionView.translatesAutoresizingMaskIntoConstraints = false
+        return collectionView
+    }()
     var movies: [Movie] = []
     override func viewDidLoad() {
         super.viewDidLoad()
         MovieHomeRouter.createModule(view: self)
+        presenter?.callApiMoviesHomeData()
+        initCollectionView()
         
-        presenter?.getMoviesHomeData()
-    }
-}
-
-extension TrendingViewController: MovieHomePresenterToViewProtocol{
-    func getListMovies(listMovies: [Movie]) {
-        movies = listMovies
-        self.tableView.reloadData()
-    }
-}
-extension TrendingViewController{
-    
-    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return movies.count
     }
     
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        tableView.dequeueReusableCell(withIdentifier: "TrendingTableViewCell")!
-    }
+    func initCollectionView(){
+        collectionViewFlowLayout.delegate = self
+        collectionViewFlowLayout.dataSource = self
+        collectionViewFlowLayout.register(MovieListCollectionViewCell.self,forCellWithReuseIdentifier: MovieListCollectionViewCell.identefier)
+        view.addSubview(collectionViewFlowLayout)
+        
+        NSLayoutConstraint.activate([
+            collectionViewFlowLayout.topAnchor.constraint(equalTo: view.layoutMarginsGuide.topAnchor),
+            collectionViewFlowLayout.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            collectionViewFlowLayout.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            collectionViewFlowLayout.bottomAnchor.constraint(equalTo: view.bottomAnchor)
+        ])
     
-    override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        var config = UIListContentConfiguration.cell()
-        config.text = movies[indexPath.row].title
-        config.image = presenter?.setUrlToImage(url: movies[indexPath.row].backdrop)
-        cell.contentConfiguration = config
     }
-    
 }
