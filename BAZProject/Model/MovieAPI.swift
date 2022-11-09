@@ -8,6 +8,7 @@ import Foundation
 
 protocol MovieApiProtocol {
     func getAllMovies(movies: [MoviesWithCategory])
+    func getSearchMovies(movies: [Movie])
 }
 
 class MovieAPI {
@@ -34,15 +35,15 @@ class MovieAPI {
         movieApiDelegate?.getAllMovies(movies: allMovies)
     }
     
-    func getSearchMovies() -> [Movie] {
+    func getSearchMovies() {
         guard let url = URL(string: "https://api.themoviedb.org/3/movie/upcoming?api_key=" + apiKey),
               let data = try? Data(contentsOf: url)
-        else { return [] }
+        else { return }
         var searchMovies: [Movie] = []
         if let api = try? JSONDecoder().decode(API.self, from: data) {
             searchMovies = api.results
         }
-        return searchMovies
+        movieApiDelegate?.getSearchMovies(movies: searchMovies)
     }
     
     func setUrl(endPoint: MovieEndpoint) {

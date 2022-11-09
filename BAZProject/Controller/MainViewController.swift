@@ -41,7 +41,7 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
         let api = MovieAPI()
         api.movieApiDelegate = self
         api.getMovies()
-        searchMovies = api.getSearchMovies()
+        api.getSearchMovies()
         
         tableView.register(UINib(nibName: "MainTableViewCell", bundle: nil), forCellReuseIdentifier: "cell")
         searchCollection.register(UINib(nibName: "SearchCell", bundle: nil), forCellWithReuseIdentifier: "searchCell")
@@ -49,6 +49,10 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
     
     func getAllMovies(movies: [MoviesWithCategory]) {
         self.movies = movies
+    }
+    
+    func getSearchMovies(movies: [Movie]) {
+        self.searchMovies = movies
     }
     
     // MARK: - TableView Methods
