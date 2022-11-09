@@ -8,6 +8,7 @@
 import Foundation
 
 struct MoviesWithCategory {
+    var open: Bool = true
     let genre: String
     let movies: [Movie]
     

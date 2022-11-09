@@ -35,6 +35,7 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
         
         navigationItem.searchController = searchController
         navigationItem.title = "FILMS"
+        tableView.separatorStyle = .none
         searchController.searchResultsUpdater = self
         
         let api = MovieAPI()
@@ -48,6 +49,9 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
     // MARK: - TableView Methods
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        if !movies[section].open {
+            return 0
+        }
         return movies[section].movies.count
     }
     
@@ -61,8 +65,40 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as? MainTableViewCell else { return UITableViewCell() }
-        cell.printData(movie: movies[indexPath.section].movies[indexPath.row])
+        let sectionMovie = movies[indexPath.section]
+        let cellMovie = sectionMovie.movies[indexPath.row]
+        cell.printData(movie: cellMovie)
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let button = UIButton()
+        button.tag = section
+        button.setTitle(movies[section].genre, for: .normal)
+        button.setTitleColor(.white, for: .normal)
+        button.backgroundColor = UIColor(red: 52/255, green: 78/255, blue: 65/255, alpha: 1)
+        button.addTarget(self, action: #selector(self.openSection), for: .touchUpInside)
+        return button
+    }
+    
+    @objc fileprivate func openSection(button: UIButton) {
+        let section = button.tag
+        var indexPaths = [IndexPath]()
+        for row in movies[section].movies.indices {
+            let indexPathToDelete = IndexPath(row: row, section: section)
+            indexPaths.append(indexPathToDelete)
+        }
+        
+        let isOpen = movies[section].open
+        movies[section].open = !isOpen
+        
+        if isOpen {
+            tableView.deleteRows(at: indexPaths, with: .fade)
+            button.backgroundColor = .darkGray
+        } else {
+            tableView.insertRows(at: indexPaths, with: .fade)
+            button.backgroundColor = UIColor(red: 52/255, green: 78/255, blue: 65/255, alpha: 1)
+        }
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -97,7 +133,7 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
     
     func updateSearchResults(for searchController: UISearchController) {
         guard let text = searchController.searchBar.text else { return }
-        if text.isEmpty {
+        if text.isEmpty && !searchController.isActive {
             searchCollection.isHidden = true
             filteredSearchMovies = searchMovies
         } else {
