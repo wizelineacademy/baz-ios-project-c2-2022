@@ -84,6 +84,6 @@ extension SearchViewController : UISearchBarDelegate {
 
 extension Movie {
     func mapToViewData() -> SearchResultCellViewData {
-        SearchResultCellViewData(title: self.title, posterPath: self.poster_path)
+        SearchResultCellViewData(title: self.title, posterPath: self.posterPath)
     }
 }

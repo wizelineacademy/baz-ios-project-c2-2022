@@ -25,7 +25,7 @@ class DetailViewController: UIViewController {
         lblTitle.text = dataMovie?.title
         txtReseña.text = dataMovie?.overview
         if let dataMovie = dataMovie {
-            let imageMovie = UIImage(data: movieAPI.getImage(urlImage: dataMovie.poster_path)) ?? UIImage(named: "poster")
+            let imageMovie = UIImage(data: movieAPI.getImage(urlImage: dataMovie.posterPath)) ?? UIImage(named: "poster")
             imvPoster.image = imageMovie
         }
     }
