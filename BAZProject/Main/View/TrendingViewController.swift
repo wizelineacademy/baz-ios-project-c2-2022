@@ -16,9 +16,11 @@ class TrendingViewController: UIViewController {
         }
     }
     
+    // MARK: - Properties
     let movieApi = MovieAPI()
     let identifier = "TrendingTableViewCell"
     
+    //MARK: Override methods
     override func viewDidLoad() {
         super.viewDidLoad()
         movieApi.getMovies()
@@ -29,8 +31,9 @@ class TrendingViewController: UIViewController {
         }
     }
     
+    /// Register the custom cell to Trending
     private func registerNibs() {
-        tblMovie.register(UINib(nibName: "TrendingTableViewCell", bundle: nil), forCellReuseIdentifier: "TrendingTableViewCell")
+        tblMovie.register(UINib(nibName: identifier, bundle: nil), forCellReuseIdentifier: identifier)
     }
 }
 

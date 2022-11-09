@@ -13,14 +13,16 @@ class DetailViewController: UIViewController {
     @IBOutlet weak var txtReseña: UITextView!
     @IBOutlet weak var imvPoster: UIImageView!
     
+    // MARK: - Properties
     var dataMovie: Movie?
     private var movieAPI = MovieAPI()
     
+    //MARK: Override methods
     override func viewDidLoad() {
         super.viewDidLoad()
         configurateDetailView()
     }
-    
+    /// Setting of the detail of the movies for the cells
     private func configurateDetailView() {
         lblTitle.text = dataMovie?.title
         txtReseña.text = dataMovie?.overview

@@ -18,22 +18,26 @@ class SearchViewController: UIViewController {
             registerNibs()
         }
     }
-    
+    // MARK: - Properties
     let movieAPI = MovieAPI()
     private var searchResults: [Movie] = []
     var searchActive : Bool = false
     let identifier = "SearchCell"
     
+    //MARK: Override methods
     override func viewDidLoad() {
         super.viewDidLoad()
         self.searchBarMovie.delegate = self
-        
     }
     
+    /// Register the custom cell to Search
     private func registerNibs() {
-        collectionMovie.register(UINib(nibName: "SearchCell", bundle: nil), forCellWithReuseIdentifier: "SearchCell")
+        collectionMovie.register(UINib(nibName: identifier, bundle: nil), forCellWithReuseIdentifier: identifier)
     }
     
+    /// Makes a query to the service
+    ///  - Parameter :
+    ///  - wordToSearch:   String to search in request
     private func getMoviesSearch(wordToSearch: String) {
         movieAPI.getMoviesSearch(wordToSearch: wordToSearch) { [weak self] movies in
             if let movies = movies {
@@ -45,7 +49,7 @@ class SearchViewController: UIViewController {
         }
     }
 }
-
+// MARK: - CollectionView Delegate
 extension SearchViewController: UICollectionViewDataSource, UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return searchResults.count
@@ -60,6 +64,7 @@ extension SearchViewController: UICollectionViewDataSource, UICollectionViewDele
     }
 }
 
+// MARK: - Implement SearchBar
 extension SearchViewController : UISearchBarDelegate {
     func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
         searchActive = true
