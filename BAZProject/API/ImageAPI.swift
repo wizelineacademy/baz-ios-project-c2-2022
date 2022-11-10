@@ -8,18 +8,24 @@
 import Foundation
 import UIKit
 
-final class ImageAPI: GenericRequestProtocol {
+final class ImageAPI {
     /// Download image
     /// - Parameter name: name of image to download
     /// - Returns: Image of type UIIMage
     func getImage(with name: String, completion: @escaping (Result<UIImage, Error>) -> Void){
         let image = UIImage(named: "poster") ?? UIImage()
-        guard let url = URL(string: "https://image.tmdb.org/t/p/w500\(name)"),
-                let data = try? Data(contentsOf: url) else {
-                    completion(Result.failure(APIError.urlError))
-                    return
+        let urlStr = "https://image.tmdb.org/t/p/w500\(name)"
+        guard let url = URL(string: urlStr) else {
+            completion(Result.failure(APIError.urlError))
+            return
         }
-        let imgResult = UIImage(data: data) ?? image
-        completion(Result.success(imgResult))
+        URLSession.shared.dataTask(with: URLRequest(url: url)) { data, response, error in
+            guard let data = data else {
+                completion(Result.failure(APIError.urlError))
+                return
+            }
+            let imgResult = UIImage(data: data) ?? image
+            completion(Result.success(imgResult))
+        }.resume()
     }
 }
