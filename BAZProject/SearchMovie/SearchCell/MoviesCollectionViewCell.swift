@@ -11,6 +11,7 @@ final class MoviesCollectionViewCell: UICollectionViewCell {
 
     @IBOutlet weak var imageMovie: UIImageView!
     @IBOutlet weak var titleMovie: UILabel!
+    @IBOutlet weak var imgLiked: UIImageView!
     
     static let identifier = "movieCollection"
     let imageApi = ImageAPI()
@@ -19,7 +20,7 @@ final class MoviesCollectionViewCell: UICollectionViewCell {
         super.awakeFromNib()
     }
 
-    func setUpCell(_ Element: Movie) {
+    func setUpCell(_ Element: Movie, _ liked: Bool) {
         let posterImage = Element.posterPath ?? "poster"
         titleMovie.text = Element.title
         imageApi.getImage(with: posterImage) { result in
@@ -30,5 +31,7 @@ final class MoviesCollectionViewCell: UICollectionViewCell {
                 self.imageMovie.image = UIImage(named: "poster")
             }
         }
+        let imageLiked = liked ? UIImage(systemName: "heart.fill") : UIImage(systemName: "heart")
+        self.imgLiked.image = imageLiked
     }
 }

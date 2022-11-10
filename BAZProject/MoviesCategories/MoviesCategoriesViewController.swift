@@ -114,7 +114,8 @@ extension MoviesCategoriesViewController: UICollectionViewDataSource {
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let vc = DetailsMovieRouter.createModuleDetailsMovie(with: movies[indexPath.row], and: self)
+        let liked = likeMovieIndex.contains(movies[indexPath.row].id)
+        let vc = DetailsMovieRouter.createModuleDetailsMovie(with: movies[indexPath.row], and: self, liked: liked)
         self.present(vc, animated: true)
     }
     
@@ -153,10 +154,12 @@ extension MoviesCategoriesViewController: UIPickerViewDataSource {
 }
 
 extension MoviesCategoriesViewController: DetailsMovieDelegate {
-
-    func returnIdMovie(_ idMovie: Int) {
+    func addIdMovie(_ idMovie: Int) {
         self.likeMovieIndex.append(idMovie)
         self.collectionMovies.reloadData()
-    }    
-   
+    }
+    func removeIdMoview(_ idMovie: Int) {
+        self.likeMovieIndex = self.likeMovieIndex.filter { $0 != idMovie}
+        self.collectionMovies.reloadData()
+    }
 }

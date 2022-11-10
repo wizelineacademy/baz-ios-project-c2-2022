@@ -12,7 +12,7 @@ final class SearchMovieViewController: UICollectionViewController, Storyboarded{
     private let itemsPerRow: CGFloat = 2.0
     private let sectionInsets = UIEdgeInsets(top: 50.0, left: 20.0, bottom: 50.0, right: 20.0)
     private var movies: [Movie] = []
-    private var likeMovieIndex: Int = -1
+    private var likeMovieIndex: [Int] = []
     private let movieApi = SearchAPI()
     
     override func viewDidLoad() {
@@ -21,7 +21,8 @@ final class SearchMovieViewController: UICollectionViewController, Storyboarded{
     }
     
     private func showMovieDetails(_ Element: Movie) {
-        let vc = DetailsMovieRouter.createModuleDetailsMovie(with: Element, and: self)
+        let likedMovie = likeMovieIndex.contains(Element.id)
+        let vc = DetailsMovieRouter.createModuleDetailsMovie(with: Element, and: self, liked: likedMovie)
         self.present(vc, animated: true)
     }
     
@@ -41,7 +42,8 @@ extension SearchMovieViewController {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MoviesCollectionViewCell.identifier, for: indexPath) as? MoviesCollectionViewCell else {
             return UICollectionViewCell()
         }
-        cell.setUpCell(movies[indexPath.row])
+        let likedMovie = likeMovieIndex.contains(movies[indexPath.row].id)
+        cell.setUpCell(movies[indexPath.row], likedMovie)
         return cell
     }
     
@@ -94,10 +96,15 @@ extension SearchMovieViewController: UITextFieldDelegate {
 }
 
 extension SearchMovieViewController: DetailsMovieDelegate {
-    func returnIdMovie(_ idMovie: Int) {
-        self.likeMovieIndex = idMovie
+    func addIdMovie(_ idMovie: Int) {
+        self.likeMovieIndex.append(idMovie)
         self.collectionView.reloadData()
     }
+    
+    func removeIdMoview(_ idMovie: Int) {
+        self.collectionView.reloadData()
+    }
+    
 }
 
 
