@@ -12,10 +12,12 @@ final class MoviesCategoriesViewController: UIViewController {
     private let itemsPerRow: CGFloat = 2.0
     private var movies: [Movie] = []
     private let movieApi = MovieAPI()
+    private var likeMovieIndex: [Int] = []
     
     @IBOutlet weak var btnSearch: UIButton!
     @IBOutlet weak var pickerSelector: UIPickerView!
     @IBOutlet weak var collectionMovies: UICollectionView!
+    @IBOutlet weak var lblCountMovies: UILabel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -42,7 +44,7 @@ final class MoviesCategoriesViewController: UIViewController {
                 }
             }
         })
-        NotificationCenter.default.addObserver(self, selector: #selector(moviesCount(with:)), name: NSNotification.Name(rawValue: "contadorToVCCategory"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(moviesCount(_:)), name: .countMovieDetails, object: nil)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -54,11 +56,13 @@ final class MoviesCategoriesViewController: UIViewController {
     }
     
     private func setupElements() {
+        let countMovies = UserDefaults.standard.integer(forKey: "countMovies")
         self.pickerSelector.dataSource = self
         self.pickerSelector.delegate = self
         self.collectionMovies.delegate = self
         self.collectionMovies.dataSource = self
         self.collectionMovies.register(UINib(nibName: MoviesCategoryCollectionViewCell.nameCell, bundle: nil), forCellWithReuseIdentifier: MoviesCategoryCollectionViewCell.identifier)
+        self.lblCountMovies.text = "Peliculas vistas: \(countMovies)"
     }
     
     private func changePickerSelected(_ value: Int) {
@@ -83,9 +87,9 @@ final class MoviesCategoriesViewController: UIViewController {
         }
     }
     
-    @objc private func moviesCount(with notification: Notification) {
-        guard let userInfo = notification.object as? [String:Any ] else { return }
-        print(userInfo)
+    @objc private func moviesCount(_ notification: Notification) {
+        let countMovies = UserDefaults.standard.integer(forKey: "countMovies")
+        self.lblCountMovies.text = "Peliculas vistas: \(countMovies)"
     }
     
     @IBAction private func tapSearch() {
@@ -104,12 +108,13 @@ extension MoviesCategoriesViewController: UICollectionViewDataSource {
         guard let cell = collectionMovies.dequeueReusableCell(withReuseIdentifier: MoviesCategoryCollectionViewCell.identifier, for: indexPath) as? MoviesCategoryCollectionViewCell else {
             return UICollectionViewCell()
         }
-        cell.setUpCell(movies[indexPath.row])
+        let liked = likeMovieIndex.contains(movies[indexPath.row].id)
+        cell.setUpCell(movies[indexPath.row], liked)
         return cell
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let vc = DetailsMovieRouter.createModuleDetailsMovie(with: movies[indexPath.row], from: .moviesCategory)
+        let vc = DetailsMovieRouter.createModuleDetailsMovie(with: movies[indexPath.row], and: self)
         self.present(vc, animated: true)
     }
     
@@ -145,4 +150,13 @@ extension MoviesCategoriesViewController: UIPickerViewDataSource {
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
         return CategoryFilterMovie(rawValue: row)?.title
     }
+}
+
+extension MoviesCategoriesViewController: DetailsMovieDelegate {
+
+    func returnIdMovie(_ idMovie: Int) {
+        self.likeMovieIndex.append(idMovie)
+        self.collectionMovies.reloadData()
+    }    
+   
 }

@@ -10,6 +10,7 @@ final class TrendingViewController: UITableViewController {
 
     private var movies: [Movie] = []
     private let movieApi = MovieAPI()
+    private var imageApi = ImageAPI()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -53,7 +54,14 @@ extension TrendingViewController {
         var config = UIListContentConfiguration.cell()
         let posterPath = movies[indexPath.row].posterPath ?? "poster"
         config.text = movies[indexPath.row].title
-        config.image = movieApi.getImage(with: posterPath)
+        imageApi.getImage(with: posterPath) { result in
+            switch result {
+            case .success(let image):
+                config.image = image
+            case .failure(_):
+                config.image = UIImage(named: "poster")
+            }
+        }
         cell.contentConfiguration = config
     }
     

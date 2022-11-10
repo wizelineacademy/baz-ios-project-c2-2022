@@ -13,7 +13,7 @@ final class MoviesCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var titleMovie: UILabel!
     
     static let identifier = "movieCollection"
-    let apiMovie = MovieAPI()
+    let imageApi = ImageAPI()
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -22,6 +22,13 @@ final class MoviesCollectionViewCell: UICollectionViewCell {
     func setUpCell(_ Element: Movie) {
         let posterImage = Element.posterPath ?? "poster"
         titleMovie.text = Element.title
-        imageMovie.image = apiMovie.getImage(with: posterImage)
+        imageApi.getImage(with: posterImage) { result in
+            switch result {
+            case .success(let image):
+                self.imageMovie.image = image
+            case .failure(_):
+                self.imageMovie.image = UIImage(named: "poster")
+            }
+        }
     }
 }

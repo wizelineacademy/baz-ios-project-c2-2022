@@ -26,15 +26,24 @@
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="NCr-4w-reV">
                                         <rect key="frame" x="0.0" y="0.0" width="114" height="122"/>
                                     </imageView>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hjO-JO-kke">
+                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" translatesAutoresizingMaskIntoConstraints="NO" id="Ppz-nX-w4h">
                                         <rect key="frame" x="0.0" y="122" width="114" height="40"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="40" id="hGJ-yt-PNp"/>
-                                        </constraints>
-                                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                                        <nil key="textColor"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hjO-JO-kke">
+                                                <rect key="frame" x="0.0" y="0.0" width="96.5" height="40"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="40" id="hGJ-yt-PNp"/>
+                                                </constraints>
+                                                <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="heart" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="6gP-6a-ALR">
+                                                <rect key="frame" x="96.5" y="1.5" width="17.5" height="37.5"/>
+                                                <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            </imageView>
+                                        </subviews>
+                                    </stackView>
                                 </subviews>
                             </stackView>
                         </subviews>
@@ -58,9 +67,13 @@
             <size key="customSize" width="130" height="178"/>
             <connections>
                 <outlet property="imageMovie" destination="NCr-4w-reV" id="5fh-Bs-M9Q"/>
+                <outlet property="imgLiked" destination="6gP-6a-ALR" id="tcg-OY-c0c"/>
                 <outlet property="titleMovie" destination="hjO-JO-kke" id="fav-XZ-cxK"/>
             </connections>
             <point key="canvasLocation" x="195.6521739130435" y="94.419642857142847"/>
         </collectionViewCell>
     </objects>
+    <resources>
+        <image name="heart" catalog="system" width="128" height="109"/>
+    </resources>
 </document>

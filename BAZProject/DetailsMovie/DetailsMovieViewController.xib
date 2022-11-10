@@ -12,6 +12,7 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="DetailsMovieViewController" customModule="BAZProject" customModuleProvider="target">
             <connections>
                 <outlet property="backgroundImage" destination="dKC-j8-Z0x" id="L0c-Dq-au7"/>
+                <outlet property="btnLikedMovie" destination="kGi-sh-Brf" id="FGs-dS-faX"/>
                 <outlet property="descriptionLbl" destination="VSm-Gb-SR2" id="K0l-lQ-Lp6"/>
                 <outlet property="titleLbl" destination="NkE-8l-4jJ" id="SV7-tN-Ga4"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
@@ -31,14 +32,28 @@
                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" alignment="top" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="M0c-Jy-awb">
                     <rect key="frame" x="25" y="254" width="364" height="508"/>
                     <subviews>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NkE-8l-4jJ">
-                            <rect key="frame" x="0.0" y="0.0" width="41.5" height="204"/>
-                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                            <nil key="textColor"/>
-                            <nil key="highlightedColor"/>
-                        </label>
+                        <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" translatesAutoresizingMaskIntoConstraints="NO" id="NTR-e8-q3n">
+                            <rect key="frame" x="0.0" y="0.0" width="62" height="213"/>
+                            <subviews>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kGi-sh-Brf">
+                                    <rect key="frame" x="0.0" y="0.0" width="20.5" height="213"/>
+                                    <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                    <state key="normal" image="heart" catalog="system"/>
+                                    <connections>
+                                        <action selector="clickLikedMovie" destination="-1" eventType="touchUpInside" id="oo8-mY-eci"/>
+                                    </connections>
+                                </button>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NkE-8l-4jJ">
+                                    <rect key="frame" x="20.5" y="0.0" width="41.5" height="213"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                    <nil key="textColor"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                            </subviews>
+                        </stackView>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VSm-Gb-SR2">
-                            <rect key="frame" x="0.0" y="214" width="41.5" height="294"/>
+                            <rect key="frame" x="0.0" y="223" width="41.5" height="285"/>
                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                             <nil key="textColor"/>
                             <nil key="highlightedColor"/>
@@ -61,6 +76,7 @@
         </view>
     </objects>
     <resources>
+        <image name="heart" catalog="system" width="128" height="109"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

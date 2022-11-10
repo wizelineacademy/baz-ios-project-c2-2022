@@ -7,26 +7,27 @@
 
 import UIKit
 
-final class SearchMovieViewController: UICollectionViewController, Storyboarded {
+final class SearchMovieViewController: UICollectionViewController, Storyboarded{
     
     private let itemsPerRow: CGFloat = 2.0
     private let sectionInsets = UIEdgeInsets(top: 50.0, left: 20.0, bottom: 50.0, right: 20.0)
     private var movies: [Movie] = []
-    private let movieApi = MovieAPI()
+    private var likeMovieIndex: Int = -1
+    private let movieApi = SearchAPI()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        NotificationCenter.default.addObserver(self, selector: #selector(moviesCount(with:)), name: NSNotification.Name(rawValue: "contadorToVCSearch"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(moviesCount(_:)), name: .countMovieDetails, object: nil)
     }
     
     private func showMovieDetails(_ Element: Movie) {
-        let vc = DetailsMovieRouter.createModuleDetailsMovie(with: Element, from: .searchMovie)
+        let vc = DetailsMovieRouter.createModuleDetailsMovie(with: Element, and: self)
         self.present(vc, animated: true)
     }
     
-    @objc private func moviesCount(with notification: Notification) {
-        guard let userInfo = notification.object as? [String:Any ]else { return }
-        print(userInfo)
+    @objc private func moviesCount(_ notification: Notification) {
+        let countMovies = UserDefaults.standard.integer(forKey: "countMovies")
+        print("Contador: \(countMovies)")
     }
 }
 
@@ -89,6 +90,13 @@ extension SearchMovieViewController: UITextFieldDelegate {
             }
         }
         return true
+    }
+}
+
+extension SearchMovieViewController: DetailsMovieDelegate {
+    func returnIdMovie(_ idMovie: Int) {
+        self.likeMovieIndex = idMovie
+        self.collectionView.reloadData()
     }
 }
 

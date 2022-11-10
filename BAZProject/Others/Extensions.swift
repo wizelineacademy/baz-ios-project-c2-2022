@@ -56,12 +56,14 @@ extension UIViewController: IndicatorActivity {
         dialogMessage.addAction(ok)
         self.present(dialogMessage, animated: true)
     }
+    
+    func upCount(by idMovie: Int) {
+        
+    }
 }
 
 extension Notification.Name {
-    static var notificationName: Notification.Name {
-        return .init(rawValue: "contador")
-    }
+    static var countMovieDetails = Notification.Name(rawValue: "countMovies")
 }
 
 func ranmdomInterval(with interval: TimeInterval, and variancia: Double) -> TimeInterval {

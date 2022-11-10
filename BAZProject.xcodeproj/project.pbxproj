@@ -23,6 +23,9 @@
 		1B943A692914391D00383C0F /* MoviesCategoriesViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1B943A672914391D00383C0F /* MoviesCategoriesViewController.xib */; };
 		1B943A7129143EDD00383C0F /* MoviesCategoryCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B943A6F29143EDD00383C0F /* MoviesCategoryCollectionViewCell.swift */; };
 		1B943A7229143EDD00383C0F /* MoviesCategoryCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1B943A7029143EDD00383C0F /* MoviesCategoryCollectionViewCell.xib */; };
+		1BFA3BA2291D644F006746E4 /* GenericRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BFA3BA1291D644F006746E4 /* GenericRequest.swift */; };
+		1BFA3BA4291D6637006746E4 /* SearchAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BFA3BA3291D6637006746E4 /* SearchAPI.swift */; };
+		1BFA3BA6291D6670006746E4 /* ImageAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BFA3BA5291D6670006746E4 /* ImageAPI.swift */; };
 		C30893AE28A2F42B004B1860 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C30893AD28A2F42B004B1860 /* AppDelegate.swift */; };
 		C30893B028A2F42B004B1860 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C30893AF28A2F42B004B1860 /* SceneDelegate.swift */; };
 		C30893B528A2F42B004B1860 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C30893B328A2F42B004B1860 /* Main.storyboard */; };
@@ -52,6 +55,9 @@
 		1B943A672914391D00383C0F /* MoviesCategoriesViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MoviesCategoriesViewController.xib; sourceTree = "<group>"; };
 		1B943A6F29143EDD00383C0F /* MoviesCategoryCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoviesCategoryCollectionViewCell.swift; sourceTree = "<group>"; };
 		1B943A7029143EDD00383C0F /* MoviesCategoryCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MoviesCategoryCollectionViewCell.xib; sourceTree = "<group>"; };
+		1BFA3BA1291D644F006746E4 /* GenericRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenericRequest.swift; sourceTree = "<group>"; };
+		1BFA3BA3291D6637006746E4 /* SearchAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchAPI.swift; sourceTree = "<group>"; };
+		1BFA3BA5291D6670006746E4 /* ImageAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageAPI.swift; sourceTree = "<group>"; };
 		C30893AA28A2F42B004B1860 /* BAZProject.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BAZProject.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C30893AD28A2F42B004B1860 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C30893AF28A2F42B004B1860 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -136,6 +142,17 @@
 			path = Others;
 			sourceTree = "<group>";
 		};
+		1BFA3BA0291D642C006746E4 /* API */ = {
+			isa = PBXGroup;
+			children = (
+				C30893E028A425E1004B1860 /* MovieAPI.swift */,
+				1BFA3BA1291D644F006746E4 /* GenericRequest.swift */,
+				1BFA3BA3291D6637006746E4 /* SearchAPI.swift */,
+				1BFA3BA5291D6670006746E4 /* ImageAPI.swift */,
+			);
+			path = API;
+			sourceTree = "<group>";
+		};
 		C30893A128A2F42B004B1860 = {
 			isa = PBXGroup;
 			children = (
@@ -157,6 +174,7 @@
 		C30893AC28A2F42B004B1860 /* BAZProject */ = {
 			isa = PBXGroup;
 			children = (
+				1BFA3BA0291D642C006746E4 /* API */,
 				1B943A73291459EC00383C0F /* Others */,
 				1B943A65291438E900383C0F /* MoviesCategories */,
 				1B245189291173C8009B5BF1 /* SearchMovie */,
@@ -165,7 +183,6 @@
 				C30893AF28A2F42B004B1860 /* SceneDelegate.swift */,
 				C30893C328A2F845004B1860 /* TrendingViewController.swift */,
 				C30893E128A425E1004B1860 /* Movie.swift */,
-				C30893E028A425E1004B1860 /* MovieAPI.swift */,
 				C30893B328A2F42B004B1860 /* Main.storyboard */,
 				C30893B828A2F42D004B1860 /* LaunchScreen.storyboard */,
 				C30893B628A2F42D004B1860 /* Assets.xcassets */,
@@ -255,16 +272,19 @@
 				C30893AE28A2F42B004B1860 /* AppDelegate.swift in Sources */,
 				1B18E2E52908378A0097673D /* DetailsMovieInteractor.swift in Sources */,
 				1B943A682914391D00383C0F /* MoviesCategoriesViewController.swift in Sources */,
+				1BFA3BA6291D6670006746E4 /* ImageAPI.swift in Sources */,
 				1B24518F291176E0009B5BF1 /* MoviesCollectionViewCell.swift in Sources */,
 				1B18E2E12908376C0097673D /* DetailsMovieRouter.swift in Sources */,
 				1B18E2DF290837500097673D /* DetailsMovieProtocols.swift in Sources */,
 				C30893B028A2F42B004B1860 /* SceneDelegate.swift in Sources */,
 				1B943A642914377500383C0F /* Enums.swift in Sources */,
 				1B24518B291173EC009B5BF1 /* SearchMovieViewController.swift in Sources */,
+				1BFA3BA4291D6637006746E4 /* SearchAPI.swift in Sources */,
 				C30893E228A425E1004B1860 /* MovieAPI.swift in Sources */,
 				1B943A7129143EDD00383C0F /* MoviesCategoryCollectionViewCell.swift in Sources */,
 				1B18E2DC290834740097673D /* DetailsMovieViewController.swift in Sources */,
 				C30893E328A425E1004B1860 /* Movie.swift in Sources */,
+				1BFA3BA2291D644F006746E4 /* GenericRequest.swift in Sources */,
 				1B8322B72919E0CA00097EA7 /* Extensions.swift in Sources */,
 				1B0DEE44291B0B6800A2E52A /* MovieResponse.swift in Sources */,
 				1B18E2E32908377B0097673D /* DetailsMoviePresenter.swift in Sources */,
@@ -413,8 +433,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = LBR8HP6556;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = BAZProject/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -430,6 +452,7 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.wizeline.BAZProject;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -441,8 +464,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = LBR8HP6556;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = BAZProject/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -458,6 +483,7 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.wizeline.BAZProject;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
