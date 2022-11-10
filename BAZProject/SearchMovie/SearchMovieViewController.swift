@@ -68,6 +68,7 @@ extension SearchMovieViewController: UITextFieldDelegate {
         guard let text = textField.text else {
             return true
         }
+        view.endEditing(true)
         let indicatorAnimating = indicator
         indicatorAnimating.startAnimating()
         movieApi.searchMovie(with: text) { resultado in
