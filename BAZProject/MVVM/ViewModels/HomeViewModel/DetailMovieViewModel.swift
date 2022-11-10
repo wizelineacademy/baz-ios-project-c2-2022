@@ -13,15 +13,15 @@ protocol DetailMovieViewModelProtocol {
     func getSimilar(id: Int)
     var response: Observable<DetailMovieEntity?> { get }
     var error: Observable<ErrorResponseEntity?> { get }
-    var loading: Observable<typeLoading> { get }
+    var loading: Observable<TypeLoading> { get }
     var similar: Observable<[MovieEntity]?> { get }
 }
 
-class DetailMovieViewModel: DetailMovieViewModelProtocol {
+final class DetailMovieViewModel: DetailMovieViewModelProtocol {
     private var usecase: ApiUseCaseProtocol?
     var response: Observable<DetailMovieEntity?> = Observable(nil)
     var error: Observable<ErrorResponseEntity?> = Observable(nil)
-    var loading: Observable<typeLoading> = Observable(.fullScreen)
+    var loading: Observable<TypeLoading> = Observable(.fullScreen)
     var similar: Observable<[MovieEntity]?> = Observable(nil)
     
     init(usecase: ApiUseCaseProtocol) {

@@ -12,22 +12,22 @@ protocol HomeViewModelProtocol {
     func getMovies()
     func searchMovie(query: String, language: LanguageType)
     func getMoviesCategory(language: LanguageType)
-    func getText(index: Int)-> String
+    func getText(index: Int) -> String
     func getType(index: Int)
     var response: Observable<[MovieEntity]?> { get }
     var error: Observable<ErrorResponseEntity?> { get }
-    var loading: Observable<typeLoading> { get }
+    var loading: Observable<Bool> { get }
     var search: Observable<[MovieEntity]?> { get }
     var category: Observable<MovieType?> { get }
     var title: Observable<String?> { get }
 }
 
-class HomeViewModel: HomeViewModelProtocol {
-    
+final class HomeViewModel: HomeViewModelProtocol {
+   
     private var usecase: ApiUseCaseProtocol?
     var response: Observable<[MovieEntity]?> = Observable(nil)
     var error: Observable<ErrorResponseEntity?> = Observable(nil)
-    var loading: Observable<typeLoading> = Observable(.fullScreen)
+    var loading: Observable<Bool> = Observable(true)
     var search: Observable<[MovieEntity]?> = Observable(nil)
     var category: Observable<MovieType?> = Observable(nil)
     var title: Observable<String?> = Observable(nil)
@@ -42,30 +42,30 @@ class HomeViewModel: HomeViewModelProtocol {
         }, erro: { error in
             self.error.value = error
         }, completion: {
-            self.loading.value = .hide
+            self.loading.value = true
         } )
     }
     
     func searchMovie(query: String, language: LanguageType = .es) {
-        self.loading.value = .fullScreen
+        self.loading.value = false
         self.usecase?.searchMovie(query: query, language: language, success: { response in
             if response?.count == 0 {
-                self.error.value = ErrorResponseEntity(code: "001", message: staticLabel.noMovies)
+                self.error.value = ErrorResponseEntity(code: "001", message: StaticLabel.noMovies)
             } else {
                 self.response.value = response
             }
         }, erro: { error in
             self.error.value = error
         }, completion: {
-            self.loading.value = .hide
+            self.loading.value = true
         })
     }
     
     func getMoviesCategory(language: LanguageType = .es) {
-        self.loading.value = .fullScreen
+        self.loading.value = false
         self.usecase?.categoryMovie( category: self.category.value?.endPoint ?? "", language: language, success: { response in
             if response?.count == 0 {
-                self.error.value = ErrorResponseEntity(code: "001", message: staticLabel.noMovies)
+                self.error.value = ErrorResponseEntity(code: "001", message: StaticLabel.noMovies)
             } else {
                 self.response.value = response
                 self.title.value = self.category.value?.rawValue
@@ -73,7 +73,7 @@ class HomeViewModel: HomeViewModelProtocol {
         }, erro: { error in
             self.error.value = error
         }, completion: {
-            self.loading.value = .hide
+            self.loading.value = true
         })
     }
     

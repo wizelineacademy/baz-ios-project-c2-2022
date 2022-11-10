@@ -13,17 +13,19 @@ extension UIImageView {
     
     func loadImage(id: String) {
         image = UIImage()
+        let defaultImage = UIImage(named: "poster")
         let strUrl = "\(Endpoints.shared.imgApi)\(id)"
         if let img = cache.object(forKey: NSString(string: strUrl)) {
             image = img
             return
         }
         guard let url = URL(string: strUrl) else {
+            self.image = defaultImage
             return
         }
         URLSession.shared.dataTask(with: url) { data, response, error in
-            if let err = error {
-                print(err)
+            if let _ = error {
+                self.image = defaultImage
             } else {
                 DispatchQueue.main.async {
                     guard let data = data,

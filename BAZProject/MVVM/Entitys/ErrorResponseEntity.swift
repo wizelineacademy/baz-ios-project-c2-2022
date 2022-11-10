@@ -13,6 +13,6 @@ struct ErrorResponseEntity: Codable {
     var codeMessage: String?
     
     static var genericError: ErrorResponseEntity {
-        return ErrorResponseEntity(code: "", message: staticLabel.genericError)
+        return ErrorResponseEntity(code: "", message: StaticLabel.genericError)
     }
 }

@@ -7,7 +7,7 @@
 
 import UIKit
 
-enum typeLoading {
+enum TypeLoading {
     case fullScreen
     case hide
 }

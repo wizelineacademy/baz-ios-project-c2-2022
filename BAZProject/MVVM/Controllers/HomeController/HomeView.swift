@@ -8,7 +8,7 @@
 import UIKit
 import Bond
 
-class HomeViewController: UIViewController {
+final class HomeViewController: UIViewController {
 
     @IBOutlet weak var movieTable: UITableView!
     @IBOutlet weak var loadingView: UIActivityIndicatorView!
@@ -18,60 +18,53 @@ class HomeViewController: UIViewController {
     @IBOutlet weak var btnDone: UIBarButtonItem!
     @IBOutlet weak var btnCancel: UIBarButtonItem!
     
+    weak var detailNavigato: DetailNavigator?
     var viewModel: HomeViewModel?
     lazy var alert: CustomAlertViewController = {
         return CustomAlertViewController()
     }()
     
     override func viewDidLoad() {
+        super.viewDidLoad()
         self.config()
         self.setupObservables()
         self.setupObservablesAction()
     }
     
     func config() {
-        self.viewModel = HomeViewModel(usecase: ApiUseCase())
-        self.movieTable.register( UINib(nibName: MoviesCell.idReusable , bundle: nil) , forCellReuseIdentifier: MoviesCell.idReusable)
-        self.movieTable.delegate = self
-        self.movieTable.dataSource = self
-        self.searchBar.delegate = self
-        self.myPicker.delegate = self
-        self.myPicker.dataSource = self
-        self.viewModel?.getMovies()
+        movieTable.register( UINib(nibName: MoviesCell.idReusable , bundle: nil) , forCellReuseIdentifier: MoviesCell.idReusable)
+        movieTable.delegate = self
+        movieTable.dataSource = self
+        searchBar.delegate = self
+        myPicker.delegate = self
+        myPicker.dataSource = self
+        viewModel?.getMovies()
     }
     
     fileprivate func setupObservables() {
-        self.viewModel?.response.observeNext{ [weak self] response in
-            if let _ = response {
-                self?.movieTable.reloadData()
-            }
+        guard let viewModel = viewModel else { return }
+        viewModel.response.observeNext{ [weak self] response in
+            guard let _ =  response, let self = self else { return }
+            self.movieTable.reloadData()
         }.dispose(in: bag)
         
-        self.viewModel?.loading.observeNext{ [weak self] response in
-            switch response {
-            case .fullScreen:
-                self?.loadingView.isHidden = false
-                self?.loadingView.startAnimating()
-            case .hide:
-                self?.loadingView.isHidden = true
-                self?.loadingView.stopAnimating()
-            }
+        viewModel.loading.observeNext{ [weak self] response in
+            guard let self = self else { return }
+            self.loadingView.isHidden = response
         }.dispose(in: bag)
         
-        self.viewModel?.error.observeNext{ [weak self] response in
-            if let error = response {
-                self?.alert.alertStyle = .error
-                self?.alert.bodyText = error.message
-                self?.alert.customAlertDelegate = self
-                self?.present(self?.alert ?? UIViewController(), animated: true)
-            }
+        viewModel.error.observeNext{ [weak self] response in
+            guard let response =  response, let self = self else { return }
+            self.alert.alertStyle = .error
+            self.alert.bodyText = response.message
+            self.alert.doneCustomAlertDelegate = self
+            self.present(self.alert , animated: true)
         }.dispose(in: bag)
         
-        self.viewModel?.title.observeNext { [weak self] response in
-            if let _ = response {
-                self?.navigationItem.title = response
-                self?.enablePicker()
-            }
+        viewModel.title.observeNext { [weak self] response in
+            guard let response =  response, let self = self else { return }
+            self.navigationItem.title = response
+            self.enablePicker()
         }.dispose(in: bag)
     }
     
@@ -84,7 +77,7 @@ class HomeViewController: UIViewController {
             self?.enablePicker()
         }.dispose(in: bag)
         
-        self.btnDone.reactive.tap.observeNext{[weak self] in
+        self.btnDone.reactive.tap.observeNext{ [weak self] in
             self?.viewModel?.getMoviesCategory()
         }.dispose(in: bag)
     }
@@ -143,7 +136,7 @@ extension HomeViewController: UIPickerViewDelegate, UIPickerViewDataSource {
     
 }
 
-extension HomeViewController: CustomProtocol {
+extension HomeViewController: DoneCustomAlertProtocol {
     func doneClick() {
         self.alert.dismiss(animated: true)
         self.searchBar.text = ""
@@ -152,9 +145,6 @@ extension HomeViewController: CustomProtocol {
 
 extension HomeViewController: MoviesCellProtocol {
     func selectMovie(id: Int) {
-        guard let vc = UIStoryboard(name: "Views", bundle: .main).instantiateViewController(withIdentifier: "detail") as? DetailMovieView else { return
-        }
-        vc.idMovie = id
-        self.navigationController?.pushViewController( vc, animated: true)
+        self.detailNavigato?.gotoDetail(id: id)
     }
 }

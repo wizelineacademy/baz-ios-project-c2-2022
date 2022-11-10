@@ -7,7 +7,7 @@
 
 import UIKit
 
-class DetailMovieView: UIViewController {
+final class DetailMovieView: UIViewController {
     
     var idMovie: Int?
     var viewModel: DetailMovieViewModel?
@@ -29,41 +29,40 @@ class DetailMovieView: UIViewController {
     }
     
     func config() {
-        self.viewModel = DetailMovieViewModel(usecase: ApiUseCase())
-        self.viewModel?.getDetail(id: self.idMovie ?? 0)
-        self.viewModel?.getSimilar(id: self.idMovie ?? 0)
-        self.sugestionsMoviesColletion.register( UINib(nibName: suggestionsMovieCell.idReusable , bundle: nil) , forCellWithReuseIdentifier: suggestionsMovieCell.idReusable)
-        self.sugestionsMoviesColletion.delegate = self
-        self.sugestionsMoviesColletion.dataSource = self
+        viewModel?.getDetail(id: self.idMovie ?? 0)
+        viewModel?.getSimilar(id: self.idMovie ?? 0)
+        sugestionsMoviesColletion.register( UINib(nibName: SuggestionsMovieCell.idReusable , bundle: nil) , forCellWithReuseIdentifier: SuggestionsMovieCell.idReusable)
+        sugestionsMoviesColletion.delegate = self
+        sugestionsMoviesColletion.dataSource = self
     }
     
     private func setupObservables() {
-        self.viewModel?.response.observeNext {[weak self] response in
-            if let _ = response {
-                self?.setDetail(data: response!)
-            }
+        guard let viewModel = viewModel else { return }
+        viewModel.response.observeNext {[weak self] response in
+            guard let response =  response, let self = self else { return }
+            self.setDetail(data: response)
         }.dispose(in: bag)
         
-        self.viewModel?.error.observeNext{ [weak self] response in
-            if let error = response {
-                self?.alert.alertStyle = .error
-                self?.alert.bodyText = error.message
-                self?.present(self?.alert ?? UIViewController(), animated: true)
-            }
+        viewModel.error.observeNext{ [weak self] response in
+            guard let response =  response, let self = self else { return }
+            self.alert.alertStyle = .error
+            self.alert.bodyText = response.message
+            self.present(self.alert , animated: true)
         }.dispose(in: bag)
         
-        self.viewModel?.similar.observeNext { [weak self] response in
-                self?.sugestionsMoviesColletion.reloadData()
+        viewModel.similar.observeNext { [weak self] response in
+            guard let response =  response, let self = self else { return }
+            self.sugestionsMoviesColletion.reloadData()
         }.dispose(in: bag)
     }
     
     private func setDetail(data: DetailMovieEntity) {
-        self.titleMovie.text = data.title
-        self.imgMovie.loadImage(id: data.posterPath)
-        self.voteAverage.text = "\(staticLabel.lblPoint)\(data.voteAverage)"
-        self.timeMovie.text = "\(staticLabel.lblMinutes)\(data.runtime)"
-        self.voteCount.text = "\(staticLabel.lblvoteCount)\(data.voteCount)"
-        self.descriptionMovie.text = data.overview
+        titleMovie.text = data.title
+        imgMovie.loadImage(id: data.posterPath)
+        voteAverage.text = "\(StaticLabel.lblPoint)\(data.voteAverage)"
+        timeMovie.text = "\(StaticLabel.lblMinutes)\(data.runtime)"
+        voteCount.text = "\(StaticLabel.lblvoteCount)\(data.voteCount)"
+        descriptionMovie.text = data.overview
     }
 }
 
@@ -74,7 +73,7 @@ extension DetailMovieView: UICollectionViewDelegate, UICollectionViewDataSource 
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = self.viewModel?.similar.value else { return UICollectionViewCell () }
-        if let movieCell = collectionView.dequeueReusableCell(withReuseIdentifier: suggestionsMovieCell.idReusable, for: indexPath) as? suggestionsMovieCell {
+        if let movieCell = collectionView.dequeueReusableCell(withReuseIdentifier: SuggestionsMovieCell.idReusable, for: indexPath) as? SuggestionsMovieCell {
             let item = cell[indexPath.row]
             movieCell.configure(item)
             return movieCell

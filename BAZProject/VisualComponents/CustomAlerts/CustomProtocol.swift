@@ -7,7 +7,10 @@
 
 import Foundation
 
-@objc protocol CustomProtocol: AnyObject {
+protocol DoneCustomAlertProtocol: AnyObject {
     func doneClick()
-    @objc optional func cancelClick()
+}
+
+protocol CancelCustomAlertProtocol: AnyObject {
+    func cancelClick()
 }

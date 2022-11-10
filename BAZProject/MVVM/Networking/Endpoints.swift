@@ -26,23 +26,23 @@ class Endpoints {
     }()
     
     func getSearchUrl(language: String, query: String)-> String {
-        return "\(self.moviApi)\(search)\(Constans.apiKey)&language=\(language)&query=\(clearQuery(query: query))&page=1"
+        return "\(self.moviApi)\(search)\(Constants.apiKey)&language=\(language)&query=\(clearQuery(query: query))&page=1"
     }
     
     func getTrendingMovie()-> String {
-        return "\(self.moviApi)\(self.trending)\(Constans.apiKey)"
+        return "\(self.moviApi)\(self.trending)\(Constants.apiKey)"
     }
     
     func getCategory(language: String, category: String)-> String {
-        return "\(self.moviApi)\(category)\(Constans.apiKey)&language=\(language)&page=1"
+        return "\(self.moviApi)\(category)\(Constants.apiKey)&language=\(language)&page=1"
     }
     
     func getSimilar(language: String, id: Int)-> String {
-        return "\(self.moviApi)movie/\(id)/\(similar)\(Constans.apiKey)&language=\(language)&page=1"
+        return "\(self.moviApi)movie/\(id)/\(similar)\(Constants.apiKey)&language=\(language)&page=1"
     }
     
     func getDetail(language: String, id: Int) -> String {
-        return "\(self.moviApi)movie/\(id)?api_key=\(Constans.apiKey)&language=\(language)&page=1"
+        return "\(self.moviApi)movie/\(id)?api_key=\(Constants.apiKey)&language=\(language)&page=1"
     }
     
     private func clearQuery(query: String) -> String {

@@ -7,8 +7,7 @@
 
 import UIKit
 
-class suggestionsMovieCell: UICollectionViewCell {
-    
+class SuggestionsMovieCell: UICollectionViewCell {
     
     @IBOutlet weak private var titleSuggestions: UILabel!
     @IBOutlet weak private var imgSuggestions: UIImageView!

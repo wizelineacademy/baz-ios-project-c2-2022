@@ -6,10 +6,14 @@
 
 import UIKit
 
+protocol DetailNavigator: AnyObject {
+    func gotoDetail(id: Int)
+}
+
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     var window: UIWindow?
-
+    let navigationController = UINavigationController()
 
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         // Use this method to optionally configure and attach the UIWindow `window` to the provided UIWindowScene `scene`.
@@ -18,7 +22,10 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         guard let windowScene = (scene as? UIWindowScene) else { return }
         let window = UIWindow(windowScene: windowScene)
         let welcomeViewController = UIStoryboard(name: "Views", bundle: .main).instantiateViewController(withIdentifier: "list") as? HomeViewController
-        let navigationController = UINavigationController(rootViewController: welcomeViewController!)
+        welcomeViewController?.viewModel = HomeViewModel(usecase: ApiUseCase())
+        welcomeViewController?.detailNavigato = self
+        navigationController.viewControllers = [welcomeViewController!]
+        
         window.rootViewController = navigationController
         window.makeKeyAndVisible()
         self.window = window
@@ -51,7 +58,15 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // Use this method to save data, release shared resources, and store enough scene-specific state information
         // to restore the scene back to its current state.
     }
+}
 
-
+extension SceneDelegate: DetailNavigator {
+    func gotoDetail(id: Int) {
+        guard let vc = UIStoryboard(name: "Views", bundle: .main).instantiateViewController(withIdentifier: "detail") as? DetailMovieView else { return
+        }
+        vc.idMovie = id
+        vc.viewModel = DetailMovieViewModel(usecase: ApiUseCase())
+        navigationController.pushViewController( vc, animated: true)
+    }
 }
 
