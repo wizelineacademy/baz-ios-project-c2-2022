@@ -10,11 +10,11 @@ class MovieAPI: MovieApiDelegate {
     let httpMeth = "GET"
     /// Funcion getInformation obtiene la informacion de una api de peliculas dependiendo la URL que manden
     ///  - Parameter api: Seleccionas el tipo de api que solicitaras
-    func getInformation(_ api: MovieFeed) -> [MovieResults] {
+    func getInformation(_ api: MovieFeed) -> [Any] {
         let semaphore = DispatchSemaphore (value: 0)
         var request = api.request
         request.httpMethod = httpMeth
-        var infoJson: [MovieResults] = []
+        var infoJson: [Any] = []
         let task = URLSession.shared.dataTask(with: request) { data, response, error in
             guard let httpResponse = response as? HTTPURLResponse else {
                 self.showError(.requestFailed)
@@ -24,8 +24,13 @@ class MovieAPI: MovieApiDelegate {
                 let decoder = JSONDecoder()
                 if let data = data {
                     do {
-                        let json = try decoder.decode(MovieApiModel.self, from: data)
-                        infoJson = json.results
+                        if api.name == "Credits" {
+                            let json = try decoder.decode(CastApiModel.self, from: data)
+                            infoJson = json.cast
+                        } else {
+                            let json = try decoder.decode(MovieApiModel.self, from: data)
+                            infoJson = json.results
+                        }
                     } catch {
                         self.showError(.jsonConversionFailure)
                     }
@@ -44,9 +49,10 @@ class MovieAPI: MovieApiDelegate {
     /// Funcion getMovies Obtiene las peliculas y su informacion mas importante
     ///- Parameter api: Seleccionas el tipo de api que solicitaras
     func getMovies(_ api: MovieFeed) -> [Movie] {
-        let jsonInfo: [MovieResults] = self.getInformation(api)
+        let movieInfo = self.getInformation(api) as! [MovieResults]
         var movies: [Movie] = []
-        for result in jsonInfo {
+        for result in movieInfo {
+            let castInfo = self.getInformation(.Credits(movieID: result.id ?? 0)) as! [CastResults]
             if let id = result.id,
                let title = result.title,
                let posterPath = result.poster_path,
@@ -54,8 +60,8 @@ class MovieAPI: MovieApiDelegate {
                let voteAverage = result.vote_average,
                let overview = result.overview,
                let releaseDate = result.release_date,
-               let backdropPath = result.backdrop_path{
-                movies.append(Movie(id: id, title: title, posterPath: posterPath, originalTitle: originalTitle, voteAverage: voteAverage, overview: overview, releaseDate: releaseDate, backdropPath: backdropPath))}
+               let backdropPath = result.backdrop_path {
+                movies.append(Movie(id: id, title: title, posterPath: posterPath, originalTitle: originalTitle, voteAverage: voteAverage, overview: overview, releaseDate: releaseDate, backdropPath: backdropPath, cast: castInfo))}
         }
         return movies
     }

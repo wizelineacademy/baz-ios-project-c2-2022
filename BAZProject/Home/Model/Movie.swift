@@ -15,6 +15,7 @@ struct Movie {
     let overview: String
     let releaseDate: String
     let backdropPath: String
+    let cast: [CastResults]
 }
 
 struct MovieApiModel: Codable {
@@ -37,4 +38,18 @@ struct MovieResults: Codable {
     var vote_count: Int?
     var release_date: String?
     var video: Bool?
+}
+
+struct CastApiModel: Codable {
+    var cast: [CastResults]
+}
+
+struct CastResults: Codable {
+    var adult: Bool?
+    var gender: Int?
+    var id: Int?
+    var name: String?
+    var profile_path: String?
+    var character: String?
+    
 }

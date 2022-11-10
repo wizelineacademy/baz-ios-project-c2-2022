@@ -15,21 +15,21 @@ enum MovieFeed {
     case UpComing
     case Keyword(query: String)
     case Search(query: String)
-    case Reviews(movieID: String)
-    case Similar(movieID: String)
-    case Recommendations(movieID: String)
+    case Reviews(movieID: Int)
+    case Similar(movieID: Int)
+    case Recommendations(movieID: Int)
+    case Credits(movieID: Int)
 }
 extension MovieFeed: Endpoint {
     
     var apiKey: String {
         switch self {
-        case .Trendig, .NowPlaying, .Popular, .TopRated, .UpComing, .Reviews, .Similar, .Recommendations:
+        case .Trendig, .NowPlaying, .Popular, .TopRated, .UpComing, .Reviews, .Similar, .Recommendations, .Credits:
             return "api_key=f6cd5c1a9e6c6b965fdcab0fa6ddd38a&language=es&region=MX&"
         case .Keyword(let query), .Search(let query):
             return "api_key=f6cd5c1a9e6c6b965fdcab0fa6ddd38a&language=es&region=MX&query=\(query)"
         }
     }
-    
     
     var base: String {
         return "https://api.themoviedb.org"
@@ -57,6 +57,8 @@ extension MovieFeed: Endpoint {
             return "/3/movie/\(movieID)/similar"
         case .Recommendations(let movieID):
             return "/3/movie/\(movieID)/recommendations"
+        case .Credits(let movieID):
+            return "/3/movie/\(movieID)/credits"
         }
     }
     
@@ -82,6 +84,8 @@ extension MovieFeed: Endpoint {
             return "Similar"
         case .Recommendations:
             return "Recommendations"
+        case .Credits:
+            return "Credits"
         }
     }
 }

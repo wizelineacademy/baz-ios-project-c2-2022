@@ -8,6 +8,8 @@
 import UIKit
 
 class HomeViewController: UIViewController, PrincipalView {
+    
+    var movies: Int = 0
      
     @IBOutlet weak var segmentControl: UISegmentedControl! {
         didSet {
@@ -27,12 +29,14 @@ class HomeViewController: UIViewController, PrincipalView {
             tableViewMovies.reloadData()
         }
     }
+    @IBOutlet weak var movieNotification: UIButton!
     let homeViewModel = ViewModelMovie()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         configurateView()
         refreshData()
+        NotificationCenter.default.addObserver(self, selector: #selector(changeValueOfNotification(_:)), name: NSNotification.Name(rawValue: "notificationValue"), object: nil)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -56,6 +60,23 @@ class HomeViewController: UIViewController, PrincipalView {
             }
         }
     }
+    
+    @IBAction func showDetailOfNotification(_ sender: Any) {
+        sendAlert("Tus películas", "Estas son las peliculas consultadas hasta ahora: \(movies)")
+    }
+    
+    @objc func changeValueOfNotification(_ notification: Notification) {
+        movies += 1
+        movieNotification.tintColor = UIColor(red: CGFloat.random(in: 0...1), green: CGFloat.random(in: 0...1), blue: CGFloat.random(in: 0...1), alpha: 1)
+        movieNotification.setTitle("\(movies)", for: .normal)
+    }
+    
+    func sendAlert(_ title: String,_ message: String) {
+        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+        self.present(alert, animated: true, completion: nil)
+    }
+    
 }
 
 extension HomeViewController: UITableViewDelegate, UITableViewDataSource {

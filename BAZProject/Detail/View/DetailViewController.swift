@@ -21,12 +21,17 @@ class DetailViewController: UIViewController, GenericView {
     let detailViewModel = DetailModelView()
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.title = "Detail"
         self.tabBarController?.tabBar.isHidden = true
         configurateView()
+        sendNotification()
+    }
+    
+    private func sendNotification() {
+        NotificationCenter.default.post(name: NSNotification.Name(rawValue: "notificationValue"), object: nil)
     }
     
     func configurateView() {
+        self.title = "Detail"
         stackView.layer.cornerRadius = 15
         BackDetailTopView.addBlurToView()
         BackDetailTopView.backgroundColor = UIColor(patternImage: UIImage(data: self.detailViewModel.getImage(urlImage: detailViewModel.dataArray?.backdropPath ?? "")) ?? UIImage())
@@ -36,5 +41,6 @@ class DetailViewController: UIViewController, GenericView {
         fechaEstrenoDetail.text = "  \(self.detailViewModel.dataArray?.releaseDate ?? "")"
         descDetailView.text = "\(self.detailViewModel.dataArray?.overview ?? "")"
         imageMovie.image = UIImage(data: self.detailViewModel.getImage(urlImage: detailViewModel.dataArray?.posterPath ?? "")) ?? UIImage(named: "poster")
+//        detailViewModel.dataArray?.cast[0].
     }
 }

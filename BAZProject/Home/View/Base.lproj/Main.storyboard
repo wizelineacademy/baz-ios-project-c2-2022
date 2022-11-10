@@ -268,7 +268,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gtH-lH-G3A" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2276.8115942028985" y="677.67857142857144"/>
+            <point key="canvasLocation" x="1761" y="595"/>
         </scene>
         <!--Home-->
         <scene sceneID="B6W-zq-ADf">
@@ -330,8 +330,22 @@
                             <constraint firstItem="Y3e-Xz-cip" firstAttribute="top" secondItem="3rs-BF-ii6" secondAttribute="top" id="aS1-iX-m7f"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="Home" id="PEB-Zv-c1I"/>
+                    <navigationItem key="navigationItem" title="Home" id="PEB-Zv-c1I">
+                        <barButtonItem key="rightBarButtonItem" style="plain" id="r7p-Uw-Pcp">
+                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" id="shb-GT-PVd">
+                                <rect key="frame" x="302" y="5" width="92" height="34.5"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" image="bell.badge" catalog="system" title="0"/>
+                                <connections>
+                                    <action selector="showDetailOfNotification:" destination="gJ9-X3-A7i" eventType="touchUpInside" id="Tha-VK-liO"/>
+                                </connections>
+                            </button>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
+                        <outlet property="movieNotification" destination="shb-GT-PVd" id="ZHn-AW-XGP"/>
                         <outlet property="segmentControl" destination="6zd-kX-fBC" id="kRA-67-mqQ"/>
                         <outlet property="tableViewMovies" destination="b5H-5a-ZfM" id="JIp-b9-LlP"/>
                     </connections>
@@ -380,6 +394,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="bell.badge" catalog="system" width="128" height="124"/>
         <image name="homekit" catalog="system" width="128" height="106"/>
         <image name="magnifyingglass" catalog="system" width="128" height="115"/>
         <systemColor name="systemBackgroundColor">
