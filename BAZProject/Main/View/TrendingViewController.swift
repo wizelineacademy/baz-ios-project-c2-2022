@@ -8,7 +8,7 @@ import UIKit
 
 class TrendingViewController: UIViewController {
     
-    @IBOutlet weak var tblMovie: UITableView!{
+    @IBOutlet weak var tblMovie: UITableView! {
         didSet{
             tblMovie.delegate = self
             tblMovie.dataSource = self

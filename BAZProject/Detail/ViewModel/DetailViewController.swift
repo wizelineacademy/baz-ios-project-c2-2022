@@ -25,18 +25,18 @@ class DetailViewController: UIViewController {
     
     var arraySimilar: [Movie] = [] {
         didSet {
-        DispatchQueue.main.async {
-            self.collectionSimilar.reloadData()
+            DispatchQueue.main.async {
+                self.collectionSimilar.reloadData()
+            }
         }
     }
-}
     var arrayRecommended: [Movie] = [] {
         didSet {
-        DispatchQueue.main.async {
-            self.collectionRecommended.reloadData()
+            DispatchQueue.main.async {
+                self.collectionRecommended.reloadData()
+            }
         }
     }
-}
     
     //MARK: Override methods
     override func viewDidLoad() {
@@ -50,14 +50,14 @@ class DetailViewController: UIViewController {
     /// Register the custom cell to show recomended movies in collectionRecomend
     func registerCollectionRecomended() {
         collectionRecommended.register(UINib(nibName: identifier,
-                                        bundle: Bundle(for: DetailCell.self)),
-                                  forCellWithReuseIdentifier: identifier)
+                                             bundle: Bundle(for: DetailCell.self)),
+                                       forCellWithReuseIdentifier: identifier)
     }
     /// Register the custom cell to show recomended movies in collectionSimilar
     func registerCollectionSimilar() {
         collectionSimilar.register(UINib(nibName: identifier,
-                                        bundle: Bundle(for: DetailCell.self)),
-                                  forCellWithReuseIdentifier: identifier)
+                                         bundle: Bundle(for: DetailCell.self)),
+                                   forCellWithReuseIdentifier: identifier)
     }
     /// Setting of the detail of the movies
     private func configurateDetailView() {
@@ -78,7 +78,7 @@ class DetailViewController: UIViewController {
     }
     /// Makes a query to the service
     private func getMoviesRecommended() {
-        movieAPI.getMovieSection(section: MoreMovies.similar.rawValue, idMovie: idMovie, completion: { result in
+        movieAPI.getMovieSection(section: MoreMovies.recommended.rawValue, idMovie: idMovie, completion: { result in
             if let moviesRecommended = result {
                 self.arrayRecommended = moviesRecommended
             }
@@ -105,11 +105,11 @@ extension DetailViewController: UICollectionViewDelegate, UICollectionViewDataSo
         }
         switch collectionView {
         case collectionSimilar:
-           cell.showDetailsMovies(movie: arraySimilar[indexPath.row])
+            cell.showDetailsMovies(movie: arraySimilar[indexPath.row])
         case collectionRecommended:
-           cell.showDetailsMovies(movie: arrayRecommended[indexPath.row])
+            cell.showDetailsMovies(movie: arrayRecommended[indexPath.row])
         default:
-           cell.showDetailsMovies(movie: arraySimilar[indexPath.row])
+            cell.showDetailsMovies(movie: arraySimilar[indexPath.row])
         }
         return cell
         

@@ -11,7 +11,7 @@ import UIKit
 class SearchViewController: UIViewController {
     
     @IBOutlet weak var searchBarMovie: UISearchBar!
-    @IBOutlet weak var collectionMovie: UICollectionView!{
+    @IBOutlet weak var collectionMovie: UICollectionView! {
         didSet{
             collectionMovie.delegate = self
             collectionMovie.dataSource = self
