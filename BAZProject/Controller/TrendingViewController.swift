@@ -6,11 +6,11 @@
 
 import UIKit
 
-class TrendingViewController: UITableViewController {
+class TrendingViewController: UIViewController {
     
     
     @IBOutlet var tblMovies: UITableView!
-    
+    @IBOutlet weak var segMovies: UISegmentedControl!
     //MARK: Properties
     let movieAPI = MovieAPI()
     var movieSelected: InfoMovies?
@@ -35,7 +35,7 @@ class TrendingViewController: UITableViewController {
     }
     
     private func getMovies() {
-        self.movieAPI.getMovies { result in
+        self.movieAPI.getMovies(typeMovies: PathMovies.getPathForSegmentsOption(segMovies.selectedSegmentIndex)) { result in
             switch result {
             case .success(let movies):
                 self.movies = movies
@@ -52,18 +52,23 @@ class TrendingViewController: UITableViewController {
             detailMovies.movie = movieSelected!
         }
     }
+    
+    
+    @IBAction func segmentedChanged(_ sender: UISegmentedControl) {
+        getMovies()
+    }
 }
 
 
-// MARK: - TableView's DataSource
+// MARK: - TableView's DataSource and Delegate
 
-extension TrendingViewController {
+extension TrendingViewController: UITableViewDataSource, UITableViewDelegate {
     
-    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return movies.count
     }
     
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "ContentMoviesTableViewCell", for: indexPath) as? ContentMoviesTableViewCell else {
             return UITableViewCell()
         }
@@ -72,7 +77,7 @@ extension TrendingViewController {
         return cell
     }
     
-    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         movieSelected = movies[indexPath.row]
         guard movieSelected != nil else { return }
         performSegue(withIdentifier: "detailsMovies", sender: nil)
