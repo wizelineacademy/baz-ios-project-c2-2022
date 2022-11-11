@@ -54,7 +54,7 @@ final class MoviesCategoriesViewController: UIViewController {
         pickerSelector.customPicker()
         btnSearch.shakeButton()
     }
-    
+    /// setUpElements: config initial interface to user
     private func setupElements() {
         let countMovies = UserDefaults.standard.integer(forKey: "countMovies")
         self.pickerSelector.dataSource = self
@@ -65,6 +65,8 @@ final class MoviesCategoriesViewController: UIViewController {
         self.lblCountMovies.text = "Peliculas vistas: \(countMovies)"
     }
     
+    /// setUpcell
+    /// - Parameter value: int to identifier with enum what category selected
     private func changePickerSelected(_ value: Int) {
         let indicatorAnimating = indicator
         indicatorAnimating.startAnimating()
@@ -87,11 +89,14 @@ final class MoviesCategoriesViewController: UIViewController {
         }
     }
     
+    /// moviesCount: asign value Userdefault to present into screen
+    /// - Parameter notification: object type Notification received data
     @objc private func moviesCount(_ notification: Notification) {
         let countMovies = UserDefaults.standard.integer(forKey: "countMovies")
         self.lblCountMovies.text = "Peliculas vistas: \(countMovies)"
     }
     
+    /// tapSearch: user click in search button, so present to SearchMovieViewController
     @IBAction private func tapSearch() {
         guard let vc = SearchMovieViewController.instantiate() else { return }
         navigationController?.pushViewController(vc, animated: true)
@@ -108,14 +113,12 @@ extension MoviesCategoriesViewController: UICollectionViewDataSource {
         guard let cell = collectionMovies.dequeueReusableCell(withReuseIdentifier: MoviesCategoryCollectionViewCell.identifier, for: indexPath) as? MoviesCategoryCollectionViewCell else {
             return UICollectionViewCell()
         }
-        let liked = likeMovieIndex.contains(movies[indexPath.row].id)
-        cell.setUpCell(movies[indexPath.row], liked)
+        cell.setUpCell(movies[indexPath.row], likeMovieIndex)
         return cell
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let liked = likeMovieIndex.contains(movies[indexPath.row].id)
-        let vc = DetailsMovieRouter.createModuleDetailsMovie(with: movies[indexPath.row], and: self, liked: liked)
+        let vc = DetailsMovieRouter.createModuleDetailsMovie(with: movies[indexPath.row], and: self, arrFavoriteMovies: likeMovieIndex)
         self.present(vc, animated: true)
     }
     
@@ -154,12 +157,16 @@ extension MoviesCategoriesViewController: UIPickerViewDataSource {
 }
 
 extension MoviesCategoriesViewController: DetailsMovieDelegate {
-    func addIdMovie(_ idMovie: Int) {
-        self.likeMovieIndex.append(idMovie)
+    /// addMovie: Add id into favoriteArrays
+    /// - Parameter id: movie id´s
+    func addMovie(with id: Int) {
+        self.likeMovieIndex.append(id)
         self.collectionMovies.reloadData()
     }
-    func removeIdMoview(_ idMovie: Int) {
-        self.likeMovieIndex = self.likeMovieIndex.filter { $0 != idMovie}
+    /// removeMovie: remove id into favoriteArrays
+    /// - Parameter id: movie id´s
+    func removeMovie(with id: Int) {
+        self.likeMovieIndex = self.likeMovieIndex.filter { $0 != id}
         self.collectionMovies.reloadData()
     }
 }

@@ -19,16 +19,16 @@ final class SearchMovieViewController: UICollectionViewController, Storyboarded{
         super.viewDidLoad()
         NotificationCenter.default.addObserver(self, selector: #selector(moviesCount(_:)), name: .countMovieDetails, object: nil)
     }
-    
-    private func showMovieDetails(_ Element: Movie) {
-        let likedMovie = likeMovieIndex.contains(Element.id)
-        let vc = DetailsMovieRouter.createModuleDetailsMovie(with: Element, and: self, liked: likedMovie)
+    /// showMovieDetails: present detail movie view
+    /// - Parameter movie: object type Movie with movie info
+    private func showMovieDetails(for movie: Movie) {
+        let vc = DetailsMovieRouter.createModuleDetailsMovie(with: movie, and: self, arrFavoriteMovies: likeMovieIndex)
         self.present(vc, animated: true)
     }
-    
+    /// moviesCount:  get movie counts to userdefault
+    /// - Parameter notification: object type Notification received data
     @objc private func moviesCount(_ notification: Notification) {
-        let countMovies = UserDefaults.standard.integer(forKey: "countMovies")
-        print("Contador: \(countMovies)")
+        let _ = UserDefaults.standard.integer(forKey: "countMovies")
     }
 }
 
@@ -42,13 +42,12 @@ extension SearchMovieViewController {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MoviesCollectionViewCell.identifier, for: indexPath) as? MoviesCollectionViewCell else {
             return UICollectionViewCell()
         }
-        let likedMovie = likeMovieIndex.contains(movies[indexPath.row].id)
-        cell.setUpCell(movies[indexPath.row], likedMovie)
+        cell.setUpCell(movies[indexPath.row], self.likeMovieIndex)
         return cell
     }
     
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        showMovieDetails(movies[indexPath.row])
+        showMovieDetails(for: movies[indexPath.row])
     }
 }
 
@@ -97,12 +96,16 @@ extension SearchMovieViewController: UITextFieldDelegate {
 }
 
 extension SearchMovieViewController: DetailsMovieDelegate {
-    func addIdMovie(_ idMovie: Int) {
-        self.likeMovieIndex.append(idMovie)
+    /// addMovie: Add id into favoriteArrays
+    /// - Parameter id: movie id´s
+    func addMovie(with id: Int) {
+        self.likeMovieIndex.append(id)
         self.collectionView.reloadData()
     }
-    
-    func removeIdMoview(_ idMovie: Int) {
+    /// removeMovie: remove id into favoriteArrays
+    /// - Parameter id: movie id´s
+    func removeMovie(with id: Int) {
+        self.likeMovieIndex = self.likeMovieIndex.filter { $0 != id}
         self.collectionView.reloadData()
     }
     

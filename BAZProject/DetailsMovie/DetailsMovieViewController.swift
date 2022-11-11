@@ -8,8 +8,8 @@
 import UIKit
 
 protocol DetailsMovieDelegate {
-    func addIdMovie(_ idMovie: Int)
-    func removeIdMoview(_ idMovie: Int)
+    func addMovie(with id: Int)
+    func removeMovie(with id: Int)
 }
 
 final class DetailsMovieViewController: UIViewController {
@@ -20,15 +20,15 @@ final class DetailsMovieViewController: UIViewController {
     @IBOutlet weak var btnLikedMovie: UIButton!
     
     var presenter: DetailsMoviePresenterProtocols?
-    var movie: Movie?
-    var delegate: DetailsMovieDelegate?
-    var likedMovie: Bool = false
+    let movie: Movie
+    let delegate: DetailsMovieDelegate
+    var likedMovie: Bool
     
-    init(movie: Movie, delegado: DetailsMovieDelegate, like: Bool) {
-        super.init(nibName: nil, bundle: nil)
+    init(movie: Movie, delegado: DetailsMovieDelegate) {
         self.movie = movie
         self.delegate = delegado
-        self.likedMovie = like
+        self.likedMovie = false
+        super.init(nibName: nil, bundle: nil)
     }
     
     required init?(coder: NSCoder) {
@@ -38,24 +38,38 @@ final class DetailsMovieViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationController?.isNavigationBarHidden = false
-        var moviesCount = UserDefaults.standard.integer(forKey: "countMovies")
-        moviesCount += 1
-        UserDefaults.standard.set(moviesCount, forKey: "countMovies")
-        presenter?.setUpPresentToInteractor()
+        self.moviesCount()
+        presenter?.setUpPresentToInteractor(with: movie)
         NotificationCenter.default.post(name: .countMovieDetails, object: nil)
     }
-
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-    }
     
+    private func setUpImageMovie(with moviePath: String) {
+        ImageAPI.getImage(with: moviePath) { result in
+            switch result {
+            case .success(let imagenMovie):
+                self.backgroundImage.image = imagenMovie
+            case .failure(_):
+                self.backgroundImage.image = UIImage()
+            }
+        }
+    }
+
     @IBAction func clickLikedMovie() {
-        presenter?.btnLikedClick()
+        likedMovie = !likedMovie
+        presenter?.likeButtonTapped(isLike: likedMovie, delegado: delegate)
     }
 }
 
 extension DetailsMovieViewController: DetailsMovieViewProtocols {
-    var viewInterface: DetailsMovieViewController? {
-        return self
+    func setupView(with movie: DetailsMovieModel) {
+        self.titleLbl.text = movie.titleMovie
+        self.descriptionLbl.text = movie.descriptionMovie
+        self.btnLikedMovie.setImage(movie.likedMovie, for: .normal)
+        setUpImageMovie(with: movie.backgroundImage)
+        
+    }
+    
+    func likeIconChange(image: UIImage) {
+        self.btnLikedMovie.setImage(image, for: .normal)
     }
 }

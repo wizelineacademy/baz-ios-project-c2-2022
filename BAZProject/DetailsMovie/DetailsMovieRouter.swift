@@ -10,8 +10,8 @@ import UIKit
 
 final class DetailsMovieRouter: DetailsMovieRouterProtocols {
     
-    static func createModuleDetailsMovie(with movie: Movie, and delegate: DetailsMovieDelegate, liked: Bool) -> UIViewController {
-        let navController = DetailsMovieViewController(movie: movie, delegado: delegate, like: liked)
+    static func createModuleDetailsMovie(with movie: Movie, and delegate: DetailsMovieDelegate, arrFavoriteMovies: [Int]) -> UIViewController {
+        let navController = DetailsMovieViewController(movie: movie, delegado: delegate)
         
         let presenter: DetailsMoviePresenterProtocols & DetailsMovieInteractorInputAndOutputProtocols = DetailsMoviePresenter()
         let interactor: DetailsMovieInteractorInputAndOutputProtocols = DetailsMovieInteractor()
@@ -23,7 +23,7 @@ final class DetailsMovieRouter: DetailsMovieRouterProtocols {
         presenter.interactor = interactor
         interactor.presenter = presenter
         interactor.view = navController
-        
+        interactor.arrFavoriteMovies = arrFavoriteMovies
         return navController
     }
     

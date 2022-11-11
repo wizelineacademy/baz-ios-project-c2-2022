@@ -12,7 +12,7 @@ final class ImageAPI {
     /// Download image
     /// - Parameter name: name of image to download
     /// - Returns: Image of type UIIMage
-    func getImage(with name: String, completion: @escaping (Result<UIImage, Error>) -> Void){
+    static func getImage(with name: String, completion: @escaping (Result<UIImage, Error>) -> Void){
         let image = UIImage(named: "poster") ?? UIImage()
         let urlStr = "https://image.tmdb.org/t/p/w500\(name)"
         guard let url = URL(string: urlStr) else {

@@ -16,22 +16,27 @@ final class MoviesCategoryCollectionViewCell: UICollectionViewCell {
     
     static let identifier = "cellCollectionMovie"
     static let nameCell = "MoviesCategoryCollectionViewCell"
-    let apiMovie = ImageAPI()
     
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
     }
     
-    func setUpCell(_ movie: Movie, _ liked: Bool) {
+    /// setUpcell
+    /// - Parameter movie: info about movie element
+    /// - Parameter arrFavoritesMovies: Array with favorite movie id´s 
+    func setUpCell(_ movie: Movie, _ arrFavoritesMovies: [Int]) {
+        let isLikeMovie = arrFavoritesMovies.contains(movie.id)
         let image = movie.posterPath ?? "poster"
-        let imageLiked = liked ? UIImage(systemName: "heart.fill") : UIImage(systemName: "heart")
-        apiMovie.getImage(with: image) { result in
-            switch result {
-            case .success(let image):
-                self.imageMovie.image = image
-            case .failure(_):
-                self.imageMovie.image = UIImage(named: "poster")
+        let imageLiked = isLikeMovie ? UIImage(systemName: "heart.fill") : UIImage(systemName: "heart")
+        ImageAPI.getImage(with: image) { result in
+            DispatchQueue.main.async {
+                switch result {
+                case .success(let image):
+                    self.imageMovie.image = image
+                case .failure(_):
+                    self.imageMovie.image = UIImage(named: "poster")
+                }
             }
         }
         self.imgLiked.image = imageLiked

@@ -57,8 +57,10 @@ extension UIViewController: IndicatorActivity {
         self.present(dialogMessage, animated: true)
     }
     
-    func upCount(by idMovie: Int) {
-        
+    func moviesCount() {
+        var moviesCount = UserDefaults.standard.integer(forKey: "countMovies")
+        moviesCount += 1
+        UserDefaults.standard.set(moviesCount, forKey: "countMovies")
     }
 }
 

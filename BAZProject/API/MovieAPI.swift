@@ -6,7 +6,7 @@
 
 import Foundation
 
-final class MovieAPI: GenericRequestProtocol {
+struct MovieAPI: GenericRequestProtocol {
     ///Get Movies By Category
     /// - Parameter category: category by enum
     /// - Returns: Movies Array
