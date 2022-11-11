@@ -65,7 +65,7 @@ class SearchViewController: UIViewController, PrincipalView {
     
     
 }
- 
+
 extension SearchViewController: UICollectionViewDelegate, UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -90,7 +90,7 @@ extension SearchViewController: UICollectionViewDelegate, UICollectionViewDataSo
         vc.detailViewModel.dataArray = searchViewModel.dataArray[indexPath.row]
         vc.modalPresentationStyle = .fullScreen
         self.navigationController?.pushViewController(vc, animated: true)
-//        present(vc, animated: true, completion: nil)
+        //        present(vc, animated: true, completion: nil)
     }
     
 }
