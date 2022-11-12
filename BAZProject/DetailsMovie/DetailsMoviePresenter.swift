@@ -6,10 +6,10 @@
 //
 
 import Foundation
-import UIKit
 
 final class DetailsMoviePresenter: DetailsMoviePresenterProtocols, DetailsMovieInteractorInputAndOutputProtocols {
     var arrFavoriteMovies: [Int]?
+    var idMovie: Int?
     var presenter: DetailsMoviePresenterProtocols?
     var view: DetailsMovieViewProtocols?
     var router: DetailsMovieRouterProtocols?
@@ -31,7 +31,7 @@ final class DetailsMoviePresenter: DetailsMoviePresenterProtocols, DetailsMovieI
         interactor?.likeButtonTapped(isLike: isLike, delegado: delegado)
     }
     
-    func changeIconLike(image: UIImage) {
-        view?.likeIconChange(image: image)
+    func changeIconLike(with image: String) {
+        view?.likeIconChange(with: image)
     }
 }

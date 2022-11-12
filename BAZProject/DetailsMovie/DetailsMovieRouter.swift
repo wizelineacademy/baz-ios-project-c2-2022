@@ -24,6 +24,7 @@ final class DetailsMovieRouter: DetailsMovieRouterProtocols {
         interactor.presenter = presenter
         interactor.view = navController
         interactor.arrFavoriteMovies = arrFavoriteMovies
+        interactor.idMovie = movie.id
         return navController
     }
     

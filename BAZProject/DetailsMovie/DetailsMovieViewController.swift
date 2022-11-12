@@ -42,18 +42,22 @@ final class DetailsMovieViewController: UIViewController {
         presenter?.setUpPresentToInteractor(with: movie)
         NotificationCenter.default.post(name: .countMovieDetails, object: nil)
     }
-    
+    /// setUpImageMovie: config background movie image
+    ///  - Parameter moviePath: name background path movie
     private func setUpImageMovie(with moviePath: String) {
         ImageAPI.getImage(with: moviePath) { result in
-            switch result {
-            case .success(let imagenMovie):
-                self.backgroundImage.image = imagenMovie
-            case .failure(_):
-                self.backgroundImage.image = UIImage()
+            DispatchQueue.main.async {
+                switch result {
+                case .success(let imagenMovie):
+                    self.backgroundImage.image = imagenMovie
+                case .failure(_):
+                    self.backgroundImage.image = UIImage()
+                }
             }
         }
     }
 
+    /// clickLikedMovie: Func  execute when user click into like button
     @IBAction func clickLikedMovie() {
         likedMovie = !likedMovie
         presenter?.likeButtonTapped(isLike: likedMovie, delegado: delegate)
@@ -61,6 +65,8 @@ final class DetailsMovieViewController: UIViewController {
 }
 
 extension DetailsMovieViewController: DetailsMovieViewProtocols {
+    /// setupView: config view with info
+    ///  - Parameter movie: object with info to show
     func setupView(with movie: DetailsMovieModel) {
         self.titleLbl.text = movie.titleMovie
         self.descriptionLbl.text = movie.descriptionMovie
@@ -68,8 +74,11 @@ extension DetailsMovieViewController: DetailsMovieViewProtocols {
         setUpImageMovie(with: movie.backgroundImage)
         
     }
-    
-    func likeIconChange(image: UIImage) {
-        self.btnLikedMovie.setImage(image, for: .normal)
+    /// likeIconChange: func change heart icon tapped button like
+    ///  - Parameter imagePath: name background path movie
+    func likeIconChange(with imagePath: String) {
+        DispatchQueue.main.async {
+            self.btnLikedMovie.setImage(UIImage(systemName: imagePath), for: .normal)
+        }
     }
 }

@@ -14,7 +14,7 @@ protocol DetailsMovieViewProtocols: AnyObject {
     
     func setupView(with movie: DetailsMovieModel)
     
-    func likeIconChange(image: UIImage)
+    func likeIconChange(with imagePath: String)
 }
 
 ///Presenter to View, Presenter to Interactor and Presenter to Router
@@ -25,7 +25,7 @@ protocol DetailsMoviePresenterProtocols: AnyObject {
     func setUpPresentToInteractor(with movie: Movie)
     func setUpPresenterToView(with movie: DetailsMovieModel)
     func likeButtonTapped(isLike: Bool, delegado: DetailsMovieDelegate)
-    func changeIconLike(image: UIImage)
+    func changeIconLike(with imagePath: String)
 }
 
 protocol DetailsMovieRouterProtocols: AnyObject {
@@ -34,6 +34,7 @@ protocol DetailsMovieRouterProtocols: AnyObject {
 
 protocol DetailsMovieInteractorInputAndOutputProtocols: AnyObject {
     var arrFavoriteMovies: [Int]? { get set }
+    var idMovie: Int? { get set }
     var presenter: DetailsMoviePresenterProtocols? { get set }
     var view: DetailsMovieViewProtocols? { get set }
     

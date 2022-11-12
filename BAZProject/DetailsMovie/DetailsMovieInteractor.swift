@@ -6,19 +6,17 @@
 //
 
 import Foundation
-import UIKit
 
 final class DetailsMovieInteractor: DetailsMovieInteractorInputAndOutputProtocols {
     var arrFavoriteMovies: [Int]?
     var view: DetailsMovieViewProtocols?
-    var idMovie: Int = 0
+    var idMovie: Int?
     var presenter: DetailsMoviePresenterProtocols?
     
     /// setUpPresentToInteractor: config data to present to user
     ///  - Parameter movie: object type Movie
     func setUpPresentToInteractor(with movie: Movie) {
         let detailMovie = movie.adaptToDetailsMovieModelAdapter(with: arrFavoriteMovies ?? [])
-        idMovie = movie.id
         setupInteractorToPresent(with: detailMovie)
     }
     
@@ -32,12 +30,13 @@ final class DetailsMovieInteractor: DetailsMovieInteractorInputAndOutputProtocol
     ///  - Parameter isLiked: bool that determ is like o not the movie
     ///  - Parameter delegado: DetailMovieDelegate to add or remove into array favorite id´s 
     func likeButtonTapped(isLike: Bool, delegado: DetailsMovieDelegate) {
+        guard let id = idMovie else { return }
         if isLike {
-            delegado.addMovie(with: idMovie)
+            delegado.addMovie(with: id)
         } else {
-            delegado.removeMovie(with: idMovie)
+            delegado.removeMovie(with: id)
         }
-        let imageLiked = isLike ? UIImage(systemName: "heart.fill") : UIImage(systemName: "heart")
-        presenter?.changeIconLike(image: imageLiked ?? UIImage())
+        let imagePath = isLike ? "heart.fill" : "heart"
+        presenter?.changeIconLike(with: imagePath )
     }
 }
