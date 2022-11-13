@@ -10,21 +10,22 @@ import Foundation
 final class DetailsMoviePresenter: DetailsMoviePresenterProtocols, DetailsMovieInteractorInputAndOutputProtocols {
     var arrFavoriteMovies: [Int]?
     var idMovie: Int?
+    var movie: Movie?
     var presenter: DetailsMoviePresenterProtocols?
     var view: DetailsMovieViewProtocols?
     var router: DetailsMovieRouterProtocols?
     var interactor: DetailsMovieInteractorInputAndOutputProtocols?
     
-    func setUpPresentToInteractor(with movie: Movie) {
-        interactor?.setUpPresentToInteractor(with: movie)
+    func setUpPresentToInteractor() {
+        interactor?.setUpPresentToInteractor()
     }
     
-    func setupInteractorToPresent(with movie: DetailsMovieModel) {
-        presenter?.setUpPresenterToView(with: movie)
+    func setupInteractorToPresent(with movie: Movie, and isFavorite: String) {
+        presenter?.setUpPresenterToView(with: movie, isFavorite: isFavorite)
     }
     
-    func setUpPresenterToView(with movie: DetailsMovieModel) {
-        view?.setupView(with: movie)
+    func setUpPresenterToView(with movie: Movie, isFavorite: String) {
+        view?.setupView(with: movie, isFavorite: isFavorite)
     }
     
     func likeButtonTapped(isLike: Bool, delegado: DetailsMovieDelegate) {

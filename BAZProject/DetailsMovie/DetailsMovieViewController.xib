@@ -14,6 +14,8 @@
                 <outlet property="backgroundImage" destination="dKC-j8-Z0x" id="L0c-Dq-au7"/>
                 <outlet property="btnLikedMovie" destination="kGi-sh-Brf" id="FGs-dS-faX"/>
                 <outlet property="descriptionLbl" destination="VSm-Gb-SR2" id="K0l-lQ-Lp6"/>
+                <outlet property="recommendationCollection" destination="koJ-bX-X6Q" id="A2c-r5-HZB"/>
+                <outlet property="similarCollection" destination="Dh0-pj-8Nl" id="eLE-m5-yZE"/>
                 <outlet property="titleLbl" destination="NkE-8l-4jJ" id="SV7-tN-Ga4"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
@@ -30,13 +32,13 @@
                     </constraints>
                 </imageView>
                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" alignment="top" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="M0c-Jy-awb">
-                    <rect key="frame" x="25" y="254" width="364" height="508"/>
+                    <rect key="frame" x="25" y="254" width="364" height="598"/>
                     <subviews>
                         <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" translatesAutoresizingMaskIntoConstraints="NO" id="NTR-e8-q3n">
-                            <rect key="frame" x="0.0" y="0.0" width="62" height="213"/>
+                            <rect key="frame" x="0.0" y="0.0" width="62" height="22"/>
                             <subviews>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kGi-sh-Brf">
-                                    <rect key="frame" x="0.0" y="0.0" width="20.5" height="213"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="20.5" height="22"/>
                                     <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                     <state key="normal" image="heart" catalog="system"/>
@@ -45,7 +47,7 @@
                                     </connections>
                                 </button>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NkE-8l-4jJ">
-                                    <rect key="frame" x="20.5" y="0.0" width="41.5" height="213"/>
+                                    <rect key="frame" x="20.5" y="0.0" width="41.5" height="22"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                     <nil key="textColor"/>
                                     <nil key="highlightedColor"/>
@@ -53,11 +55,31 @@
                             </subviews>
                         </stackView>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VSm-Gb-SR2">
-                            <rect key="frame" x="0.0" y="223" width="41.5" height="285"/>
+                            <rect key="frame" x="0.0" y="32" width="41.5" height="20.5"/>
                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                             <nil key="textColor"/>
                             <nil key="highlightedColor"/>
                         </label>
+                        <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="koJ-bX-X6Q">
+                            <rect key="frame" x="0.0" y="62.5" width="240" height="267"/>
+                            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                            <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="10" id="W8M-89-3uU">
+                                <size key="itemSize" width="128" height="128"/>
+                                <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                            </collectionViewFlowLayout>
+                        </collectionView>
+                        <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="Dh0-pj-8Nl">
+                            <rect key="frame" x="0.0" y="339.5" width="240" height="258.5"/>
+                            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                            <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="10" id="v8b-j4-Jlp">
+                                <size key="itemSize" width="128" height="128"/>
+                                <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                            </collectionViewFlowLayout>
+                        </collectionView>
                     </subviews>
                 </stackView>
             </subviews>
@@ -66,7 +88,7 @@
             <constraints>
                 <constraint firstItem="dKC-j8-Z0x" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" id="PX3-PE-3L5"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="M0c-Jy-awb" secondAttribute="trailing" constant="25" id="Uz4-xZ-C72"/>
-                <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="M0c-Jy-awb" secondAttribute="bottom" constant="100" id="WNa-qq-t8B"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="M0c-Jy-awb" secondAttribute="bottom" constant="10" id="WNa-qq-t8B"/>
                 <constraint firstItem="M0c-Jy-awb" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="25" id="ZVx-IZ-LsO"/>
                 <constraint firstItem="M0c-Jy-awb" firstAttribute="top" secondItem="dKC-j8-Z0x" secondAttribute="bottom" constant="10" id="bW2-qX-iMi"/>
                 <constraint firstItem="dKC-j8-Z0x" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="eZR-Nl-DcK"/>

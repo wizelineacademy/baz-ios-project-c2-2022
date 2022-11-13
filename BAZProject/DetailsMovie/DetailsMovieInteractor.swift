@@ -11,19 +11,24 @@ final class DetailsMovieInteractor: DetailsMovieInteractorInputAndOutputProtocol
     var arrFavoriteMovies: [Int]?
     var view: DetailsMovieViewProtocols?
     var idMovie: Int?
+    var movie: Movie?
     var presenter: DetailsMoviePresenterProtocols?
     
     /// setUpPresentToInteractor: config data to present to user
     ///  - Parameter movie: object type Movie
-    func setUpPresentToInteractor(with movie: Movie) {
-        let detailMovie = movie.adaptToDetailsMovieModelAdapter(with: arrFavoriteMovies ?? [])
-        setupInteractorToPresent(with: detailMovie)
+    func setUpPresentToInteractor() {
+        guard let movie = movie else {
+            return
+        }
+        let isFavorite = arrFavoriteMovies?.contains(movie.id) ?? false
+        let strIcon = isFavorite ? "heart.fill" : "heart"
+        setupInteractorToPresent(with: movie, and: strIcon)
     }
     
     /// setupInteractorToPresent: send object Movie model
     ///  - Parameter movie: object type DetailsMovieModel
-    func setupInteractorToPresent(with movie: DetailsMovieModel) {
-        presenter?.setUpPresenterToView(with: movie)
+    func setupInteractorToPresent(with movie: Movie, and isFavorite: String) {
+        presenter?.setUpPresenterToView(with: movie, isFavorite: isFavorite)
     }
     
     /// likeButtonTapped: determ icon like into view

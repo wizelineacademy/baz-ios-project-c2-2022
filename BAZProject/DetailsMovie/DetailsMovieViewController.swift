@@ -18,14 +18,14 @@ final class DetailsMovieViewController: UIViewController {
     @IBOutlet weak var titleLbl: UILabel!
     @IBOutlet weak var descriptionLbl: UILabel!
     @IBOutlet weak var btnLikedMovie: UIButton!
+    @IBOutlet weak var recommendationCollection: UICollectionView!
+    @IBOutlet weak var similarCollection: UICollectionView!
     
     var presenter: DetailsMoviePresenterProtocols?
-    let movie: Movie
     let delegate: DetailsMovieDelegate
     var likedMovie: Bool
     
-    init(movie: Movie, delegado: DetailsMovieDelegate) {
-        self.movie = movie
+    init(delegado: DetailsMovieDelegate) {
         self.delegate = delegado
         self.likedMovie = false
         super.init(nibName: nil, bundle: nil)
@@ -39,9 +39,10 @@ final class DetailsMovieViewController: UIViewController {
         super.viewDidLoad()
         self.navigationController?.isNavigationBarHidden = false
         self.moviesCount()
-        presenter?.setUpPresentToInteractor(with: movie)
+        presenter?.setUpPresentToInteractor()
         NotificationCenter.default.post(name: .countMovieDetails, object: nil)
     }
+    
     /// setUpImageMovie: config background movie image
     ///  - Parameter moviePath: name background path movie
     private func setUpImageMovie(with moviePath: String) {
@@ -67,11 +68,12 @@ final class DetailsMovieViewController: UIViewController {
 extension DetailsMovieViewController: DetailsMovieViewProtocols {
     /// setupView: config view with info
     ///  - Parameter movie: object with info to show
-    func setupView(with movie: DetailsMovieModel) {
-        self.titleLbl.text = movie.titleMovie
-        self.descriptionLbl.text = movie.descriptionMovie
-        self.btnLikedMovie.setImage(movie.likedMovie, for: .normal)
-        setUpImageMovie(with: movie.backgroundImage)
+    func setupView(with movie: Movie, isFavorite: String) {
+        self.titleLbl.text = movie.title
+        self.descriptionLbl.text = movie.overview
+        self.btnLikedMovie.setImage(UIImage(systemName: isFavorite), for: .normal)
+        setUpImageMovie(with: movie.backdropPath ?? "poster")
+        self.recommendationCollection.reloadData()
         
     }
     /// likeIconChange: func change heart icon tapped button like

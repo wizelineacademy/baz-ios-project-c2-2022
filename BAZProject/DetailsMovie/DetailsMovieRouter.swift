@@ -11,7 +11,7 @@ import UIKit
 final class DetailsMovieRouter: DetailsMovieRouterProtocols {
     
     static func createModuleDetailsMovie(with movie: Movie, and delegate: DetailsMovieDelegate, arrFavoriteMovies: [Int]) -> UIViewController {
-        let navController = DetailsMovieViewController(movie: movie, delegado: delegate)
+        let navController = DetailsMovieViewController(delegado: delegate)
         
         let presenter: DetailsMoviePresenterProtocols & DetailsMovieInteractorInputAndOutputProtocols = DetailsMoviePresenter()
         let interactor: DetailsMovieInteractorInputAndOutputProtocols = DetailsMovieInteractor()
@@ -25,6 +25,7 @@ final class DetailsMovieRouter: DetailsMovieRouterProtocols {
         interactor.view = navController
         interactor.arrFavoriteMovies = arrFavoriteMovies
         interactor.idMovie = movie.id
+        interactor.movie = movie
         return navController
     }
     

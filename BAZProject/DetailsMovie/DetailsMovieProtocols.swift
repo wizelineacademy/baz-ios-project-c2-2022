@@ -12,7 +12,7 @@ import UIKit
 protocol DetailsMovieViewProtocols: AnyObject {
     var presenter: DetailsMoviePresenterProtocols? { get set }
     
-    func setupView(with movie: DetailsMovieModel)
+    func setupView(with movie: Movie, isFavorite: String)
     
     func likeIconChange(with imagePath: String)
 }
@@ -22,8 +22,8 @@ protocol DetailsMoviePresenterProtocols: AnyObject {
     var view: DetailsMovieViewProtocols? { get set }
     var router: DetailsMovieRouterProtocols? { get set }
     var interactor: DetailsMovieInteractorInputAndOutputProtocols? { get set }
-    func setUpPresentToInteractor(with movie: Movie)
-    func setUpPresenterToView(with movie: DetailsMovieModel)
+    func setUpPresentToInteractor()
+    func setUpPresenterToView(with movie: Movie, isFavorite: String)
     func likeButtonTapped(isLike: Bool, delegado: DetailsMovieDelegate)
     func changeIconLike(with imagePath: String)
 }
@@ -35,11 +35,12 @@ protocol DetailsMovieRouterProtocols: AnyObject {
 protocol DetailsMovieInteractorInputAndOutputProtocols: AnyObject {
     var arrFavoriteMovies: [Int]? { get set }
     var idMovie: Int? { get set }
+    var movie: Movie? { get set }
     var presenter: DetailsMoviePresenterProtocols? { get set }
     var view: DetailsMovieViewProtocols? { get set }
     
-    func setUpPresentToInteractor(with movie: Movie)
-    func setupInteractorToPresent(with movie: DetailsMovieModel)
+    func setUpPresentToInteractor()
+    func setupInteractorToPresent(with movie: Movie, and isFavorite: String)
     
     func likeButtonTapped(isLike: Bool, delegado: DetailsMovieDelegate)
 }
