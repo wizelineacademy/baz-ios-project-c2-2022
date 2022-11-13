@@ -15,7 +15,6 @@ final class MoviesCategoriesViewController: UIViewController {
     private var likeMovieIndex: [Int] = []
     
     @IBOutlet weak var btnSearch: UIButton!
-    @IBOutlet weak var pickerSelector: UIPickerView!
     @IBOutlet weak var collectionMovies: UICollectionView!
     @IBOutlet weak var lblCountMovies: UILabel!
     
@@ -51,23 +50,37 @@ final class MoviesCategoriesViewController: UIViewController {
         super.viewWillAppear(animated)
         self.title = "Movies"
         setupElements()
-        pickerSelector.customPicker()
+        setupSegmentControl()
         btnSearch.shakeButton()
     }
     /// setUpElements: config initial interface to user
     private func setupElements() {
         let countMovies = UserDefaults.standard.integer(forKey: "countMovies")
-        self.pickerSelector.dataSource = self
-        self.pickerSelector.delegate = self
         self.collectionMovies.delegate = self
         self.collectionMovies.dataSource = self
         self.collectionMovies.register(UINib(nibName: MoviesCategoryCollectionViewCell.nameCell, bundle: nil), forCellWithReuseIdentifier: MoviesCategoryCollectionViewCell.identifier)
         self.lblCountMovies.text = "Peliculas vistas: \(countMovies)"
     }
     
-    /// setUpcell
-    /// - Parameter value: int to identifier with enum what category selected
-    private func changePickerSelected(_ value: Int) {
+    /// setupSegmentControl: configure segment control handler 5 types movies
+    private func setupSegmentControl() {
+        let mySegmentedControl = UISegmentedControl(items: ["Trending","Now Playing","Popular","Top Rated","Upcoming"])
+        mySegmentedControl.selectedSegmentIndex = 0
+        mySegmentedControl.backgroundColor = .gray
+        mySegmentedControl.addTarget(self, action: #selector(changeSegmentSelected(with:)), for: .valueChanged)
+        mySegmentedControl.changeLineSegment()
+        view.addSubview(mySegmentedControl)
+        mySegmentedControl.translatesAutoresizingMaskIntoConstraints = false
+        mySegmentedControl.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 10).isActive = true
+        mySegmentedControl.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant:  10).isActive = true
+        mySegmentedControl.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -70).isActive = true
+        mySegmentedControl.heightAnchor.constraint(equalToConstant: 50).isActive = true
+    }
+    
+    /// changeSegmentSelected
+    /// - Parameter segmentControl: int to identifier with selected segment is selected
+    @objc private func changeSegmentSelected(with segmentControl: UISegmentedControl) {
+        let value = segmentControl.selectedSegmentIndex
         let indicatorAnimating = indicator
         indicatorAnimating.startAnimating()
         movies.removeAll()
@@ -132,27 +145,6 @@ extension MoviesCategoriesViewController: UICollectionViewDelegateFlowLayout {
         let availableWidth = self.collectionMovies.frame.width - paddingSpace
         let widthPerItem = availableWidth / itemsPerRow
         return CGSize(width: widthPerItem, height: widthPerItem * 1.7)
-    }
-}
-
-extension MoviesCategoriesViewController: UIPickerViewDelegate {
-    
-    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        changePickerSelected(row)
-    }
-}
-
-extension MoviesCategoriesViewController: UIPickerViewDataSource {
-    func numberOfComponents(in pickerView: UIPickerView) -> Int {
-        return 1
-    }
-    
-    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        return 4
-    }
-    
-    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        return CategoryFilterMovie(rawValue: row)?.title
     }
 }
 

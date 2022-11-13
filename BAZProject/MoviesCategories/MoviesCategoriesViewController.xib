@@ -14,7 +14,6 @@
                 <outlet property="btnSearch" destination="JM3-9p-Zy0" id="Rto-Qw-aZe"/>
                 <outlet property="collectionMovies" destination="v4N-cA-rZb" id="sMq-J2-Hsr"/>
                 <outlet property="lblCountMovies" destination="Wc2-QH-vUD" id="d1q-lm-mbl"/>
-                <outlet property="pickerSelector" destination="OtE-mb-PyB" id="b9J-01-MTg"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -23,16 +22,8 @@
             <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="OtE-mb-PyB">
-                    <rect key="frame" x="25" y="44" width="299" height="80"/>
-                    <color key="backgroundColor" systemColor="systemGray3Color"/>
-                    <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                    <constraints>
-                        <constraint firstAttribute="height" constant="80" id="0YQ-sN-L9a"/>
-                    </constraints>
-                </pickerView>
                 <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="v4N-cA-rZb">
-                    <rect key="frame" x="10" y="154" width="394" height="698"/>
+                    <rect key="frame" x="10" y="144" width="394" height="708"/>
                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="KdG-mT-eml">
                         <size key="itemSize" width="200" height="200"/>
@@ -42,7 +33,7 @@
                     </collectionViewFlowLayout>
                 </collectionView>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JM3-9p-Zy0">
-                    <rect key="frame" x="332" y="54" width="60" height="60"/>
+                    <rect key="frame" x="344" y="54" width="60" height="60"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="60" id="LWA-92-8d9"/>
@@ -58,7 +49,7 @@
                     </connections>
                 </button>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Peliiculas vistas: 10" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Wc2-QH-vUD">
-                    <rect key="frame" x="254" y="124" width="135" height="25"/>
+                    <rect key="frame" x="254" y="124" width="135" height="15"/>
                     <fontDescription key="fontDescription" type="boldSystem" pointSize="14"/>
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
@@ -69,15 +60,12 @@
             <constraints>
                 <constraint firstItem="v4N-cA-rZb" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="10" id="23j-Wk-4Gc"/>
                 <constraint firstItem="Wc2-QH-vUD" firstAttribute="top" secondItem="JM3-9p-Zy0" secondAttribute="bottom" constant="10" id="3g1-j6-52q"/>
-                <constraint firstItem="OtE-mb-PyB" firstAttribute="trailing" secondItem="fnl-2z-Ty3" secondAttribute="trailing" constant="-90" id="77c-gb-qQe"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="v4N-cA-rZb" secondAttribute="trailing" constant="10" id="7Ya-pQ-776"/>
-                <constraint firstItem="OtE-mb-PyB" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="25" id="8Wy-kP-P6o"/>
-                <constraint firstItem="JM3-9p-Zy0" firstAttribute="leading" secondItem="OtE-mb-PyB" secondAttribute="trailing" constant="8" id="8sk-Nd-FeF"/>
-                <constraint firstItem="JM3-9p-Zy0" firstAttribute="centerY" secondItem="OtE-mb-PyB" secondAttribute="centerY" id="QW1-pH-Mi5"/>
+                <constraint firstItem="JM3-9p-Zy0" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="10" id="Cxz-wr-gCI"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="v4N-cA-rZb" secondAttribute="bottom" constant="10" id="afG-YH-LBv"/>
+                <constraint firstItem="v4N-cA-rZb" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="100" id="bWL-Eu-9eY"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="Wc2-QH-vUD" secondAttribute="trailing" constant="25" id="geB-cd-PUf"/>
-                <constraint firstItem="OtE-mb-PyB" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" id="id5-E3-jsk"/>
-                <constraint firstItem="v4N-cA-rZb" firstAttribute="top" secondItem="OtE-mb-PyB" secondAttribute="bottom" constant="30" id="tcc-Sk-5cd"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="JM3-9p-Zy0" secondAttribute="trailing" constant="10" id="l1k-fO-MtU"/>
                 <constraint firstItem="v4N-cA-rZb" firstAttribute="top" secondItem="Wc2-QH-vUD" secondAttribute="bottom" constant="5" id="vpp-Qf-YMO"/>
             </constraints>
             <point key="canvasLocation" x="137.68115942028987" y="51.5625"/>
@@ -87,9 +75,6 @@
         <image name="magnifyingglass" catalog="system" width="128" height="115"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-        </systemColor>
-        <systemColor name="systemGray3Color">
-            <color red="0.7803921568627451" green="0.7803921568627451" blue="0.80000000000000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>

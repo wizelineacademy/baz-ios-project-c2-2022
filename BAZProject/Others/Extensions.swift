@@ -75,3 +75,16 @@ extension Notification.Name {
 func ranmdomInterval(with interval: TimeInterval, and variancia: Double) -> TimeInterval {
     return interval + variancia * Double((Double(arc4random_uniform(1000)) - 500.0) / 500.0)
 }
+
+extension UISegmentedControl {
+    func changeLineSegment() {
+        for segmentItem : UIView in self.subviews {
+            for item : Any in segmentItem.subviews {
+                if let i = item as? UILabel {
+                    i.numberOfLines = 0
+                }
+            }
+        }
+    }
+
+}
