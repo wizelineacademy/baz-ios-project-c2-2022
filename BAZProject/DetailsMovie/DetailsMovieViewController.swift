@@ -48,6 +48,7 @@ final class DetailsMovieViewController: UIViewController {
         NotificationCenter.default.post(name: .countMovieDetails, object: nil)
     }
     
+    /// setUpView: config to view with collection views
     private func setUpView(){
         self.recommendationCollection.dataSource = self
         self.recommendationCollection.delegate = self
@@ -71,59 +72,6 @@ final class DetailsMovieViewController: UIViewController {
         }
     }
     
-    private func setupSimilarMovies(with idMovie: String) {
-        SimilarAPI().searchSimilarMovies(with: idMovie, completion: { result in
-            switch result {
-            case .success(let res):
-                let similarMovies = res.movies
-                self.similarMovies = similarMovies
-                if similarMovies.isEmpty {
-                    DispatchQueue.main.async {
-                        self.similarCollection.isHidden = true
-                        self.labelSimilar.isHidden = true
-                    }
-                } else {
-                    DispatchQueue.main.async {
-                        self.similarCollection.reloadData()
-                    }
-                }
-            case .failure(let error):
-                debugPrint(error)
-                self.similarMovies = []
-                DispatchQueue.main.async {
-                    self.similarCollection.isHidden = true
-                    self.labelSimilar.isHidden = true
-                }
-            }
-        })
-    }
-
-    private func setupRecommendationMovies(with idMovie: String) {
-        RecommendationAPI().searchRecommendationMovies(with: idMovie, completion: { result in
-            switch result {
-            case .success(let res):
-                let movies = res.movies
-                self.recommendationMovies = movies
-                if movies.isEmpty {
-                    DispatchQueue.main.async {
-                        self.recommendationCollection.isHidden = true
-                        self.labelRecommendation.isHidden = true
-                    }
-                } else {
-                    DispatchQueue.main.async {
-                        self.recommendationCollection.reloadData()
-                    }
-                }
-            case .failure(let error):
-                debugPrint(error)
-                self.recommendationMovies = []
-                DispatchQueue.main.async {
-                    self.recommendationCollection.isHidden = true
-                    self.labelRecommendation.isHidden = true
-                }
-            }
-        })
-    }
     /// clickLikedMovie: Func  execute when user click into like button
     @IBAction func clickLikedMovie() {
         likedMovie = !likedMovie
@@ -139,8 +87,6 @@ extension DetailsMovieViewController: DetailsMovieViewProtocols {
         self.descriptionLbl.text = movie.overview
         self.btnLikedMovie.setImage(UIImage(systemName: isFavorite), for: .normal)
         setUpImageMovie(with: movie.backdropPath ?? "poster")
-        self.setupSimilarMovies(with: "\(movie.id)")
-        self.setupRecommendationMovies(with: "\(movie.id)")
     }
     /// likeIconChange: func change heart icon tapped button like
     ///  - Parameter imagePath: name background path movie
@@ -149,6 +95,28 @@ extension DetailsMovieViewController: DetailsMovieViewProtocols {
             self.btnLikedMovie.setImage(UIImage(systemName: imagePath), for: .normal)
         }
     }
+    /// setUpRecommendationMovies: received array recommendation movies, assigned to local array and reload collection view
+    ///  - Parameter arrMovies: array recomendation movies
+    func setUpRecommendationMovies(with arrMovies: [Movie]) {
+        self.recommendationMovies = arrMovies
+        DispatchQueue.main.async {
+            self.recommendationCollection.isHidden = arrMovies.isEmpty
+            self.labelRecommendation.isHidden = true
+            self.recommendationCollection.reloadData()
+        }
+    }
+    
+    /// setUpSimilarMoview: received array similar movies, assigned to local array and reload collection view
+    ///  - Parameter arrMovies: array simiarl movies
+    func setUpSimilarMoview(with arrMovies: [Movie]) {
+        self.similarMovies = arrMovies
+        DispatchQueue.main.async {
+            self.similarCollection.isHidden = arrMovies.isEmpty
+            self.labelSimilar.isHidden = arrMovies.isEmpty
+            self.similarCollection.reloadData()
+        }
+    }
+    
 }
 
 extension DetailsMovieViewController: UICollectionViewDataSource {

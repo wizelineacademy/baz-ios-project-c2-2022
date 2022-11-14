@@ -35,4 +35,12 @@ final class DetailsMoviePresenter: DetailsMoviePresenterProtocols, DetailsMovieI
     func changeIconLike(with image: String) {
         view?.likeIconChange(with: image)
     }
+    
+    func setUpRecommendationMoviesToView(with arrMovies: [Movie]) {
+        view?.setUpRecommendationMovies(with: arrMovies)
+    }
+    
+    func setUpSimilarMoviewToView(with arrMovies: [Movie]) {
+        view?.setUpSimilarMoview(with: arrMovies)
+    }
 }

@@ -17,6 +17,8 @@ final class DetailsMovieInteractor: DetailsMovieInteractorInputAndOutputProtocol
     /// setUpPresentToInteractor: config data to present to user
     ///  - Parameter movie: object type Movie
     func setUpPresentToInteractor() {
+        getArrRecommendationMovies()
+        getArrSimilarMovies()
         guard let movie = movie else {
             return
         }
@@ -43,5 +45,34 @@ final class DetailsMovieInteractor: DetailsMovieInteractorInputAndOutputProtocol
         }
         let imagePath = isLike ? "heart.fill" : "heart"
         presenter?.changeIconLike(with: imagePath )
+    }
+    
+    /// getArrRecommendationMovies: get recommendation movies with movie id and send it to present
+    func getArrRecommendationMovies() {
+        guard let id = movie?.id else { return }
+        RecommendationAPI().searchRecommendationMovies(with: "\(id)", completion: { result in
+            switch result {
+            case .success(let res):
+                self.presenter?.setUpRecommendationMoviesToView(with: res.movies)
+            case .failure(let error):
+                debugPrint(error)
+                self.presenter?.setUpRecommendationMoviesToView(with: [])
+            }
+        })
+    }
+    
+    
+    /// getArrSimilarMovies: get similar movies with movie id  and send it to presenter
+    func getArrSimilarMovies() {
+        guard let id = movie?.id else { return }
+        SimilarAPI().searchSimilarMovies(with: "\(id)", completion: { result in
+            switch result {
+            case .success(let res):
+                self.presenter?.setUpSimilarMoviewToView(with: res.movies)
+            case .failure(let error):
+                debugPrint(error)
+                self.presenter?.setUpSimilarMoviewToView(with: [])
+            }
+        })
     }
 }
