@@ -13,11 +13,11 @@ final class HomeViewController: UIViewController, PrincipalView {
      
     @IBOutlet weak var segmentControl: UISegmentedControl! {
         didSet {
-            segmentControl.setTitle("Trending", forSegmentAt: 0)
-            segmentControl.setTitle("Now Paying", forSegmentAt: 1)
-            segmentControl.setTitle("Popular", forSegmentAt: 2)
-            segmentControl.setTitle("Top Rated", forSegmentAt: 3)
-            segmentControl.setTitle("Up Coming", forSegmentAt: 4)
+            segmentControl.setTitle("Tendencia", forSegmentAt: 0)
+            segmentControl.setTitle("En cines", forSegmentAt: 1)
+            segmentControl.setTitle("Pupular", forSegmentAt: 2)
+            segmentControl.setTitle("Mejores", forSegmentAt: 3)
+            segmentControl.setTitle("Prox", forSegmentAt: 4)
         }
     }
     @IBOutlet weak var tableViewMovies: UITableView! {

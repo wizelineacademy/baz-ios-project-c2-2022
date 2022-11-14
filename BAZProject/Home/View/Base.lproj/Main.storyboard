@@ -28,7 +28,7 @@
             </objects>
             <point key="canvasLocation" x="62" y="-106"/>
         </scene>
-        <!--Search-->
+        <!--Buscar-->
         <scene sceneID="quT-u1-oXl">
             <objects>
                 <viewController id="aJX-Oe-N5S" customClass="SearchViewController" customModule="BAZProject" customModuleProvider="target" sceneMemberID="viewController">
@@ -142,7 +142,7 @@
                             <constraint firstItem="vXj-Ob-E81" firstAttribute="trailing" secondItem="RXF-yV-Pn8" secondAttribute="trailing" id="m8l-MN-G9S"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="Search" id="bfN-P7-pRH"/>
+                    <navigationItem key="navigationItem" title="Buscar" id="bfN-P7-pRH"/>
                     <connections>
                         <outlet property="CollectionSearchView" destination="tZI-ud-JpF" id="5Yf-vy-07u"/>
                         <outlet property="searchText" destination="Nhp-iJ-l8P" id="MvV-uw-hV6"/>
@@ -294,7 +294,7 @@
             </objects>
             <point key="canvasLocation" x="1760.8695652173915" y="594.64285714285711"/>
         </scene>
-        <!--Home-->
+        <!--Inicio-->
         <scene sceneID="B6W-zq-ADf">
             <objects>
                 <viewController id="gJ9-X3-A7i" customClass="HomeViewController" customModule="BAZProject" customModuleProvider="target" sceneMemberID="viewController">
@@ -354,7 +354,7 @@
                             <constraint firstItem="Y3e-Xz-cip" firstAttribute="top" secondItem="3rs-BF-ii6" secondAttribute="top" id="aS1-iX-m7f"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="Home" id="PEB-Zv-c1I">
+                    <navigationItem key="navigationItem" title="Inicio" id="PEB-Zv-c1I">
                         <barButtonItem key="rightBarButtonItem" id="r7p-Uw-Pcp">
                             <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" id="shb-GT-PVd">
                                 <rect key="frame" x="302" y="5" width="92" height="34.5"/>
@@ -378,11 +378,11 @@
             </objects>
             <point key="canvasLocation" x="971.01449275362324" y="594.64285714285711"/>
         </scene>
-        <!--Home-->
+        <!--Inicio-->
         <scene sceneID="LKp-hO-F6l">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="stx-05-wSY" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Home" image="homekit" catalog="system" id="8WP-za-IFG"/>
+                    <tabBarItem key="tabBarItem" title="Inicio" image="homekit" catalog="system" id="8WP-za-IFG"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="dMU-fy-mLd">
                         <rect key="frame" x="0.0" y="44" width="414" height="44"/>
@@ -397,11 +397,11 @@
             </objects>
             <point key="canvasLocation" x="60.869565217391312" y="594.64285714285711"/>
         </scene>
-        <!--Search-->
+        <!--Buscar-->
         <scene sceneID="pfy-ao-JLN">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="ioc-Yv-GPn" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Search" image="magnifyingglass" catalog="system" selectedImage="magnifyingglass" id="CVB-dQ-TaC"/>
+                    <tabBarItem key="tabBarItem" title="Buscar" image="magnifyingglass" catalog="system" selectedImage="magnifyingglass" id="CVB-dQ-TaC"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="22T-wr-SYO">
                         <rect key="frame" x="0.0" y="44" width="414" height="44"/>
