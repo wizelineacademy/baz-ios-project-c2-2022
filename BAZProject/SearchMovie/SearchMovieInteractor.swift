@@ -13,4 +13,39 @@ import UIKit
 class SearchMovieInteractor: SearchMovieInteractorProtocol {
 
     weak var presenter: SearchMoviePresenterProtocol?
+
+    func getMovies(endPoint: EndPoint) -> MovieResponseResult {
+        var moviesList: [MovieModel] = []
+        var result: MovieResponseResult
+        let decoder = JSONDecoder()
+        decoder.keyDecodingStrategy = .convertFromSnakeCase
+
+        guard let url = endPoint.url,
+              let data = try? Data(contentsOf: url),
+              let movies = try? decoder.decode(GenericResponse.self, from: data)
+        else {
+            return MovieResponseResult(totalPages: 0, totalResults: 0, movies: [])
+        }
+
+        for movie in movies.results {
+            let posterPath = movie.posterPath ?? ""
+            let backdropPath = movie.backdropPath ?? ""
+            var movieModel: MovieModel
+            if let url = URL(string: "https://image.tmdb.org/t/p/w500\(posterPath)"), let urlBackdrop = URL(string: "https://image.tmdb.org/t/p/w500\(backdropPath)") {
+                if let imageData = try? Data(contentsOf: url), let backdropData = try? Data(contentsOf: urlBackdrop) {
+                    movieModel = MovieModel(moviePoster: UIImage(data: imageData), movieBackdrop: UIImage(data: backdropData), movie: movie)
+                } else {
+                    movieModel = MovieModel(moviePoster: UIImage(named: "poster"), movieBackdrop: nil, movie: movie)
+                }
+            } else {
+                movieModel = MovieModel(moviePoster: UIImage(named: "poster"), movieBackdrop: nil, movie: movie)
+            }
+            moviesList.append(movieModel)
+        }
+
+        result = MovieResponseResult(totalPages: movies.totalPages,
+                                     totalResults: movies.totalResults,
+                                     movies: moviesList)
+        return result
+    }
 }

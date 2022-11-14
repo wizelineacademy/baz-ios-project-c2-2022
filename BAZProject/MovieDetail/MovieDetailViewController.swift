@@ -13,9 +13,28 @@ import UIKit
 class MovieDetailViewController: UIViewController, MovieDetailViewProtocol {
 
 	var presenter: MovieDetailPresenterProtocol?
+    var movie: MovieModel?
 
-	override func viewDidLoad() {
+    @IBOutlet weak var image: UIImageView!
+    @IBOutlet weak var lblTitle: UILabel!
+    @IBOutlet weak var lblReleaseDate: UILabel!
+    @IBOutlet weak var lblVotes: UILabel!
+    @IBOutlet weak var lblOverview: UITextView!
+
+    override func viewDidLoad() {
         super.viewDidLoad()
+        configView()
+    }
+
+    func configView() {
+        if let movie = movie {
+            lblTitle.text = movie.movie.title
+            lblReleaseDate.text = "Fecha de estreno: \(movie.movie.releaseDate ?? "NA")"
+            lblVotes.text = "Votos: \(String(movie.movie.voteAverage ?? 0.0))"
+            lblOverview.text = movie.movie.overview
+            image.layer.cornerRadius = 10.0
+            image.image = movie.movieBackdrop
+        }
     }
 
 }

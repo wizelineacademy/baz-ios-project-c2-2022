@@ -16,15 +16,30 @@ class MainMovieRouter: MainMovieWireframeProtocol {
 
     static func createModule() -> UIViewController {
         // Change to get view from storyboard if not using progammatic UI
-        let view = MainMovieViewController(nibName: nil, bundle: Bundle(for: MainMovieRouter.self))
+        let storyboard = UIStoryboard(name: "MainMovieViewController", bundle: nil)
+        guard let movieViewController = storyboard.instantiateViewController(withIdentifier: "MainMovieViewController") as? MainMovieViewController else {
+            fatalError()
+        }
+        movieViewController.configure(tabs: makeMovieTabs())
         let interactor = MainMovieInteractor()
         let router = MainMovieRouter()
-        let presenter = MainMoviePresenter(interface: view, interactor: interactor, router: router)
+        let presenter = MainMoviePresenter(interface: movieViewController, interactor: interactor, router: router)
 
-        view.presenter = presenter
+        movieViewController.presenter = presenter
         interactor.presenter = presenter
-        router.viewController = view
+        router.viewController = movieViewController
 
-        return view
+        return movieViewController
     }
+
+    static func makeMovieTabs() -> [MainMovieTab] {
+        return [
+            MainMovieTab(uiViewController: MovieListRouter.createModule(endPoint: TrendingEndPoint(page: 1)), tabBarImages: "chart.line.uptrend.xyaxis.circle.fill", tabBarTitle: "Trending"),
+            MainMovieTab(uiViewController: MovieListRouter.createModule(endPoint: NowPlayingEndPoint()), tabBarImages: "play.circle", tabBarTitle: "Now Playing"),
+            MainMovieTab(uiViewController: MovieListRouter.createModule(endPoint: PopularEndPoint()), tabBarImages: "theatermasks", tabBarTitle: "Popular"),
+            MainMovieTab(uiViewController: MovieListRouter.createModule(endPoint: TopRatedEndPoint()), tabBarImages: "star.fill", tabBarTitle: "Top Rated"),
+            MainMovieTab(uiViewController: MovieListRouter.createModule(endPoint: UpcomingEndPoint()), tabBarImages: "arrowshape.turn.up.forward.circle", tabBarTitle: "Upcoming")
+        ]
+    }
+
 }

@@ -16,7 +16,11 @@ class SearchMovieRouter: SearchMovieWireframeProtocol {
 
     static func createModule() -> UIViewController {
         // Change to get view from storyboard if not using progammatic UI
-        let view = SearchMovieViewController(nibName: nil, bundle: nil)
+        let storyboard = UIStoryboard(name: "SearchMovie", bundle: Bundle(for: SearchMovieRouter.self))
+        guard let view = storyboard.instantiateViewController(withIdentifier: "SearchMovie") as? SearchMovieViewController else {
+            fatalError()
+        }
+//        let view = SearchMovieViewController(nibName: "SearchMovieViewController", bundle: Bundle(for: SearchMovieRouter.self))
         let interactor = SearchMovieInteractor()
         let router = SearchMovieRouter()
         let presenter = SearchMoviePresenter(interface: view, interactor: interactor, router: router)

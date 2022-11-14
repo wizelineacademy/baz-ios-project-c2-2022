@@ -5,6 +5,7 @@
 //
 
 import Foundation
+import UIKit
 
 struct Movie: Decodable {
     let name: String?
@@ -36,4 +37,22 @@ struct GenericResponse: Decodable {
 struct Dates: Decodable {
     let maximum: String
     let minimum: String
+}
+
+struct MovieModel {
+    let moviePoster: UIImage?
+    let movieBackdrop: UIImage?
+    let movie: Movie
+}
+
+struct MainMovieTab {
+    var uiViewController: UIViewController
+    var tabBarImages: String
+    var tabBarTitle: String
+}
+
+struct MovieResponseResult {
+    let totalPages: Int
+    let totalResults: Int
+    let movies: [MovieModel]
 }
