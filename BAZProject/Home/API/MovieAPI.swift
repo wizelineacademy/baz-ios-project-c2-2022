@@ -8,7 +8,7 @@ import Foundation
 
 final class MovieAPI: MovieApiDelegate {
     
-    let httpMeth = "GET"
+    private let httpMeth = "GET"
     
     /// Funcion getInformation obtiene la informacion de una api de peliculas dependiendo la URL que manden
     ///  - Parameter api: Seleccionas el tipo de api que solicitaras
