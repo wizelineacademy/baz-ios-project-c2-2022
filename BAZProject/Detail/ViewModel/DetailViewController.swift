@@ -47,6 +47,12 @@ class DetailViewController: UIViewController {
         getMoviesSimilar()
         getMoviesRecommended()
     }
+    
+    //MARK: - Actions
+    @IBAction func closeActionClicked(_ sender: Any) {
+        self.dismiss(animated: true, completion: nil)
+    }
+
     /// Register the custom cell to show recomended movies in collectionRecomend
     func registerCollectionRecomended() {
         collectionRecommended.register(UINib(nibName: identifier,

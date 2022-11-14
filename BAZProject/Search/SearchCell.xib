@@ -17,21 +17,20 @@
                 <rect key="frame" x="0.0" y="0.0" width="233" height="211"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="zqj-in-shl">
-                        <rect key="frame" x="57" y="52" width="119" height="142"/>
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="749" image="poster" translatesAutoresizingMaskIntoConstraints="NO" id="zqj-in-shl">
+                        <rect key="frame" x="57" y="51.5" width="119" height="142.5"/>
                         <constraints>
-                            <constraint firstAttribute="width" constant="119" id="aFM-4C-gwi"/>
-                            <constraint firstAttribute="height" constant="142" id="oDh-ki-dxM"/>
+                            <constraint firstAttribute="width" constant="119" id="8yh-VB-9l9"/>
+                            <constraint firstAttribute="height" constant="142.5" id="TtJ-sB-Utu"/>
                         </constraints>
                     </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gsl-Vl-icg">
-                        <rect key="frame" x="16" y="13" width="201" height="21"/>
+                        <rect key="frame" x="16" y="13" width="201" height="20.5"/>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <nil key="highlightedColor"/>
                     </label>
                 </subviews>
-                <color key="backgroundColor" white="0.66666666666666663" alpha="0.28285389072847683" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                 <constraints>
                     <constraint firstItem="gsl-Vl-icg" firstAttribute="leading" secondItem="Ofn-mn-G81" secondAttribute="leading" constant="16" id="3zc-A2-Gc5"/>
                     <constraint firstAttribute="trailing" secondItem="zqj-in-shl" secondAttribute="trailing" constant="57" id="Ov5-Tq-fj3"/>
@@ -50,4 +49,7 @@
             <point key="canvasLocation" x="-714" y="161"/>
         </collectionViewCell>
     </objects>
+    <resources>
+        <image name="poster" width="500" height="743"/>
+    </resources>
 </document>

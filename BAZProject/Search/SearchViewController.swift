@@ -78,10 +78,14 @@ extension SearchViewController : UISearchBarDelegate {
         searchActive = false
     }
     
-    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+    
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        print(searchText)
         searchActive = true
-        if let searchWord = searchBar.text {
-            self.getMoviesSearch(wordToSearch: searchWord)
+        DispatchQueue.main.async {
+            if let searchWord = searchBar.text {
+                self.getMoviesSearch(wordToSearch: searchWord)
+            }
         }
     }
     
