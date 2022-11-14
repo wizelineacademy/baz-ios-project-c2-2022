@@ -20,6 +20,7 @@ enum MovieFeed {
     case Recommendations(movieID: Int)
     case Credits(movieID: Int)
 }
+
 extension MovieFeed: Endpoint {
     
     var apiKey: String {

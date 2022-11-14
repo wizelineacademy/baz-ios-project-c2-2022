@@ -6,8 +6,10 @@
 
 import Foundation
 
-class MovieAPI: MovieApiDelegate {
+final class MovieAPI: MovieApiDelegate {
+    
     let httpMeth = "GET"
+    
     /// Funcion getInformation obtiene la informacion de una api de peliculas dependiendo la URL que manden
     ///  - Parameter api: Seleccionas el tipo de api que solicitaras
     func getInformation(_ api: MovieFeed) -> [Any] {
@@ -70,5 +72,5 @@ class MovieAPI: MovieApiDelegate {
     func showError(_ error: APIError) {
         print("El error es: \(error)")
     }
-
+    
 }

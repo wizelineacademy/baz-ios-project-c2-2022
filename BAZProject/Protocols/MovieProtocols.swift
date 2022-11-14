@@ -17,7 +17,6 @@ protocol GenericView {
 
 protocol GenericViewModel {
     var dataArray: [Movie] {get set}
-    func getImage(urlImage: String) -> Data
 }
 
 protocol PrincipalViewModel: GenericViewModel {

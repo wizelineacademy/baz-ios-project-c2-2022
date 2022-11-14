@@ -12,6 +12,7 @@ protocol Endpoint {
     var path: String { get }
     var apiKey: String { get }
 }
+
 extension Endpoint {
     
     var urlComponents: URLComponents {

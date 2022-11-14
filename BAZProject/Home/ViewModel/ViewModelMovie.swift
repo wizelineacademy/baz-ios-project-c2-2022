@@ -44,15 +44,6 @@ class ViewModelMovie: PrincipalViewModel {
     func changeDataToShow(_ kindOfData: MovieFeed) {
         self.dataArray = dicAllMovies[kindOfData.name] ?? []
     }
-    /// La funcion getImage retorna la informacion de una imagen
-    /// - Parameter urlImage: String con la url de la imagen a descargar
-    /// - Returns: La infotmacion de la imagen descargada de tipo Data
-    func getImage(urlImage: String) -> Data {
-        let urlIm = "https://image.tmdb.org/t/p/w500\(urlImage)"
-        guard let urlData = URL(string: urlIm),
-              let data = try? Data(contentsOf: urlData) else { return Data() }
-        return data
-    }
     /// La funcion cambia la informacion a mostrar en el HomeView
     /// - Parameter index: Index de la informacion a mostrar en la tabla
     func changeInfoByIndex(_ index: Int) {

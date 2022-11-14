@@ -355,13 +355,13 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Home" id="PEB-Zv-c1I">
-                        <barButtonItem key="rightBarButtonItem" style="plain" id="r7p-Uw-Pcp">
+                        <barButtonItem key="rightBarButtonItem" id="r7p-Uw-Pcp">
                             <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" id="shb-GT-PVd">
                                 <rect key="frame" x="302" y="5" width="92" height="34.5"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="plain" image="bell.badge" catalog="system" title="0"/>
+                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                <state key="normal" title="0" image="bell.badge" catalog="system"/>
                                 <connections>
                                     <action selector="showDetailOfNotification:" destination="gJ9-X3-A7i" eventType="touchUpInside" id="Tha-VK-liO"/>
                                 </connections>

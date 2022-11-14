@@ -7,7 +7,7 @@
 
 import UIKit
 
-class HomeViewController: UIViewController, PrincipalView {
+final class HomeViewController: UIViewController, PrincipalView {
     
     var movies: Int = 0
      
@@ -29,7 +29,9 @@ class HomeViewController: UIViewController, PrincipalView {
             tableViewMovies.reloadData()
         }
     }
+    
     @IBOutlet weak var movieNotification: UIButton!
+    
     let homeViewModel = ViewModelMovie()
     
     override func viewDidLoad() {
@@ -62,7 +64,7 @@ class HomeViewController: UIViewController, PrincipalView {
     }
     
     @IBAction func showDetailOfNotification(_ sender: Any) {
-        sendAlert("Tus películas", "Estas son las peliculas consultadas hasta ahora: \(movies)")
+        self.present(GenericFunctions.sendAlert("Tus películas", "Estas son las peliculas consultadas hasta ahora: \(movies)"), animated: true, completion: nil)
     }
     
     @objc func changeValueOfNotification(_ notification: Notification) {
@@ -70,46 +72,5 @@ class HomeViewController: UIViewController, PrincipalView {
         movieNotification.tintColor = UIColor(red: CGFloat.random(in: 0...1), green: CGFloat.random(in: 0...1), blue: CGFloat.random(in: 0...1), alpha: 1)
         movieNotification.setTitle("\(movies)", for: .normal)
     }
-    
-    func sendAlert(_ title: String,_ message: String) {
-        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
-        self.present(alert, animated: true, completion: nil)
-    }
-    
-}
 
-extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        self.homeViewModel.dataArray.count
-    }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = self.tableViewMovies.dequeueReusableCell(withIdentifier: "MovieCell") as! MovieTableViewCell
-        cell.setUpSkeleton()
-        cell.titleMovie.showAnimatedGradientSkeleton()
-        cell.qualificationMovie.showAnimatedGradientSkeleton()
-        cell.imageViewMovie.showAnimatedGradientSkeleton()
-        cell.originalTitleMovie.showAnimatedGradientSkeleton()
-        DispatchQueue.main.asyncAfter(deadline: .now()) { [self] in
-            cell.originalTitleMovie.hideSkeleton()
-            cell.titleMovie.hideSkeleton()
-            cell.qualificationMovie.hideSkeleton()
-            cell.imageViewMovie.hideSkeleton()
-            cell.movieModel = homeViewModel.getInfoIndex(indexPath.row)
-        }
-        return cell
-    }
-    
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "DetailViewController") as! DetailViewController
-        vc.detailViewModel.dataArray = homeViewModel.dataArray[indexPath.row]
-        vc.modalPresentationStyle = .fullScreen
-        self.navigationController?.pushViewController(vc, animated: true)
-//        present(vc, animated: true, completion: nil)
-    }
-    
-    func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
-        return UITableView.automaticDimension
-    }
 }
