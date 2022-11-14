@@ -10,36 +10,17 @@
 
 import UIKit
 
-class MainMovieViewController: UITabBarController, MainMovieViewProtocol {
+class MainMovieViewController: UITabBarController, MainMovieView {
 
-	var presenter: MainMoviePresenterProtocol?
-
-    private var mainMovieTabs: [MainMovieTab] = []
+	var presenter: MainMoviePresenter?
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        setTabs()
+        presenter?.setTabs()
         configureSearchButton()
     }
 
-    private func setTabs() {
-        self.viewControllers = mainMovieTabs.map { $0.uiViewController }
-        guard let viewControllers = self.viewControllers else {
-            return
-        }
-        for (index, controller) in viewControllers.enumerated() {
-            if index < mainMovieTabs.count {
-                controller.tabBarItem.title = mainMovieTabs[index].tabBarTitle
-                controller.tabBarItem.image = UIImage(systemName: mainMovieTabs[index].tabBarImages)
-            }
-        }
-    }
-
-    func configure(tabs: [MainMovieTab]) {
-        mainMovieTabs = tabs
-    }
-
-    func configureSearchButton() {
+    private func configureSearchButton() {
         let image = UIImage(systemName: "magnifyingglass")
         let searchButton = UIBarButtonItem(image: image, style: .plain, target: self, action: #selector(openSearchView))
         self.navigationItem.rightBarButtonItem = searchButton

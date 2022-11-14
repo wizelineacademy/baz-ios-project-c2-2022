@@ -7,17 +7,13 @@
 
 import Foundation
 
-struct TrendingEndPoint: EndPoint {
-    var page: Int? = 1
+struct TrendingEndPoint: PaginatedEndPoint {
+    var page: Int = 1
     var url: URL? { createUrl(page: page) }
 
     private func createUrl(page: Int?) -> URL? {
         var components = EndPointComponents.init(path: "/3/trending/movie/day").components
         components.queryItems?.append(URLQueryItem(name: "page", value: String(page ?? 1)))
         return components.url
-    }
-
-    init(page: Int) {
-        self.page = page
     }
 }

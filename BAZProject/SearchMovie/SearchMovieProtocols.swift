@@ -11,20 +11,20 @@
 import Foundation
 
 // MARK: Wireframe -
-protocol SearchMovieWireframeProtocol: AnyObject { }
+protocol SearchMovieWireframe: AnyObject { }
 
 // MARK: Presenter -
-protocol SearchMoviePresenterProtocol: AnyObject {
-    func getMovies(endPoint: EndPoint) -> MovieResponseResult
+protocol SearchMoviePresenter: AnyObject {
+    func getMovies(endPoint: EndPoint, endPointResult: @escaping (MovieResponseResult?) -> Void)
 }
 
 // MARK: Interactor -
-protocol SearchMovieInteractorProtocol: AnyObject {
-    var presenter: SearchMoviePresenterProtocol? { get set }
-    func getMovies(endPoint: EndPoint) -> MovieResponseResult
+protocol SearchMovieInteractor: AnyObject {
+    var presenter: SearchMoviePresenter? { get set }
+    func getMovies(endPoint: EndPoint, endPointResult: @escaping (MovieResponseResult?) -> Void)
 }
 
 // MARK: View -
-protocol SearchMovieViewProtocol: AnyObject {
-    var presenter: SearchMoviePresenterProtocol? { get set }
+protocol SearchMovieView: AnyObject {
+    var presenter: SearchMoviePresenter? { get set }
 }

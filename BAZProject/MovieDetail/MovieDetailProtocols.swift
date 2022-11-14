@@ -11,22 +11,22 @@
 import Foundation
 
 // MARK: Wireframe -
-protocol MovieDetailWireframeProtocol: AnyObject {
+protocol MovieDetailWireframe: AnyObject {
 
 }
 // MARK: Presenter -
-protocol MovieDetailPresenterProtocol: AnyObject {
+protocol MovieDetailPresenter: AnyObject {
 
 }
 
 // MARK: Interactor -
-protocol MovieDetailInteractorProtocol: AnyObject {
+protocol MovieDetailInteractor: AnyObject {
 
-  var presenter: MovieDetailPresenterProtocol? { get set }
+  var presenter: MovieDetailPresenter? { get set }
 }
 
 // MARK: View -
-protocol MovieDetailViewProtocol: AnyObject {
+protocol MovieDetailView: AnyObject {
 
-  var presenter: MovieDetailPresenterProtocol? { get set }
+  var presenter: MovieDetailPresenter? { get set }
 }

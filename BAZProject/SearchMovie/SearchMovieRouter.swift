@@ -10,25 +10,29 @@
 
 import UIKit
 
-class SearchMovieRouter: SearchMovieWireframeProtocol {
+final class SearchViewRouterFactory {
+    func make() -> UIViewController {
+        let storyboard = UIStoryboard(name: "SearchMovie", bundle: Bundle(for: SearchMovieRouter.self))
+        guard let view = storyboard.instantiateViewController(withIdentifier: "SearchMovie") as? SearchMovieViewController else {
+            fatalError()
+        }
+        let interactor = SearchMovieInteractorImp()
+        let router = SearchMovieRouter()
+        let presenter = SearchMoviePresenterImp(interface: view, interactor: interactor, router: router)
+
+        view.presenter = presenter
+        interactor.presenter = presenter
+        router.viewController = view
+        return view
+    }
+}
+
+final class SearchMovieRouter: SearchMovieWireframe {
 
     weak var viewController: UIViewController?
 
     static func createModule() -> UIViewController {
         // Change to get view from storyboard if not using progammatic UI
-        let storyboard = UIStoryboard(name: "SearchMovie", bundle: Bundle(for: SearchMovieRouter.self))
-        guard let view = storyboard.instantiateViewController(withIdentifier: "SearchMovie") as? SearchMovieViewController else {
-            fatalError()
-        }
-//        let view = SearchMovieViewController(nibName: "SearchMovieViewController", bundle: Bundle(for: SearchMovieRouter.self))
-        let interactor = SearchMovieInteractor()
-        let router = SearchMovieRouter()
-        let presenter = SearchMoviePresenter(interface: view, interactor: interactor, router: router)
-
-        view.presenter = presenter
-        interactor.presenter = presenter
-        router.viewController = view
-
-        return view
+        return SearchViewRouterFactory().make()
     }
 }

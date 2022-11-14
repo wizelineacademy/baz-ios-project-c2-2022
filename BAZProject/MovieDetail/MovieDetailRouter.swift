@@ -10,22 +10,27 @@
 
 import UIKit
 
-class MovieDetailRouter: MovieDetailWireframeProtocol {
-
-    weak var viewController: UIViewController?
-
-    static func createModule(movie: MovieModel) -> UIViewController {
-        // Change to get view from storyboard if not using progammatic UI
+final class MovieDetailRouterFactory {
+    func make(movie: MovieModel) -> UIViewController {
         let view = MovieDetailViewController(nibName: nil, bundle: Bundle(for: MovieDetailRouter.self))
-        let interactor = MovieDetailInteractor()
+        let interactor = MovieDetailInteractorImp()
         let router = MovieDetailRouter()
-        let presenter = MovieDetailPresenter(interface: view, interactor: interactor, router: router)
+        let presenter = MovieDetailPresenterImp(interface: view, interactor: interactor, router: router)
 
         view.presenter = presenter
         view.movie = movie
         interactor.presenter = presenter
         router.viewController = view
-
         return view
+    }
+}
+
+final class MovieDetailRouter: MovieDetailWireframe {
+
+    weak var viewController: UIViewController?
+
+    static func createModule(movie: MovieModel) -> UIViewController {
+        // Change to get view from storyboard if not using progammatic UI
+        return MovieDetailRouterFactory().make(movie: movie)
     }
 }

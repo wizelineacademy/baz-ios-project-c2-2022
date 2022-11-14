@@ -10,9 +10,9 @@
 
 import UIKit
 
-class MovieDetailViewController: UIViewController, MovieDetailViewProtocol {
+final class MovieDetailViewController: UIViewController, MovieDetailView {
 
-	var presenter: MovieDetailPresenterProtocol?
+	var presenter: MovieDetailPresenter?
     var movie: MovieModel?
 
     @IBOutlet weak var image: UIImageView!
@@ -27,14 +27,15 @@ class MovieDetailViewController: UIViewController, MovieDetailViewProtocol {
     }
 
     func configView() {
-        if let movie = movie {
-            lblTitle.text = movie.movie.title
-            lblReleaseDate.text = "Fecha de estreno: \(movie.movie.releaseDate ?? "NA")"
-            lblVotes.text = "Votos: \(String(movie.movie.voteAverage ?? 0.0))"
-            lblOverview.text = movie.movie.overview
-            image.layer.cornerRadius = 10.0
-            image.image = movie.movieBackdrop
+        guard let movie = movie else {
+            return
         }
+        lblTitle.text = movie.movie.title
+        lblReleaseDate.text = "Fecha de estreno: \(movie.movie.releaseDate ?? "NA")"
+        lblVotes.text = "Votos: \(String(movie.movie.voteAverage ?? 0.0))"
+        lblOverview.text = movie.movie.overview
+        image.layer.cornerRadius = 10.0
+        image.image = movie.movieBackdrop
     }
 
 }

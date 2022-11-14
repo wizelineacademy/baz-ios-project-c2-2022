@@ -10,12 +10,18 @@
 
 import UIKit
 
-final class SearchMovieViewController: UIViewController, SearchMovieViewProtocol {
+final class SearchMovieViewController: UIViewController, SearchMovieView {
 
-	var presenter: SearchMoviePresenterProtocol?
+	var presenter: SearchMoviePresenter?
     @IBOutlet weak var txtSearch: UISearchBar!
     @IBOutlet weak var movieCollectionView: UICollectionView!
-    private var movies: [MovieModel] = []
+    private var movies: [MovieModel] = [] {
+        didSet {
+            DispatchQueue.main.async { [weak self] in
+                self?.movieCollectionView.reloadData()
+            }
+        }
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -33,15 +39,19 @@ final class SearchMovieViewController: UIViewController, SearchMovieViewProtocol
     }
 
     private func getMoviesToCollection(query: String) {
-        if let results = presenter?.getMovies(endPoint: SearchEndPoint.init(query: query)) {
-            movies = results.movies
-        }
-        movieCollectionView.reloadData()
+        presenter?.getMovies(endPoint: SearchEndPoint.init(query: query), endPointResult: { [weak self] resultEndPoint in
+            if resultEndPoint != nil {
+                if let result = resultEndPoint {
+                    self?.movies = result.movies
+                }
+            } else {
+                return
+            }
+        })
     }
 }
 
 extension SearchMovieViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
-
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         movies.count
     }
@@ -69,7 +79,6 @@ extension SearchMovieViewController: UICollectionViewDelegate, UICollectionViewD
  extension SearchMovieViewController: UISearchBarDelegate {
 
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        debugPrint(searchText)
         getMoviesToCollection(query: searchText)
     }
 

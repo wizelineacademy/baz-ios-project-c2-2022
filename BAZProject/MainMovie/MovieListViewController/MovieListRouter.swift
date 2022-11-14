@@ -7,24 +7,30 @@
 
 import UIKit
 
-class MovieListRouter: MainMovieWireframeProtocol {
-
-    weak var viewController: UIViewController?
-
-    static func createModule(endPoint: EndPoint) -> UIViewController {
-        // Change to get view from storyboard if not using progammatic UI
+final class MovieListRouterFactory {
+    func make(endPoint: PaginatedEndPoint) -> UIViewController {
         let storyboard = UIStoryboard(name: "MovieList", bundle: nil)
         guard let movieViewController = storyboard.instantiateViewController(withIdentifier: "MovieListViewController") as? MovieListViewController else {
             fatalError()
         }
-        let interactor = MainMovieInteractor()
-        let router = MovieListRouter()
-        let presenter = MainMoviePresenter(interface: movieViewController, interactor: interactor, router: router)
+        let interactor = MainMovieInteractorImp(endPoint: endPoint)
+        let router = MainMovieRouter()
+        let presenter = MovieListPresenterImp(interactor: interactor, router: router)
 
         movieViewController.presenter = presenter
         interactor.presenter = presenter
         router.viewController = movieViewController
         movieViewController.endPoint = endPoint
         return movieViewController
+    }
+}
+
+final class MovieListRouter: MainMovieWireframeProtocol {
+
+    weak var viewController: UIViewController?
+
+    static func createModule(endPoint: PaginatedEndPoint) -> UIViewController {
+        // Change to get view from storyboard if not using progammatic UI
+        return MovieListRouterFactory().make(endPoint: endPoint)
     }
 }

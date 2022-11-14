@@ -7,13 +7,13 @@
 
 import UIKit
 
-class MovieListTableViewCell: UITableViewCell {
-    
+final class MovieListTableViewCell: UITableViewCell {
+
     @IBOutlet weak var movieView: UIView!
     @IBOutlet weak var title: UILabel!
     @IBOutlet weak var subtitle: UILabel!
     @IBOutlet weak var posterImage: UIImageView!
-    
+
     override func awakeFromNib() {
         super.awakeFromNib()
         movieView.layer.cornerRadius = 10.0
@@ -26,15 +26,15 @@ class MovieListTableViewCell: UITableViewCell {
 
         // Configure the view for the selected state
     }
-    
+
     static func nib() -> UINib {
         return UINib(nibName: "MovieListTableViewCell", bundle: nil)
     }
-    
+
     func configureCell(movie: MovieModel) {
         title.text = movie.movie.title
         subtitle.text = String(movie.movie.voteAverage ?? 0.0)
         posterImage.image = movie.moviePoster
     }
-    
+
 }

@@ -7,7 +7,7 @@
 
 import UIKit
 
-class SearchMovieViewCell: UICollectionViewCell {
+final class SearchMovieViewCell: UICollectionViewCell {
 
     @IBOutlet weak var posterImage: UIImageView!
 
