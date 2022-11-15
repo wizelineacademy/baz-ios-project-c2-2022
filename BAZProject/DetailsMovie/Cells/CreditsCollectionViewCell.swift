@@ -22,6 +22,11 @@ class CreditsCollectionViewCell: UICollectionViewCell {
         // Initialization code
     }
     
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        self.imageCredits.image = nil
+    }
+    
     /// setUpcell
     /// - Parameter actor: info about actor element
     func setUpCell(_ actor: Credit) {

@@ -9,6 +9,7 @@ import UIKit
 
 final class MoviesCategoriesViewController: UIViewController {
     
+    private var indexSegment: Int = 0
     private let itemsPerRow: CGFloat = 2.0
     private var movies: [Movie] = []
     private let movieApi = MovieAPI()
@@ -65,7 +66,7 @@ final class MoviesCategoriesViewController: UIViewController {
     /// setupSegmentControl: configure segment control handler 5 types movies
     private func setupSegmentControl() {
         let mySegmentedControl = UISegmentedControl(items: ["Trending","Now Playing","Popular","Top Rated","Upcoming"])
-        mySegmentedControl.selectedSegmentIndex = 0
+        mySegmentedControl.selectedSegmentIndex = indexSegment
         mySegmentedControl.backgroundColor = .gray
         mySegmentedControl.addTarget(self, action: #selector(changeSegmentSelected(with:)), for: .valueChanged)
         mySegmentedControl.changeLineSegment()
@@ -81,6 +82,7 @@ final class MoviesCategoriesViewController: UIViewController {
     /// - Parameter segmentControl: int to identifier with selected segment is selected
     @objc private func changeSegmentSelected(with segmentControl: UISegmentedControl) {
         let value = segmentControl.selectedSegmentIndex
+        indexSegment = value
         let indicatorAnimating = indicator
         indicatorAnimating.startAnimating()
         movies.removeAll()

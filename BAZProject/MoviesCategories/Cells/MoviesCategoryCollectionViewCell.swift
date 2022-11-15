@@ -42,5 +42,10 @@ final class MoviesCategoryCollectionViewCell: UICollectionViewCell {
         self.imgLiked.image = imageLiked
         self.titleMovie.text = movie.title
     }
+    
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        self.imageMovie.image = nil
+    }
 
 }

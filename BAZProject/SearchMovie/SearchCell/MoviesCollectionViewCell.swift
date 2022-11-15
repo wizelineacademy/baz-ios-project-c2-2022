@@ -18,6 +18,11 @@ final class MoviesCollectionViewCell: UICollectionViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
     }
+    
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        self.imageMovie.image = nil
+    }
 
     /// setUpcell
     /// - Parameter movie: info about movie element
@@ -27,11 +32,13 @@ final class MoviesCollectionViewCell: UICollectionViewCell {
         let posterImage = movie.posterPath ?? "poster"
         titleMovie.text = movie.title
         ImageAPI.getImage(with: posterImage) { result in
-            switch result {
-            case .success(let image):
-                self.imageMovie.image = image
-            case .failure(_):
-                self.imageMovie.image = UIImage(named: "poster")
+            DispatchQueue.main.async {
+                switch result {
+                case .success(let image):
+                    self.imageMovie.image = image
+                case .failure(_):
+                    self.imageMovie.image = UIImage(named: "poster")
+                }
             }
         }
         let imageLiked = isFavoriteMovie ? UIImage(systemName: "heart.fill") : UIImage(systemName: "heart")

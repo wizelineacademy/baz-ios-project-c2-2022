@@ -23,7 +23,7 @@ final class SearchMovieViewController: UICollectionViewController, Storyboarded{
     /// - Parameter movie: object type Movie with movie info
     private func showMovieDetails(for movie: Movie) {
         let vc = DetailsMovieRouter.createModuleDetailsMovie(with: movie, and: self, arrFavoriteMovies: likeMovieIndex)
-        self.present(vc, animated: true)
+        self.navigationController?.pushViewController(vc, animated: true)
     }
     /// moviesCount:  get movie counts to userdefault
     /// - Parameter notification: object type Notification received data
