@@ -25,15 +25,15 @@
             <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
             <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <constraints>
-                <constraint firstAttribute="trailing" secondItem="bgU-3V-byx" secondAttribute="trailing" id="My4-il-p6c"/>
-                <constraint firstItem="bgU-3V-byx" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="RX5-on-fmr"/>
-                <constraint firstItem="bgU-3V-byx" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="n80-Yi-bSy"/>
-                <constraint firstAttribute="bottom" secondItem="bgU-3V-byx" secondAttribute="bottom" id="xsh-31-8H5"/>
+                <constraint firstAttribute="trailing" secondItem="bgU-3V-byx" secondAttribute="trailing" id="IMi-LI-SWy"/>
+                <constraint firstItem="bgU-3V-byx" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="L02-rB-K50"/>
+                <constraint firstItem="bgU-3V-byx" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="ffa-5k-r5G"/>
+                <constraint firstAttribute="bottom" secondItem="bgU-3V-byx" secondAttribute="bottom" id="iRY-8J-Bgs"/>
             </constraints>
             <connections>
                 <outlet property="imgPosterPath" destination="bgU-3V-byx" id="g81-um-U03"/>
             </connections>
-            <point key="canvasLocation" x="139" y="140"/>
+            <point key="canvasLocation" x="137.68115942028987" y="139.95535714285714"/>
         </collectionViewCell>
     </objects>
 </document>

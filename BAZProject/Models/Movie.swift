@@ -22,7 +22,7 @@ struct Movie: Codable {
 
     enum CodingKeys: String, CodingKey {
         case adult
-        case backdropPath
+        case backdropPath = "backdrop_path"
         case id, title
         case originalLanguage
         case originalTitle
