@@ -28,8 +28,7 @@ extension DasboardViewController: UICollectionViewDataSource {
 
 extension DasboardViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let detailController = DetailMovieViewController(nibName: "DetailMovieViewController",
-                                                         bundle: Bundle(for: DetailMovieViewController.self))
+        let detailController = DetailMovieViewController.getViewController()
         if let movie = moviePresenter.getMovie(indexPath: indexPath.row, type: .collection),
            let url = moviePresenter.getUrlImgeMovie(indexPath: indexPath.row, size: .middle) {
             detailController.movie = movie
@@ -45,20 +44,20 @@ extension DasboardViewController: UICollectionViewDelegate {
 extension DasboardViewController: UICollectionViewDelegateFlowLayout {
     // swiftlint:disable line_length
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-        return UIEdgeInsets(top: insets, left: insets, bottom: insets, right: insets)
+        return UIEdgeInsets(top: Insets.insets, left: Insets.insets, bottom: Insets.insets, right: Insets.insets)
     }
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-        return minimumLineSpacing
+        return Insets.minimumLineSpacing
     }
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
-        return minimumInteritemSpacing
+        return Insets.minimumInteritemSpacing
     }
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let marginAndInsets: CGFloat
-        marginAndInsets = minimumInteritemSpacing * 2
+        marginAndInsets = Insets.minimumInteritemSpacing * 2
         + collectionView.safeAreaInsets.left
-        + collectionView.safeAreaInsets.right + insets * CGFloat(cellsPerRow - 1)
-        let itemWidth = ((collectionView.bounds.size.width - marginAndInsets) / CGFloat(cellsPerRow)).rounded(.down)
-        return CGSize(width: itemWidth, height: itemWidth + heightAditionalConstant)
+        + collectionView.safeAreaInsets.right + Insets.insets * CGFloat(Insets.cellsPerRow - 1)
+        let itemWidth = ((collectionView.bounds.size.width - marginAndInsets) / CGFloat(Insets.cellsPerRow)).rounded(.down)
+        return CGSize(width: itemWidth, height: itemWidth + Insets.heightAditionalConstant)
     }
 }

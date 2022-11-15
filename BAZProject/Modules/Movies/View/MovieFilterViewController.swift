@@ -47,3 +47,12 @@ extension MovieFilterViewController: UITableViewDataSource {
         return cell
     }
 }
+
+extension MovieFilterViewController {
+    static func getViewController() -> MovieFilterViewController {
+        let storyboard = UIStoryboard(name: "Movies", bundle: Bundle(for: MovieFilterViewController.self))
+        let controller = storyboard.instantiateViewController(withIdentifier: "MovieFilterViewController")
+        as? MovieFilterViewController ?? MovieFilterViewController()
+        return controller
+    }
+}

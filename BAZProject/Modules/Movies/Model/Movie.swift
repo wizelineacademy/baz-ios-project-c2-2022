@@ -78,15 +78,15 @@ public enum CategoryMovieType: String, CaseIterable {
     var endpoint: String {
         switch self {
         case .trending:
-            return "url_trending".localized
+            return LocalizableKeys.Categories.trending
         case .nowPlaying:
-            return "url_now_playing".localized
+            return LocalizableKeys.Categories.nowPlying
         case .popular:
-            return "url_popular".localized
+            return LocalizableKeys.Categories.popular
         case .topRated:
-            return "url_top_rated".localized
+            return LocalizableKeys.Categories.rated
         case .upcoming:
-            return "url_upcoming".localized
+            return LocalizableKeys.Categories.upComing
         case .favorites:
             return ""
         }

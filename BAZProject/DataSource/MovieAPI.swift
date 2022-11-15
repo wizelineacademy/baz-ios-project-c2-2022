@@ -8,9 +8,9 @@ import Foundation
 
 final class MovieAPI {
 
-    private let apiKey: String = "api_key".localized
-    private let baseUrl: String = "url_api".localized
-    private let baseUrlImg: String = "url_img".localized
+    private let apiKey: String = LocalizableKeys.Api.key
+    private let baseUrl: String = LocalizableKeys.Api.urlApi
+    private let baseUrlImg: String = LocalizableKeys.Api.urlImg
 
     /// Make an API request by category
     ///

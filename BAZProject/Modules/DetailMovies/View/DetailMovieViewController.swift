@@ -25,13 +25,6 @@ final class DetailMovieViewController: UIViewController {
     var urlImg: String?
     var similarMovie: [Movie] =  []
     var recomendedMovie: [Movie] =  []
-    // MARK: - Properties of collectionMovieMenu configuration
-    let numberOfSections = 1
-    let insets: CGFloat = 8
-    let heightAditionalConstant: CGFloat = 20
-    let minimumLineSpacing: CGFloat = 10
-    let minimumInteritemSpacing: CGFloat = 10
-    let cellsPerRow: Float = 2.3
     // MARK: - Start
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -112,5 +105,13 @@ extension DetailMovieViewController: MovieDetailDelegate {
                 }
             }
         }
+    }
+}
+
+extension DetailMovieViewController {
+    static func getViewController() -> DetailMovieViewController {
+        let detailController = DetailMovieViewController(nibName: "DetailMovieViewController",
+                                                         bundle: Bundle(for: DetailMovieViewController.self))
+        return detailController
     }
 }

@@ -6,18 +6,18 @@
   
 */
 
-"titleHome" = "Trending Movies";
-"placeHolder" = "Encuentra tu película";
+"title.home" = "Trending Movies";
+"place.holder.search" = "Encuentra tu película";
 
-"url_trending" = "/trending/movie/day";
-"url_now_playing" = "/movie/now_playing";
-"url_popular" = "/movie/popular";
-"url_top_rated" = "/movie/top_rated";
-"url_upcoming" = "/movie/upcoming";
+"url.trending" = "/trending/movie/day";
+"url.now.playing" = "/movie/now_playing";
+"url.popular" = "/movie/popular";
+"url.top.rated" = "/movie/top_rated";
+"url.upcoming" = "/movie/upcoming";
 
-"api_key" = "f6cd5c1a9e6c6b965fdcab0fa6ddd38a";
-"url_api" = "https://api.themoviedb.org/3";
-"url_img" = "https://image.tmdb.org/t/p/w500";
+"api.key" = "f6cd5c1a9e6c6b965fdcab0fa6ddd38a";
+"url.api" = "https://api.themoviedb.org/3";
+"url.img" = "https://image.tmdb.org/t/p/w500";
 
-"idTable" = "MovieTableViewCell";
-"idCollection" = "MovieCollectionViewCell";
+"identifier.tableViewCell" = "MovieTableViewCell";
+"identifier.collectionViewCell" = "MovieCollectionViewCell";
