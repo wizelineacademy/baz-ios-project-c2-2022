@@ -46,14 +46,16 @@ class RecentlySeenTableViewController: UITableViewController {
         recentlyMovies.append(movie)
         countMovies+=1
         createBadge(countMovies)
-        self.basicAlert(title: "Visto Recientemente", message: "Pelicula\(movie.title ?? "")")
     }
     
-    func createBadge(_ contadorMovies: Int){
+    /**
+     create a badge to notify the user that they watched a movie
+     -Parameter counterMovies: counter when entering the detail of the movies accumulating or resetting to 0 */
+    func createBadge(_ counterMovies: Int){
         let tabBar = self.tabBarController!.tabBar
         let add = tabBar.items![2]
-        add.badgeColor = contadorMovies > 0 ? UIColor.red : UIColor.white.withAlphaComponent(0.8)
-        add.badgeValue = contadorMovies > 0 ? "\(contadorMovies)" : ""
+        add.badgeColor = counterMovies > 0 ? UIColor.red : UIColor.clear
+        add.badgeValue = counterMovies > 0 ? "\(counterMovies)" : ""
     }
     
     //MARK: private methods
