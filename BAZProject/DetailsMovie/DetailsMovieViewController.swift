@@ -84,6 +84,7 @@ extension DetailsMovieViewController: DetailsMovieViewProtocols {
     ///  - Parameter movie: object with info to show
     func setupView(with movie: Movie, isFavorite: String) {
         self.titleLbl.text = movie.title
+        title = movie.title
         self.descriptionLbl.text = movie.overview
         self.btnLikedMovie.setImage(UIImage(systemName: isFavorite), for: .normal)
         setUpImageMovie(with: movie.backdropPath ?? "poster")

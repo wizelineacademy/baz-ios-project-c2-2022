@@ -132,7 +132,8 @@ extension MoviesCategoriesViewController: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let vc = DetailsMovieRouter.createModuleDetailsMovie(with: movies[indexPath.row], and: self, arrFavoriteMovies: likeMovieIndex)
-        self.present(vc, animated: true)
+        self.navigationController?.pushViewController(vc, animated: true)
+        //self.present(vc, animated: true)
     }
     
     
