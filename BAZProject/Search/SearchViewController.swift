@@ -78,9 +78,7 @@ extension SearchViewController : UISearchBarDelegate {
         searchActive = false
     }
     
-    
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        print(searchText)
         searchActive = true
         DispatchQueue.main.async {
             if let searchWord = searchBar.text {
@@ -88,7 +86,6 @@ extension SearchViewController : UISearchBarDelegate {
             }
         }
     }
-    
 }
 
 extension Movie {

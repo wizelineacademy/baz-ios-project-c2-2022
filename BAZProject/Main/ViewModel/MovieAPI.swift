@@ -58,18 +58,38 @@ class MovieAPI {
         completionHandler(nil)
     }
     
+    
     public func getMovieSection(section: String, idMovie: Int, completion: @escaping ([Movie]?) -> ()){
         if let urlString = URL(string: "\(baseURL)/movie/\(idMovie)/\(section)?api_key=\(apiKey)&language=es") {
             URLSession.shared.dataTask(with: urlString) { data, response, error in
                 if let error = error {
-                    print("Ha ocurrido un error Search: ", error.localizedDescription )
+                    print("Ha ocurrido un error: ", error.localizedDescription )
                 }
                 do {
                     guard let json = data else { return }
                     let movies = try JSONDecoder().decode(ResultsMovie.self, from: json)
                     completion(movies.results)
                 } catch {
-                    print("Ha ocurrido un error Search: \(error.localizedDescription)")
+                    print("Ha ocurrido un error: \(error.localizedDescription)")
+                }
+            }.resume()
+        }
+    }
+    
+    
+    public func getMovieCast(idCast: Int, completion: @escaping ([Cast]?) -> ()){
+        if let urlString = URL(string: "\(baseURL)movie/\(idCast)/credits?api_key=\(apiKey)&language=es-MX") {
+            URLSession.shared.dataTask(with: urlString) { data, response, error in
+                if let error = error {
+                    print("Ha ocurrido un error Cast: ", error.localizedDescription )
+                }
+                do {
+                    guard let json = data else { return }
+                    let movies = try JSONDecoder().decode(MovieCast.self, from: json)
+                    completion(movies.cast)
+                    print("cast\(movies)")
+                } catch {
+                    print("Ha ocurrido un error Cast: \(error.localizedDescription)")
                 }
             }.resume()
         }

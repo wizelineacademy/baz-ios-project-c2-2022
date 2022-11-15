@@ -8,16 +8,11 @@
 import Foundation
 import UIKit
 
-protocol collectionMoviesDelegate {
-    func presentDetailView (dataMovie: Movie)
-}
-
 class cellCollection : UITableViewCell {
-    
     @IBOutlet weak var collectionMovies: UICollectionView!
-    public let identifierCollection = "SearchCell"
     
-    public  var delegatePresentView : collectionMoviesDelegate?
+    // MARK: - Properties
+    public let identifierCollection = "SearchCell"
     var movie: [Movie] = []
     
     //MARK: Override methods
@@ -26,15 +21,12 @@ class cellCollection : UITableViewCell {
         registerNibs()
         
     }
-    
-    
+    /// Register the custom cell
     private func registerNibs() {
         collectionMovies.register(UINib(nibName: identifierCollection, bundle: nil), forCellWithReuseIdentifier: identifierCollection)
     }
-    
-    
 }
-
+// MARK: - CollectionView Delegate
 extension cellCollection : UICollectionViewDelegate, UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return movie.count
@@ -47,14 +39,6 @@ extension cellCollection : UICollectionViewDelegate, UICollectionViewDataSource 
         cell.getInfoCollection(movie: movie[indexPath.row].mapToViewData())
         
         return cell
-        
     }
-    //    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-    
-    //        delegatePresentView?.presentDetailView(dataMovie: movie[indexPath.row])
-    //        present(vc, animated: true, completion: nil)
-    //   }
-    
-    
 }
 

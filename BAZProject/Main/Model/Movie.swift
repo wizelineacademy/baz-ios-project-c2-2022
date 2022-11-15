@@ -52,6 +52,7 @@ struct SearchResultCellViewData {
 public enum MoreMovies: String {
     case similar
     case recommended = "recommendations"
+    case cast
 }
 
 // MARK: - MovieTableSections

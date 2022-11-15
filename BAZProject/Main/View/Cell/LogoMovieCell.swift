@@ -10,5 +10,4 @@ class LogoMovieCell: UITableViewCell {
 
     // MARK: - Constant
     static let identifier = "LogoMovieCell"
-    
 }
