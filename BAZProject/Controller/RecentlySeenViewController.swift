@@ -19,12 +19,19 @@ class RecentlySeenTableViewController: UITableViewController {
             }
         }
     }
+    var countMovies: Int = 0
     
     //MARK: Override methods
     override func viewDidLoad() {
         super.viewDidLoad()
         instanceFromNib()
         notificationRecentlyMovies()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        countMovies = 0
+        createBadge(0)
     }
     
     /// Add an entry to the notification center
@@ -35,7 +42,18 @@ class RecentlySeenTableViewController: UITableViewController {
     /// - Parameter notification: instance to acceso to parameters of notification
     @objc func notificationReceived(_ notification: NSNotification) {
         guard let movie = notification.userInfo?["detailMovie"] as? InfoMovies else {return}
+        recentlyMovies = recentlyMovies.filter({$0.id != movie.id})
         recentlyMovies.append(movie)
+        countMovies+=1
+        createBadge(countMovies)
+        self.basicAlert(title: "Visto Recientemente", message: "Pelicula\(movie.title ?? "")")
+    }
+    
+    func createBadge(_ contadorMovies: Int){
+        let tabBar = self.tabBarController!.tabBar
+        let add = tabBar.items![2]
+        add.badgeColor = contadorMovies > 0 ? UIColor.red : UIColor.white.withAlphaComponent(0.8)
+        add.badgeValue = contadorMovies > 0 ? "\(contadorMovies)" : ""
     }
     
     //MARK: private methods
