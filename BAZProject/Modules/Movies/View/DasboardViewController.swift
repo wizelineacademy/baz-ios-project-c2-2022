@@ -36,6 +36,7 @@ final class DasboardViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.moviePresenter.checkFavorites()
+        self.navigationItem.leftBarButtonItem?.title = self.moviePresenter.getMoviesVisited()
     }
     deinit {
         self.moviePresenter.stopNotification()
@@ -67,11 +68,17 @@ final class DasboardViewController: UIViewController {
                                            animated: true,
                                            completion: nil)
     }
+    /// This show te movies visited
+    @IBAction func showMoviesVisitedBtn() {
+        self.moviePresenter.showVisitedMovies()
+        self.title = LocalizableKeys.Home.titleVisited
+    }
     /// Add action to Trash button showed in cell when the category is Favorites
     ///
     /// - Parameter sender: Contains a Button object
     @objc func removeMovie(sender: UIButton) {
-        moviePresenter.removeMovie(index: sender.tag)
+        self.moviePresenter.removeMovie(index: sender.tag)
+        self.navigationItem.leftBarButtonItem?.title = self.moviePresenter.getMoviesVisited()
     }
 }
 

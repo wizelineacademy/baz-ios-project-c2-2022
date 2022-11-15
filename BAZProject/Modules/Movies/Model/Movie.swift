@@ -74,7 +74,6 @@ public enum CategoryMovieType: String, CaseIterable {
     case popular
     case topRated
     case upcoming
-    case favorites
     var endpoint: String {
         switch self {
         case .trending:
@@ -87,8 +86,6 @@ public enum CategoryMovieType: String, CaseIterable {
             return LocalizableKeys.Categories.rated
         case .upcoming:
             return LocalizableKeys.Categories.upComing
-        case .favorites:
-            return ""
         }
     }
     var typeName: String {
@@ -103,8 +100,6 @@ public enum CategoryMovieType: String, CaseIterable {
             return "Top Rated"
         case .upcoming:
             return "Upcoming"
-        case .favorites:
-            return "Favorites"
         }
     }
 }

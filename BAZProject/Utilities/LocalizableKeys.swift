@@ -13,6 +13,7 @@ struct LocalizableKeys {
         static let placeHolder = "place.holder.search".localized
         static let cell = "identifier.tableViewCell".localized
         static let collection = "identifier.collectionViewCell".localized
+        static let titleVisited = "title.home.favorite".localized
     }
     struct Api {
         static let key = "api.key".localized

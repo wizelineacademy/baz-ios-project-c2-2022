@@ -27,24 +27,18 @@ final class MoviePresenter {
     ///
     ///  - Parameter category: A value from enum with category name to build a request api
     func getMoviesByCategory(category: CategoryMovieType) {
-        if category == .favorites {
-            self.favorite = true
-            self.movies = getMoviesSaved()
-            self.movieViewDelegate?.showMovies()
-        } else {
-            movieApiService.getMovies(category: category.endpoint) { [weak self] movies in
-                if let movies = movies {
-                    self?.favorite = false
-                    self?.movies = movies
-                    self?.movieViewDelegate?.showMovies()
-                }
+        movieApiService.getMovies(category: category.endpoint) { [weak self] movies in
+            if let movies = movies {
+                self?.favorite = false
+                self?.movies = movies
+                self?.movieViewDelegate?.showMovies()
             }
         }
     }
     /// Validate if section favorites is showing if is true refresh section
     func checkFavorites() {
         if favorite {
-            getMoviesByCategory(category: .favorites)
+           showVisitedMovies()
         }
     }
     /// Makes a query to the service, places the value in an array and calls a function of the view
@@ -136,9 +130,15 @@ final class MoviePresenter {
             movies.remove(at: index)
             if let encoded = try? encoder.encode(movies) {
                 UserDefaults.standard.set(encoded, forKey: "MyFavoriteMovies")
-                getMoviesByCategory(category: .favorites)
+                showVisitedMovies()
             }
         }
+    }
+    /// Show movies visited in view
+    func showVisitedMovies() {
+        self.favorite = true
+        self.movies = getMoviesSaved()
+        self.movieViewDelegate?.showMovies()
     }
     /// Retrive an array of movie objects from User Defaults
     ///
@@ -150,6 +150,17 @@ final class MoviePresenter {
             return moviesRetrived
         }
         return []
+    }
+    /// Retrieves the number of movies visited
+    ///
+    /// - Returns: Returns the number of movies plus a string
+    func getMoviesVisited() -> String {
+        let decoder = JSONDecoder()
+        if let moviesData = UserDefaults.standard.object(forKey: "MyFavoriteMovies") as? Data,
+           let moviesRetrived = try? decoder.decode([Movie].self, from: moviesData) {
+            return "\(moviesRetrived.count) visits"
+        }
+        return "0 visits"
     }
     /// Create notification to save movie en User Defaults when user see deatil of it
     func startNotification() {

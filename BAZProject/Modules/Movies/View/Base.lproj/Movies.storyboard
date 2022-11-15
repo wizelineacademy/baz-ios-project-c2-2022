@@ -79,12 +79,20 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="pO1-Pi-17d">
+                        <barButtonItem key="leftBarButtonItem" title="0 Views" id="kgs-vX-LjO">
+                            <connections>
+                                <action selector="showMoviesVisitedBtn" destination="FUS-EE-itn" id="6v6-En-Okr"/>
+                            </connections>
+                        </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" title="Item" image="more" id="U4A-yg-hF7">
                             <color key="tintColor" systemColor="systemBlueColor"/>
                             <connections>
                                 <action selector="showFilterAction:" destination="FUS-EE-itn" id="3EE-hp-man"/>
                             </connections>
                         </barButtonItem>
+                        <connections>
+                            <outlet property="leftBarButtonItem" destination="kgs-vX-LjO" id="IoF-5h-ni3"/>
+                        </connections>
                     </navigationItem>
                     <connections>
                         <outlet property="moviewTableView" destination="OAQ-tz-zxt" id="Puf-xk-oVO"/>
