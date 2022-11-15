@@ -14,7 +14,7 @@ struct CreditAPI: GenericRequestProtocol {
     /// - Returns: Movies actors
     /// - throws: if any basic condition dont success, this return empty array
     func getCredits(with idMovie: String, completion: @escaping (Result<CreditResponse, Error>) -> Void) {
-        let urlStr = urlBase + "/movie/\(idMovie)/credits?api_key=f6cd5c1a9e6c6b965fdcab0fa6ddd38a&language=en-US"
+        let urlStr = urlBase + "/movie/\(idMovie)/credits?api_key=\(apiKey)&language=en-US"
         guard let url = URL(string: urlStr) else {
             completion(Result.failure(APIError.urlError))
             return
