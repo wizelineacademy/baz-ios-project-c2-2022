@@ -208,11 +208,11 @@
             </objects>
             <point key="canvasLocation" x="2417" y="35"/>
         </scene>
-        <!--Home-->
+        <!--Peliculas-->
         <scene sceneID="8iF-II-nkY">
             <objects>
                 <navigationController id="PCz-Yw-pWn" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Home" image="homekit" catalog="system" id="Muj-0V-XNH"/>
+                    <tabBarItem key="tabBarItem" title="Peliculas" image="homekit" catalog="system" id="Muj-0V-XNH"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="iil-UH-AqJ">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -313,8 +313,8 @@
         <!--Visto Recientemente-->
         <scene sceneID="lcO-4D-M7p">
             <objects>
-                <tableViewController id="zlm-De-khl" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" id="dLP-dm-aCO">
+                <tableViewController id="zlm-De-khl" customClass="RecentlySeenTableViewController" customModule="BAZProject" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="200" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" id="dLP-dm-aCO">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -324,6 +324,9 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Visto Recientemente" id="hbG-e6-4WP"/>
+                    <connections>
+                        <outlet property="tblRecentlyMovies" destination="dLP-dm-aCO" id="ucm-dP-VFv"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="No7-AE-8mY" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>

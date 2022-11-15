@@ -77,9 +77,11 @@ extension TrendingViewController: UITableViewDataSource, UITableViewDelegate {
         return cell
     }
     
+    //Create notification when the user sees details of the movie
      func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        movieSelected = movies[indexPath.row]
-        guard movieSelected != nil else { return }
+         movieSelected = movies[indexPath.row]
+         guard let movie = movieSelected else { return }
+         NotificationCenterHelper.myNotificationCenter.post(name: Notification.Name(rawValue: "detailMovieCell.Notification"), object: nil, userInfo: ["detailMovie": movie])
         performSegue(withIdentifier: "detailsMovies", sender: nil)
     }
 }

@@ -6,7 +6,6 @@
 
 import Foundation
 
-
 enum PathMovies: String {
     case pathStrTrending     = "/trending/movie/day?api_key="
     case pathStrNowPlaying   = "/movie/now_playing?api_key="
@@ -14,6 +13,10 @@ enum PathMovies: String {
     case pathStrTopRated     = "/movie/top_rated?api_key="
     case pathStrUpcoming     = "/movie/upcoming?api_key="
     
+    /**
+    - return PathMovies: the value of the path of the movies
+     - index: tells us what category of movie returns
+     */
     static func getPathForSegmentsOption(_ index: Int ) -> PathMovies {
         switch index {
         case 0:

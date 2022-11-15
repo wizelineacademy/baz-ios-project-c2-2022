@@ -21,6 +21,8 @@
 		C90003BB2908456300F9DAAF /* ExtensionsUIImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = C90003BA2908456300F9DAAF /* ExtensionsUIImage.swift */; };
 		C91B024229057A4600A02F46 /* ContentMoviesTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C91B024029057A4600A02F46 /* ContentMoviesTableViewCell.swift */; };
 		C91B024329057A4600A02F46 /* ContentMoviesTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C91B024129057A4600A02F46 /* ContentMoviesTableViewCell.xib */; };
+		C97FC6672922A07E008E8EE0 /* NotificationHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = C97FC6662922A07E008E8EE0 /* NotificationHelper.swift */; };
+		C97FC6692922A4AC008E8EE0 /* RecentlySeenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C97FC6682922A4AC008E8EE0 /* RecentlySeenViewController.swift */; };
 		C9DF51FC29118F9300AAC618 /* DetailMovieViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9DF51FB29118F9300AAC618 /* DetailMovieViewController.swift */; };
 		C9DF524029123A4700AAC618 /* MoreMoviesCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9DF523E29123A4700AAC618 /* MoreMoviesCollectionViewCell.swift */; };
 		C9DF524129123A4700AAC618 /* MoreMoviesCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C9DF523F29123A4700AAC618 /* MoreMoviesCollectionViewCell.xib */; };
@@ -44,6 +46,8 @@
 		C90003BA2908456300F9DAAF /* ExtensionsUIImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionsUIImage.swift; sourceTree = "<group>"; };
 		C91B024029057A4600A02F46 /* ContentMoviesTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentMoviesTableViewCell.swift; sourceTree = "<group>"; };
 		C91B024129057A4600A02F46 /* ContentMoviesTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ContentMoviesTableViewCell.xib; sourceTree = "<group>"; };
+		C97FC6662922A07E008E8EE0 /* NotificationHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationHelper.swift; sourceTree = "<group>"; };
+		C97FC6682922A4AC008E8EE0 /* RecentlySeenViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentlySeenViewController.swift; sourceTree = "<group>"; };
 		C9DF51FB29118F9300AAC618 /* DetailMovieViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailMovieViewController.swift; sourceTree = "<group>"; };
 		C9DF523E29123A4700AAC618 /* MoreMoviesCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoreMoviesCollectionViewCell.swift; sourceTree = "<group>"; };
 		C9DF523F29123A4700AAC618 /* MoreMoviesCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MoreMoviesCollectionViewCell.xib; sourceTree = "<group>"; };
@@ -82,6 +86,7 @@
 		C30893AC28A2F42B004B1860 /* BAZProject */ = {
 			isa = PBXGroup;
 			children = (
+				C97FC66529229FCE008E8EE0 /* NotificationHelper */,
 				C90003AC2907779300F9DAAF /* Extensions */,
 				C91B023E2903437900A02F46 /* Service Data */,
 				C91B023D2903431F00A02F46 /* Model */,
@@ -110,6 +115,7 @@
 				C30893C328A2F845004B1860 /* TrendingViewController.swift */,
 				C9DF51FB29118F9300AAC618 /* DetailMovieViewController.swift */,
 				C9DF52462914619200AAC618 /* SearchMoviesViewController.swift */,
+				C97FC6682922A4AC008E8EE0 /* RecentlySeenViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -147,6 +153,14 @@
 				C9DF524229123A4E00AAC618 /* DetailsMoviesCell */,
 			);
 			path = Cells;
+			sourceTree = "<group>";
+		};
+		C97FC66529229FCE008E8EE0 /* NotificationHelper */ = {
+			isa = PBXGroup;
+			children = (
+				C97FC6662922A07E008E8EE0 /* NotificationHelper.swift */,
+			);
+			path = NotificationHelper;
 			sourceTree = "<group>";
 		};
 		C9DF524229123A4E00AAC618 /* DetailsMoviesCell */ = {
@@ -242,12 +256,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C97FC6692922A4AC008E8EE0 /* RecentlySeenViewController.swift in Sources */,
 				C90003BB2908456300F9DAAF /* ExtensionsUIImage.swift in Sources */,
 				C9DF51FC29118F9300AAC618 /* DetailMovieViewController.swift in Sources */,
 				C91B024229057A4600A02F46 /* ContentMoviesTableViewCell.swift in Sources */,
 				C30893C428A2F845004B1860 /* TrendingViewController.swift in Sources */,
 				C9DF524029123A4700AAC618 /* MoreMoviesCollectionViewCell.swift in Sources */,
 				C30893AE28A2F42B004B1860 /* AppDelegate.swift in Sources */,
+				C97FC6672922A07E008E8EE0 /* NotificationHelper.swift in Sources */,
 				C30893B028A2F42B004B1860 /* SceneDelegate.swift in Sources */,
 				C30893E228A425E1004B1860 /* MovieAPI.swift in Sources */,
 				C30893E328A425E1004B1860 /* Movie.swift in Sources */,
