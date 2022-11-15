@@ -88,3 +88,17 @@ extension UISegmentedControl {
     }
 
 }
+
+extension String {
+    /// heightWithConstrainedWidth: get dinamic height to text
+    ///  - Parameter width: width screen
+    ///  - Parameter font: font by calculate height
+    func heightWithConstrainedWidth(with width: CGFloat, and font: UIFont) -> CGFloat {
+        let constraintRect = CGSize(width: width, height: .greatestFiniteMagnitude)
+        let boundingBox = self.boundingRect(with: constraintRect,
+                                            options: .usesLineFragmentOrigin,
+                                            attributes: [NSAttributedString.Key.font: font],
+                                            context: nil)
+        return boundingBox.height
+    }
+}

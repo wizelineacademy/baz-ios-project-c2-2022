@@ -19,6 +19,7 @@ final class DetailsMovieInteractor: DetailsMovieInteractorInputAndOutputProtocol
     func setUpPresentToInteractor() {
         getArrRecommendationMovies()
         getArrSimilarMovies()
+        getArrCrredits()
         guard let movie = movie else {
             return
         }
@@ -29,6 +30,7 @@ final class DetailsMovieInteractor: DetailsMovieInteractorInputAndOutputProtocol
     
     /// setupInteractorToPresent: send object Movie model
     ///  - Parameter movie: object type DetailsMovieModel
+    ///  - Parameter isFavorite: name icon to show
     func setupInteractorToPresent(with movie: Movie, and isFavorite: String) {
         presenter?.setUpPresenterToView(with: movie, isFavorite: isFavorite)
     }
@@ -47,7 +49,7 @@ final class DetailsMovieInteractor: DetailsMovieInteractorInputAndOutputProtocol
         presenter?.changeIconLike(with: imagePath )
     }
     
-    /// getArrRecommendationMovies: get recommendation movies with movie id and send it to present
+    /// getArrRecommendationMovies: request recommendation movies with movie id and send it to present
     func getArrRecommendationMovies() {
         guard let id = movie?.id else { return }
         RecommendationAPI().searchRecommendationMovies(with: "\(id)", completion: { result in
@@ -62,7 +64,7 @@ final class DetailsMovieInteractor: DetailsMovieInteractorInputAndOutputProtocol
     }
     
     
-    /// getArrSimilarMovies: get similar movies with movie id  and send it to presenter
+    /// getArrSimilarMovies: request similar movies with movie id  and send it to presenter
     func getArrSimilarMovies() {
         guard let id = movie?.id else { return }
         SimilarAPI().searchSimilarMovies(with: "\(id)", completion: { result in
@@ -72,6 +74,19 @@ final class DetailsMovieInteractor: DetailsMovieInteractorInputAndOutputProtocol
             case .failure(let error):
                 debugPrint(error)
                 self.presenter?.setUpSimilarMoviewToView(with: [])
+            }
+        })
+    }
+    
+    /// getArrCrredits: request to API info about movie credits
+    func getArrCrredits() {
+        guard let id = movie?.id else { return }
+        CreditAPI().getCredits(with: "\(id)", completion: { result in
+            switch result {
+            case .success(let res):
+                self.presenter?.setUpCreditToView(with: res.actors)
+            case .failure(_):
+                self.presenter?.setUpCreditToView(with: [])
             }
         })
     }

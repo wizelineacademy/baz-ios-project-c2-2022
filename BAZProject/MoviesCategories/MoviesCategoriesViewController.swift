@@ -14,7 +14,6 @@ final class MoviesCategoriesViewController: UIViewController {
     private let movieApi = MovieAPI()
     private var likeMovieIndex: [Int] = []
     
-    @IBOutlet weak var btnSearch: UIButton!
     @IBOutlet weak var collectionMovies: UICollectionView!
     @IBOutlet weak var lblCountMovies: UILabel!
     
@@ -49,9 +48,10 @@ final class MoviesCategoriesViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.title = "Movies"
+        let buttonSearch = UIBarButtonItem(image: UIImage(systemName: "magnifyingglass")?.withTintColor(.black), style: .plain, target: self, action: #selector(tapSearch))
+        self.navigationItem.rightBarButtonItem = buttonSearch
         setupElements()
         setupSegmentControl()
-        btnSearch.shakeButton()
     }
     /// setUpElements: config initial interface to user
     private func setupElements() {
@@ -73,7 +73,7 @@ final class MoviesCategoriesViewController: UIViewController {
         mySegmentedControl.translatesAutoresizingMaskIntoConstraints = false
         mySegmentedControl.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 10).isActive = true
         mySegmentedControl.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant:  10).isActive = true
-        mySegmentedControl.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -70).isActive = true
+        mySegmentedControl.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -10).isActive = true
         mySegmentedControl.heightAnchor.constraint(equalToConstant: 50).isActive = true
     }
     
@@ -110,7 +110,7 @@ final class MoviesCategoriesViewController: UIViewController {
     }
     
     /// tapSearch: user click in search button, so present to SearchMovieViewController
-    @IBAction private func tapSearch() {
+    @objc private func tapSearch() {
         guard let vc = SearchMovieViewController.instantiate() else { return }
         navigationController?.pushViewController(vc, animated: true)
     }

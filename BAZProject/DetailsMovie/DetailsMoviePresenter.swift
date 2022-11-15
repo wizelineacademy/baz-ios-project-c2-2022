@@ -43,4 +43,9 @@ final class DetailsMoviePresenter: DetailsMoviePresenterProtocols, DetailsMovieI
     func setUpSimilarMoviewToView(with arrMovies: [Movie]) {
         view?.setUpSimilarMoview(with: arrMovies)
     }
+    
+    func setUpCreditToView(with arrActors: [Credit]) {
+        view?.setUpCreditsMovie(with: arrActors)
+    }
+    
 }

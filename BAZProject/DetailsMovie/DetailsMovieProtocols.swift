@@ -15,6 +15,7 @@ protocol DetailsMovieViewProtocols: AnyObject {
     func likeIconChange(with imagePath: String)
     func setUpRecommendationMovies(with arrMovies: [Movie])
     func setUpSimilarMoview(with arrMovies: [Movie])
+    func setUpCreditsMovie(with arrActor: [Credit])
 }
 
 ///Presenter to View, Presenter to Interactor and Presenter to Router
@@ -28,6 +29,7 @@ protocol DetailsMoviePresenterProtocols: AnyObject {
     func changeIconLike(with imagePath: String)
     func setUpRecommendationMoviesToView(with arrMovies: [Movie])
     func setUpSimilarMoviewToView(with arrMovies: [Movie])
+    func setUpCreditToView(with arrActors: [Credit])
 }
 
 protocol DetailsMovieRouterProtocols: AnyObject {
