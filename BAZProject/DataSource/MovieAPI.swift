@@ -8,9 +8,9 @@ import Foundation
 
 final class MovieAPI {
 
-    private let apiKey: String = "f6cd5c1a9e6c6b965fdcab0fa6ddd38a"
-    private let baseUrl: String = "https://api.themoviedb.org/3"
-    private let baseUrlImg: String = "https://image.tmdb.org/t/p/w500"
+    private let apiKey: String = LocalizableKeys.Api.key
+    private let baseUrl: String = LocalizableKeys.Api.urlApi
+    private let baseUrlImg: String = LocalizableKeys.Api.urlImg
 
     /// Make an API request by category
     ///
@@ -21,14 +21,14 @@ final class MovieAPI {
         if let url = URL(string: "\(baseUrl)\(category)?api_key=\(apiKey)&language=es") {
             URLSession.shared.dataTask(with: url) { data, _, error in
                 if error != nil {
-                    print("An error has ocurred ", error?.localizedDescription ?? "error")
+                    debugPrint("An error has ocurred ", error?.localizedDescription ?? "error")
                 }
                 do {
                     guard let data = data else { return }
                     let movies = try JSONDecoder().decode(MovieDay.self, from: data)
                     completionHandler(movies.results)
                 } catch {
-                    print("An error has ocurred ", error.localizedDescription)
+                    debugPrint("An error has ocurred ", error.localizedDescription)
                 }
             }.resume()
         }
@@ -43,14 +43,14 @@ final class MovieAPI {
         if let url = URL(string: "\(baseUrl)/movie/\(idMovie)/\(section.secctionName)?api_key=\(apiKey)&language=es") {
             URLSession.shared.dataTask(with: url) { data, _, error in
                 if error != nil {
-                    print("An error has ocurred 😫 ", error?.localizedDescription ?? "error")
+                    debugPrint("An error has ocurred 😫 ", error?.localizedDescription ?? "error")
                 }
                 do {
                     guard let data = data else { return }
                     let movies = try JSONDecoder().decode(MovieDay.self, from: data)
                     completionHandler(movies.results)
                 } catch {
-                    print("An error has ocurred 🤯", error.localizedDescription)
+                    debugPrint("An error has ocurred 🤯", error.localizedDescription)
                 }
             }.resume()
         }
@@ -66,15 +66,14 @@ final class MovieAPI {
         if let url = URL(string: "\(baseUrl)/search/multi?api_key=\(apiKey)&language=es&query=\(wordToSearch)&page=1") {
             URLSession.shared.dataTask(with: url) { data, _, error in
                 if error != nil {
-                    print("An error has ocurred 😫 ", error?.localizedDescription ?? "error")
+                    debugPrint("An error has ocurred 😫 ", error?.localizedDescription ?? "error")
                 }
                 do {
                     guard let data = data else { return }
                     let movies = try JSONDecoder().decode(MovieDay.self, from: data)
-                    print("Data: ", movies)
                     completionHandler(movies.results)
                 } catch {
-                    print("An error has ocurred 🤯", error.localizedDescription)
+                    debugPrint("An error has ocurred 🤯", error.localizedDescription)
                 }
             }.resume()
         }

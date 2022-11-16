@@ -42,13 +42,25 @@
                         <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <nil key="highlightedColor"/>
                     </label>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="quN-r1-17B">
+                        <rect key="frame" x="284" y="68" width="24" height="24"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="24" id="8nO-CC-uTG"/>
+                            <constraint firstAttribute="height" constant="24" id="S8X-CH-dca"/>
+                        </constraints>
+                        <color key="tintColor" systemColor="systemRedColor"/>
+                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                        <state key="normal" image="trash" catalog="system"/>
+                    </button>
                 </subviews>
                 <constraints>
                     <constraint firstItem="aSc-aO-egS" firstAttribute="leading" secondItem="m0K-6e-kdL" secondAttribute="trailing" constant="16" id="3jh-4S-H0z"/>
+                    <constraint firstAttribute="bottom" secondItem="quN-r1-17B" secondAttribute="bottom" constant="12" id="5F5-Ck-JfA"/>
                     <constraint firstItem="m0K-6e-kdL" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="4" id="6cL-Ro-0eM"/>
                     <constraint firstItem="6ja-Ju-uRI" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="8" id="Dto-xP-toi"/>
                     <constraint firstItem="m0K-6e-kdL" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="4" id="KHs-rd-8mC"/>
                     <constraint firstAttribute="trailing" secondItem="6ja-Ju-uRI" secondAttribute="trailing" constant="8" id="L4q-tc-aN2"/>
+                    <constraint firstAttribute="trailing" secondItem="quN-r1-17B" secondAttribute="trailing" constant="12" id="PS8-0r-K90"/>
                     <constraint firstAttribute="trailingMargin" secondItem="aSc-aO-egS" secondAttribute="trailing" constant="8" id="QKo-Yx-FiV"/>
                     <constraint firstItem="aSc-aO-egS" firstAttribute="top" secondItem="6ja-Ju-uRI" secondAttribute="bottom" constant="8" id="Uul-og-ZNB"/>
                     <constraint firstAttribute="bottom" secondItem="m0K-6e-kdL" secondAttribute="bottom" constant="4" id="b6A-wr-Bnx"/>
@@ -60,12 +72,17 @@
                 <outlet property="movieImageView" destination="m0K-6e-kdL" id="6SP-vx-nQc"/>
                 <outlet property="subTitleLbl" destination="aSc-aO-egS" id="hct-uN-pzP"/>
                 <outlet property="titleLbl" destination="6ja-Ju-uRI" id="1vf-Fc-Pn5"/>
+                <outlet property="trashBtn" destination="quN-r1-17B" id="8Cy-Pt-yoc"/>
             </connections>
             <point key="canvasLocation" x="137.68115942028987" y="133.92857142857142"/>
         </tableViewCell>
     </objects>
     <resources>
         <image name="poster" width="500" height="743"/>
+        <image name="trash" catalog="system" width="121" height="128"/>
+        <systemColor name="systemRedColor">
+            <color red="1" green="0.23137254901960785" blue="0.18823529411764706" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
         <systemColor name="tintColor">
             <color red="0.0" green="0.47843137254901963" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>

@@ -6,4 +6,19 @@
   
 */
 
-"titleHome" = "Trending Movies";
+"title.home" = "Trending Movies";
+"title.home.favorite" = "Movies(s) Visited";
+"place.holder.search" = "Encuentra tu película";
+
+"url.trending" = "/trending/movie/day";
+"url.now.playing" = "/movie/now_playing";
+"url.popular" = "/movie/popular";
+"url.top.rated" = "/movie/top_rated";
+"url.upcoming" = "/movie/upcoming";
+
+"api.key" = "f6cd5c1a9e6c6b965fdcab0fa6ddd38a";
+"url.api" = "https://api.themoviedb.org/3";
+"url.img" = "https://image.tmdb.org/t/p/w500";
+
+"identifier.tableViewCell" = "MovieTableViewCell";
+"identifier.collectionViewCell" = "MovieCollectionViewCell";

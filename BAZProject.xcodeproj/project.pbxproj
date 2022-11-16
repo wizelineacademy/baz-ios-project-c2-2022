@@ -15,6 +15,8 @@
 		C30893E228A425E1004B1860 /* MovieAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = C30893E028A425E1004B1860 /* MovieAPI.swift */; };
 		C30893E328A425E1004B1860 /* Movie.swift in Sources */ = {isa = PBXBuildFile; fileRef = C30893E128A425E1004B1860 /* Movie.swift */; };
 		C383356E28CA917400FCE0D5 /* code-review-rubric.md in Resources */ = {isa = PBXBuildFile; fileRef = C383356D28CA917400FCE0D5 /* code-review-rubric.md */; };
+		F0107DDF2922C33C00C96530 /* InsetsForCollections.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0107DDE2922C33C00C96530 /* InsetsForCollections.swift */; };
+		F0107DE1292320E500C96530 /* LocalizableKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0107DE0292320E500C96530 /* LocalizableKeys.swift */; };
 		F029288E2900AD7D004C3502 /* CachedImageMovie.swift in Sources */ = {isa = PBXBuildFile; fileRef = F029288D2900AD7D004C3502 /* CachedImageMovie.swift */; };
 		F02928922900AEC3004C3502 /* DasboardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F02928912900AEC3004C3502 /* DasboardViewController.swift */; };
 		F02928952900AF74004C3502 /* MoviePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = F02928942900AF74004C3502 /* MoviePresenter.swift */; };
@@ -24,6 +26,7 @@
 		F02928A42900CB94004C3502 /* CategoryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F02928A32900CB94004C3502 /* CategoryTableViewCell.swift */; };
 		F03C4048290854430087205C /* DasboardViewControllerExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = F03C4047290854430087205C /* DasboardViewControllerExt.swift */; };
 		F03C404B2909D3910087205C /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = F03C404D2909D3910087205C /* Localizable.strings */; };
+		F03E0D2C2919DD0800A52B8E /* String+Localizable.swift in Sources */ = {isa = PBXBuildFile; fileRef = F03E0D2B2919DD0800A52B8E /* String+Localizable.swift */; };
 		F04239032907003100507A40 /* DetailMovieViewControllerExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = F04239022907003100507A40 /* DetailMovieViewControllerExt.swift */; };
 		F04239052907037200507A40 /* DetailPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = F04239042907037200507A40 /* DetailPresenter.swift */; };
 		F042390729078AF700507A40 /* Detail.swift in Sources */ = {isa = PBXBuildFile; fileRef = F042390629078AF700507A40 /* Detail.swift */; };
@@ -44,6 +47,8 @@
 		C30893E028A425E1004B1860 /* MovieAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MovieAPI.swift; sourceTree = "<group>"; };
 		C30893E128A425E1004B1860 /* Movie.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Movie.swift; sourceTree = "<group>"; };
 		C383356D28CA917400FCE0D5 /* code-review-rubric.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = "code-review-rubric.md"; sourceTree = "<group>"; };
+		F0107DDE2922C33C00C96530 /* InsetsForCollections.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InsetsForCollections.swift; sourceTree = "<group>"; };
+		F0107DE0292320E500C96530 /* LocalizableKeys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalizableKeys.swift; sourceTree = "<group>"; };
 		F029288D2900AD7D004C3502 /* CachedImageMovie.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CachedImageMovie.swift; sourceTree = "<group>"; };
 		F02928912900AEC3004C3502 /* DasboardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DasboardViewController.swift; sourceTree = "<group>"; };
 		F02928942900AF74004C3502 /* MoviePresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoviePresenter.swift; sourceTree = "<group>"; };
@@ -53,6 +58,7 @@
 		F02928A32900CB94004C3502 /* CategoryTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryTableViewCell.swift; sourceTree = "<group>"; };
 		F03C4047290854430087205C /* DasboardViewControllerExt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DasboardViewControllerExt.swift; sourceTree = "<group>"; };
 		F03C404C2909D3910087205C /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		F03E0D2B2919DD0800A52B8E /* String+Localizable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Localizable.swift"; sourceTree = "<group>"; };
 		F04239022907003100507A40 /* DetailMovieViewControllerExt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailMovieViewControllerExt.swift; sourceTree = "<group>"; };
 		F04239042907037200507A40 /* DetailPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailPresenter.swift; sourceTree = "<group>"; };
 		F042390629078AF700507A40 /* Detail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Detail.swift; sourceTree = "<group>"; };
@@ -135,7 +141,10 @@
 			isa = PBXGroup;
 			children = (
 				F029288D2900AD7D004C3502 /* CachedImageMovie.swift */,
+				F03E0D2B2919DD0800A52B8E /* String+Localizable.swift */,
 				F03C404D2909D3910087205C /* Localizable.strings */,
+				F0107DDE2922C33C00C96530 /* InsetsForCollections.swift */,
+				F0107DE0292320E500C96530 /* LocalizableKeys.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -338,10 +347,13 @@
 				C30893E228A425E1004B1860 /* MovieAPI.swift in Sources */,
 				F07E1AE229036AD5004A5199 /* DetailMovieViewController.swift in Sources */,
 				F029288E2900AD7D004C3502 /* CachedImageMovie.swift in Sources */,
+				F0107DDF2922C33C00C96530 /* InsetsForCollections.swift in Sources */,
 				C30893E328A425E1004B1860 /* Movie.swift in Sources */,
 				F04239052907037200507A40 /* DetailPresenter.swift in Sources */,
 				F02928A42900CB94004C3502 /* CategoryTableViewCell.swift in Sources */,
 				F042390729078AF700507A40 /* Detail.swift in Sources */,
+				F03E0D2C2919DD0800A52B8E /* String+Localizable.swift in Sources */,
+				F0107DE1292320E500C96530 /* LocalizableKeys.swift in Sources */,
 				F02928922900AEC3004C3502 /* DasboardViewController.swift in Sources */,
 				F02928982900B004004C3502 /* MovieTableViewCell.swift in Sources */,
 				F02928952900AF74004C3502 /* MoviePresenter.swift in Sources */,

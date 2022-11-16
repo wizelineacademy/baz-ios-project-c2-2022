@@ -10,10 +10,12 @@ import UIKit
 
 final class MovieFilterViewController: UIViewController {
     @IBOutlet weak var categoriesTableView: UITableView!
+    @IBOutlet weak var mainContainerView: UIView!
     weak var filterDelegate: MovieFilterDelegate?
     // MARK: - Override viewDidLoad
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.mainContainerView.layer.cornerRadius = 20
     }
     /// Close view controller presented
     ///
@@ -43,5 +45,14 @@ extension MovieFilterViewController: UITableViewDataSource {
         cell.showCategoryBtn.setTitle(CategoryMovieType.allCases[indexPath.row].typeName, for: .normal)
         cell.showCategoryBtn.addTarget(self, action: #selector(showCategoryAction(sender:)), for: .touchUpInside)
         return cell
+    }
+}
+
+extension MovieFilterViewController {
+    static func getViewController() -> MovieFilterViewController {
+        let storyboard = UIStoryboard(name: "Movies", bundle: Bundle(for: MovieFilterViewController.self))
+        let controller = storyboard.instantiateViewController(withIdentifier: "MovieFilterViewController")
+        as? MovieFilterViewController ?? MovieFilterViewController()
+        return controller
     }
 }
