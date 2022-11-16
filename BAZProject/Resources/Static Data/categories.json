@@ -1,0 +1,39 @@
+[
+    {
+        "category": "trending",
+        "name": "Tendencias",
+        "endPoint" : "trending/movie/day?api_key=",
+        "icon": "",
+        "description": ""
+    },
+    {
+        "category": "popular",
+        "name": "Populares",
+        "endPoint" : "/movie/popular?api_key=",
+        "icon": "",
+        "description": "",
+    },
+    {
+        "category": "topRate",
+        "name": "Mejores valorados",
+        "endPoint" : "/movie/top_rated?api_key=",
+        "icon": "",
+        "description": ""
+    },
+    {
+        "category": "upcoming",
+        "name": "Proximos estrenos",
+        "endPoint" : "movie/upcoming?api_key=",
+        "icon": "",
+        "description": ""
+    },
+    {
+        "category": "nowPlaying",
+        "name": "Continuar viendo..",
+        "endPoint" : "movie/now_playing?api_key=",
+        "icon": "",
+        "description": ""
+        
+    }
+
+]

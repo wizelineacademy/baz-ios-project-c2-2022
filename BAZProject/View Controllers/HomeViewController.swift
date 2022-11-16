@@ -37,6 +37,7 @@ class HomeViewController: UIViewController {
 
 extension HomeViewController: UITableViewDataSource, UITableViewDelegate,MoviesCategoriesTableViewCellDelegate {
     func movieTapped(_ movie: Movie) {
+        NotificationCenterHelper.notificacionCenter.post(name: Notification.Name(rawValue: "detailMovieCell.Notification"), object: nil, userInfo: ["detailMovie": movie])
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let detailViewController = storyboard.instantiateViewController(withIdentifier: "DetailMovieViewController") as! DetailMovieViewController
         detailViewController.movie = movie

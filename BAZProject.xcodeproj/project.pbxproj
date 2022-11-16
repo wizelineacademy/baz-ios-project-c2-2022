@@ -25,6 +25,8 @@
 		5D8FECB32923E4AB0063CC69 /* SearchMovieViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D8FECB22923E4AB0063CC69 /* SearchMovieViewController.swift */; };
 		5D8FECB52923E4D90063CC69 /* SearchMovieViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D8FECB42923E4D90063CC69 /* SearchMovieViewModel.swift */; };
 		5D99CC9C2922A785008047F0 /* DetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D99CC9B2922A785008047F0 /* DetailViewModel.swift */; };
+		5DB6C15B2925871B009F04E8 /* NotificacionCenterHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DB6C15A2925871B009F04E8 /* NotificacionCenterHelper.swift */; };
+		5DB6C15D29258990009F04E8 /* RencentlyMoviesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DB6C15C29258990009F04E8 /* RencentlyMoviesViewController.swift */; };
 		5DC0CA54291F78C70082E17B /* categories.json in Resources */ = {isa = PBXBuildFile; fileRef = 5DC0CA53291F78C70082E17B /* categories.json */; };
 		5DC0CA57291F79000082E17B /* CategoriesLocalDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DC0CA56291F79000082E17B /* CategoriesLocalDataManager.swift */; };
 		C30893AE28A2F42B004B1860 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C30893AD28A2F42B004B1860 /* AppDelegate.swift */; };
@@ -56,6 +58,8 @@
 		5D8FECB22923E4AB0063CC69 /* SearchMovieViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchMovieViewController.swift; sourceTree = "<group>"; };
 		5D8FECB42923E4D90063CC69 /* SearchMovieViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchMovieViewModel.swift; sourceTree = "<group>"; };
 		5D99CC9B2922A785008047F0 /* DetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewModel.swift; sourceTree = "<group>"; };
+		5DB6C15A2925871B009F04E8 /* NotificacionCenterHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificacionCenterHelper.swift; sourceTree = "<group>"; };
+		5DB6C15C29258990009F04E8 /* RencentlyMoviesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RencentlyMoviesViewController.swift; sourceTree = "<group>"; };
 		5DC0CA53291F78C70082E17B /* categories.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = categories.json; path = ../../../../../../Desktop/categories.json; sourceTree = "<group>"; };
 		5DC0CA56291F79000082E17B /* CategoriesLocalDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoriesLocalDataManager.swift; sourceTree = "<group>"; };
 		C30893AA28A2F42B004B1860 /* BAZProject.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BAZProject.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -87,6 +91,7 @@
 				5D1F7EB52914F1A600CD2D99 /* HomeViewModel.swift */,
 				5D99CC9B2922A785008047F0 /* DetailViewModel.swift */,
 				5D8FECB42923E4D90063CC69 /* SearchMovieViewModel.swift */,
+				5DB6C15C29258990009F04E8 /* RencentlyMoviesViewController.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -123,6 +128,7 @@
 		5D1F7EB02914ED1500CD2D99 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				5DB6C159292586B0009F04E8 /* NotificacionHelper */,
 				5D1F7F8E291B17F000CD2D99 /* Static Data */,
 				5D1F7EC02914FB0F00CD2D99 /* Images */,
 				5D1F7EBF2914FAF800CD2D99 /* Storyboards */,
@@ -217,6 +223,14 @@
 				5DC0CA53291F78C70082E17B /* categories.json */,
 			);
 			path = "Static Data";
+			sourceTree = "<group>";
+		};
+		5DB6C159292586B0009F04E8 /* NotificacionHelper */ = {
+			isa = PBXGroup;
+			children = (
+				5DB6C15A2925871B009F04E8 /* NotificacionCenterHelper.swift */,
+			);
+			path = NotificacionHelper;
 			sourceTree = "<group>";
 		};
 		C30893A128A2F42B004B1860 = {
@@ -334,7 +348,9 @@
 				C30893AE28A2F42B004B1860 /* AppDelegate.swift in Sources */,
 				5D1F7ECE2915121600CD2D99 /* MoviesCollectionViewCell.swift in Sources */,
 				C30893B028A2F42B004B1860 /* SceneDelegate.swift in Sources */,
+				5DB6C15B2925871B009F04E8 /* NotificacionCenterHelper.swift in Sources */,
 				5D1F7EB42914EEAE00CD2D99 /* MoviesService.swift in Sources */,
+				5DB6C15D29258990009F04E8 /* RencentlyMoviesViewController.swift in Sources */,
 				5D1F7EBE2914FAE500CD2D99 /* CustomError.swift in Sources */,
 				5D1F7EC32914FD5400CD2D99 /* UIImageView.swift in Sources */,
 				5D69D6852920FE400031ECC1 /* DetailMovieViewController.swift in Sources */,
