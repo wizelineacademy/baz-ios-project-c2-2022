@@ -9,7 +9,7 @@ import Foundation
 import UIKit
 
 extension UIView {
-    
+    /// La funcion addBlurToView le añade el efecto de blur a las vistas
     func addBlurToView() {
         var blurEffect: UIBlurEffect!
         if #available(iOS 10.0, *) {
@@ -23,7 +23,7 @@ extension UIView {
         blurredEffectedView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         self.addSubview(blurredEffectedView)
     }
-    
+    /// La funcion removeFromView le elimina el blur de las vistas
     func removeBlurFromView() {
         for subview in self.subviews {
             if subview is UIVisualEffectView {

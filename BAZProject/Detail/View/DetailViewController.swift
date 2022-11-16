@@ -5,13 +5,12 @@
 //  Created by Alan Emiliano Ramirez Ayala on 21/10/22.
 //
 
-import UIKit
+import UIKit 
 
-class DetailViewController: UIViewController {
-
+final class DetailViewController: UIViewController, GenericView {
+    
     @IBOutlet weak var stackView: UIStackView!
     @IBOutlet weak var BackDetailTopView: UIView!
-    @IBOutlet weak var backArrowButtom: UIBarButtonItem!
     @IBOutlet weak var imageMovie: UIImageView!
     @IBOutlet weak var tituloDetailView: UILabel!
     @IBOutlet weak var tituloOriginalDetail: UILabel!
@@ -20,24 +19,32 @@ class DetailViewController: UIViewController {
     @IBOutlet weak var descDetailView: UILabel!
     
     let detailViewModel = DetailModelView()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.tabBarController?.tabBar.isHidden = true
         configurateView()
-        // Do any additional setup after loading the view.
+        sendNotification()
     }
     
-    @IBAction func returnListMovie(_ sender: Any) {
-        self.dismiss(animated: true, completion: nil)
+    private func sendNotification() {
+        NotificationCenter.default.post(name: NSNotification.Name(rawValue: "notificationValue"), object: nil)
     }
-    private func configurateView() {
+    
+    func configurateView() {
+        self.title = "Detalles"
+        var textCast = ""
+        for name in detailViewModel.dataArray!.cast {
+            textCast += "* \(name.name ?? "") como \(name.character ?? "")\n"
+        }
         stackView.layer.cornerRadius = 15
         BackDetailTopView.addBlurToView()
-        BackDetailTopView.backgroundColor = UIColor(patternImage: UIImage(data: self.detailViewModel.getImage(urlImage: detailViewModel.dataArray?.backdropPath ?? "")) ?? UIImage())
+        BackDetailTopView.backgroundColor = UIColor(patternImage: UIImage(data: GenericFunctions.getImage(urlImage: detailViewModel.dataArray?.backdropPath ?? "")) ?? UIImage())
         tituloDetailView.text = "  \(self.detailViewModel.dataArray?.title ?? "")"
         tituloOriginalDetail.text = "  \(self.detailViewModel.dataArray?.originalTitle ?? "")"
         clificacionDetailView.text = "  Calificaion \(self.detailViewModel.dataArray?.voteAverage ?? 0.0)"
         fechaEstrenoDetail.text = "  \(self.detailViewModel.dataArray?.releaseDate ?? "")"
-        descDetailView.text = "\(self.detailViewModel.dataArray?.overview ?? "")"
-        imageMovie.image = UIImage(data: self.detailViewModel.getImage(urlImage: detailViewModel.dataArray?.posterPath ?? "")) ?? UIImage(named: "poster")
+        descDetailView.text = "\(self.detailViewModel.dataArray?.overview ?? "") \n\nReparto:\n\(textCast)"
+        imageMovie.image = UIImage(data: GenericFunctions.getImage(urlImage: detailViewModel.dataArray?.posterPath ?? "")) ?? UIImage(named: "poster")
     }
 }

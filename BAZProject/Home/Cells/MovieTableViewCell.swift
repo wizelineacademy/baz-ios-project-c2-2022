@@ -7,7 +7,7 @@
 
 import UIKit
 import SkeletonView
-class MovieTableViewCell: UITableViewCell {
+final class MovieTableViewCell: UITableViewCell, GenericCellMovie {
     
     @IBOutlet weak var infoStackView: UIStackView!
     @IBOutlet weak var imageViewMovie: UIImageView!
@@ -38,9 +38,9 @@ class MovieTableViewCell: UITableViewCell {
         qualificationMovie.isSkeletonable = true
     }
     
-    private func configure() {
+    func configure() {
         guard let movieModel = movieModel else { return }
-        let imageMovie = UIImage(data: self.movieViewModel.getImage(urlImage: movieModel.posterPath)) ?? UIImage(named: "poster")
+        let imageMovie = UIImage(data: GenericFunctions.getImage(urlImage: movieModel.posterPath)) ?? UIImage(named: "poster")
         self.configureData(titulo: movieModel.title, originalTitle: movieModel.originalTitle, calificacion: movieModel.voteAverage, image: imageMovie ?? UIImage())
     }
     

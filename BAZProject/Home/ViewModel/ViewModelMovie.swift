@@ -6,8 +6,8 @@
 //
 
 import Foundation
-
-class ViewModelMovie {
+ 
+class ViewModelMovie: PrincipalViewModel {
     
     var refreshData = { () -> () in }
     
@@ -18,20 +18,20 @@ class ViewModelMovie {
             refreshData()
         }
     }
+    var movieApiDelegate: MovieApiDelegate?
     /// La funcion getAllMovies obtiene la informacion de todas las peliculas dividadas y las guarda en un diccionario
     func getAllMovies() {
-        dicAllMovies["Trending"] = self.movieApi.getMovies(.Trendig)
-        dicAllMovies["TopRated"] = self.movieApi.getMovies(.TopRated)
-        dicAllMovies["UpComing"] = self.movieApi.getMovies(.UpComing)
-        dicAllMovies["Popular"] = self.movieApi.getMovies(.Popular)
-        dicAllMovies["NowPlaying"] = self.movieApi.getMovies(.NowPlaying)
+        dicAllMovies["Trending"] = self.movieApiDelegate?.getMovies(.Trendig)
+        dicAllMovies["TopRated"] = self.movieApiDelegate?.getMovies(.TopRated)
+        dicAllMovies["UpComing"] = self.movieApiDelegate?.getMovies(.UpComing)
+        dicAllMovies["Popular"] = self.movieApiDelegate?.getMovies(.Popular)
+        dicAllMovies["NowPlaying"] = self.movieApiDelegate?.getMovies(.NowPlaying)
         self.dataArray = dicAllMovies["Trending"] ?? []
     }
-    let movieApi = MovieAPI()
     /// La funcion getInfo hace la peticion de la informacion con la instancia de la clase de MovieAPI y la guarda en el dataArray del ViewModel
     /// - Parameter api: El tipo de api que se busca la informacion
     func getInfo(_ api: MovieFeed) {
-        self.dataArray = self.movieApi.getMovies(api)
+        self.dataArray = self.movieApiDelegate?.getMovies(api) ?? []
     }
     /// La funcion getInfoIndex devuelve la informacion de las peliculas del index que mandan
     /// - Parameter index: Index de la informacion que se busca.
@@ -43,15 +43,6 @@ class ViewModelMovie {
     /// - Parameter kindOfData: El tipo de peliculas que se busca actualizar
     func changeDataToShow(_ kindOfData: MovieFeed) {
         self.dataArray = dicAllMovies[kindOfData.name] ?? []
-    }
-    /// La funcion getImage retorna la informacion de una imagen
-    /// - Parameter urlImage: String con la url de la imagen a descargar
-    /// - Returns: La infotmacion de la imagen descargada de tipo Data
-    func getImage(urlImage: String) -> Data {
-        let urlIm = "https://image.tmdb.org/t/p/w500\(urlImage)"
-        guard let urlData = URL(string: urlIm),
-              let data = try? Data(contentsOf: urlData) else { return Data() }
-        return data
     }
     /// La funcion cambia la informacion a mostrar en el HomeView
     /// - Parameter index: Index de la informacion a mostrar en la tabla
