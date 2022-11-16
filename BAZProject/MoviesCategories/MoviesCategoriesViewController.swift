@@ -9,13 +9,14 @@ import UIKit
 
 final class MoviesCategoriesViewController: UIViewController {
     
+    private var indexSegment: Int = 0
     private let itemsPerRow: CGFloat = 2.0
     private var movies: [Movie] = []
     private let movieApi = MovieAPI()
+    private var likeMovieIndex: [Int] = []
     
-    @IBOutlet weak var btnSearch: UIButton!
-    @IBOutlet weak var pickerSelector: UIPickerView!
     @IBOutlet weak var collectionMovies: UICollectionView!
+    @IBOutlet weak var lblCountMovies: UILabel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -42,26 +43,46 @@ final class MoviesCategoriesViewController: UIViewController {
                 }
             }
         })
-        NotificationCenter.default.addObserver(self, selector: #selector(moviesCount(with:)), name: NSNotification.Name(rawValue: "contadorToVCCategory"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(moviesCount(_:)), name: .countMovieDetails, object: nil)
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.title = "Movies"
+        let buttonSearch = UIBarButtonItem(image: UIImage(systemName: "magnifyingglass")?.withTintColor(.black), style: .plain, target: self, action: #selector(tapSearch))
+        self.navigationItem.rightBarButtonItem = buttonSearch
         setupElements()
-        pickerSelector.customPicker()
-        btnSearch.shakeButton()
+        setupSegmentControl()
     }
-    
+    /// setUpElements: config initial interface to user
     private func setupElements() {
-        self.pickerSelector.dataSource = self
-        self.pickerSelector.delegate = self
+        let countMovies = UserDefaults.standard.integer(forKey: "countMovies")
         self.collectionMovies.delegate = self
         self.collectionMovies.dataSource = self
         self.collectionMovies.register(UINib(nibName: MoviesCategoryCollectionViewCell.nameCell, bundle: nil), forCellWithReuseIdentifier: MoviesCategoryCollectionViewCell.identifier)
+        self.lblCountMovies.text = "Peliculas vistas: \(countMovies)"
     }
     
-    private func changePickerSelected(_ value: Int) {
+    /// setupSegmentControl: configure segment control handler 5 types movies
+    private func setupSegmentControl() {
+        let mySegmentedControl = UISegmentedControl(items: ["Trending","Now Playing","Popular","Top Rated","Upcoming"])
+        mySegmentedControl.selectedSegmentIndex = indexSegment
+        mySegmentedControl.backgroundColor = .gray
+        mySegmentedControl.addTarget(self, action: #selector(changeSegmentSelected(with:)), for: .valueChanged)
+        mySegmentedControl.changeLineSegment()
+        view.addSubview(mySegmentedControl)
+        mySegmentedControl.translatesAutoresizingMaskIntoConstraints = false
+        mySegmentedControl.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 10).isActive = true
+        mySegmentedControl.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant:  10).isActive = true
+        mySegmentedControl.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -10).isActive = true
+        mySegmentedControl.heightAnchor.constraint(equalToConstant: 50).isActive = true
+    }
+    
+    /// changeSegmentSelected
+    /// - Parameter segmentControl: int to identifier with selected segment is selected
+    @objc private func changeSegmentSelected(with segmentControl: UISegmentedControl) {
+        let value = segmentControl.selectedSegmentIndex
+        indexSegment = value
         let indicatorAnimating = indicator
         indicatorAnimating.startAnimating()
         movies.removeAll()
@@ -83,12 +104,15 @@ final class MoviesCategoriesViewController: UIViewController {
         }
     }
     
-    @objc private func moviesCount(with notification: Notification) {
-        guard let userInfo = notification.object as? [String:Any ] else { return }
-        print(userInfo)
+    /// moviesCount: asign value Userdefault to present into screen
+    /// - Parameter notification: object type Notification received data
+    @objc private func moviesCount(_ notification: Notification) {
+        let countMovies = UserDefaults.standard.integer(forKey: "countMovies")
+        self.lblCountMovies.text = "Peliculas vistas: \(countMovies)"
     }
     
-    @IBAction private func tapSearch() {
+    /// tapSearch: user click in search button, so present to SearchMovieViewController
+    @objc private func tapSearch() {
         guard let vc = SearchMovieViewController.instantiate() else { return }
         navigationController?.pushViewController(vc, animated: true)
     }
@@ -104,13 +128,14 @@ extension MoviesCategoriesViewController: UICollectionViewDataSource {
         guard let cell = collectionMovies.dequeueReusableCell(withReuseIdentifier: MoviesCategoryCollectionViewCell.identifier, for: indexPath) as? MoviesCategoryCollectionViewCell else {
             return UICollectionViewCell()
         }
-        cell.setUpCell(movies[indexPath.row])
+        cell.setUpCell(movies[indexPath.row], likeMovieIndex)
         return cell
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let vc = DetailsMovieRouter.createModuleDetailsMovie(with: movies[indexPath.row], from: .moviesCategory)
-        self.present(vc, animated: true)
+        let vc = DetailsMovieRouter.createModuleDetailsMovie(with: movies[indexPath.row], and: self, arrFavoriteMovies: likeMovieIndex)
+        self.navigationController?.pushViewController(vc, animated: true)
+        //self.present(vc, animated: true)
     }
     
     
@@ -126,23 +151,17 @@ extension MoviesCategoriesViewController: UICollectionViewDelegateFlowLayout {
     }
 }
 
-extension MoviesCategoriesViewController: UIPickerViewDelegate {
-    
-    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        changePickerSelected(row)
+extension MoviesCategoriesViewController: DetailsMovieDelegate {
+    /// addMovie: Add id into favoriteArrays
+    /// - Parameter id: movie id´s
+    func addMovie(with id: Int) {
+        self.likeMovieIndex.append(id)
+        self.collectionMovies.reloadData()
     }
-}
-
-extension MoviesCategoriesViewController: UIPickerViewDataSource {
-    func numberOfComponents(in pickerView: UIPickerView) -> Int {
-        return 1
-    }
-    
-    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        return 4
-    }
-    
-    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        return CategoryFilterMovie(rawValue: row)?.title
+    /// removeMovie: remove id into favoriteArrays
+    /// - Parameter id: movie id´s
+    func removeMovie(with id: Int) {
+        self.likeMovieIndex = self.likeMovieIndex.filter { $0 != id}
+        self.collectionMovies.reloadData()
     }
 }

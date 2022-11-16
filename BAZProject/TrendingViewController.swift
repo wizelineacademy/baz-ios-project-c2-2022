@@ -40,23 +40,29 @@ extension TrendingViewController {
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        tableView.dequeueReusableCell(withIdentifier: "TrendingTableViewCell")!
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "TrendingTableViewCell") else {
+            return UITableViewCell()
+        }
+        var config = UIListContentConfiguration.cell()
+        let posterPath = movies[indexPath.row].posterPath ?? "poster"
+        config.text = movies[indexPath.row].title
+        ImageAPI.getImage(with: posterPath) { result in
+            switch result {
+            case .success(let image):
+                config.image = image
+            case .failure(_):
+                config.image = UIImage(named: "poster")
+            }
+        }
+        cell.contentConfiguration = config
+        return cell
     }
 
 }
 
 // MARK: - TableView's Delegate
 
-extension TrendingViewController {
-
-    override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        var config = UIListContentConfiguration.cell()
-        let posterPath = movies[indexPath.row].posterPath ?? "poster"
-        config.text = movies[indexPath.row].title
-        config.image = movieApi.getImage(with: posterPath)
-        cell.contentConfiguration = config
-    }
-    
+extension TrendingViewController { 
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let vc = MoviesCategoriesViewController()
         self.present(vc, animated: true)

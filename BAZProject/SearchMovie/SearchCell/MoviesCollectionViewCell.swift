@@ -11,17 +11,37 @@ final class MoviesCollectionViewCell: UICollectionViewCell {
 
     @IBOutlet weak var imageMovie: UIImageView!
     @IBOutlet weak var titleMovie: UILabel!
+    @IBOutlet weak var imgLiked: UIImageView!
     
     static let identifier = "movieCollection"
-    let apiMovie = MovieAPI()
     
     override func awakeFromNib() {
         super.awakeFromNib()
     }
+    
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        self.imageMovie.image = nil
+    }
 
-    func setUpCell(_ Element: Movie) {
-        let posterImage = Element.posterPath ?? "poster"
-        titleMovie.text = Element.title
-        imageMovie.image = apiMovie.getImage(with: posterImage)
+    /// setUpcell
+    /// - Parameter movie: info about movie element
+    /// - Parameter arrFavoritesMovies: Array with favorite movie id´s
+    func setUpCell(_ movie: Movie, _ arrFavoriteMovies: [Int]) {
+        let isFavoriteMovie = arrFavoriteMovies.contains(movie.id)
+        let posterImage = movie.posterPath ?? "poster"
+        titleMovie.text = movie.title
+        ImageAPI.getImage(with: posterImage) { result in
+            DispatchQueue.main.async {
+                switch result {
+                case .success(let image):
+                    self.imageMovie.image = image
+                case .failure(_):
+                    self.imageMovie.image = UIImage(named: "poster")
+                }
+            }
+        }
+        let imageLiked = isFavoriteMovie ? UIImage(systemName: "heart.fill") : UIImage(systemName: "heart")
+        self.imgLiked.image = imageLiked
     }
 }
