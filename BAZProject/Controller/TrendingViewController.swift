@@ -14,6 +14,7 @@ class TrendingViewController: UIViewController {
     //MARK: Properties
     let movieAPI = MovieAPI()
     var movieSelected: InfoMovies?
+    private var countMoviesRecently: Int = 0
     var movies: [InfoMovies] = [] {
         didSet {
             DispatchQueue.main.async {
@@ -27,11 +28,36 @@ class TrendingViewController: UIViewController {
         super.viewDidLoad()
         instanceFromNib()
         getMovies()
+        notificationRecentlyMovies()
     }
     
     //MARK: private methods
     private func instanceFromNib() {
         tblMovies.register(UINib(nibName: "ContentMoviesTableViewCell", bundle: nil), forCellReuseIdentifier: "ContentMoviesTableViewCell")
+    }
+    
+    /// Add an entry to the notification center
+    func notificationRecentlyMovies() {
+        NotificationCenterHelper.subscribeToNotification(self, with: #selector(notificationReceived), name: Notification.Name(rawValue: "detailMovieCell.Notification"))
+    }
+    
+    /// - Parameter notification: instance to acceso to parameters of notification
+    @objc func notificationReceived(_ notification: NSNotification) {
+        guard let movie = notification.userInfo?["detailMovie"] as? InfoMovies else {return}
+        //recentlyMovies = recentlyMovies.filter({$0.id != movie.id})
+        //recentlyMovies.append(movie)
+        countMoviesRecently+=1
+        createBadge(countMoviesRecently)
+    }
+    
+    /**
+     create a badge to notify the user that they watched a movie
+     -Parameter counterMovies: counter when entering the detail of the movies accumulating or resetting to 0 */
+    func createBadge(_ counterMovies: Int){
+        let tabBar = tabBarController!.tabBar
+        let add = tabBar.items![2]
+        add.badgeColor = counterMovies > 0 ? UIColor.red : UIColor.clear
+        add.badgeValue = counterMovies > 0 ? "\(counterMovies)" : ""
     }
     
     private func getMovies() {

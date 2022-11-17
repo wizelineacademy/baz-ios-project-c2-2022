@@ -12,14 +12,13 @@ class RecentlySeenTableViewController: UITableViewController {
     @IBOutlet weak var tblRecentlyMovies: UITableView!
     
     //MARK: Properties
-    var recentlyMovies: [InfoMovies] = [] {
+    private var recentlyMovies: [InfoMovies] = [] {
         didSet {
             DispatchQueue.main.async {
                 self.tblRecentlyMovies.reloadData()
             }
         }
     }
-    var countMovies: Int = 0
     
     //MARK: Override methods
     override func viewDidLoad() {
@@ -30,8 +29,14 @@ class RecentlySeenTableViewController: UITableViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        countMovies = 0
-        createBadge(0)
+        resetBadge()
+    }
+    
+    func resetBadge(){
+        let tabBar = tabBarController!.tabBar
+        let add = tabBar.items![2]
+        add.badgeColor = UIColor.clear
+        add.badgeValue = ""
     }
     
     /// Add an entry to the notification center
@@ -44,20 +49,9 @@ class RecentlySeenTableViewController: UITableViewController {
         guard let movie = notification.userInfo?["detailMovie"] as? InfoMovies else {return}
         recentlyMovies = recentlyMovies.filter({$0.id != movie.id})
         recentlyMovies.append(movie)
-        countMovies+=1
-        createBadge(countMovies)
     }
     
-    /**
-     create a badge to notify the user that they watched a movie
-     -Parameter counterMovies: counter when entering the detail of the movies accumulating or resetting to 0 */
-    func createBadge(_ counterMovies: Int){
-        let tabBar = self.tabBarController!.tabBar
-        let add = tabBar.items![2]
-        add.badgeColor = counterMovies > 0 ? UIColor.red : UIColor.clear
-        add.badgeValue = counterMovies > 0 ? "\(counterMovies)" : ""
-    }
-    
+
     //MARK: private methods
     private func instanceFromNib() {
         tblRecentlyMovies.register(UINib(nibName: "ContentMoviesTableViewCell", bundle: nil), forCellReuseIdentifier: "ContentMoviesTableViewCell")
