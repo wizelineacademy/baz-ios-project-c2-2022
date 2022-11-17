@@ -73,8 +73,6 @@ class DetailViewController: UIViewController {
                                       bundle: Bundle(for: DetailCell.self)),
                                 forCellWithReuseIdentifier: identifier)
     }
-    
-    
     /// Register the custom cell to show recomended movies in collectionRecomend
     func registerCollectionRecomended() {
         collectionRecommended.register(UINib(nibName: identifier,
@@ -118,7 +116,7 @@ class DetailViewController: UIViewController {
     /// Makes a query to the service
     private func getCast() {
         movieAPI.getMovieCast(idCast: idCast, completion: { [weak self] result in
-            if let dataCast = result{
+            if let dataCast = result {
                 self?.arrayCast = dataCast
             }
         })

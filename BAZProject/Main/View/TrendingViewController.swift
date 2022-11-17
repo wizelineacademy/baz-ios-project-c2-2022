@@ -36,8 +36,6 @@ class TrendingViewController: UIViewController {
         guard let model = notification.userInfo?["TappedTrending"] as? Movie else { return }
         print(model.title)
     }
-    
-    
     /// Register the custom cell to Trending
     private func registerNibs() {
         tblMovie.register(UINib(nibName: identifier, bundle: nil), forCellReuseIdentifier: identifier)
@@ -67,8 +65,6 @@ extension TrendingViewController: MovieDataDelegate {
         }
     }
 }
-
-
 // MARK: - TableView's DataSource
 
 extension TrendingViewController : UITableViewDelegate, UITableViewDataSource {
@@ -107,6 +103,8 @@ extension TrendingViewController : UITableViewDelegate, UITableViewDataSource {
             return 0
         }
     }
+    
+ 
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         switch indexPath.section {

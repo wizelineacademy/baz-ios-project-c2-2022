@@ -77,7 +77,7 @@ class MovieAPI {
     }
     
     
-    public func getMovieCast(idCast: Int, completion: @escaping ([Cast]?) -> ()){
+    public func getMovieCast(idCast: Int, completion: @escaping ([Cast]?) -> ()) {
         if let urlString = URL(string: "\(baseURL)movie/\(idCast)/credits?api_key=\(apiKey)&language=es-MX") {
             URLSession.shared.dataTask(with: urlString) { data, response, error in
                 if let error = error {
@@ -87,7 +87,6 @@ class MovieAPI {
                     guard let json = data else { return }
                     let movies = try JSONDecoder().decode(MovieCast.self, from: json)
                     completion(movies.cast)
-                    print("cast\(movies)")
                 } catch {
                     print("Ha ocurrido un error Cast: \(error.localizedDescription)")
                 }
