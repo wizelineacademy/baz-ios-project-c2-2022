@@ -25,7 +25,7 @@ struct Movie: Codable {
     let releaseDate: String
     let voteAverage: Double
     let voteCount: Int
-
+    
     enum CodingKeys: String, CodingKey {
         case adult
         case overview
@@ -48,8 +48,28 @@ struct SearchResultCellViewData {
     let posterPath: String
 }
 
+// MARK: - MoreMovies
 public enum MoreMovies: String {
     case similar
     case recommended = "recommendations"
+    case cast
 }
 
+// MARK: - MovieSections
+public enum MovieSections : Int {
+    case trending   = 0
+    case nowPlaying = 1
+    case topRated   = 2
+    case popular    = 3
+    case upcoming   = 4
+    
+    var section : String {
+        switch self {
+        case .trending: return "/trending/movie/day"
+        case .nowPlaying: return "/movie/now_playing"
+        case .popular: return "/movie/popular"
+        case .topRated: return "/movie/top_rated"
+        case .upcoming: return "/movie/upcoming"
+        }
+    }
+}

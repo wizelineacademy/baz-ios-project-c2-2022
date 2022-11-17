@@ -14,13 +14,26 @@ class DetailViewController: UIViewController {
     @IBOutlet weak var imvPoster: UIImageView!
     @IBOutlet weak var collectionSimilar: UICollectionView!
     @IBOutlet weak var collectionRecommended: UICollectionView!
+    @IBOutlet weak var collectionCast: UICollectionView!
     
     // MARK: - Properties
     var dataMovie: Movie?
+    var dataCast : Cast?
     private var movieAPI = MovieAPI()
     let identifier = "DetailCell"
     var idMovie: Int {
         return self.dataMovie?.id ?? 0
+    }
+    var idCast: Int {
+        return self.dataCast?.id ?? 0
+    }
+    
+    var arrayCast: [Cast] = [] {
+        didSet{
+            DispatchQueue.main.async {
+                self.collectionCast.reloadData()
+            }
+        }
     }
     
     var arraySimilar: [Movie] = [] {
@@ -46,6 +59,19 @@ class DetailViewController: UIViewController {
         registerCollectionSimilar()
         getMoviesSimilar()
         getMoviesRecommended()
+        getCast()
+    }
+    
+    //MARK: - Actions
+    @IBAction func closeActionClicked(_ sender: Any) {
+        self.dismiss(animated: true, completion: nil)
+    }
+    
+    /// Register the custom cell to show cast movies in collectionCast
+    func registerCollectionCast() {
+        collectionCast.register(UINib(nibName: identifier,
+                                      bundle: Bundle(for: DetailCell.self)),
+                                forCellWithReuseIdentifier: identifier)
     }
     /// Register the custom cell to show recomended movies in collectionRecomend
     func registerCollectionRecomended() {
@@ -64,8 +90,10 @@ class DetailViewController: UIViewController {
         lblTitle.text = dataMovie?.title
         txtReseña.text = dataMovie?.overview
         if let dataMovie = dataMovie {
-            let imageMovie = UIImage(data: movieAPI.getImage(urlImage: dataMovie.posterPath)) ?? UIImage(named: "poster")
-            imvPoster.image = imageMovie
+            DispatchQueue.main.async {
+                let imageMovie = UIImage(data: self.movieAPI.getImage(urlImage: dataMovie.posterPath)) ?? UIImage(named: "poster")
+                self.imvPoster.image = imageMovie
+            }
         }
     }
     /// Makes a query to the service
@@ -84,6 +112,16 @@ class DetailViewController: UIViewController {
             }
         })
     }
+    
+    /// Makes a query to the service
+    private func getCast() {
+        movieAPI.getMovieCast(idCast: idCast, completion: { [weak self] result in
+            if let dataCast = result {
+                self?.arrayCast = dataCast
+            }
+        })
+        
+    }
 }
 
 // MARK: - CollectionView Delegate
@@ -94,6 +132,8 @@ extension DetailViewController: UICollectionViewDelegate, UICollectionViewDataSo
             return arraySimilar.count
         case collectionRecommended:
             return arrayRecommended.count
+        case collectionCast :
+            return arrayCast.count
         default:
             return 0
         }
@@ -108,10 +148,11 @@ extension DetailViewController: UICollectionViewDelegate, UICollectionViewDataSo
             cell.showDetailsMovies(movie: arraySimilar[indexPath.row])
         case collectionRecommended:
             cell.showDetailsMovies(movie: arrayRecommended[indexPath.row])
+        case collectionCast:
+            cell.showCast(cast: arrayCast[indexPath.row])
         default:
             cell.showDetailsMovies(movie: arraySimilar[indexPath.row])
         }
         return cell
-        
     }
 }

@@ -17,6 +17,7 @@
 		C30893E228A425E1004B1860 /* MovieAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = C30893E028A425E1004B1860 /* MovieAPI.swift */; };
 		C30893E328A425E1004B1860 /* Movie.swift in Sources */ = {isa = PBXBuildFile; fileRef = C30893E128A425E1004B1860 /* Movie.swift */; };
 		C383356E28CA917400FCE0D5 /* code-review-rubric.md in Resources */ = {isa = PBXBuildFile; fileRef = C383356D28CA917400FCE0D5 /* code-review-rubric.md */; };
+		EE1D12CD2921CBEA005DA4D9 /* NotificationCenterHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE1D12CC2921CBEA005DA4D9 /* NotificationCenterHelper.swift */; };
 		EE22A92D291B66FD004295C9 /* DetailCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = EE22A92C291B66FD004295C9 /* DetailCell.xib */; };
 		EE22A92F291B679E004295C9 /* DetailCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE22A92E291B679E004295C9 /* DetailCell.swift */; };
 		EE512FC12914463B007EB24A /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE512FC02914463B007EB24A /* DetailViewController.swift */; };
@@ -24,6 +25,7 @@
 		EE512FDE29155862007EB24A /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE512FDD29155862007EB24A /* SearchViewController.swift */; };
 		EE51301C29157D1E007EB24A /* SearchCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = EE51301B29157D1D007EB24A /* SearchCell.xib */; };
 		EE51301E29157FCF007EB24A /* SearchCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE51301D29157FCF007EB24A /* SearchCell.swift */; };
+		EEBB28B52923FD05006279CA /* Cast.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEBB28B42923FD05006279CA /* Cast.swift */; };
 		EEEB2E18290A31B700E9C822 /* TrendingTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEEB2E17290A31B700E9C822 /* TrendingTableViewCell.swift */; };
 		EEEB2E1A290ADD5D00E9C822 /* TrendingTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = EEEB2E19290ADD5D00E9C822 /* TrendingTableViewCell.xib */; };
 /* End PBXBuildFile section */
@@ -41,6 +43,7 @@
 		C30893E028A425E1004B1860 /* MovieAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MovieAPI.swift; sourceTree = "<group>"; };
 		C30893E128A425E1004B1860 /* Movie.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Movie.swift; sourceTree = "<group>"; };
 		C383356D28CA917400FCE0D5 /* code-review-rubric.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = "code-review-rubric.md"; sourceTree = "<group>"; };
+		EE1D12CC2921CBEA005DA4D9 /* NotificationCenterHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationCenterHelper.swift; sourceTree = "<group>"; };
 		EE22A92C291B66FD004295C9 /* DetailCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DetailCell.xib; sourceTree = "<group>"; };
 		EE22A92E291B679E004295C9 /* DetailCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailCell.swift; sourceTree = "<group>"; };
 		EE512FC02914463B007EB24A /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
@@ -48,6 +51,7 @@
 		EE512FDD29155862007EB24A /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
 		EE51301B29157D1D007EB24A /* SearchCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SearchCell.xib; sourceTree = "<group>"; };
 		EE51301D29157FCF007EB24A /* SearchCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchCell.swift; sourceTree = "<group>"; };
+		EEBB28B42923FD05006279CA /* Cast.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cast.swift; sourceTree = "<group>"; };
 		EEEB2E17290A31B700E9C822 /* TrendingTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrendingTableViewCell.swift; sourceTree = "<group>"; };
 		EEEB2E19290ADD5D00E9C822 /* TrendingTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TrendingTableViewCell.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -96,6 +100,23 @@
 			path = BAZProject;
 			sourceTree = "<group>";
 		};
+		EE1D12CE2921EE75005DA4D9 /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				EEEB2E19290ADD5D00E9C822 /* TrendingTableViewCell.xib */,
+				EEEB2E17290A31B700E9C822 /* TrendingTableViewCell.swift */,
+			);
+			path = Cell;
+			sourceTree = "<group>";
+		};
+		EE1D12D129222DE2005DA4D9 /* NotificationCenterHelper */ = {
+			isa = PBXGroup;
+			children = (
+				EE1D12CC2921CBEA005DA4D9 /* NotificationCenterHelper.swift */,
+			);
+			path = NotificationCenterHelper;
+			sourceTree = "<group>";
+		};
 		EE22A92B291B66D6004295C9 /* DetailCell */ = {
 			isa = PBXGroup;
 			children = (
@@ -108,6 +129,7 @@
 		EE512FB629143D3B007EB24A /* Main */ = {
 			isa = PBXGroup;
 			children = (
+				EE1D12D129222DE2005DA4D9 /* NotificationCenterHelper */,
 				EE512FB729143D48007EB24A /* Model */,
 				EE512FB829143D55007EB24A /* ViewModel */,
 				EE512FB929143D70007EB24A /* View */,
@@ -134,9 +156,8 @@
 		EE512FB929143D70007EB24A /* View */ = {
 			isa = PBXGroup;
 			children = (
+				EE1D12CE2921EE75005DA4D9 /* Cell */,
 				C30893C328A2F845004B1860 /* TrendingViewController.swift */,
-				EEEB2E17290A31B700E9C822 /* TrendingTableViewCell.swift */,
-				EEEB2E19290ADD5D00E9C822 /* TrendingTableViewCell.xib */,
 				C30893B328A2F42B004B1860 /* Main.storyboard */,
 			);
 			path = View;
@@ -155,6 +176,7 @@
 		EE512FBB29143DF5007EB24A /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				EEBB28B42923FD05006279CA /* Cast.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -265,10 +287,12 @@
 			files = (
 				EE22A92F291B679E004295C9 /* DetailCell.swift in Sources */,
 				C30893C428A2F845004B1860 /* TrendingViewController.swift in Sources */,
+				EEBB28B52923FD05006279CA /* Cast.swift in Sources */,
 				C30893AE28A2F42B004B1860 /* AppDelegate.swift in Sources */,
 				EE512FDE29155862007EB24A /* SearchViewController.swift in Sources */,
 				EEEB2E18290A31B700E9C822 /* TrendingTableViewCell.swift in Sources */,
 				EE51301E29157FCF007EB24A /* SearchCell.swift in Sources */,
+				EE1D12CD2921CBEA005DA4D9 /* NotificationCenterHelper.swift in Sources */,
 				C30893B028A2F42B004B1860 /* SceneDelegate.swift in Sources */,
 				C30893E228A425E1004B1860 /* MovieAPI.swift in Sources */,
 				C30893E328A425E1004B1860 /* Movie.swift in Sources */,

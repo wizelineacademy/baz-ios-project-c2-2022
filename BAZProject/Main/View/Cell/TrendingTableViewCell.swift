@@ -8,7 +8,6 @@ import UIKit
 class TrendingTableViewCell: UITableViewCell {
     @IBOutlet weak var lblTitle: UILabel!
     @IBOutlet weak var imvPoster: UIImageView!
-    
     // MARK: - Properties
     private var movieAPI = MovieAPI()
     

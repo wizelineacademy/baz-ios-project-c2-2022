@@ -62,6 +62,14 @@ extension SearchViewController: UICollectionViewDataSource, UICollectionViewDele
         cell.getInfoCollection(movie: searchResults[indexPath.row].mapToViewData())
         return cell
     }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        NotificationCenterHelper.myNotificationCenter.post(name: NSNotification.Name(rawValue: "TrendingTable.TappedCell.Notification"), object: nil, userInfo: ["TappedTrending": true])
+        let vc = DetailViewController(nibName: "DetailViewController", bundle: Bundle(for: DetailViewController.self))
+        vc.dataMovie = searchResults[indexPath.row]
+        vc.modalPresentationStyle = .fullScreen
+        present(vc, animated: true, completion: nil)
+    }
 }
 
 // MARK: - Implement SearchBar
@@ -78,13 +86,15 @@ extension SearchViewController : UISearchBarDelegate {
         searchActive = false
     }
     
-    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         searchActive = true
-        if let searchWord = searchBar.text {
-            self.getMoviesSearch(wordToSearch: searchWord)
+        DispatchQueue.main.async {
+            if let searchWord = searchBar.text {
+                self.getMoviesSearch(wordToSearch: searchWord)
+                self.collectionMovie.reloadData()
+            }
         }
     }
-    
 }
 
 extension Movie {
