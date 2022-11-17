@@ -11,6 +11,7 @@ class TrendingViewController: UIViewController {
     
     @IBOutlet var tblMovies: UITableView!
     @IBOutlet weak var segMovies: UISegmentedControl!
+    
     //MARK: Properties
     let movieAPI = MovieAPI()
     var movieSelected: InfoMovies?
@@ -22,6 +23,7 @@ class TrendingViewController: UIViewController {
             }
         }
     }
+    var recentMovies: RecentMovies = RecentMovies()
     
     //MARK: Override methods
     override func viewDidLoad() {
@@ -44,10 +46,14 @@ class TrendingViewController: UIViewController {
     /// - Parameter notification: instance to acceso to parameters of notification
     @objc func notificationReceived(_ notification: NSNotification) {
         guard let movie = notification.userInfo?["detailMovie"] as? InfoMovies else {return}
-        //recentlyMovies = recentlyMovies.filter({$0.id != movie.id})
-        //recentlyMovies.append(movie)
-        countMoviesRecently+=1
-        createBadge(countMoviesRecently)
+        let duplicated = recentMovies.arrayMovies.contains { element in
+            element.id == movie.id
+        }
+        if !duplicated {
+            recentMovies.arrayMovies.append(movie)
+            countMoviesRecently+=1
+            createBadge(countMoviesRecently)
+        }
     }
     
     /**
@@ -110,5 +116,15 @@ extension TrendingViewController: UITableViewDataSource, UITableViewDelegate {
          NotificationCenterHelper.myNotificationCenter.post(name: Notification.Name(rawValue: "detailMovieCell.Notification"), object: nil, userInfo: ["detailMovie": movie])
         performSegue(withIdentifier: "detailsMovies", sender: nil)
     }
+}
+
+// MARK: - Delegate RecentSeenDataSource
+
+extension TrendingViewController: RecentSeenDataSource {
+    func badgeCleaned() {
+        countMoviesRecently = 0
+    }
+    
+    func getRecentMovies() -> RecentMovies { recentMovies }
 }
 

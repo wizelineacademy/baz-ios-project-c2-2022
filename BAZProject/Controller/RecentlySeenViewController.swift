@@ -7,6 +7,15 @@
 
 import UIKit
 
+/**Protocol
+    - getRecentMovies: function to get recent movies and returns the RecentMovies class
+    - badgeCleaned: function to reset the badge counter
+ */
+protocol RecentSeenDataSource: AnyObject {
+    func getRecentMovies() -> RecentMovies
+    func badgeCleaned()
+}
+
 class RecentlySeenTableViewController: UITableViewController {
     
     @IBOutlet weak var tblRecentlyMovies: UITableView!
@@ -19,43 +28,38 @@ class RecentlySeenTableViewController: UITableViewController {
             }
         }
     }
+    weak var delegateRecentMovies: RecentSeenDataSource?
     
     //MARK: Override methods
     override func viewDidLoad() {
         super.viewDidLoad()
         instanceFromNib()
-        notificationRecentlyMovies()
+        setDelegate()
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         resetBadge()
+        recentlyMovies = delegateRecentMovies?.getRecentMovies().arrayMovies ?? []
     }
     
-    func resetBadge(){
-        let tabBar = tabBarController!.tabBar
-        let add = tabBar.items![2]
-        add.badgeColor = UIColor.clear
-        add.badgeValue = ""
-    }
-    
-    /// Add an entry to the notification center
-    func notificationRecentlyMovies() {
-        NotificationCenterHelper.subscribeToNotification(self, with: #selector(notificationReceived), name: Notification.Name(rawValue: "detailMovieCell.Notification"))
-    }
-    
-    /// - Parameter notification: instance to acceso to parameters of notification
-    @objc func notificationReceived(_ notification: NSNotification) {
-        guard let movie = notification.userInfo?["detailMovie"] as? InfoMovies else {return}
-        recentlyMovies = recentlyMovies.filter({$0.id != movie.id})
-        recentlyMovies.append(movie)
-    }
-    
-
     //MARK: private methods
     private func instanceFromNib() {
         tblRecentlyMovies.register(UINib(nibName: "ContentMoviesTableViewCell", bundle: nil), forCellReuseIdentifier: "ContentMoviesTableViewCell")
     }
+    
+    private func resetBadge(){
+        let tabBar = tabBarController!.tabBar
+        let add = tabBar.items![2]
+        add.badgeColor = UIColor.clear
+        add.badgeValue = ""
+        delegateRecentMovies?.badgeCleaned()
+    }
+    
+    private func setDelegate() {
+        delegateRecentMovies = (tabBarController?.viewControllers?.first as? UINavigationController)?.viewControllers.first as? TrendingViewController
+    }
+    
 }
 
 // MARK: - TableView's DataSource
