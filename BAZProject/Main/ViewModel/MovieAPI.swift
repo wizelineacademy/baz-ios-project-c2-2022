@@ -7,32 +7,28 @@
 import Foundation
 import UIKit
 
-///  Protocol to get movie data
-protocol MovieDataDelegate{
-    func showDataMovies(dataMovie: ResultsMovie, category: String )
-}
-
 class MovieAPI {
-    public var delegateDataMovie: MovieDataDelegate?
     private let apiKey: String = "f6cd5c1a9e6c6b965fdcab0fa6ddd38a"
     private let baseURL: String = "https://api.themoviedb.org/3"
     private let imageURL: String = "https://image.tmdb.org/t/p/w500"
     
     /// Request movies
-    ///    - category: Represent the name of category, is used to conform the endpoint
+    /// - category:  category by enum MovieSections
+    /// - completionHandler: closure to retrive the response
     
-    func getMovies(category: String) {
-        guard let url = URL(string: "\(baseURL)\(category)?api_key=\(apiKey)&language=es") else {return}
-        URLSession.shared.dataTask(with: url) { [self] (data, response, error) in
+    func getMovies(categories: MovieSections, completionHandler: @escaping([Movie]?) -> Void ) {
+        guard let url = URL(string: "\(baseURL)\(categories.section)?api_key=\(apiKey)&language=es") else {return}
+        URLSession.shared.dataTask(with: url) { (data, response, error) in
             guard let json = data else{return}
             do{
                 let decoder = JSONDecoder()
                 let dataMovie = try decoder.decode(ResultsMovie.self, from: json)
-                delegateDataMovie?.showDataMovies(dataMovie: dataMovie, category: category)
+                completionHandler(dataMovie.results)
             }catch let error{
                 print("Ha ocurrido un error: \(error.localizedDescription)")
             }
         }.resume()
+        completionHandler(nil)
     }
     
     /// Request to search movies by word.
@@ -57,9 +53,12 @@ class MovieAPI {
         }
         completionHandler(nil)
     }
-    
-    
-    public func getMovieSection(section: String, idMovie: Int, completion: @escaping ([Movie]?) -> ()){
+    /// Request to sections movies
+    /// - Parameters:
+    ///   - section: option section
+    ///   - idMovie: Id Movie
+    ///   - completionHandler: closure to retrive the response
+    public func getMovieSection(section: String, idMovie: Int, completion: @escaping ([Movie]?) -> ()) {
         if let urlString = URL(string: "\(baseURL)/movie/\(idMovie)/\(section)?api_key=\(apiKey)&language=es") {
             URLSession.shared.dataTask(with: urlString) { data, response, error in
                 if let error = error {
@@ -74,25 +73,28 @@ class MovieAPI {
                 }
             }.resume()
         }
+        completion(nil)
     }
-    
-    
-    public func getMovieCast(idCast: Int, completion: @escaping ([Cast]?) -> ()){
-        if let urlString = URL(string: "\(baseURL)movie/\(idCast)/credits?api_key=\(apiKey)&language=es-MX") {
+    /// Request  cast movies
+    /// - Parameters:
+    ///   - idCast: isCast
+    ///   - completionHandler: closure to retrive the response
+    public func getMovieCast(idCast: Int, completion: @escaping ([Cast]?) -> ()) {
+        if let urlString = URL(string: "\(baseURL)movie/\(idCast)/credits?api_key=\(apiKey)&language=es-US") {
             URLSession.shared.dataTask(with: urlString) { data, response, error in
                 if let error = error {
                     print("Ha ocurrido un error Cast: ", error.localizedDescription )
                 }
                 do {
                     guard let json = data else { return }
-                    let movies = try JSONDecoder().decode(MovieCast.self, from: json)
-                    completion(movies.cast)
-                    print("cast\(movies)")
+                    let cast = try JSONDecoder().decode(MovieCast.self, from: json)
+                    completion(cast.cast)
                 } catch {
                     print("Ha ocurrido un error Cast: \(error.localizedDescription)")
                 }
             }.resume()
         }
+        completion(nil)
     }
     
     /// - Parameters:
