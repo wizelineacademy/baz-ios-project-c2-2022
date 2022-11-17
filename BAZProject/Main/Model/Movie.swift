@@ -55,35 +55,21 @@ public enum MoreMovies: String {
     case cast
 }
 
-// MARK: - MovieTableSections
-public enum MovieTableSections : Int, CaseIterable {
-    case logo = 0, trending, nowPlaying, popular, topRated, upcoming
+// MARK: - MovieSections
+public enum MovieSections : Int {
+    case trending   = 0
+    case nowPlaying = 1
+    case topRated   = 2
+    case popular    = 3
+    case upcoming   = 4
     
-    var endpoint: String {
+    var section : String {
         switch self {
-        case .trending:
-            return "/trending/movie/day"
-        case .nowPlaying:
-            return "/movie/now_playing"
-        case .popular:
-            return "/movie/popular"
-        case .topRated:
-            return "/movie/top_rated"
-        case .upcoming:
-            return "/movie/upcoming"
-        case .logo:
-            return ""
-        }
-    }
-    
-    var MovieListType : String {
-        switch self {
-        case .trending: return "Trending"
-        case .nowPlaying: return "Now Playing"
-        case .popular: return "Most popular"
-        case .topRated: return "Top Rated"
-        case .upcoming: return "Upcoming"
-        case .logo: return ""
+        case .trending: return "/trending/movie/day"
+        case .nowPlaying: return "/movie/now_playing"
+        case .popular: return "/movie/popular"
+        case .topRated: return "/movie/top_rated"
+        case .upcoming: return "/movie/upcoming"
         }
     }
 }

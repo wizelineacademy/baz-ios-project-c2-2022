@@ -7,6 +7,8 @@
 import UIKit
 
 class TrendingViewController: UIViewController {
+    @IBOutlet weak var segCategories: UISegmentedControl!
+    @IBOutlet weak var lblMovies: UILabel!
     @IBOutlet weak var tblMovie: UITableView! {
         didSet{
             tblMovie.delegate = self
@@ -17,160 +19,67 @@ class TrendingViewController: UIViewController {
     
     // MARK: - Properties
     let movieApi = MovieAPI()
-    let cellcollection = cellCollection()
     let identifier = "TrendingTableViewCell"
-    var dicMovies : [String:ResultsMovie]?
-    private var movie: [Movie] = []
-    public let identifierCollection = "CellCollection"
+    var movie: [Movie] = []
+    var movieVisited : Int = 0
     
     
     //MARK: Override methods
     override func viewDidLoad() {
         super.viewDidLoad()
-        movieApi.delegateDataMovie = self
         NotificationCenterHelper.subscribeToNotification(self, with: #selector(notificationReceived), name: NSNotification.Name(rawValue: "TrendingTable.TappedCell.Notification"))
-        getSections()
+        movieVisited = 0
+        getMovie()
+        
     }
     
     @objc private func notificationReceived(_ notification: NSNotification) {
-        guard let model = notification.userInfo?["TappedTrending"] as? Movie else { return }
-        print(model.title)
+        guard let model = notification.userInfo?["TappedTrending"] as? Bool else { return }
+        if model {
+        movieVisited += 1
+        lblMovies.text = String(movieVisited)
+        }
     }
     /// Register the custom cell to Trending
     private func registerNibs() {
         tblMovie.register(UINib(nibName: identifier, bundle: nil), forCellReuseIdentifier: identifier)
     }
     
-    /// Makes a query to the service
-    func getSections() {
-        self.movieApi.getMovies(category: MovieTableSections.trending.endpoint)
-        self.movieApi.getMovies(category: MovieTableSections.nowPlaying.endpoint)
-        self.movieApi.getMovies(category: MovieTableSections.upcoming.endpoint)
-        self.movieApi.getMovies(category: MovieTableSections.topRated.endpoint)
-        self.movieApi.getMovies(category: MovieTableSections.popular.endpoint)
+    @IBAction func segCategories(_ sender: Any) {
+        getMovie()
     }
-}
-
-//MARK: Delegado Movie
-extension TrendingViewController: MovieDataDelegate {
-    func showDataMovies(dataMovie: ResultsMovie, category: String) {
-        
-        if ((dicMovies?.isEmpty) != nil) {
-            dicMovies?[category] = dataMovie
-            DispatchQueue.main.async {
-                self.tblMovie.reloadData()
+    /// Makes a query to the service
+    func getMovie() {
+        movieApi.getMovies(categories: MovieSections(rawValue: segCategories.selectedSegmentIndex ) ?? .nowPlaying) { results in
+            if let movie = results {
+                self.movie = movie
+                DispatchQueue.main.async {
+                    self.tblMovie.reloadData()
+                }
             }
-        }else{
-            self.dicMovies = [category : dataMovie]
         }
     }
 }
 // MARK: - TableView's DataSource
-
 extension TrendingViewController : UITableViewDelegate, UITableViewDataSource {
     
-    
-    func numberOfSections(in tableView: UITableView) -> Int {
-        return MovieTableSections.allCases.count
-    }
-    
-    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        switch section {
-        case 0: //Logo Movie
-            return nil
-        case 1: //Trending
-            return MovieTableSections.trending.MovieListType
-        case 2: //NowPlaying
-            return MovieTableSections.nowPlaying.MovieListType
-        case 3: //Popular
-            return MovieTableSections.popular.MovieListType
-        case 4: // topRated
-            return MovieTableSections.topRated.MovieListType
-        case 5: //Upcoming
-            return MovieTableSections.upcoming.MovieListType
-        default:
-            return nil
-        }
-    }
-    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        switch section {
-        case 0, 5, 2, 3, 4:
-            return 1
-        case 1://Trending
-            return dicMovies?[MovieTableSections.trending.endpoint]?.results.count ?? 0
-        default:
-            return 0
-        }
+        return movie.count
     }
-    
- 
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        switch indexPath.section {
-        case 0:
-            let cell:LogoMovieCell = tableView.dequeueReusableCell(withIdentifier: LogoMovieCell.identifier,for: indexPath) as! LogoMovieCell
-            return cell
-            
-        case 1:
-            guard let cell = tableView.dequeueReusableCell(withIdentifier: identifier, for: indexPath) as? TrendingTableViewCell else{ return UITableViewCell() }
-            if let dataMovie = dicMovies?[MovieTableSections.trending.endpoint]{
-                let info = dataMovie.results[indexPath.row]
-                cell.getInfoCell(movie: info )
-            }
-            return cell
-        case 2:
-            guard let cell = tableView.dequeueReusableCell(withIdentifier: identifierCollection , for: indexPath) as? cellCollection else{ return UITableViewCell() }
-            if let movie = dicMovies?[MovieTableSections.nowPlaying.endpoint]?.results{
-                cell.movie = movie
-            }
-            return cell
-        case 3:
-            guard let cell = tableView.dequeueReusableCell(withIdentifier: identifierCollection , for: indexPath) as? cellCollection else{ return UITableViewCell() }
-            if let movie = dicMovies?[MovieTableSections.popular.endpoint]?.results{
-                cell.movie = movie
-            }
-            return cell
-            
-        case 4:
-            guard let cell = tableView.dequeueReusableCell(withIdentifier: identifierCollection , for: indexPath) as? cellCollection else{ return UITableViewCell() }
-            if let movie = dicMovies?[MovieTableSections.topRated.endpoint]?.results{
-                cell.movie = movie
-            }
-            return cell
-            
-        case 5:
-            guard let cell = tableView.dequeueReusableCell(withIdentifier: identifierCollection , for: indexPath) as? cellCollection else{ return UITableViewCell() }
-            if let movie = dicMovies?[MovieTableSections.upcoming.endpoint]?.results{
-                cell.movie = movie
-            }
-            return cell
-            
-        default:
-            let cell : UITableViewCell = tableView.dequeueReusableCell(withIdentifier: "UITableViewCell", for: indexPath)
-            return cell
-        }
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: identifier, for: indexPath) as? TrendingTableViewCell else{ return UITableViewCell() }
+        cell.getInfoCell(movie: movie[indexPath.row] )
+        return cell
+        
     }
-    
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        tableView.deselectRow(at: indexPath, animated: false)
-        switch indexPath.section {
-        case 1://Trending
-            let vc = DetailViewController(nibName: "DetailViewController",
-                                          bundle: Bundle(for: DetailViewController.self))
-            if let dataMovie = dicMovies?[MovieTableSections.trending.endpoint]{
-                vc.dataMovie = dataMovie.results[indexPath.row]
-                NotificationCenterHelper.myNotificationCenter.post(name: NSNotification.Name(rawValue: "TrendingTable.TappedCell.Notification"), object: nil, userInfo: ["TappedTrending": dataMovie])
-                vc.modalPresentationStyle = .fullScreen
-                present(vc, animated: true, completion: nil)
-            }
-            break
-        default:
-            break
-        }
+        NotificationCenterHelper.myNotificationCenter.post(name: NSNotification.Name(rawValue: "TrendingTable.TappedCell.Notification"), object: nil, userInfo: ["TappedTrending": true])
+        let vc = DetailViewController(nibName: "DetailViewController", bundle: Bundle(for: DetailViewController.self))
+        vc.dataMovie = movie[indexPath.row]
+        vc.modalPresentationStyle = .fullScreen
+        present(vc, animated: true, completion: nil)
     }
 }
-
-
 

@@ -21,30 +21,13 @@
                         <tabBarAppearance key="standardAppearance" backgroundImage="homekit" catalog="system"/>
                     </tabBar>
                     <connections>
-                        <segue destination="3Iv-Ju-Wau" kind="relationship" relationship="viewControllers" id="7ZR-98-iab"/>
-                        <segue destination="vNW-ES-MWx" kind="relationship" relationship="viewControllers" id="yqg-NT-eKb"/>
+                        <segue destination="NyO-HS-xhe" kind="relationship" relationship="viewControllers" id="XIf-jf-Y6e"/>
+                        <segue destination="vNW-ES-MWx" kind="relationship" relationship="viewControllers" id="vl8-PP-9Ko"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vZs-3s-K8D" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="62" y="-106"/>
-        </scene>
-        <!--Item-->
-        <scene sceneID="xgE-dD-i8M">
-            <objects>
-                <navigationController id="3Iv-Ju-Wau" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Item" image="homekit" catalog="system" id="AcM-ri-zDm"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="2Kh-fA-3mA">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
-                    <connections>
-                        <segue destination="NyO-HS-xhe" kind="relationship" relationship="rootViewController" id="Vgg-Sd-OQl"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="2XH-fo-Mms" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="870" y="-107"/>
         </scene>
         <!--Trending-->
         <scene sceneID="L4D-ri-cdT">
@@ -59,8 +42,17 @@
                                 <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <color key="sectionIndexBackgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </tableView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Peliculas Visitadas:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="51r-11-v9r">
+                                <rect key="frame" x="149" y="100" width="101" height="21"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="21" id="Z11-v7-hdK"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="11"/>
+                                <color key="textColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo" translatesAutoresizingMaskIntoConstraints="NO" id="41q-j0-q1e">
-                                <rect key="frame" x="0.0" y="44" width="375" height="77"/>
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="85"/>
                             </imageView>
                             <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" id="sn6-qV-ugD">
                                 <rect key="frame" x="0.0" y="129" width="375" height="32"/>
@@ -73,31 +65,52 @@
                                     <segment title="Popular"/>
                                     <segment title="UpComing"/>
                                 </segments>
+                                <connections>
+                                    <action selector="segCategories:" destination="NyO-HS-xhe" eventType="valueChanged" id="gC0-Ec-pDo"/>
+                                </connections>
                             </segmentedControl>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nse-Xy-v9F">
+                                <rect key="frame" x="297" y="103.5" width="53" height="14"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="53" id="BTu-K1-Ngs"/>
+                                    <constraint firstAttribute="height" constant="14" id="qzi-UX-nZZ"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="11"/>
+                                <color key="textColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="L1g-xw-HRO"/>
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
+                            <constraint firstItem="L1g-xw-HRO" firstAttribute="trailing" secondItem="nse-Xy-v9F" secondAttribute="trailing" constant="25" id="0EC-km-vkd"/>
                             <constraint firstItem="ztY-9l-PxH" firstAttribute="bottom" secondItem="L1g-xw-HRO" secondAttribute="bottom" id="3tM-t0-xyX"/>
+                            <constraint firstItem="nse-Xy-v9F" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="51r-11-v9r" secondAttribute="trailing" constant="8" symbolic="YES" id="4nM-Pa-v52"/>
                             <constraint firstItem="ztY-9l-PxH" firstAttribute="leading" secondItem="L1g-xw-HRO" secondAttribute="leading" id="PxB-ct-lbY"/>
-                            <constraint firstItem="sn6-qV-ugD" firstAttribute="top" secondItem="41q-j0-q1e" secondAttribute="bottom" constant="8" id="Str-R7-BeM"/>
-                            <constraint firstItem="41q-j0-q1e" firstAttribute="trailing" secondItem="L1g-xw-HRO" secondAttribute="trailing" id="WRc-iK-P9p"/>
+                            <constraint firstItem="41q-j0-q1e" firstAttribute="top" secondItem="L1g-xw-HRO" secondAttribute="top" id="Str-9w-gMw"/>
+                            <constraint firstItem="sn6-qV-ugD" firstAttribute="top" secondItem="51r-11-v9r" secondAttribute="bottom" constant="8" id="Tpc-Bh-29G"/>
                             <constraint firstItem="ztY-9l-PxH" firstAttribute="top" secondItem="sn6-qV-ugD" secondAttribute="bottom" constant="7" id="Zj7-0i-xSX"/>
+                            <constraint firstItem="51r-11-v9r" firstAttribute="leading" secondItem="L1g-xw-HRO" secondAttribute="leading" constant="149" id="a4X-Ll-2kG"/>
+                            <constraint firstItem="51r-11-v9r" firstAttribute="top" secondItem="41q-j0-q1e" secondAttribute="bottom" constant="15" id="bAH-pQ-Yau"/>
+                            <constraint firstItem="41q-j0-q1e" firstAttribute="leading" secondItem="L1g-xw-HRO" secondAttribute="leading" id="bdf-Wf-oiM"/>
+                            <constraint firstItem="51r-11-v9r" firstAttribute="centerY" secondItem="nse-Xy-v9F" secondAttribute="centerY" id="coa-2b-HWF"/>
                             <constraint firstItem="ztY-9l-PxH" firstAttribute="top" secondItem="sn6-qV-ugD" secondAttribute="bottom" constant="7" id="cqN-4u-KBv"/>
-                            <constraint firstItem="41q-j0-q1e" firstAttribute="top" secondItem="L1g-xw-HRO" secondAttribute="top" id="h9B-CU-ZY3"/>
-                            <constraint firstItem="41q-j0-q1e" firstAttribute="leading" secondItem="L1g-xw-HRO" secondAttribute="leading" id="lfO-qf-3H6"/>
+                            <constraint firstItem="41q-j0-q1e" firstAttribute="trailing" secondItem="L1g-xw-HRO" secondAttribute="trailing" id="dSy-Yj-PxW"/>
+                            <constraint firstItem="51r-11-v9r" firstAttribute="top" secondItem="41q-j0-q1e" secondAttribute="bottom" constant="15" id="oWh-gQ-JnT"/>
                             <constraint firstItem="ztY-9l-PxH" firstAttribute="trailing" secondItem="L1g-xw-HRO" secondAttribute="trailing" id="uEa-lt-Xcg"/>
                         </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="Item" image="homekit" catalog="system" id="0aI-5M-GS6"/>
                     <navigationItem key="navigationItem" title="Trending" largeTitleDisplayMode="never" id="Km3-zb-BP6"/>
                     <connections>
+                        <outlet property="lblMovies" destination="nse-Xy-v9F" id="dTt-tL-zy9"/>
+                        <outlet property="segCategories" destination="sn6-qV-ugD" id="efb-c9-esC"/>
                         <outlet property="tblMovie" destination="ztY-9l-PxH" id="SuT-wS-3C8"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="WMv-Z3-iik" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1661.5999999999999" y="-107.49625187406298"/>
+            <point key="canvasLocation" x="1037.5999999999999" y="-107.49625187406298"/>
         </scene>
         <!--Item-->
         <scene sceneID="j55-GP-UEY">
@@ -160,7 +173,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="6z7-GU-eIH" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1248.8" y="659.82008995502258"/>
+            <point key="canvasLocation" x="62" y="713"/>
         </scene>
     </scenes>
     <resources>

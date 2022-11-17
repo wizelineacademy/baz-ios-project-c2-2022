@@ -14,16 +14,13 @@ struct MovieCast: Codable {
 
 // MARK: - Cast
 struct Cast: Codable {
-    let adult: Bool
-    let gender, id: Int
+    let id: Int
     let name: String
-    let originalName: String
     let profilePath: String
     
     enum CodingKeys: String, CodingKey {
-        case adult, gender, id
+        case id
         case name
-        case originalName = "original_name"
         case profilePath = "profile_path"
     }
 }
