@@ -14,17 +14,25 @@ import Foundation
 protocol MainMovieWireframeProtocol: AnyObject {}
 
 // MARK: Presenter -
-protocol MainMoviePresenterProtocol: AnyObject {
-    func getMovies(endPoint: EndPoint) -> MovieResponseResult
+protocol MainMoviePresenter: AnyObject {
+    func setTabs()
+}
+
+protocol MovieListPresenter: AnyObject {
+    func getMoviesService(page: Int?, endPointResult: @escaping (MovieResponseResult?) -> Void)
 }
 
 // MARK: Interactor -
-protocol MainMovieInteractorProtocol: AnyObject {
-    var presenter: MainMoviePresenterProtocol? { get set }
-    func getMovies(endPoint: EndPoint) -> MovieResponseResult
+protocol MainMovieInteractor: AnyObject {
+    var presenter: MovieListPresenter? { get set }
+    func getMoviesService(page: Int?, endPointResult: @escaping (MovieResponseResult?) -> Void)
 }
 
 // MARK: View -
-protocol MainMovieViewProtocol: AnyObject {
-    var presenter: MainMoviePresenterProtocol? { get set }
+protocol MainMovieView: AnyObject {
+    var presenter: MainMoviePresenter? { get set }
+}
+
+protocol MovieListView: AnyObject {
+    var presenter: MovieListPresenter? { get set }
 }

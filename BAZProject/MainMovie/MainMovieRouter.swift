@@ -10,36 +10,47 @@
 
 import UIKit
 
-class MainMovieRouter: MainMovieWireframeProtocol {
+class MainMovieRouterFactory {
+    func make() -> UIViewController {
+        let storyboard = UIStoryboard(name: "MainMovieViewController", bundle: nil)
+        guard let movieViewController = storyboard.instantiateViewController(
+            withIdentifier: "MainMovieViewController") as? MainMovieViewController else {
+            fatalError()
+        }
+        let presenter = MainMoviePresenterImp(interface: movieViewController, mainMovieTabs: makeMovieTabs())
+
+        movieViewController.presenter = presenter
+
+        return movieViewController
+    }
+
+    private func makeMovieTabs() -> [MainMovieTab] {
+        return [
+            MainMovieTab(uiViewController: MovieListRouter.createModule(endPoint: TrendingEndPoint(page: 1)),
+                         tabBarImages: "chart.line.uptrend.xyaxis.circle.fill",
+                         tabBarTitle: "Trending"),
+            MainMovieTab(uiViewController: MovieListRouter.createModule(endPoint: NowPlayingEndPoint()),
+                         tabBarImages: "play.circle",
+                         tabBarTitle: "Now Playing"),
+            MainMovieTab(uiViewController: MovieListRouter.createModule(endPoint: PopularEndPoint()),
+                         tabBarImages: "theatermasks",
+                         tabBarTitle: "Popular"),
+            MainMovieTab(uiViewController: MovieListRouter.createModule(endPoint: TopRatedEndPoint()),
+                         tabBarImages: "star.fill",
+                         tabBarTitle: "Top Rated"),
+            MainMovieTab(uiViewController: MovieListRouter.createModule(endPoint: UpcomingEndPoint()),
+                         tabBarImages: "arrowshape.turn.up.forward.circle",
+                         tabBarTitle: "Upcoming")
+        ]
+    }
+}
+
+final class MainMovieRouter: MainMovieWireframeProtocol {
 
     weak var viewController: UIViewController?
 
     static func createModule() -> UIViewController {
         // Change to get view from storyboard if not using progammatic UI
-        let storyboard = UIStoryboard(name: "MainMovieViewController", bundle: nil)
-        guard let movieViewController = storyboard.instantiateViewController(withIdentifier: "MainMovieViewController") as? MainMovieViewController else {
-            fatalError()
-        }
-        movieViewController.configure(tabs: makeMovieTabs())
-        let interactor = MainMovieInteractor()
-        let router = MainMovieRouter()
-        let presenter = MainMoviePresenter(interface: movieViewController, interactor: interactor, router: router)
-
-        movieViewController.presenter = presenter
-        interactor.presenter = presenter
-        router.viewController = movieViewController
-
-        return movieViewController
+        return MainMovieRouterFactory().make()
     }
-
-    static func makeMovieTabs() -> [MainMovieTab] {
-        return [
-            MainMovieTab(uiViewController: MovieListRouter.createModule(endPoint: TrendingEndPoint(page: 1)), tabBarImages: "chart.line.uptrend.xyaxis.circle.fill", tabBarTitle: "Trending"),
-            MainMovieTab(uiViewController: MovieListRouter.createModule(endPoint: NowPlayingEndPoint()), tabBarImages: "play.circle", tabBarTitle: "Now Playing"),
-            MainMovieTab(uiViewController: MovieListRouter.createModule(endPoint: PopularEndPoint()), tabBarImages: "theatermasks", tabBarTitle: "Popular"),
-            MainMovieTab(uiViewController: MovieListRouter.createModule(endPoint: TopRatedEndPoint()), tabBarImages: "star.fill", tabBarTitle: "Top Rated"),
-            MainMovieTab(uiViewController: MovieListRouter.createModule(endPoint: UpcomingEndPoint()), tabBarImages: "arrowshape.turn.up.forward.circle", tabBarTitle: "Upcoming")
-        ]
-    }
-
 }

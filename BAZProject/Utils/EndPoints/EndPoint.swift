@@ -12,6 +12,10 @@ protocol EndPoint {
     var url: URL? { get }
 }
 
+protocol PaginatedEndPoint: EndPoint {
+    var page: Int { get set }
+}
+
 struct QueryItems {
     var items: [URLQueryItem] = []
 

@@ -10,7 +10,7 @@
 
 import UIKit
 
-class MovieDetailInteractor: MovieDetailInteractorProtocol {
+final class MovieDetailInteractorImp: MovieDetailInteractor {
 
-    weak var presenter: MovieDetailPresenterProtocol?
+    weak var presenter: MovieDetailPresenter?
 }
