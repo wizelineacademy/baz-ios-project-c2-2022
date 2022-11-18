@@ -6,9 +6,33 @@
 
 import Foundation
 
-
-enum Path: String {
-    case pathStrMovies = "/trending/movie/day?api_key="
+enum PathMovies: String {
+    case pathStrTrending     = "/trending/movie/day?api_key="
+    case pathStrNowPlaying   = "/movie/now_playing?api_key="
+    case pathStrPopular      = "/movie/popular?api_key="
+    case pathStrTopRated     = "/movie/top_rated?api_key="
+    case pathStrUpcoming     = "/movie/upcoming?api_key="
+    
+    /**
+    - return PathMovies: the value of the path of the movies
+     - index: tells us what category of movie returns
+     */
+    static func getPathForSegmentsOption(_ index: Int ) -> PathMovies {
+        switch index {
+        case 0:
+            return .pathStrTrending
+        case 1:
+            return .pathStrNowPlaying
+        case 2:
+            return .pathStrPopular
+        case 3:
+            return .pathStrTopRated
+        case 4:
+            return .pathStrUpcoming
+        default:
+            return .pathStrTrending
+        }
+    }
 }
 
 final class MovieAPI {
@@ -27,8 +51,8 @@ final class MovieAPI {
         - [InfoMovies]: An array that represents the information of the movies
         - Error: An error representing that the API failed.
      */
-    public func getMovies(completion: @escaping (Result<[InfoMovies], Error>) -> ()){
-        if let urlString = URL(string: "\(baseEndpoint)\(Path.pathStrMovies.rawValue)\(apiKey)&language=es"){
+    public func getMovies(typeMovies: PathMovies, completion: @escaping (Result<[InfoMovies], Error>) -> ()){
+        if let urlString = URL(string: "\(baseEndpoint)\(typeMovies.rawValue)\(apiKey)&language=es"){
             let task = session.dataTask(with: urlString) { data, response, error in
                 if let error = error {
                     completion(.failure(error))
