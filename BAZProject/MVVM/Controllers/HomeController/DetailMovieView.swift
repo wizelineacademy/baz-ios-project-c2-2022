@@ -28,7 +28,7 @@ final class DetailMovieView: UIViewController {
         self.setupObservables()
     }
     
-    func config() {
+    private func config() {
         viewModel?.getDetail()
         viewModel?.getSimilar()
         sugestionsMoviesColletion.register( UINib(nibName: SuggestionsMovieCell.idReusable , bundle: nil) , forCellWithReuseIdentifier: SuggestionsMovieCell.idReusable)
@@ -50,8 +50,8 @@ final class DetailMovieView: UIViewController {
             self.present(self.alert , animated: true)
         }.dispose(in: bag)
         
-        viewModel.similar.observeNext { [weak self] response in
-            guard let response =  response, let self = self else { return }
+        viewModel.similar.observeNext { [weak self] _ in
+            guard let self = self else { return }
             self.sugestionsMoviesColletion.reloadData()
         }.dispose(in: bag)
     }
