@@ -29,8 +29,8 @@ final class DetailMovieView: UIViewController {
     }
     
     func config() {
-        viewModel?.getDetail(id: self.idMovie ?? 0)
-        viewModel?.getSimilar(id: self.idMovie ?? 0)
+        viewModel?.getDetail()
+        viewModel?.getSimilar()
         sugestionsMoviesColletion.register( UINib(nibName: SuggestionsMovieCell.idReusable , bundle: nil) , forCellWithReuseIdentifier: SuggestionsMovieCell.idReusable)
         sugestionsMoviesColletion.delegate = self
         sugestionsMoviesColletion.dataSource = self

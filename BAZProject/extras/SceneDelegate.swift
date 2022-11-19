@@ -64,8 +64,8 @@ extension SceneDelegate: DetailNavigator {
     func gotoDetail(id: Int) {
         guard let vc = UIStoryboard(name: "Views", bundle: .main).instantiateViewController(withIdentifier: "detail") as? DetailMovieView else { return
         }
-        vc.idMovie = id
         vc.viewModel = DetailMovieViewModel(usecase: ApiUseCase())
+        vc.viewModel?.idMovie.value = id
         navigationController.pushViewController( vc, animated: true)
     }
 }
