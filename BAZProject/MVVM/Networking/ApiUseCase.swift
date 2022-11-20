@@ -101,21 +101,14 @@ struct ApiUseCase: ApiUseCaseProtocol {
     
     func apiRest(url: String)-> [MovieEntity]? {
         if let url = URL(string: "\(url)"),
-           let data = try? Data(contentsOf: url),
-           let json = try? JSONSerialization.jsonObject(with: data) as? NSDictionary,
-           let results = json.object(forKey: "results") as? [NSDictionary] {
-            var movies: [MovieEntity] = []
-            
-            for result in results {
-                if let id = result.object(forKey: "id") as? Int,
-                   let title = result.object(forKey: "title") as? String,
-                   let posterPath = result.object(forKey: "poster_path") as? String {
-                    movies.append(MovieEntity(id: id, title: title, posterPath: posterPath))
-                }
+           let data = try? Data(contentsOf: url) {
+            do {
+                let result = try JSONDecoder().decode(ResponseMovies.self, from: data)
+                return result.results
+            } catch {
+                return nil
             }
-           return movies
-        } else {
-            return nil
         }
+        return nil
     }
 }

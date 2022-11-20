@@ -7,10 +7,14 @@
 
 import Foundation
 
-struct MovieEntity {
+struct ResponseMovies: Codable {
+    let results: [MovieEntity]
+}
+
+struct MovieEntity: Codable {
     let id: Int
     let title: String
-    let posterPath: String
+    let poster_path: String
 }
 
 enum LanguageType: String {

@@ -11,7 +11,7 @@ protocol MoviesCellProtocol {
     func selectMovie(id: Int)
 }
 
-class MoviesCell: UITableViewCell {
+final class MoviesCell: UITableViewCell {
     
     @IBOutlet weak private var imgMovies: UIImageView!
     @IBOutlet weak private var lblTitle: UILabel!
@@ -20,7 +20,7 @@ class MoviesCell: UITableViewCell {
     var moviesCellDelegate: MoviesCellProtocol?
     
     func configure(_ data: MovieEntity, moviesCellDelegate: MoviesCellProtocol) {
-        self.imgMovies.loadImage(id: data.posterPath)
+        self.imgMovies.loadImage(id: data.poster_path)
         self.lblTitle.text = data.title
         self.moviesCellId = data.id
         self.moviesCellDelegate = moviesCellDelegate
