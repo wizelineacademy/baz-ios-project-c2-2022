@@ -94,14 +94,10 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = self.viewModel?.response.value else { return UITableViewCell () }
-        if let movieCell = tableView.dequeueReusableCell(withIdentifier: MoviesCell.idReusable, for: indexPath) as? MoviesCell {
-            let item = cell[indexPath.row]
-            movieCell.configure(item, moviesCellDelegate: self)
-            return movieCell
-        } else {
-            return UITableViewCell()
-        }
+        guard let cellModels = self.viewModel?.response.value, let movieCell = tableView.dequeueReusableCell(withIdentifier: MoviesCell.idReusable, for: indexPath) as? MoviesCell else { return UITableViewCell () }
+        let cellModel = cellModels[indexPath.row]
+        movieCell.configure(cellModel, moviesCellDelegate: self)
+        return movieCell
     }
 }
 
