@@ -11,6 +11,8 @@ import UIKit
 
 extension UIImageView {
 
+    /// Methodo that obtains the url of an image
+         /// - Parameter nameImage : image name
    public func setMovieImage (nameImage: String) {
             let baseURLImage = "https://image.tmdb.org/t/p/w500"
             guard let url = URL(string: "\(baseURLImage)\(nameImage)"),

@@ -10,6 +10,8 @@ import SystemConfiguration
 
 class Reachability {
     
+    /// Method that verifies the internet connection of the device
+         /// - Returns: Whether or not the device is connected to the internet
     class func isConnectedToNetwork() -> Bool {
         
         var zeroAddress = sockaddr_in()

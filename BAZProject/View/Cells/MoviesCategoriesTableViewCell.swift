@@ -7,13 +7,19 @@
 
 import UIKit
 
+protocol MoviesCategoriesTableViewCellDelegate: AnyObject {
+    func movieTapped(_ movie: Movie)
+}
+
 class MoviesCategoriesTableViewCell: UITableViewCell {
     
     static let identifier = "MoviesCategoriesTableViewCell"
     
     @IBOutlet weak var categoryCollection: UICollectionView!
+    weak var delegate: MoviesCategoriesTableViewCellDelegate?
+    
+    var viewModel = HomeViewModel()
         
-    @IBOutlet weak var btnSeeMore: UIButton!
     @IBOutlet weak var lblNameCategory: UILabel!
     
     var movies : [Movie] = []
@@ -28,13 +34,10 @@ class MoviesCategoriesTableViewCell: UITableViewCell {
         categoryCollection.register(MoviesCollectionViewCell.nib(), forCellWithReuseIdentifier: MoviesCollectionViewCell.identifier)
         categoryCollection.delegate = self
         categoryCollection.dataSource = self
-        // Initialization code
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
     }
     
     func configure(with movies : [Movie]){
@@ -44,7 +47,11 @@ class MoviesCategoriesTableViewCell: UITableViewCell {
     
 }
 
-extension MoviesCategoriesTableViewCell: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout{
+extension MoviesCategoriesTableViewCell: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, MovieCollectionViewCellDelegate {
+    func movieTapped(_ movie: Movie) {
+        delegate?.movieTapped(movie)
+    }
+    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return movies.count
     }
@@ -52,6 +59,7 @@ extension MoviesCategoriesTableViewCell: UICollectionViewDelegate, UICollectionV
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MoviesCollectionViewCell.identifier, for: indexPath) as! MoviesCollectionViewCell
         cell.configureCollection(with: movies[indexPath.row])
+        cell.delegate = self
         return cell
     }
     
