@@ -9,8 +9,8 @@ import UIKit
 
 class SearchMovieViewController: UIViewController {
     
-    @IBOutlet weak var tableResultsSearchMovies: UITableView!
-    @IBOutlet weak var txtSearchMovies: UISearchBar!
+    @IBOutlet weak var movieSearchResultsTable: UITableView!
+    @IBOutlet weak var textToSearchBar: UISearchBar!
     
     var viewModel = SearchMovieViewModel()
     
@@ -21,16 +21,16 @@ class SearchMovieViewController: UIViewController {
     }
     
     func configureView(){
-        tableResultsSearchMovies.dataSource = self
-        tableResultsSearchMovies.delegate = self
-        txtSearchMovies.delegate = self
-        tableResultsSearchMovies.register(SearchTableViewCell.nib(), forCellReuseIdentifier: SearchTableViewCell.identifier)
+        movieSearchResultsTable.dataSource = self
+        movieSearchResultsTable.delegate = self
+        textToSearchBar.delegate = self
+        movieSearchResultsTable.register(SearchTableViewCell.nib(), forCellReuseIdentifier: SearchTableViewCell.identifier)
     }
     
     private func bind(){
         viewModel.refreshData = { [weak self] () in
             DispatchQueue.main.async { 
-                self?.tableResultsSearchMovies.reloadData()
+                self?.movieSearchResultsTable.reloadData()
             }
         }
     }
@@ -42,29 +42,30 @@ extension SearchMovieViewController: UITableViewDataSource, UITableViewDelegate 
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableResultsSearchMovies.dequeueReusableCell(withIdentifier: SearchTableViewCell.identifier, for: indexPath) as! SearchTableViewCell
+        let cell = movieSearchResultsTable.dequeueReusableCell(withIdentifier: SearchTableViewCell.identifier, for: indexPath) as! SearchTableViewCell
         let movie = viewModel.movies[indexPath.row]
-        cell.lblTitleMovie.text = movie.title
+        cell.movieTitleLabel.text = movie.title
         if let posterPath = movie.posterPath{
-            cell.imgPosterPath.setMovieImage(nameImage: posterPath)
+            cell.moviePosterImage.setMovieImage(nameImage: posterPath)
         }
         return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        let detailViewController = storyboard.instantiateViewController(withIdentifier: "DetailMovieViewController") as! DetailMovieViewController
-        detailViewController.movie = viewModel.movies[indexPath.row]
+        let detailViewController = storyboard.instantiateViewController(withIdentifier: "DetailsMovieViewController") as! DetailMovieViewController
+        detailViewController.configureView(for: viewModel.movies[indexPath.row])
         navigationController?.pushViewController(detailViewController, animated: true)
     }
 }
 
 extension SearchMovieViewController:UISearchBarDelegate{
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        tableResultsSearchMovies.reloadData()
+        movieSearchResultsTable.reloadData()
     }
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-        viewModel.searchMovie(query: txtSearchMovies.text ?? "")
-        txtSearchMovies.resignFirstResponder()
-       }
+        guard let query = textToSearchBar.text else { return }
+        viewModel.searchMovie(with: query)
+        textToSearchBar.resignFirstResponder()
+    }
 }

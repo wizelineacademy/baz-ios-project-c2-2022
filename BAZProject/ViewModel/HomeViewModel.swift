@@ -14,37 +14,46 @@ struct movieByCategory {
 
 class HomeViewModel  {
     var refreshData = { () -> () in }
-    
+    let clientAPI: Networkable
     var responseMoviesByCategory: [movieByCategory] = []
+    var categoryList: [EndPoint] = [.trending, .popular, .topRate, .upcoming, .nowPlaying]
 
     var categories : [movieByCategory] = []{
         didSet {
-            refreshData()
-        }
-    }
-    
-    /// Method to load the list of movie categories
-    func loadCategoriesMovies(){
-        CategoriesLocalDataManager.getCategories{ result in
-            switch result {
-            case let .success(categories):
-                for category in categories {
-                    self.moviesByCategory(category)
-                }
-            case let .failure(error):
-                debugPrint(error)
+            DispatchQueue.main.async {
+                self.refreshData()
             }
         }
     }
     
-    private func moviesByCategory(_ category: Category){
-        MoviesService.getMoviesByCategory(endPoint: category.endPoint){ result in
-            switch result {
-                case let .success(movies):
-                let category = movieByCategory(nameCategory: category.name, movies: movies )
-                self.categories.append(category)
-                case let .failure(error):
-                debugPrint(error)
+    init(clientApi: Networkable = ClientAPI()){
+        self.clientAPI = clientApi
+    }
+    
+    /// Method to load the list of movie categories
+    func loadMoviesCategories(){
+        for category in categoryList {
+            self.getMovies(for: category)
+        }
+    }
+    
+    /// Method to get movies according to a category
+    ///  - Parameter category: Movie category
+    private func getMovies(for category: EndPoint){
+        let similarMoviesService = category.getCase()
+        clientAPI.load(request: similarMoviesService.request){ response in
+            switch response {
+            case .success(let movies):
+                do {
+                    let moviesResponse = try JSONDecoder().decode(MoviesResponse.self, from: movies)
+                    let movies = moviesResponse.results
+                    let moviesByCategory = movieByCategory(nameCategory: category.getCase().name, movies: movies)
+                    self.categories.append(moviesByCategory)
+                } catch let error {
+                    print(error)
+                }
+            case .failure(let error):
+                print(error)
             }
         }
     }

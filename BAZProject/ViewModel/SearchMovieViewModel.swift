@@ -9,22 +9,35 @@ import Foundation
 
 class SearchMovieViewModel {
     var refreshData = { () -> () in }
+    let clientAPI: Networkable
     
     var movies : [Movie] = []{
         didSet {
-            refreshData()
+            DispatchQueue.main.async {
+                self.refreshData()
+            }
         }
+    }
+    
+    init(clientApi: Networkable = ClientAPI()){
+        self.clientAPI = clientApi
     }
     
     /// Method to search for movies
          /// - Parameter query : Search criteria string
-    func searchMovie(query: String){
-        MoviesService.searchMovies(query: query){ result in
-            switch result {
-                case let .success(movies):
-                self.movies = movies
-                case let .failure(error):
-                debugPrint(error)
+    func searchMovie(with query: String){
+        let similarMoviesService = EndPoint.search(query).getCase()
+        clientAPI.load(request: similarMoviesService.request){ response in
+            switch response {
+            case .success(let response):
+                do {
+                    let moviesResponse = try JSONDecoder().decode(MoviesResponse.self, from: response)
+                    self.movies = moviesResponse.results
+                } catch let error {
+                    print(error)
+                }
+            case .failure(let error):
+                print(error)
             }
         }
     }

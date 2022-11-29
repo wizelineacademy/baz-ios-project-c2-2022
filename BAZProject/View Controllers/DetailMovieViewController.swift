@@ -1,59 +1,91 @@
 //
-//  DetailMovieViewController.swift
+//  DetailsMovieViewController.swift
 //  BAZProject
 //
-//  Created by Sarahi Pérez Rosas on 13/11/22.
+//  Created by Sarahi Pérez Rosas on 26/11/22.
 //
 
 import UIKit
 
 class DetailMovieViewController: UIViewController {
-    
-    @IBOutlet weak var imgBackdropPath: UIImageView!
-    
-    @IBOutlet weak var collectionViewSimilar: UICollectionView!
-    @IBOutlet weak var txtOverview: UITextView!
-    @IBOutlet weak var btnAddFavorites: UIButton!
-    @IBOutlet weak var lblTitleMovie: UILabel!
+
+    @IBOutlet weak var tableDetailsMovie: UITableView!
     var viewModel = DetailViewModel()
     var movie: Movie = Movie()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        collectionViewSimilar.register(MoviesCollectionViewCell.nib(), forCellWithReuseIdentifier:  MoviesCollectionViewCell.identifier)
-        collectionViewSimilar.delegate = self
-        collectionViewSimilar.dataSource = self
-        viewModel.loadSimilarMovies(idMovie: movie.id ?? 1)
-        loadDataMovie()
+        configureView()
+        bind()
+    }
         
+    private func configureView(){
+        tableDetailsMovie.delegate = self
+        tableDetailsMovie.dataSource = self
+        registerCells()
     }
     
-    private func loadDataMovie(){
-        lblTitleMovie.text = movie.title
-        txtOverview.text = movie.overview
-        if let backdropPath = movie.backdropPath{
-            imgBackdropPath.setMovieImage(nameImage: backdropPath)
+    private func registerCells(){
+        tableDetailsMovie.register(DetailTableViewCell.nib(), forCellReuseIdentifier: DetailTableViewCell.identifier)
+        tableDetailsMovie.register(CastMovieTableViewCell.nib(), forCellReuseIdentifier: CastMovieTableViewCell.identifier)
+        tableDetailsMovie.register(MoviesCategoriesTableViewCell.nib(), forCellReuseIdentifier: MoviesCategoriesTableViewCell.identifier)
+    }
+    
+    private func bind(){
+        viewModel.refreshData = { [weak self] () in DispatchQueue.main.async {
+            self?.tableDetailsMovie?.reloadData()
+            }
         }
     }
+    
+    func configureView(for movie: Movie){
+        self.movie = movie
+        guard let movieID = movie.id else { return}
+        viewModel.loadCast(for: movieID)
+        viewModel.loadSimilar(for: movieID)
+        viewModel.loadRecommended(for: movieID)
+        viewModel.loadReviews(for: movieID)
+        bind()
+    }
 }
 
-extension DetailMovieViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return viewModel.similar.count
+extension DetailMovieViewController: UITableViewDelegate, UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 1
     }
     
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MoviesCollectionViewCell.identifier, for: indexPath) as! MoviesCollectionViewCell
-        cell.configureCollection(with: viewModel.similar[indexPath.row])
-        return cell
-        
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let sectionInTable = indexPath.section
+        switch sectionInTable{
+        case 0:
+            let cell = tableDetailsMovie.dequeueReusableCell(withIdentifier: DetailTableViewCell.identifier, for: indexPath) as! DetailTableViewCell
+            cell.configureCell(movie: movie)
+            return cell
+        case 1:
+            let cell = tableDetailsMovie.dequeueReusableCell(withIdentifier: CastMovieTableViewCell.identifier, for: indexPath) as! CastMovieTableViewCell
+            cell.configure(with: viewModel.cast)
+            return cell
+        case 2:
+            let cell = tableDetailsMovie.dequeueReusableCell(withIdentifier: MoviesCategoriesTableViewCell.identifier, for: indexPath) as! MoviesCategoriesTableViewCell
+            cell.MovieCategoryNameLabel.text = "Titulos similares"
+            cell.configure(with: viewModel.moviesSimilar)
+            return cell
+        case 3:
+            let cell = tableDetailsMovie.dequeueReusableCell(withIdentifier: MoviesCategoriesTableViewCell.identifier, for: indexPath) as! MoviesCategoriesTableViewCell
+            cell.MovieCategoryNameLabel.text = "Recomendaciones"
+            cell.configure(with: viewModel.moviesRecommended)
+            return cell
+        default:
+            return UITableViewCell()
+        }
     }
     
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: 150, height: 300)
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return 4
     }
     
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return UITableView.automaticDimension
+    }
     
 }
-
-

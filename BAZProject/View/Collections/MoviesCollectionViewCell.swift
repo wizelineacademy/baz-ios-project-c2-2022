@@ -7,19 +7,13 @@
 
 import UIKit
 
-protocol MovieCollectionViewCellDelegate: AnyObject {
-    func movieTapped(_ movie: Movie)
-}
-
 class MoviesCollectionViewCell: UICollectionViewCell {
 
     static let identifier = "MoviesCollectionViewCell"
-    
     var movie: Movie?
-    let detailMovie = DetailMovieViewController()
-    weak var delegate: MovieCollectionViewCellDelegate?
     
-     @IBOutlet weak var imgPosterPath: UIImageView!
+    @IBOutlet weak var movieDetailView: UIView!
+    @IBOutlet weak var moviePosterImage: UIImageView!
     
     static func nib() -> UINib{
         return UINib(nibName: "MoviesCollectionViewCell", bundle: nil)
@@ -27,25 +21,23 @@ class MoviesCollectionViewCell: UICollectionViewCell {
     }
     override func awakeFromNib() {
         super.awakeFromNib()
+        configureCell()
     }
     
+    private func configureCell() {
+        moviePosterImage.layer.cornerRadius = 10.0
+        moviePosterImage.layer.masksToBounds = true
+        movieDetailView.layer.masksToBounds = false
+        movieDetailView.layer.shadowColor = UIColor.gray.cgColor
+        movieDetailView.layer.shadowOffset = CGSize(width: 0, height: 3)
+        movieDetailView.layer.shadowOpacity = 0.3
+        movieDetailView.backgroundColor = UIColor.clear
+    }
     public func configureCollection(with movie:Movie){
         self.movie = movie
-        configureActionImageMovie()
         if let posterPath = movie.posterPath{
-            imgPosterPath.setMovieImage(nameImage: posterPath)
+            moviePosterImage.setMovieImage(nameImage: posterPath)
         }
-    }
-    
-    private func configureActionImageMovie(){
-        let tapGR = UITapGestureRecognizer(target: self, action: #selector(self.imageTapped))
-        imgPosterPath.addGestureRecognizer(tapGR)
-        imgPosterPath.isUserInteractionEnabled = true
-    }
-    
-    @objc func imageTapped(){
-        guard let movie = movie else { return }
-        delegate?.movieTapped(movie)
     }
 }
 
