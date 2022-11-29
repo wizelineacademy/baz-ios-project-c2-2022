@@ -7,32 +7,41 @@
 
 import Foundation
 
-protocol ApiUseCaseProtocol {
-    func getMovie(success: @escaping ([MovieEntity]?) -> Void,
-                  erro: @escaping (ErrorResponseEntity) -> Void,
-                  completion: @escaping () -> Void
-    )
-    
-    func searchMovie (query: String, language: LanguageType, success: @escaping ([MovieEntity]?) -> Void,
-                      erro: @escaping (ErrorResponseEntity) -> Void,
-                      completion: @escaping () -> Void
-    )
-    
-    func categoryMovie (category: String, language: LanguageType, success: @escaping ([MovieEntity]?) -> Void,
-                      erro: @escaping (ErrorResponseEntity) -> Void,
-                      completion: @escaping () -> Void
-    )
-    
-    func getDetail(id: Int, language: LanguageType, success: @escaping (DetailMovieEntity?) -> Void,
-                   erro: @escaping (ErrorResponseEntity) -> Void,
-                   completion: @escaping () -> Void
-    )
-    
+protocol GetSimilarUseCase {
     func getSimilar (id: Int, language: LanguageType, success: @escaping ([MovieEntity]?) -> Void,
                      erro: @escaping (ErrorResponseEntity) -> Void,
                      completion: @escaping () -> Void
     )
 }
+
+protocol GetDetailUseCase {
+    func getDetail(id: Int, language: LanguageType, success: @escaping (DetailMovieEntity?) -> Void,
+                   erro: @escaping (ErrorResponseEntity) -> Void,
+                   completion: @escaping () -> Void
+    )
+}
+protocol SearchMovieUseCase {
+    func searchMovie (query: String, language: LanguageType, success: @escaping ([MovieEntity]?) -> Void,
+                      erro: @escaping (ErrorResponseEntity) -> Void,
+                      completion: @escaping () -> Void
+    )
+}
+
+protocol GetCategoryMovieUseCase {
+    func categoryMovie (category: String, language: LanguageType, success: @escaping ([MovieEntity]?) -> Void,
+                      erro: @escaping (ErrorResponseEntity) -> Void,
+                      completion: @escaping () -> Void
+    )
+}
+
+protocol GetMovieUseCase {
+    func getMovie(success: @escaping ([MovieEntity]?) -> Void,
+                  erro: @escaping (ErrorResponseEntity) -> Void,
+                  completion: @escaping () -> Void
+    )
+}
+
+typealias ApiUseCaseProtocol = GetSimilarUseCase & GetDetailUseCase & SearchMovieUseCase & GetCategoryMovieUseCase & GetMovieUseCase & SearchMovieUseCase
 
 struct ApiUseCase: ApiUseCaseProtocol {
     func getMovie(success: @escaping ([MovieEntity]?) -> Void,
