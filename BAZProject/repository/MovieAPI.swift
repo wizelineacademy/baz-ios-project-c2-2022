@@ -9,12 +9,11 @@ import Foundation
 final class MovieAPI: MovieAPIProtocol,MovieAPIConstantsProtocol {
     var interactor: MovieHomeDataExternalToInteractorProtocol?
     /// This function does not receive parameters, call the service of movies
-    func setMovies() {
-        guard let url = URL(string: self.APIMOVIELISTURL)
+    func setMovies<T : Codable>(urlCategoria: String, _ enumCategories: String) -> T? {
+        guard let url = URL(string: urlCategoria)
         else {
-            return
+            return nil
         }
-        
         URLSession.shared.dataTask(with: url){
             data,response,error in
             guard let datos = data, error == nil, let result = response as? HTTPURLResponse
@@ -22,15 +21,13 @@ final class MovieAPI: MovieAPIProtocol,MovieAPIConstantsProtocol {
                 return
             }
             if result.statusCode == 200{
-                guard let getDeserialization: Result = self.decode(data: datos) else { return }
+                guard let getDeserialization: Result<T> = self.decode(data: datos) else { return }
                 DispatchQueue.main.async {
-                    self.interactor?.responseListMovies(moviesList: getDeserialization.results)
+                    self.interactor?.responseListMovies(dataMovie: getDeserialization, enumCategories)
                 }
             }
-            else{
-                
-            }
         }.resume()
+        return nil
     }
     /// This function is generic and receive parameters, serialize of json to object
     ///  - parameters
@@ -39,5 +36,4 @@ final class MovieAPI: MovieAPIProtocol,MovieAPIConstantsProtocol {
     func decode<T:Decodable>(data: Data, jsonDecoder: JSONDecoder = JSONDecoder()) -> T?{
         return try? jsonDecoder.decode(T.self, from: data)
     }
-    
 }

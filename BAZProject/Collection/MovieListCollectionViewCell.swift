@@ -7,7 +7,7 @@
 
 import UIKit
 
-class MovieListCollectionViewCell: UICollectionViewCell {
+class MovieListCollectionViewCell : UICollectionViewCell {
     static let identefier = "TrendingTableViewCell"
     
     
@@ -25,13 +25,13 @@ class MovieListCollectionViewCell: UICollectionViewCell {
     }()
     
     private let titleLabel: UILabel = {
-       let titleLabel = UILabel()
+        let titleLabel = UILabel()
         titleLabel.font = .boldSystemFont(ofSize: 14)
         return titleLabel.styleLabel()
     }()
     
     private let descriptionLabel: UILabel = {
-       let descriptionLabel = UILabel()
+        let descriptionLabel = UILabel()
         descriptionLabel.font = .systemFont(ofSize: 12)
         return descriptionLabel.styleLabel()
     }()
@@ -39,17 +39,7 @@ class MovieListCollectionViewCell: UICollectionViewCell {
     override init(frame: CGRect){
         super.init(frame: frame)
         addSubview(collectionViewStack)
-        //viewStackVertical.addArrangedSubview(titleLabel)
-        //viewStackVertical.addArrangedSubview(descriptionLabel)
         collectionViewStack.addArrangedSubview(imageView)
-        //collectionViewStack.addArrangedSubview(viewStackVertical)
-        
-        
-        /*NSLayoutConstraint.activate([
-            viewStackVertical.leadingAnchor.constraint(equalTo: leadingAnchor),
-            viewStackVertical.trailingAnchor.constraint(equalTo: trailingAnchor),
-            viewStackVertical.topAnchor.constraint(equalTo: topAnchor)
-        ])*/
         setConstraints()
         
     }
@@ -58,11 +48,22 @@ class MovieListCollectionViewCell: UICollectionViewCell {
         fatalError()
     }
     
-    func configure(model: Movie){
-        imageView.loadFromNetwork(model.poster)
-        //titleLabel.text = model.title
-        //descriptionLabel.text = model.overview
+    /// This function receive parameter model and modelReview
+    /// - parameters
+    ///      - model: set model Movie
+    ///      - modelReview:set model Review
+    func configure(model: Movie?, modelReview: Review?){
+        if let models = model {
+            imageView.loadFromNetwork(models.posterPath)
+        }
+        else if let modelReviews = modelReview {
+            imageView.loadFromNetwork(modelReviews.authorDetails?.avatarPath)
+        }
     }
+    /// This function receive parameter viewController and UiTabNarController
+    /// - parameters
+    ///      - tabBar: set tabBar for the navigation
+    ///      - viewController: get ViewController current
     private func setConstraints() {
         NSLayoutConstraint.activate([
             collectionViewStack.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 1),

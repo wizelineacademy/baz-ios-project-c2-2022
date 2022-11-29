@@ -11,7 +11,8 @@ final class MovieHomeRouter: MovieHomePresenterToRouterProtocol{
     /// This function receive parameter viewController
     /// - parameters
     ///      - view: receive the view of viewController called
-    static func createModule(view: TrendingViewController){
+    static func createModule() -> UIViewController {
+        let view = TrendingViewController.init()
         var presenter: MoviewHomeViewToPresenterProtocol & MovieHomeInteractorToPresenterProtocol = MovieHomePresenter()
         var interactor: MovieHomePresenterToInteractorProtocol & MovieHomeDataExternalToInteractorProtocol = MovieHomeInteractor()
         let router: MovieHomePresenterToRouterProtocol = MovieHomeRouter()
@@ -24,5 +25,15 @@ final class MovieHomeRouter: MovieHomePresenterToRouterProtocol{
         interactor.presenter = presenter
         interactor.movieAPI = movieAPI
         movieAPI.interactor = interactor
+        
+        return view
+    }
+    /// This function receive parameter viewController
+    /// - parameters
+    ///      - indexPath: position of the array
+    ///      - listMovies: array model Movie
+    ///      - navigation: get viewController position
+    func navigationToMovieDetail(at indexPath: IndexPath, listMovies: [Movie],from navigation: UIViewController) {
+        MovieDetailRouter.createModuleDetailView(at: indexPath, listMovies: listMovies, from: navigation)
     }
 }

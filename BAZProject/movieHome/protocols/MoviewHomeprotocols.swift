@@ -9,53 +9,39 @@ import Foundation
 import UIKit
 
 protocol MoviewHomeViewToPresenterProtocol{
-    var view: MovieHomePresenterToViewProtocol? {get set}
-    var interactor: MovieHomePresenterToInteractorProtocol? {get set}
-    var router: MovieHomePresenterToRouterProtocol? {get set}
-    func callApiMoviesHomeData()
+    var listMovies: [String:[Movie]] { get set }
+    var setMoviesCategories: [String] { get set }
+    var view: MovieHomePresenterToViewProtocol? { get set }
+    var interactor: MovieHomePresenterToInteractorProtocol? { get set }
+    var router: MovieHomePresenterToRouterProtocol? { get set }
+    func callServiceApis(_ page: Int)
+    func navigationToDetailMovie(at indexPath: IndexPath, listMovies: [Movie],from navigation: UIViewController)
     
 }
 protocol MovieHomePresenterToViewProtocol{
-    func callApiListMovies(listMovies: [Movie])
+    func reloadMoviesTableView()
 }
 protocol MovieHomePresenterToRouterProtocol{
-    static func createModule(view: TrendingViewController)
+    static func createModule() -> UIViewController
+    func navigationToMovieDetail(at indexPath: IndexPath, listMovies: [Movie],from navigation: UIViewController)
 }
 protocol MovieHomePresenterToInteractorProtocol{
     var presenter:MovieHomeInteractorToPresenterProtocol? {get set}
-    func callMoviesApi()
+    func callAPIMovie(_ page: Int)
 }
 protocol MovieHomeInteractorToPresenterProtocol{
-    func resultMoviesList(movies: [Movie])
-}
-protocol MovieHomeDataExternalToInteractorProtocol{
-    var movieAPI: MovieAPIProtocol? {get set}
-    func responseListMovies(moviesList: [Movie])
-}
-protocol MovieAPIProtocol{
-    var interactor: MovieHomeDataExternalToInteractorProtocol? {get set}
-    func setMovies()
-}
-protocol MovieAPIConstantsProtocol{
-    var APIKEY: String { get }
-    var APIMOVIELISTURL: String { get }
-    var NAMEOBJECTRESPONSE: String { get }
-    var URLIMAGE: String { get }
+    var setMoviesCategories: [String] { get set }
+    func resultApiMovies<T : Codable>(movies: [T],_ enumValues: String)
 }
 
 protocol MovieCollectionViewCellProtocol{
     var movieItem: String { get set }
 }
 
+protocol MovieCollectionSelectedProtocol: AnyObject{
+    func didSelectMovie(at indexPath: IndexPath, listMovies: [Movie])
+}
+
 protocol MovieDetailDataViewControllerProtoco{
     func setDataMovie(movieData: Movie)
-}
-extension MovieAPIConstantsProtocol{
-    var APIKEY: String { return "f6cd5c1a9e6c6b965fdcab0fa6ddd38a"}
-    
-    var APIMOVIELISTURL: String { return "https://api.themoviedb.org/3/trending/movie/day?api_key=\(APIKEY)"}
-    
-    var NAMEOBJECTRESPONSE: String { return "results"}
-    
-    var URLIMAGE: String { return "https://image.tmdb.org/t/p/w500/"}
 }
