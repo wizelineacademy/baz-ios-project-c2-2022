@@ -8,14 +8,14 @@
 import Foundation
 
 protocol GetSimilarUseCase {
-    func getSimilar (id: Int, language: LanguageType, success: @escaping ([MovieEntity]?) -> Void,
+    func getSimilar (id: Int, language: String, success: @escaping ([MovieEntity]?) -> Void,
                      erro: @escaping (ErrorResponseEntity) -> Void,
                      completion: @escaping () -> Void
     )
 }
 
 protocol GetDetailUseCase {
-    func getDetail(id: Int, language: LanguageType, success: @escaping (DetailMovieEntity?) -> Void,
+    func getDetail(id: Int, language: String, success: @escaping (DetailMovieEntity?) -> Void,
                    erro: @escaping (ErrorResponseEntity) -> Void,
                    completion: @escaping () -> Void
     )
@@ -87,8 +87,8 @@ struct ApiUseCase: ApiUseCaseProtocol {
         
     }
     
-    func getDetail(id: Int, language: LanguageType, success: @escaping (DetailMovieEntity?) -> Void, erro: @escaping (ErrorResponseEntity) -> Void, completion: @escaping () -> Void) {
-        let baseUrl = Endpoints.shared.getDetail(language: language.rawValue, id: id)
+    func getDetail(id: Int, language: String, success: @escaping (DetailMovieEntity?) -> Void, erro: @escaping (ErrorResponseEntity) -> Void, completion: @escaping () -> Void) {
+        let baseUrl = Endpoints.shared.getDetail(language: language, id: id)
         guard let url = URL(string: baseUrl) else { return }
         URLSession.shared.dataTask(with: url) { data, response, error in
             if error == nil {
@@ -103,8 +103,8 @@ struct ApiUseCase: ApiUseCaseProtocol {
         }.resume()
     }
     
-    func getSimilar(id: Int, language: LanguageType, success: @escaping ([MovieEntity]?) -> Void, erro: @escaping (ErrorResponseEntity) -> Void, completion: @escaping () -> Void) {
-        let baseUrl = Endpoints.shared.getSimilar(language: language.rawValue, id: id)
+    func getSimilar(id: Int, language: String, success: @escaping ([MovieEntity]?) -> Void, erro: @escaping (ErrorResponseEntity) -> Void, completion: @escaping () -> Void) {
+        let baseUrl = Endpoints.shared.getSimilar(language: language, id: id)
         apiRest(url: baseUrl, success: { data in
             success(data)
         }, erro: {

@@ -18,6 +18,7 @@ final class DetailMovieView: UIViewController {
     @IBOutlet weak var voteCount: UILabel!
     @IBOutlet weak var descriptionMovie: UITextView!
     @IBOutlet weak var sugestionsMoviesColletion: UICollectionView!
+    @IBOutlet weak var segmentLenguaje: UISegmentedControl!
     lazy var alert: CustomAlertViewController = {
         DispatchQueue.main.sync {
             return CustomAlertViewController()
@@ -31,11 +32,15 @@ final class DetailMovieView: UIViewController {
     }
     
     private func config() {
-        viewModel?.getDetail()
-        viewModel?.getSimilar()
+        getDataDetail()
         sugestionsMoviesColletion.register( UINib(nibName: SuggestionsMovieCell.idReusable , bundle: nil) , forCellWithReuseIdentifier: SuggestionsMovieCell.idReusable)
         sugestionsMoviesColletion.delegate = self
         sugestionsMoviesColletion.dataSource = self
+    }
+    
+    private func getDataDetail() {
+        viewModel?.getDetail()
+        viewModel?.getSimilar()
     }
     
     private func setupObservables() {
@@ -60,6 +65,12 @@ final class DetailMovieView: UIViewController {
                 self.sugestionsMoviesColletion.reloadData()
             }
         }.dispose(in: bag)
+        
+        viewModel.language.observeNext{ [weak self] response in
+            guard let response =  response, let self = self else { return }
+            NotificationCenter.default.post(name: .didLanguageChange, object: nil, userInfo: ["language": response.rawValue])
+            self.getDataDetail()
+        }.dispose(in: bag)
     }
     
     private func setDetail(data: DetailMovieEntity) {
@@ -71,6 +82,10 @@ final class DetailMovieView: UIViewController {
             self.voteCount.text = "\(StaticLabel.lblvoteCount)\(data.voteCount)"
             self.descriptionMovie.text = data.overview
         }
+    }
+    
+    @IBAction func changeLenguaje(_ sender: Any) {
+        viewModel?.chengeLanguage(id: segmentLenguaje.selectedSegmentIndex)
     }
 }
 

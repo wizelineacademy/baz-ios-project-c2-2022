@@ -16,6 +16,7 @@ protocol DetailMovieViewModelProtocol {
     var loading: Observable<TypeLoading> { get }
     var similar: Observable<[MovieEntity]?> { get }
     var idMovie: Observable<Int?> { get }
+    var language: Observable<LanguageType?> { get }
 }
 
 final class DetailMovieViewModel: DetailMovieViewModelProtocol {
@@ -25,6 +26,7 @@ final class DetailMovieViewModel: DetailMovieViewModelProtocol {
     var loading: Observable<TypeLoading> = Observable(.fullScreen)
     var similar: Observable<[MovieEntity]?> = Observable(nil)
     var idMovie: Observable<Int?> = Observable(nil)
+    var language: Observable<LanguageType?> = Observable(nil)
     
     init(usecase: ApiUseCaseProtocol) {
         self.usecase = usecase
@@ -32,7 +34,8 @@ final class DetailMovieViewModel: DetailMovieViewModelProtocol {
     
     func getDetail() {
         self.loading.value = .fullScreen
-        self.usecase?.getDetail( id: self.idMovie.value ?? 0, language: .es, success: { response in
+        let configLanguage: String = UserDefaults.standard.string(forKey: "SelectedLanguage") ?? "es"
+        self.usecase?.getDetail( id: self.idMovie.value ?? 0, language: configLanguage, success: { response in
             self.response.value = response
         }, erro: { error in
             self.error.value = error
@@ -43,12 +46,24 @@ final class DetailMovieViewModel: DetailMovieViewModelProtocol {
     
     func getSimilar() {
         self.loading.value = .fullScreen
-        self.usecase?.getSimilar( id: self.idMovie.value ?? 0, language: .es, success: { response in
+        let configLanguage: String = UserDefaults.standard.string(forKey: "SelectedLanguage") ?? "es"
+        self.usecase?.getSimilar( id: self.idMovie.value ?? 0, language: configLanguage, success: { response in
             self.similar.value = response
         }, erro: { error in
             self.error.value = error
         }, completion: {
             self.loading.value = .hide
         })
+    }
+    
+    func chengeLanguage(id: Int) {
+        switch id {
+        case 0:
+            self.language.value = .es
+        case 1:
+            self.language.value = .en
+        default:
+            break
+        }
     }
 }

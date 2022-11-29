@@ -64,9 +64,11 @@ final class HomeViewController: UIViewController {
         }.dispose(in: bag)
         
         viewModel.title.observeNext { [weak self] response in
-            guard let response =  response, let self = self else { return }
-            self.navigationItem.title = response
-            self.enablePicker()
+            DispatchQueue.main.async {
+                guard let response =  response, let self = self else { return }
+                self.navigationItem.title = response
+                self.enablePicker()
+            }
         }.dispose(in: bag)
     }
     
