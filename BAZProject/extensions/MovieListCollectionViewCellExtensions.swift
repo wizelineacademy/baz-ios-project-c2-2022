@@ -12,7 +12,6 @@ extension UIStackView{
     func changePosition(position: NSLayoutConstraint.Axis) -> UIStackView{
         let stackView = UIStackView()
         stackView.axis = position
-        stackView.spacing = 5
         stackView.distribution = .fillProportionally
         stackView.translatesAutoresizingMaskIntoConstraints = false
         stackView.layer.borderColor = UIColor.white.cgColor
@@ -36,5 +35,31 @@ extension UILabel{
         label.translatesAutoresizingMaskIntoConstraints = false
         label.textAlignment = .left
         return label
+    }
+}
+
+extension UIImageView {
+    func detailImage() -> UIImageView {
+        let imageView = UIImageView()
+        imageView.contentMode = .scaleToFill
+        imageView.translatesAutoresizingMaskIntoConstraints = false
+        imageView.clipsToBounds = true
+        return imageView
+    }
+}
+
+extension UITextView {
+    func detailTextView() -> UITextView {
+        let textView = UITextView()
+        textView.translatesAutoresizingMaskIntoConstraints = false
+        textView.layer.cornerRadius = 15
+        textView.layer.masksToBounds = true
+        textView.font = UIFont.systemFont(ofSize: 12)
+        textView.textAlignment = .justified
+        textView.sizeToFit()
+        textView.textColor = .gray
+        textView.isScrollEnabled = true
+        textView.isEditable = false
+        return textView
     }
 }

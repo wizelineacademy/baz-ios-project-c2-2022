@@ -7,8 +7,12 @@
 
 import Foundation
 import UIKit
+
 final class MovieHomePresenter: MoviewHomeViewToPresenterProtocol, MovieHomeInteractorToPresenterProtocol {
     
+    var listMovies: [String:[Movie]] = [:]
+    
+    var setMoviesCategories: [String] = Categories.allCases.map{ $0.rawValue }
     
     var interactor: MovieHomePresenterToInteractorProtocol?
     
@@ -16,13 +20,26 @@ final class MovieHomePresenter: MoviewHomeViewToPresenterProtocol, MovieHomeInte
     
     var view: MovieHomePresenterToViewProtocol?
     /// This function does not parameters, this call the service API of movies
-    func callApiMoviesHomeData() {
-        interactor?.callMoviesApi()
+    func callServiceApis(_ page: Int) {
+        interactor?.callAPIMovie(page)
     }
     /// This function receive a parameter is a list object called movie
     ///  - parameters
     ///     - movies is a variable list of type object
-    func resultMoviesList(movies: [Movie]) {
-        self.view?.callApiListMovies(listMovies: movies)
+    ///     - enumValues: set category of type String
+    func resultApiMovies<T : Codable>(movies: [T],_ enumValues: String) {
+        guard let moviesList = movies as? [Movie] else { return }
+        DispatchQueue.main.async {
+            self.listMovies[enumValues] = moviesList
+            self.view?.reloadMoviesTableView()
+        }
+    }
+    /// This function receive parameter viewController
+    /// - parameters
+    ///      - indexPath: position of the array
+    ///      - listMovies: array model Movie
+    ///      - navigation: get viewController position
+    func navigationToDetailMovie(at indexPath: IndexPath, listMovies: [Movie],from navigation: UIViewController) {
+        router?.navigationToMovieDetail(at: indexPath, listMovies: listMovies, from: navigation)
     }
 }
