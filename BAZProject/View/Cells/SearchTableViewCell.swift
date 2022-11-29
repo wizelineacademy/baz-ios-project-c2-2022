@@ -11,8 +11,8 @@ class SearchTableViewCell: UITableViewCell {
 
     static let identifier = "SearchTableViewCell"
     
-    @IBOutlet weak var imgPosterPath: UIImageView!
-    @IBOutlet weak var lblTitleMovie: UILabel!
+    @IBOutlet weak var moviePosterImage: UIImageView!
+    @IBOutlet weak var movieTitleLabel: UILabel!
     
     static func nib() -> UINib{
         return UINib(nibName: "SearchTableViewCell", bundle: nil)

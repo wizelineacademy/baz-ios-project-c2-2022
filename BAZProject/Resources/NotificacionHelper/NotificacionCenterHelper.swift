@@ -8,13 +8,13 @@
 import Foundation
 
 class NotificationCenterHelper{
-    static var notificacionCenter: NotificationCenter = myNotficacion()
+    static var myNotificationCenter: NotificationCenter = MyNotificationCenter()
     
     static func subscribeToNotification (_ suscriber: AnyObject, with selector: Selector, name: NSNotification.Name) {
-        NotificationCenterHelper.notificacionCenter.addObserver(suscriber, selector: selector, name: name, object: nil)
+        NotificationCenterHelper.myNotificationCenter.addObserver(suscriber, selector: selector, name: name, object: nil)
     }
 }
 
-class myNotficacion: NotificationCenter {
+class MyNotificationCenter: NotificationCenter {
     
 }
