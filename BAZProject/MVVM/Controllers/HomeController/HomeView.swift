@@ -45,7 +45,9 @@ final class HomeViewController: UIViewController {
         guard let viewModel = viewModel else { return }
         viewModel.response.observeNext{ [weak self] response in
             guard let _ =  response, let self = self else { return }
-            self.movieTable.reloadData()
+            DispatchQueue.main.async {
+                self.movieTable.reloadData()
+            }
         }.dispose(in: bag)
         
         viewModel.loading.observeNext{ [weak self] response in

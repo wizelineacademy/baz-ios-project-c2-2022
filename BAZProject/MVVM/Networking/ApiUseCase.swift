@@ -41,19 +41,23 @@ protocol GetMovieUseCase {
     )
 }
 
-typealias ApiUseCaseProtocol = GetSimilarUseCase & GetDetailUseCase & SearchMovieUseCase & GetCategoryMovieUseCase & GetMovieUseCase & SearchMovieUseCase
+protocol GetApiRest {
+    func apiRest(url: String, success: @escaping ([MovieEntity]?) -> Void,
+                 erro: @escaping () -> Void)
+}
+
+typealias ApiUseCaseProtocol = GetSimilarUseCase & GetDetailUseCase & SearchMovieUseCase & GetCategoryMovieUseCase & GetMovieUseCase & SearchMovieUseCase & GetApiRest
 
 struct ApiUseCase: ApiUseCaseProtocol {
     func getMovie(success: @escaping ([MovieEntity]?) -> Void,
                   erro: @escaping (ErrorResponseEntity) -> Void,
                   completion: @escaping ()-> Void) {
         let baseUrl = Endpoints.shared.getTrendingMovie()
-        if let data = apiRest(url: baseUrl) {
+        apiRest(url: baseUrl, success: { data in
             success(data)
-        }
-        else {
+        }, erro: {
             erro(ErrorResponseEntity.genericError)
-        }
+        })
         completion()
     }
     
@@ -62,12 +66,11 @@ struct ApiUseCase: ApiUseCaseProtocol {
                      erro: @escaping (ErrorResponseEntity) -> Void,
                      completion: @escaping ()-> Void) {
         let baseUrl = Endpoints.shared.getSearchUrl(language: language.rawValue, query: query)
-        if let data = apiRest(url: baseUrl) {
+        apiRest(url: baseUrl, success: { data in
             success(data)
-        }
-        else {
+        }, erro: {
             erro(ErrorResponseEntity.genericError)
-        }
+        })
         completion()
     }
     
@@ -75,49 +78,54 @@ struct ApiUseCase: ApiUseCaseProtocol {
                        success: @escaping ([MovieEntity]?) -> Void, erro: @escaping (ErrorResponseEntity) -> Void,
                        completion: @escaping () -> Void) {
         let baseUrl = Endpoints.shared.getCategory(language: language.rawValue, category: category)
-        if let data = apiRest(url: baseUrl) {
+        apiRest(url: baseUrl, success: { data in
             success(data)
-        }
-        else {
+        }, erro: {
             erro(ErrorResponseEntity.genericError)
-        }
+        })
         completion()
+        
     }
     
     func getDetail(id: Int, language: LanguageType, success: @escaping (DetailMovieEntity?) -> Void, erro: @escaping (ErrorResponseEntity) -> Void, completion: @escaping () -> Void) {
         let baseUrl = Endpoints.shared.getDetail(language: language.rawValue, id: id)
-        if let url = URL(string: "\(baseUrl)"),
-           let data = try? Data(contentsOf: url),
-           let json = try? JSONDecoder().decode(DetailMovieEntity.self, from: data) {
-            success(json)
-        }
-        else {
-            erro(ErrorResponseEntity.genericError)
-        }
-        completion()
+        guard let url = URL(string: baseUrl) else { return }
+        URLSession.shared.dataTask(with: url) { data, response, error in
+            if error == nil {
+                guard let data = data else { return }
+                if let json = try? JSONDecoder().decode(DetailMovieEntity.self, from: data) {
+                    success(json)
+                } else {
+                    erro(ErrorResponseEntity.genericError)
+                }
+            }
+            completion()
+        }.resume()
     }
     
     func getSimilar(id: Int, language: LanguageType, success: @escaping ([MovieEntity]?) -> Void, erro: @escaping (ErrorResponseEntity) -> Void, completion: @escaping () -> Void) {
         let baseUrl = Endpoints.shared.getSimilar(language: language.rawValue, id: id)
-        if let data = apiRest(url: baseUrl) {
+        apiRest(url: baseUrl, success: { data in
             success(data)
-        }
-        else {
+        }, erro: {
             erro(ErrorResponseEntity.genericError)
-        }
+        })
         completion()
     }
     
-    func apiRest(url: String)-> [MovieEntity]? {
-        if let url = URL(string: "\(url)"),
-           let data = try? Data(contentsOf: url) {
-            do {
-                let result = try JSONDecoder().decode(ResponseMovies.self, from: data)
-                return result.results
-            } catch {
-                return nil
+    func apiRest(url: String, success: @escaping ([MovieEntity]?) -> Void, erro: @escaping () -> Void) {
+        guard let url = URL(string: url) else { return  }
+        URLSession.shared.dataTask(with: url) { data, response,error  in
+            guard let data = data else { return }
+            if error == nil {
+                if let result = try? JSONDecoder().decode(ResponseMovies.self, from: data) {
+                    success(result.results)
+                } else {
+                    erro()
+                }
+            } else {
+                erro()
             }
-        }
-        return nil
+        }.resume()
     }
 }

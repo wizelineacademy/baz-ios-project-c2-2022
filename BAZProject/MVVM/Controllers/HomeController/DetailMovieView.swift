@@ -19,7 +19,9 @@ final class DetailMovieView: UIViewController {
     @IBOutlet weak var descriptionMovie: UITextView!
     @IBOutlet weak var sugestionsMoviesColletion: UICollectionView!
     lazy var alert: CustomAlertViewController = {
-        return CustomAlertViewController()
+        DispatchQueue.main.sync {
+            return CustomAlertViewController()
+        }
     }()
     
     override func viewDidLoad() {
@@ -47,22 +49,28 @@ final class DetailMovieView: UIViewController {
             guard let response =  response, let self = self else { return }
             self.alert.alertStyle = .error
             self.alert.bodyText = response.message
-            self.present(self.alert , animated: true)
+            DispatchQueue.main.sync {
+                self.present(self.alert , animated: true)
+            }
         }.dispose(in: bag)
         
         viewModel.similar.observeNext { [weak self] _ in
             guard let self = self else { return }
-            self.sugestionsMoviesColletion.reloadData()
+            DispatchQueue.main.async {
+                self.sugestionsMoviesColletion.reloadData()
+            }
         }.dispose(in: bag)
     }
     
     private func setDetail(data: DetailMovieEntity) {
-        titleMovie.text = data.title
-        imgMovie.loadImage(id: data.posterPath)
-        voteAverage.text = "\(StaticLabel.lblPoint)\(data.voteAverage)"
-        timeMovie.text = "\(StaticLabel.lblMinutes)\(data.runtime)"
-        voteCount.text = "\(StaticLabel.lblvoteCount)\(data.voteCount)"
-        descriptionMovie.text = data.overview
+        DispatchQueue.main.async {
+            self.titleMovie.text = data.title
+            self.imgMovie.loadImage(id: data.posterPath)
+            self.voteAverage.text = "\(StaticLabel.lblPoint)\(data.voteAverage)"
+            self.timeMovie.text = "\(StaticLabel.lblMinutes)\(data.runtime)"
+            self.voteCount.text = "\(StaticLabel.lblvoteCount)\(data.voteCount)"
+            self.descriptionMovie.text = data.overview
+        }
     }
 }
 
